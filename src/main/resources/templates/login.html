@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSpotter | Prijava</title>
+</head>
+<body>
+    <h1>Prijava</h1>
+    <form th:action="@{/prijava}" method="post">
+        <div>
+            <label for="username">Korisničko ime:</label>
+            <input type="text" id="username" name="username" />
+        </div>
+        <div>
+            <label for="password">Lozinka:</label>
+            <input type="password" id="password" name="password" />
+        </div>
+        <div>
+            <input type="submit" value="Potvrdi" />
+        </div>
+        <div>
+            <p>Nemate korisnički račun? <a href="/registracija">Registrirajte se</a></p>
+        </div>
+    </form>
+</body>
+</html>

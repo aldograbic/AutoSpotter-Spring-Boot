@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script th:src="@{/showRegistrationForm.js}" defer="defer"></script>
+    <title>AutoSpotter | Registracija</title>
+</head>
+<body>
+    <h1>Registracija</h1>
+    <div>
+        <button id="btnPrivateUser" onclick="showOptionForm(1)">Privatni korisnik</button>
+        <button id="btnBusinessUser" onclick="showOptionForm(2)">Poslovni korisnik</button>
+    </div>
+
+    <div id="formPrivateUser" style="display: none;">
+        <h2>Registracija - privatni korisnik</h2>
+        <form th:action="@{/registerPrivateUser}" method="post">
+            <div>
+                <label for="firstName">Ime:</label>
+                <input type="text" id="firstName" name="firstName" />
+            </div>
+            <div>
+                <label for="lastName">Prezime:</label>
+                <input type="text" id="lastName" name="lastName" />
+            </div>
+            <div>
+                <label for="address">Adresa:</label>
+                <input type="text" id="address" name="address" />
+            </div>
+            <div>
+                <label for="city">Grad:</label>
+                <input type="text" id="city" name="city" />
+            </div>
+            <div>
+                <label for="phoneNumber">Broj telefona:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" />
+            </div>
+            <div>
+                <label for="email">E-mail adresa:</label>
+                <input type="email" id="email" name="email" />
+            </div>
+            <div>
+                <label for="username">Korisničko ime:</label>
+                <input type="text" id="username" name="username" />
+            </div>
+            <div>
+                <label for="password">Lozinka:</label>
+                <input type="password" id="password" name="password" />
+            </div>
+            <div>
+                <input type="submit" value="Potvrdi" />
+            </div>
+        </form>
+    </div>
+
+    <div id="formBusinessUser" style="display: none;">
+        <h2>Registracija - poslovni korisnik</h2>
+        <form th:action="@{/registerBusinessUser}" method="post">
+            <div>
+                <label for="companyName">Naziv tvrtke:</label>
+                <input type="text" id="companyName" name="companyName" />
+            </div>
+            <div>
+                <label for="companyOIB">Osobni identifikacijski broj tvrtke:</label>
+                <input type="text" id="companyOIB" name="companyOIB" />
+            </div>
+            <div>
+                <label for="address">Adresa tvrtke:</label>
+                <input type="text" id="address" name="address" />
+            </div>
+            <div>
+                <label for="city">Grad:</label>
+                <input type="text" id="city" name="city" />
+            </div>
+            <div>
+                <label for="phoneNumber">Broj telefona:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" />
+            </div>
+            <div>
+                <label for="email">E-mail adresa:</label>
+                <input type="email" id="email" name="email" />
+            </div>
+            <div>
+                <label for="username">Korisničko ime:</label>
+                <input type="text" id="username" name="username" />
+            </div>
+            <div>
+                <label for="password">Lozinka:</label>
+                <input type="password" id="password" name="password" />
+            </div>
+            <div>
+                <input type="submit" value="Potvrdi" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>
