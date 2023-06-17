@@ -10,25 +10,27 @@
     </header>
     <main class="flex min-h-screen">
         <div class="flex-0 w-1/5 bg-gray-100"></div>
-        <div class="flex flex-1 w-50 justify-center">
-            <h1>Prijava</h1>
+
+        <div class="flex flex-col flex-1 w-50 items-center justify-center">
+            <h1 class="text-3xl font-bold text-gray-700">Prijava</h1>
             <form th:action="@{/prijava}" method="post">
                 <div>
                     <label for="username">Korisničko ime:</label>
-                    <input type="text" id="username" name="username" />
+                    <input type="text" id="username" name="username" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
                 </div>
                 <div>
                     <label for="password">Lozinka:</label>
-                    <input type="password" id="password" name="password" />
+                    <input type="password" id="password" name="password" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
                 </div>
                 <div>
-                    <input type="submit" value="Potvrdi" />
+                    <input type="submit" value="Potvrdi" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:border-cyan-600"/>
                 </div>
                 <div>
-                    <p>Nemate korisnički račun? <a href="/registracija">Registrirajte se</a></p>
+                    <p>Nemate korisnički račun? <a href="/registracija" class="text-cyan-700">Registrirajte se</a></p>
                 </div>
             </form>
         </div>
+
         <div class="flex-0 w-1/5 bg-gray-100"></div>
     </main>
     <footer>
