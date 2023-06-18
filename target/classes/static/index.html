@@ -7,29 +7,34 @@
     <link href="main.css" rel="stylesheet">
     <title>AutoSpotter</title>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
     <header>
-        <nav class="bg-gray-200 p-4 flex justify-around items-center">
-            <div class="flex font-bold text-lg items-center">
+        <nav class="bg-gray-200 p-3 flex items-center justify-between">
+            <div class="flex items-center">
                 <img class="mr-3 w-1/4" src="img/logo.png" alt="logo">
                 <p>AutoSpotter</p>
             </div>
-            <ul class="flex space-x-4">
-                <li><a class="text-gray-700 font-medium hover:text-cyan-900" href="/">Početna</a></li>
-                <li><a class="text-gray-700 font-medium hover:text-cyan-900" href="/pretraga">Pretraga</a></li>
-                <li><a class="text-gray-700 font-medium hover:text-cyan-900" href="/kontakt">Kontakt</a></li>
-                <li><a class="text-gray-700 font-medium hover:text-cyan-900" href="/prijava">Prijava</a></li>
-              </ul>
-          </nav>
+            <ul class="flex space-x-4 flex-grow justify-center">
+                <li><a class="text-gray-700 font-medium hover:text-cyan-700" href="/pretraga">Pretraga</a></li>
+                <li><a class="text-gray-700 font-medium hover:text-cyan-700" href="/novi-oglasi">Novi oglasi</a></li>
+                <li><a class="text-gray-700 font-medium hover:text-cyan-700" href="/postavi-oglas">Postavi oglas</a></li>
+            </ul>
+            <div class="flex space-x-4">
+                <a class="text-gray-700 font-medium hover:text-cyan-700" href="/kontakt">Kontakt</a>
+                <a class="text-gray-700 font-medium hover:text-cyan-700" href="/prijava">Prijava</a>
+            </div>
+        </nav>
     </header>
-    <main class="flex min-h-screen">
+    
+    <main class="flex flex-1">
         <div class="flex-0 w-1/5 bg-gray-100"></div>
-        <div class="flex flex-1 w-50 justify-center">
+        <div class="flex flex-1 justify-center">
 
         </div>
         <div class="flex-0 w-1/5 bg-gray-100"></div>
     </main>
-    <footer>
+    
+    <footer class="mt-auto">
         <p class="block bottom-0 bg-gray-200">Copyright &copy;2023 AutoSpotter</p>
     </footer>
 </body>

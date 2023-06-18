@@ -5,11 +5,11 @@
     <script th:src="@{/showRegistrationForm.js}" defer="defer"></script>
     <title>AutoSpotter | Registracija</title>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
     <header>
 
     </header>
-    <main class="flex min-h-screen">
+    <main class="flex flex-1">
         <div class="flex-0 w-1/5 bg-gray-100"></div>
 
         <div class="flex flex-col flex-1 w-50 items-center justify-center">
@@ -105,7 +105,7 @@
         <div class="flex-0 w-1/5 bg-gray-100"></div>
     </main>
     <footer>
-
+        <th:block th:insert="~{fragments/footer :: footer}"></th:block>
     </footer>
 </body>
 </html>
