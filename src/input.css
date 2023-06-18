@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .button {
+        --tw-bg-opacity: 1;
+        background-color: rgb(8 145 178 / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(255 255 255 / var(--tw-text-opacity));
+        font-weight: 600;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        border-radius: 0.375rem;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        --tw-bg-opacity: 1;
+        background-color: rgb(14 116 144 / var(--tw-bg-opacity));
+    }
+
+    .button:focus {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        --tw-border-opacity: 1;
+        border-color: rgb(8 145 178 / var(--tw-border-opacity));
+    }
+
+    .input {
+        border-width: 1px;
+        --tw-border-opacity: 1;
+        border-color: rgb(55 65 81 / var(--tw-border-opacity));
+        border-radius: 0.375rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+    }
+
+    .input:focus {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        --tw-border-opacity: 1;
+        border-color: rgb(8 145 178 / var(--tw-border-opacity));
+    }
+}

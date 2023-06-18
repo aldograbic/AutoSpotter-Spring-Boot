@@ -9,10 +9,12 @@ function showOptionForm(option) {
         formBusinessUser.style.display = "none";
         btnPrivateUser.disabled = true;
         btnBusinessUser.disabled = false;
+        btnPrivateUser.classList.add("disabled:opacity-25");
     } else if (option === 2) {
         formPrivateUser.style.display = "none";
         formBusinessUser.style.display = "block";
         btnPrivateUser.disabled = false;
         btnBusinessUser.disabled = true;
+        btnBusinessUser.classList.add("disabled:opacity-25");
     }
 }

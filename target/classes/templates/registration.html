@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <th:block th:include="fragments/head :: head"></th:block>
+    <th:block th:insert="~{fragments/head :: head}"></th:block>
     <script th:src="@{/showRegistrationForm.js}" defer="defer"></script>
     <title>AutoSpotter | Registracija</title>
 </head>
@@ -12,91 +12,91 @@
     <main class="flex min-h-screen">
         <div class="flex-0 w-1/5 bg-gray-100"></div>
 
-        <div class="flex flex-col flex-1 w-50 items-center">
-            <h1 class="text-3xl font-bold text-gray-700">Registracija</h1>
+        <div class="flex flex-col flex-1 w-50 items-center justify-center">
+            <h1 class="text-3xl font-bold text-gray-700 mb-8">Registracija</h1>
             <div>
-                <button id="btnPrivateUser" onclick="showOptionForm(1)" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:border-cyan-600">Privatni korisnik</button>
-                <button id="btnBusinessUser" onclick="showOptionForm(2)" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:border-cyan-600">Poslovni korisnik</button>
+                <button id="btnPrivateUser" onclick="showOptionForm(1)" class="button">Privatni korisnik</button>
+                <button id="btnBusinessUser" onclick="showOptionForm(2)" class="button">Poslovni korisnik</button>
             </div>
         
             <div id="formPrivateUser" style="display: none;">
-                <h2 class="text-xl font-bold text-gray-700">Registracija - privatni korisnik</h2>
+                <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6">Registracija - privatni korisnik</h2>
                 <form th:action="@{/registerPrivateUser}" method="post">
-                    <div>
-                        <label for="firstName">Ime:</label>
-                        <input type="text" id="firstName" name="firstName" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="firstName">Ime</label>
+                        <input type="text" id="firstName" name="firstName" class="input"/>
                     </div>
-                    <div>
-                        <label for="lastName">Prezime:</label>
-                        <input type="text" id="lastName" name="lastName" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="lastName">Prezime</label>
+                        <input type="text" id="lastName" name="lastName" class="input"/>
                     </div>
-                    <div>
-                        <label for="address">Adresa:</label>
-                        <input type="text" id="address" name="address" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="address">Adresa</label>
+                        <input type="text" id="address" name="address" class="input"/>
                     </div>
-                    <div>
-                        <label for="city">Grad:</label>
-                        <input type="text" id="city" name="city" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="city">Grad</label>
+                        <input type="text" id="city" name="city" class="input"/>
                     </div>
-                    <div>
-                        <label for="phoneNumber">Broj telefona:</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="phoneNumber">Broj telefona</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" class="input"/>
                     </div>
-                    <div>
-                        <label for="email">E-mail adresa:</label>
-                        <input type="email" id="email" name="email" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="email">E-mail adresa</label>
+                        <input type="email" id="email" name="email" class="input"/>
                     </div>
-                    <div>
-                        <label for="username">Korisničko ime:</label>
-                        <input type="text" id="username" name="username" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="username">Korisničko ime</label>
+                        <input type="text" id="username" name="username" class="input"/>
                     </div>
-                    <div>
-                        <label for="password">Lozinka:</label>
-                        <input type="password" id="password" name="password" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="password">Lozinka</label>
+                        <input type="password" id="password" name="password" class="input"/>
                     </div>
-                    <div>
-                        <input type="submit" value="Potvrdi" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <input type="submit" value="Potvrdi" class="button"/>
                     </div>
                 </form>
             </div>
         
             <div id="formBusinessUser" style="display: none;">
-                <h2 class="text-xl font-bold text-gray-700">Registracija - poslovni korisnik</h2>
+                <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6">Registracija - poslovni korisnik</h2>
                 <form th:action="@{/registerBusinessUser}" method="post">
-                    <div>
-                        <label for="companyName">Naziv tvrtke:</label>
-                        <input type="text" id="companyName" name="companyName" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="companyName">Naziv tvrtke</label>
+                        <input type="text" id="companyName" name="companyName" class="input"/>
                     </div>
-                    <div>
-                        <label for="companyOIB">Osobni identifikacijski broj tvrtke:</label>
-                        <input type="text" id="companyOIB" name="companyOIB" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="companyOIB">Osobni identifikacijski broj tvrtke</label>
+                        <input type="text" id="companyOIB" name="companyOIB" class="input"/>
                     </div>
-                    <div>
-                        <label for="address">Adresa tvrtke:</label>
-                        <input type="text" id="address" name="address" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="address">Adresa tvrtke</label>
+                        <input type="text" id="address" name="address" class="input"/>
                     </div>
-                    <div>
-                        <label for="city">Grad:</label>
-                        <input type="text" id="city" name="city" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="city">Grad</label>
+                        <input type="text" id="city" name="city" class="input"/>
                     </div>
-                    <div>
-                        <label for="phoneNumber">Broj telefona:</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="phoneNumber">Broj telefona</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" class="input"/>
                     </div>
-                    <div>
-                        <label for="email">E-mail adresa:</label>
-                        <input type="email" id="email" name="email" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="email">E-mail adresa</label>
+                        <input type="email" id="email" name="email" class="input"/>
                     </div>
-                    <div>
-                        <label for="username">Korisničko ime:</label>
-                        <input type="text" id="username" name="username" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="username">Korisničko ime</label>
+                        <input type="text" id="username" name="username" class="input"/>
                     </div>
-                    <div>
-                        <label for="password">Lozinka:</label>
-                        <input type="password" id="password" name="password" class="border border-gray-700 rounded-md py-1 focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <label for="password">Lozinka</label>
+                        <input type="password" id="password" name="password" class="input"/>
                     </div>
-                    <div>
-                        <input type="submit" value="Potvrdi" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:border-cyan-600"/>
+                    <div class="flex flex-col mb-4">
+                        <input type="submit" value="Potvrdi" class="button"/>
                     </div>
                 </form>
             </div>
