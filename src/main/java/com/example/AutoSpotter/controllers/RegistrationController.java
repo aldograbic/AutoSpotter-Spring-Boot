@@ -16,6 +16,6 @@ public class RegistrationController {
     public String processRegistration() {
         // Process the registration form submission
         // You can add your registration logic here, such as validating the credentials
-        return "redirect:/login";
+        return "redirect:/prijava";
     }
 }

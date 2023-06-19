@@ -5,12 +5,15 @@
     <title>AutoSpotter | Pretraga</title>
 </head>
 <body class="flex flex-col min-h-screen">
-    <header>
-
-    </header>
+    
+    <th:block th:insert="~{fragments/header :: header}"></th:block>
 
     <main class="flex flex-1">
-
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+        <div class="flex flex-col flex-1 w-50 items-center justify-center">
+            
+        </div>
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
     </main>
 
     <footer>

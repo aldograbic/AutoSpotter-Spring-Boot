@@ -16,6 +16,6 @@ public class LoginController {
     public String processLogin() {
         // Process the login form submission
         // You can add your login logic here, such as validating the credentials
-        return "redirect:/dashboard"; // Redirect to the dashboard page after successful login
+        return "redirect:/";
     }
 }
