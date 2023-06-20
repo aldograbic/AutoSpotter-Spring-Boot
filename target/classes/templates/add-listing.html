@@ -9,11 +9,82 @@
     <th:block th:insert="~{fragments/header :: header}"></th:block>
 
     <main class="flex flex-1">
+
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+
         <div class="flex flex-col flex-1 w-50 items-center justify-center">
-            
+            <!-- Step 1: Vehicle Type -->
+            <div th:if="${step eq 1}">
+                <!-- Vehicle type form -->
+                <form th:action="@{/listing/step1}" method="post">
+                    
+                </form>
+            </div>
+            <!-- Step 2: Vehicle Details -->
+            <div th:if="${step eq 2}">
+                <!-- Vehicle details form -->
+                <form th:action="@{/listing/step2}" method="post">
+                    <div>
+                        <label for="manufacturer">Proizvođač:</label>
+                        <select id="manufacturer" name="manufacturer">
+                        <!-- izgenerirat pomocu baze sve proizvodace -->
+                        </select>
+                    </div>
+                    <div>
+                        <label for="model">Model:</label>
+                        <select id="model" name="model">
+                        <!-- izgenerirat pomocu baze sve modele AJAX (s obzirom na odabranog proizvodaca) -->
+                        </select>
+                    </div>
+                    
+                    
+
+                    <!-- Input fields for vehicle details -->
+                    <!-- Make, model, year, mileage -->
+                    <!-- Submit button to proceed to next step -->
+                </form>
+            </div>
+
+            <!-- Step 3: Vehicle Images -->
+            <div th:if="${step eq 3}">
+                <!-- Vehicle images form -->
+                <form th:action="@{/listing/step3}" method="post">
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                        <label for="images">Slike za oglas:</label>
+                        <input type="file" id="images" name="images" accept="image/*" multiple>
+                        <input type="button" value="Dalje" class="button">
+                    </form>
+                      
+                    <!-- Image upload field(s) -->
+                    <!-- Submit button to proceed to next step -->
+                </form>
+            </div>
+
+            <!-- Step 4: Listing Title, Description, and Price -->
+            <div th:if="${step eq 4}">
+                <form th:action="@{/listing/step4}" method="post">
+                    <div>
+                        <label for="title">Naslov oglasa:</label>
+                        <input type="text" id="title" name="title" class="input">
+                    </div>
+                    <div>
+                        <label for="description">Opis oglasa:</label>
+                        <textarea id="description" name="description" rows="4" class="input"></textarea>
+                    </div>
+                    <div>
+                        <label for="price">Cijena:</label>
+                        <input type="number" id="price" name="price" class="input">
+                    </div>
+                    <div>
+                        <input type="submit" value="Potvrdi" class="button">
+                    </div>
+                </form>
+            </div>
+
         </div>
+
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+
     </main>
 
     <footer>
