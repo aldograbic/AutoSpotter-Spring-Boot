@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <script th:src="@{/showManufacturers.js}" defer="defer"></script>
     <title>AutoSpotter | Pretraga</title>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -9,10 +10,22 @@
     <th:block th:insert="~{fragments/header :: header}"></th:block>
 
     <main class="flex flex-1">
+
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
-        <div class="flex flex-col flex-1 w-50 items-center justify-center">
-            
+
+        <div class="flex flex-col flex-1 w-50 items-center mt-8">
+            <h1 class="text-3xl font-bold text-gray-700 mb-8">Tražim</h1>
+
+            <div class="flex gap-x-6 mt-8 cursor-pointer">
+                <img src="/img/car-icon.png" alt="Auto" onclick="showManufacturers('auto')">
+                <img src="/img/motorcycle-icon.png" alt="Motor" onclick="showManufacturers('motor')">
+                <img src="/img/truck-icon.png" alt="Kamion" onclick="showManufacturers('kamion')">
+                <img src="/img/engine-icon.png" alt="Dijelovi" onclick="showManufacturers('dijelovi')">
+            </div>
+
+            <div id="manufacturer-container"></div>
         </div>
+
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
     </main>
 
