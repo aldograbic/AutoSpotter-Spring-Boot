@@ -13,74 +13,103 @@
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
         <div class="flex flex-col flex-1 w-50 items-center justify-center">
-            <!-- Step 1: Vehicle Type -->
+            
+            <!-- Vehicle type form -->
             <div th:if="${step eq 1}">
-                <!-- Vehicle type form -->
-                <form th:action="@{/listing/step1}" method="post">
-                    
+                <form th:action="@{/oglas-1}" method="post">
+                    <div class="flex flex-col mb-4">
+                        <label for="listingType">Prodajem</label>
+                        <select id="listingType" name="listingType" class="input">
+                            <option value="Automobil">Automobil</option>
+                            <option value="Motor">Motor</option>
+                            <option value="Kamion">Kamion</option>
+                            <option value="Dijelovi za vozila">Dijelovi za vozila</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <input type="submit" value="Dalje" class="button">
+                    </div>
                 </form>
             </div>
+
+            <div th:if="${step > 1}">
+                <!-- Back button -->
+                <form th:action="@{/back}" method="post">
+                    <div class="flex flex-col mb-4">
+                        <input type="hidden" name="step" th:value="${step - 1}">
+                        <input type="submit" value="Nazad" class="button">
+                    </div>
+                </form>
+            </div>
+
+
             <!-- Step 2: Vehicle Details -->
             <div th:if="${step eq 2}">
                 <!-- Vehicle details form -->
-                <form th:action="@{/listing/step2}" method="post">
-                    <div>
-                        <label for="manufacturer">Proizvođač:</label>
-                        <select id="manufacturer" name="manufacturer">
-                        <!-- izgenerirat pomocu baze sve proizvodace -->
+                <form th:action="@{/oglas-2}" method="post">
+                    <div class="flex flex-col mb-4">
+                        <label for="manufacturer">Proizvođač</label>
+                        <select id="manufacturer" name="manufacturer" class="input">
+                            <option>Primjer</option>
+                            <!-- Use Thymeleaf expression to iterate over manufacturers and populate options -->
+                            <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer}" th:text="${manufacturer}"></option>
                         </select>
                     </div>
-                    <div>
-                        <label for="model">Model:</label>
-                        <select id="model" name="model">
-                        <!-- izgenerirat pomocu baze sve modele AJAX (s obzirom na odabranog proizvodaca) -->
+                    <div class="flex flex-col mb-4">
+                        <label for="model">Model</label>
+                        <select id="model" name="model" class="input">
+                            <option>Primjer</option>
+                            <!-- Use Thymeleaf expression to iterate over models and populate options -->
+                            <option th:each="model : ${models}" th:value="${model}" th:text="${model}"></option>
                         </select>
                     </div>
-                    
-                    
-
-                    <!-- Input fields for vehicle details -->
-                    <!-- Make, model, year, mileage -->
-                    <!-- Submit button to proceed to next step -->
+                    <div class="flex flex-col mb-4">
+                        <label for="state">Stanje</label>
+                        <select id="state" name="state" class="input">
+                            <option>Primjer</option>
+                            <!-- Use Thymeleaf expression to iterate over states and populate options -->
+                            <option th:each="state : ${states}" th:value="${state}" th:text="${state}"></option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <input type="submit" value="Dalje" class="button">
+                    </div>
                 </form>
             </div>
 
             <!-- Step 3: Vehicle Images -->
             <div th:if="${step eq 3}">
-                <!-- Vehicle images form -->
-                <form th:action="@{/listing/step3}" method="post">
-                    <form action="/upload" method="POST" enctype="multipart/form-data">
-                        <label for="images">Slike za oglas:</label>
+                <form th:action="@{/oglas-3}" method="post" enctype="multipart/form-data">
+                    <div class="flex flex-col mb-4">
+                        <label for="images">Slike za oglas</label>
                         <input type="file" id="images" name="images" accept="image/*" multiple>
-                        <input type="button" value="Dalje" class="button">
-                    </form>
-                      
-                    <!-- Image upload field(s) -->
-                    <!-- Submit button to proceed to next step -->
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <input type="submit" value="Dalje" class="button">
+                    </div>
                 </form>
             </div>
 
             <!-- Step 4: Listing Title, Description, and Price -->
             <div th:if="${step eq 4}">
-                <form th:action="@{/listing/step4}" method="post">
-                    <div>
-                        <label for="title">Naslov oglasa:</label>
+                <form th:action="@{/oglas-4}" method="post">
+                    <div class="flex flex-col mb-4">
+                        <label for="title">Naslov oglasa</label>
                         <input type="text" id="title" name="title" class="input">
                     </div>
-                    <div>
-                        <label for="description">Opis oglasa:</label>
+                    <div class="flex flex-col mb-4">
+                        <label for="description">Opis oglasa</label>
                         <textarea id="description" name="description" rows="4" class="input"></textarea>
                     </div>
-                    <div>
-                        <label for="price">Cijena:</label>
+                    <div class="flex flex-col mb-4">
+                        <label for="price">Cijena</label>
                         <input type="number" id="price" name="price" class="input">
                     </div>
-                    <div>
+                    <div class="flex flex-col mb-4">
                         <input type="submit" value="Potvrdi" class="button">
                     </div>
                 </form>
             </div>
-
         </div>
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
@@ -90,5 +119,6 @@
     <footer>
         <th:block th:insert="~{fragments/footer :: footer}"></th:block>
     </footer>
+    
 </body>
 </html>
