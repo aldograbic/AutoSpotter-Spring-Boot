@@ -20,8 +20,8 @@ public class BusinessUser extends User {
         this.web = web;
     }
 
-    public BusinessUser(Long id, String email, String phoneNumber, String username, String password, String name, String web) {
-        super(id, email, phoneNumber, username, password);
+    public BusinessUser(Long id, String email, String username, String password, String name, String web) {
+        super(id, email, username, password);
         this.name = name;
         this.web = web;
     }

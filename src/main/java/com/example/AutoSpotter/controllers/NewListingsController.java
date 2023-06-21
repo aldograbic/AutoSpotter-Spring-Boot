@@ -10,5 +10,4 @@ public class NewListingsController {
     public String showLoginForm() {
         return "new-listings";
     }
-    
 }

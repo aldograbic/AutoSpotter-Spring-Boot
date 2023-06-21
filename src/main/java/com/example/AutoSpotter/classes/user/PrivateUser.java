@@ -31,8 +31,8 @@ public class PrivateUser extends User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public PrivateUser(Long id, String email, String phoneNumber, String username, String password, String firstName, String lastName, LocalDate dateOfBirth) {
-        super(id, email, phoneNumber, username, password);
+    public PrivateUser(Long id, String email, String username, String password, String firstName, String lastName, LocalDate dateOfBirth) {
+        super(id, email, username, password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
