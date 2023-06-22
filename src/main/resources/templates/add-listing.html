@@ -18,8 +18,8 @@
             <div th:if="${step eq 1}">
                 <form th:action="@{/oglas-1}" method="post">
                     <div class="flex flex-col mb-4">
-                        <label for="listingType">Prodajem</label>
-                        <select id="listingType" name="listingType" class="input">
+                        <label for="vehicleType">Prodajem</label>
+                        <select id="vehicleType" name="vehicleType" class="input">
                             <option th:each="type : ${vehicleTypes}" th:value="${type}" th:text="${type}"></option>
                         </select>
                     </div>
@@ -28,7 +28,6 @@
                     </div>
                 </form>
             </div>
-
 
             <div th:if="${step > 1}">
                 <!-- Back button -->
@@ -40,7 +39,6 @@
                 </form>
             </div>
 
-
             <!-- Step 2: Vehicle Details -->
             <div th:if="${step eq 2}">
                 <!-- Vehicle details form -->
@@ -48,15 +46,16 @@
                     <div class="flex flex-col mb-4">
                         <label for="manufacturer">Proizvođač</label>
                         <select id="manufacturer" name="manufacturer" class="input">
-                            <option>Primjer</option>
+                            <option value="" disabled selected>Odabir</option>
                             <!-- Use Thymeleaf expression to iterate over manufacturers and populate options -->
                             <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer}" th:text="${manufacturer}"></option>
                         </select>
                     </div>
+                    
                     <div class="flex flex-col mb-4">
                         <label for="model">Model</label>
                         <select id="model" name="model" class="input">
-                            <option>Primjer</option>
+                            <option selected>Primjer</option>
                             <!-- Use Thymeleaf expression to iterate over models and populate options -->
                             <option th:each="model : ${models}" th:value="${model}" th:text="${model}"></option>
                         </select>
@@ -64,18 +63,17 @@
                     <div class="flex flex-col mb-4">
                         <label for="state">Stanje</label>
                         <select id="state" name="state" class="input">
-                            <option>Primjer</option>
-                            <!-- Use Thymeleaf expression to iterate over states and populate options -->
+                            <option value="" disabled selected>Odabir</option>
                             <option th:each="state : ${states}" th:value="${state}" th:text="${state}"></option>
                         </select>
-                    </div>
+                    </div>                    
                     <div class="flex flex-col mb-4">
                         <input type="hidden" name="vehicleTypeId" th:value="${vehicleTypeId}">
+
                         <input type="submit" value="Dalje" class="button">
                     </div>
                 </form>
             </div>
-            
 
             <!-- Step 3: Vehicle Images -->
             <div th:if="${step eq 3}">

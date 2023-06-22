@@ -15,7 +15,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
 
     @Override
     public int saveVehicle(Vehicle vehicle) {
-        String sql = "INSERT INTO vehicle (manufacturer, model, state, vehicle_type) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO vehicle (manufacturer, model, state, vehicle_type_id) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql,
                 vehicle.getManufacturer(),
@@ -30,21 +30,26 @@ public class JdbcVehicleRepository implements VehicleRepository {
     }
 
     @Override
-    public List<String> getManufacturersByVehicleType(String vehicleType) {
-        int vehicleTypeId = Integer.parseInt(vehicleType);
-        String sql = "SELECT manufacturer_name FROM manufacturers WHERE vehicle_type_id = ?";
+    public List<String> getManufacturersByVehicleType(int vehicleTypeId) {
+        String sql = "SELECT manufacturer_name FROM manufacturers WHERE vehicle_type_id = ? ";
         return jdbcTemplate.queryForList(sql, String.class, vehicleTypeId);
     }
 
     @Override
-    public int getVehicleTypeIdByListingType(String listingType) {
+    public int getVehicleTypeId(String vehicleType) {
         String sql = "SELECT id FROM vehicle_type WHERE name = ?";
-        return jdbcTemplate.queryForObject(sql, Integer.class, listingType);
+        return jdbcTemplate.queryForObject(sql, Integer.class, vehicleType);
     }
 
     @Override
     public List<String> getAllVehicleTypes() {
         String sql = "SELECT name FROM vehicle_type";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
+
+    @Override
+    public List<String> getAllStates() {
+        String sql = "SELECT name FROM states";
         return jdbcTemplate.queryForList(sql, String.class);
     }
 }
