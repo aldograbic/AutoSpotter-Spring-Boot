@@ -1,5 +1,7 @@
 package com.example.AutoSpotter.controllers;
 
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,14 +9,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.AutoSpotter.classes.listing.Listing;
+import com.example.AutoSpotter.classes.listing.ListingRepository;
+import com.example.AutoSpotter.classes.vehicle.Vehicle;
+import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
+
 import jakarta.servlet.http.HttpSession;
 
 
 @Controller
 public class AddListingController {
 
+    private final ListingRepository listingRepository;
+    private final VehicleRepository vehicleRepository;
+
+    public AddListingController(ListingRepository listingRepository, VehicleRepository vehicleRepository) {
+        this.listingRepository = listingRepository;
+        this.vehicleRepository = vehicleRepository;
+    }
+
     @GetMapping("/postavi-oglas")
-    public String showLoginForm(HttpSession session, Model model) {
+    public String showNewListing(HttpSession session, Model model) {
         Integer step = (Integer) session.getAttribute("step");
         if (step == null) {
             step = 1;
@@ -45,9 +60,12 @@ public class AddListingController {
                                             @RequestParam("model") String model,
                                             @RequestParam("state") String state,
                                             HttpSession session) {
-        session.setAttribute("manufacturer", manufacturer);
-        session.setAttribute("model", model);
-        session.setAttribute("state", state);
+        // Save the vehicle details to the database
+        int vehicleId = vehicleRepository.saveVehicle(new Vehicle(manufacturer, model, state));
+
+
+        session.setAttribute("vehicleId", vehicleId);
+
         session.setAttribute("step", 3);
         return "redirect:/postavi-oglas";
     }
@@ -64,14 +82,23 @@ public class AddListingController {
     @PostMapping("/oglas-4")
     public String handleStep4FormSubmission(@RequestParam("title") String title,
                                             @RequestParam("description") String description,
-                                            @RequestParam("price") double price,
+                                            @RequestParam("price") BigDecimal price,
                                             HttpSession session) {
-        // Process the submitted data as needed
-        // ...
 
-        // Clear the session and redirect to the success page
-        session.invalidate();
-        return "redirect:/success";
+    int vehicleId = (int) session.getAttribute("vehicleId");
+
+    int userId = 1; // Retrieve the userId from the logged-in user
+
+    Listing listing = new Listing();
+    listing.setListingTitle(title);
+    listing.setListingDescription(description);
+    listing.setListingPrice(price);
+    listing.setVehicleId(vehicleId);
+    listing.setUserId(userId);
+
+    listingRepository.createListing(listing);
+
+    session.invalidate();
+    return "redirect:/success";
     }
 }
-
