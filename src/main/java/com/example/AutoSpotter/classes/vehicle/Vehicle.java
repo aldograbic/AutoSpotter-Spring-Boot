@@ -1,17 +1,17 @@
 package com.example.AutoSpotter.classes.vehicle;
 
-import java.util.Date;
-
 public class Vehicle {
     int id;
     private String model;
     private String manufacturer;
     private String state;
+    private int vehicleTypeId;
 
-    public Vehicle(String model, String manufacturer, String state) {
+    public Vehicle(String model, String manufacturer, String state, int vehicleTypeId) {
         this.model = model;
         this.manufacturer = manufacturer;
         this.state = state;
+        this.vehicleTypeId = vehicleTypeId;
     }
 
     public int getId() {
@@ -45,6 +45,16 @@ public class Vehicle {
     public void setState(String state) {
         this.state = state;
     }
+
+    public int getVehicleTypeId() {
+        return vehicleTypeId;
+    }
+
+    public void setVehicleTypeId(int vehicleTypeId) {
+        this.vehicleTypeId = vehicleTypeId;
+    }
+
+
 
     // private String vin;
     // private Date year;

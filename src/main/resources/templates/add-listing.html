@@ -20,10 +20,7 @@
                     <div class="flex flex-col mb-4">
                         <label for="listingType">Prodajem</label>
                         <select id="listingType" name="listingType" class="input">
-                            <option value="Automobil">Automobil</option>
-                            <option value="Motor">Motor</option>
-                            <option value="Kamion">Kamion</option>
-                            <option value="Dijelovi za vozila">Dijelovi za vozila</option>
+                            <option th:each="type : ${vehicleTypes}" th:value="${type}" th:text="${type}"></option>
                         </select>
                     </div>
                     <div class="flex flex-col mb-4">
@@ -31,6 +28,7 @@
                     </div>
                 </form>
             </div>
+
 
             <div th:if="${step > 1}">
                 <!-- Back button -->
@@ -72,10 +70,12 @@
                         </select>
                     </div>
                     <div class="flex flex-col mb-4">
+                        <input type="hidden" name="vehicleTypeId" th:value="${vehicleTypeId}">
                         <input type="submit" value="Dalje" class="button">
                     </div>
                 </form>
             </div>
+            
 
             <!-- Step 3: Vehicle Images -->
             <div th:if="${step eq 3}">

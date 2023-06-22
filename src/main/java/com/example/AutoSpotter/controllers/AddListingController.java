@@ -1,6 +1,7 @@
 package com.example.AutoSpotter.controllers;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,6 @@ import com.example.AutoSpotter.classes.vehicle.Vehicle;
 import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
 
 import jakarta.servlet.http.HttpSession;
-
 
 @Controller
 public class AddListingController {
@@ -36,6 +36,11 @@ public class AddListingController {
             session.setAttribute("step", step);
         }
         model.addAttribute("step", step);
+
+        // Fetch all vehicle types and pass them to the template
+        List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
+        model.addAttribute("vehicleTypes", vehicleTypes);
+
         return "add-listing";
     }
 
@@ -49,7 +54,9 @@ public class AddListingController {
     // Step 1: Vehicle Type form submission
     @PostMapping("/oglas-1")
     public String handleStep1FormSubmission(@RequestParam("listingType") String listingType, HttpSession session) {
-        session.setAttribute("listingType", listingType);
+        int vehicleTypeId = vehicleRepository.getVehicleTypeIdByListingType(listingType);
+        session.setAttribute("vehicleType", listingType);
+        session.setAttribute("vehicleTypeId", vehicleTypeId);
         session.setAttribute("step", 2);
         return "redirect:/postavi-oglas";
     }
@@ -57,18 +64,26 @@ public class AddListingController {
     // Step 2: Vehicle Details form submission
     @PostMapping("/oglas-2")
     public String handleStep2FormSubmission(@RequestParam("manufacturer") String manufacturer,
-                                            @RequestParam("model") String model,
+                                            @RequestParam("model") String vehicleModel,
                                             @RequestParam("state") String state,
-                                            HttpSession session) {
+                                            @RequestParam("vehicleTypeId") int vehicleTypeId,
+                                            HttpSession session, Model model) {
+
         // Save the vehicle details to the database
-        int vehicleId = vehicleRepository.saveVehicle(new Vehicle(manufacturer, model, state));
-
-
+        Vehicle vehicle = new Vehicle(vehicleModel, manufacturer, state, vehicleTypeId);
+        int vehicleId = vehicleRepository.saveVehicle(vehicle);
         session.setAttribute("vehicleId", vehicleId);
-
         session.setAttribute("step", 3);
+
+        // Fetch manufacturers based on the selected vehicle type
+        String vehicleType = (String) session.getAttribute("vehicleType");
+        List<String> manufacturers = vehicleRepository.getManufacturersByVehicleType(vehicleType);
+        model.addAttribute("manufacturers", manufacturers);
+
         return "redirect:/postavi-oglas";
     }
+
+
 
     // Step 3: Vehicle Images form submission
     @PostMapping("/oglas-3")
@@ -85,20 +100,21 @@ public class AddListingController {
                                             @RequestParam("price") BigDecimal price,
                                             HttpSession session) {
 
-    int vehicleId = (int) session.getAttribute("vehicleId");
+        int vehicleId = (int) session.getAttribute("vehicleId");
 
-    int userId = 1; // Retrieve the userId from the logged-in user
+        int userId = 1; // Retrieve the userId from the logged-in user
 
-    Listing listing = new Listing();
-    listing.setListingTitle(title);
-    listing.setListingDescription(description);
-    listing.setListingPrice(price);
-    listing.setVehicleId(vehicleId);
-    listing.setUserId(userId);
+        Listing listing = new Listing();
+        listing.setListingTitle(title);
+        listing.setListingDescription(description);
+        listing.setListingPrice(price);
+        listing.setVehicleId(vehicleId);
+        listing.setUserId(userId);
 
-    listingRepository.createListing(listing);
+        listingRepository.createListing(listing);
 
-    session.invalidate();
-    return "redirect:/success";
+        session.invalidate();
+        return "redirect:/success";
     }
+
 }
