@@ -2,6 +2,7 @@ package com.example.AutoSpotter.classes.listing;
 
 import java.math.BigDecimal;
 
+import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.vehicle.Vehicle;
 
 public class Listing {
@@ -12,6 +13,7 @@ public class Listing {
     private int userId;
 
     private Vehicle vehicle;
+    private User user;
 
     public Listing() {}
 
@@ -29,6 +31,14 @@ public class Listing {
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getId() {

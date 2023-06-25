@@ -564,8 +564,20 @@ video {
   border-color: rgb(8 145 178 / var(--tw-border-opacity));
 }
 
+.absolute {
+  position: absolute;
+}
+
 .bottom-0 {
   bottom: 0px;
+}
+
+.right-0 {
+  right: 0px;
+}
+
+.top-0 {
+  top: 0px;
 }
 
 .mb-4 {

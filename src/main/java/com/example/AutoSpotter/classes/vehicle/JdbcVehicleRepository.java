@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class JdbcVehicleRepository implements VehicleRepository {
+    
     private final JdbcTemplate jdbcTemplate;
 
     public JdbcVehicleRepository(JdbcTemplate jdbcTemplate) {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.example.AutoSpotter.classes.user.UserRepository;
 import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
 
 @Repository
@@ -12,10 +13,12 @@ public class JdbcListingRepository implements ListingRepository {
 
     private final JdbcTemplate jdbcTemplate;
     private final VehicleRepository vehicleRepository;
+    private final UserRepository userRepository;
 
-    public JdbcListingRepository(JdbcTemplate jdbcTemplate, VehicleRepository vehicleRepository) {
+    public JdbcListingRepository(JdbcTemplate jdbcTemplate, VehicleRepository vehicleRepository, UserRepository userRepository) {
         this.jdbcTemplate = jdbcTemplate;
         this.vehicleRepository = vehicleRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -52,12 +55,18 @@ public class JdbcListingRepository implements ListingRepository {
     @Override
     public Listing getListingById(int id) {
         String sql = "SELECT id, listing_description, listing_price, vehicle_id, user_id FROM listing WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new ListingRowMapper(vehicleRepository), id);
+        return jdbcTemplate.queryForObject(sql, new ListingRowMapper(vehicleRepository, userRepository), id);
     }
 
     @Override
     public List<Listing> getNewListings() {
-        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, v.year, v.manufacturer, v.model, v.mileage, v.state FROM listing l INNER JOIN vehicle v ON l.vehicle_id = v.id ORDER BY l.created_at DESC LIMIT 10";
-        return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository));
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, v.year, v.manufacturer, v.model, v.mileage, v.state, u.username " +
+                    "FROM listing l " +
+                    "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
+                    "INNER JOIN user u ON l.user_id = u.id " +
+                    "ORDER BY l.created_at DESC LIMIT 10";
+
+        return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository, userRepository));
     }
+
 }

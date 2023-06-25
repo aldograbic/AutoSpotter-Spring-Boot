@@ -1,16 +1,16 @@
 package com.example.AutoSpotter.classes.user;
 
-public abstract class User {
-    private Long id;
+public class User {
+    private int id;
     private String email;
     private String username;
     private String password;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -38,10 +38,12 @@ public abstract class User {
         this.password = password;
     }
 
-    public User(Long id, String email, String username, String password) {
+    public User(int id, String email, String username, String password) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.password = password;
     }
+
+    public User() {}
 }

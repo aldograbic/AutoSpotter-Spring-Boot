@@ -42,9 +42,9 @@ public class AddListingController {
         model.addAttribute("vehicleTypes", vehicleTypes);
 
         List<Integer> years = new ArrayList<>();
-        years.add(2023);
-        years.add(2022);
-
+        for(int i = 2023; i >= 1900; i--) {
+            years.add(i);
+        }
         model.addAttribute("years", years);
 
         List<String> states = vehicleRepository.getAllStates();
