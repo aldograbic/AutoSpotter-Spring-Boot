@@ -14,7 +14,6 @@
 
         <div class="flex flex-col flex-1 w-50 items-center justify-center">
             
-            <!-- Step 1: Vehicle type form -->
             <div th:if="${step eq 1}">
                 <form th:action="@{/oglas-1}" method="post">
                     <div class="flex flex-col mb-4">
@@ -29,7 +28,6 @@
                 </form>
             </div>
 
-            <!-- Back button -->
             <div th:if="${step > 1}">
                 <form th:action="@{/back}" method="post">
                     <div class="flex flex-col mb-4">
@@ -39,14 +37,12 @@
                 </form>
             </div>
 
-            <!-- Step 2: Vehicle Details -->
             <div th:if="${step eq 2}">
                 <form th:action="@{/oglas-2}" method="post">
                     <div class="flex flex-col mb-4">
                         <label for="manufacturer">Proizvođač</label>
                         <select id="manufacturer" name="manufacturer" required class="input">
                             <option value="" disabled selected>Odabir</option>
-                            <!-- Use Thymeleaf expression to iterate over manufacturers and populate options -->
                             <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer}" th:text="${manufacturer}"></option>
                         </select>
                     </div>
@@ -55,7 +51,7 @@
                         <label for="model">Model</label>
                         <select id="model" name="model" required class="input">
                             <option selected>Primjer</option>
-                            <!-- Use Thymeleaf expression to iterate over models and populate options -->
+                            <!-- Use Thymeleaf expression to iterate over models of manufacturer and populate options -->
                             <option th:each="model : ${models}" th:value="${model}" th:text="${model}"></option>
                         </select>
                     </div>
@@ -64,7 +60,6 @@
                         <label for="year">Godina proizvodnje</label>
                         <select id="year" name="year" required class="input">
                             <option value="" disabled selected>Odabir</option>
-                            <!-- Use Thymeleaf expression to iterate over years and populate options -->
                             <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
                         </select>
                     </div>
@@ -72,7 +67,15 @@
                     <div class="flex flex-col mb-4">
                         <label for="mileage">Kilometraža</label>
                         <input type="number" id="mileage" name="mileage" placeholder="Unesite kilometražu" required class="input">
-                    </div>                    
+                    </div>
+
+                    <div class="flex flex-col mb-4">
+                        <label for="location">Lokacija vozila</label>
+                        <select id="location" name="location" required class="input">
+                            <option value="" disabled selected>Odabir</option>
+                            <option th:each="location : ${locations}" th:value="${location}" th:text="${location}"></option>
+                        </select>
+                    </div>
 
                     <div class="flex flex-col mb-4">
                         <label for="state">Stanje</label>
@@ -102,7 +105,6 @@
                 </form>
             </div>
 
-            <!-- Step 4: Listing Title, Description, and Price -->
             <div th:if="${step eq 4}">
                 <form th:action="@{/oglas-4}" method="post">
                     <div class="flex flex-col mb-4">

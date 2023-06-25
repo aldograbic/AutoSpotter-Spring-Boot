@@ -5,14 +5,16 @@ public class Vehicle {
     private String model;
     private String manufacturer;
     private int mileage;
+    private String location;
     private String state;
     private int year;
     private int vehicleTypeId;
 
-    public Vehicle(String model, String manufacturer, int mileage, String state, int year, int vehicleTypeId) {
+    public Vehicle(String model, String manufacturer, int mileage, String location, String state, int year, int vehicleTypeId) {
         this.model = model;
         this.manufacturer = manufacturer;
         this.mileage = mileage;
+        this.location = location;
         this.state = state;
         this.year = year;
         this.vehicleTypeId = vehicleTypeId;
@@ -50,6 +52,14 @@ public class Vehicle {
 
     public void setMileage(int mileage) {
         this.mileage = mileage;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getState() {

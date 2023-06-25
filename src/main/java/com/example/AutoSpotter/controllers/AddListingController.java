@@ -47,6 +47,9 @@ public class AddListingController {
         }
         model.addAttribute("years", years);
 
+        List<String> locations = vehicleRepository.getAllLocations();
+        model.addAttribute("locations", locations);
+
         List<String> states = vehicleRepository.getAllStates();
         model.addAttribute("states", states);
 
@@ -65,7 +68,6 @@ public class AddListingController {
         return "redirect:/postavi-oglas";
     }
 
-    // Step 1: Vehicle Type form submission
     @PostMapping("/oglas-1")
     public String handleStep1FormSubmission(@RequestParam("vehicleType") String vehicleType, HttpSession session, Model model) {
         int vehicleTypeId = vehicleRepository.getVehicleTypeId(vehicleType);
@@ -75,28 +77,20 @@ public class AddListingController {
         return "redirect:/postavi-oglas";
     }
 
-    // Step 2: Vehicle Details form submission
     @PostMapping("/oglas-2")
     public String handleStep2FormSubmission(@RequestParam("manufacturer") String manufacturer,
                                             @RequestParam("model") String vehicleModel,
                                             @RequestParam("mileage") int mileage,
+                                            @RequestParam("location") String location,
                                             @RequestParam("year") int year,
                                             @RequestParam("state") String state,
                                             HttpSession session, Model model) {
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
-        Vehicle vehicle = new Vehicle(vehicleModel, manufacturer, mileage, state, year, vehicleTypeId);
+        Vehicle vehicle = new Vehicle(vehicleModel, manufacturer, mileage, location, state, year, vehicleTypeId);
         int vehicleId = vehicleRepository.saveVehicle(vehicle);
         session.setAttribute("vehicleId", vehicleId);
         session.setAttribute("step", 3);
-
-        if (state.isEmpty()) {
-            // Handle the case where no state is selected
-            // You can display an error message or perform any other desired action
-            // For example, you can redirect back to the form and show an error message
-            model.addAttribute("errorMessage", "Please select a state.");
-            return "add-listing";
-        }
 
         List<String> manufacturers = vehicleRepository.getManufacturersByVehicleType(vehicleTypeId);
         session.setAttribute("manufacturers", manufacturers);
@@ -104,8 +98,6 @@ public class AddListingController {
         return "redirect:/postavi-oglas";
     }
 
-
-     // Step 3: Vehicle Images form submission
     @PostMapping("/oglas-3")
     public String handleStep3FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session) {
         session.setAttribute("images", images);
@@ -113,7 +105,6 @@ public class AddListingController {
         return "redirect:/postavi-oglas";
     }
 
-    // Step 4: Listing Title, Description, and Price form submission
     @PostMapping("/oglas-4")
     public String handleStep4FormSubmission(@RequestParam("description") String description,
                                             @RequestParam("price") BigDecimal price,

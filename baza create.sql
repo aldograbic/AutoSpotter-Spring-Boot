@@ -1,3 +1,27 @@
+CREATE TABLE `countries` (
+  `id` int NOT NULL,
+  `country_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `counties` (
+  `id` int NOT NULL,
+  `county_name` varchar(255) DEFAULT NULL,
+  `country_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `country_id` (`country_id`),
+  CONSTRAINT `counties_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cities` (
+  `id` int NOT NULL,
+  `city_name` varchar(255) DEFAULT NULL,
+  `county_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `county_id` (`county_id`),
+  CONSTRAINT `cities_ibfk_1` FOREIGN KEY (`county_id`) REFERENCES `counties` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `listing` (
   `id` int NOT NULL AUTO_INCREMENT,
   `listing_description` text,
@@ -29,6 +53,7 @@ CREATE TABLE `states` (
 
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -38,13 +63,14 @@ CREATE TABLE `vehicle` (
   `model` varchar(255) NOT NULL,
   `mileage` int DEFAULT NULL,
   `year` int NOT NULL,
+  `location` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
   `vehicle_type_id` int NOT NULL,
+  
   PRIMARY KEY (`id`),
   KEY `fk_vehicle_type` (`vehicle_type_id`),
   CONSTRAINT `fk_vehicle_type` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `vehicle_type` (
   `id` int NOT NULL AUTO_INCREMENT,

@@ -20,7 +20,8 @@
                         <p th:text="&euro; + ${listing.listingPrice}" class="text-gray-700"></p>
                         <p th:text="${listing.vehicle.state + ', ' + listing.vehicle.mileage + ' km'}" class="text-gray-700"></p>
                         <p th:text="${listing.listingDescription}" class="text-gray-700"></p>
-                        <p th:text="${listing.user.username}" class="text-gray-700"></p> 
+                        <p th:text="${listing.vehicle.location}" class="text-gray-700"></p>
+                        <a href="" class="hover:text-cyan-900"><p th:text="${listing.user.username}" class="text-gray-700"></p></a>
                     </div>
                 </li>
             </ul>
