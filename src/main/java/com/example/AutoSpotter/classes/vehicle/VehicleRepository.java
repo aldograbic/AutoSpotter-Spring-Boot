@@ -13,4 +13,6 @@ public interface VehicleRepository {
     List<String> getAllVehicleTypes();
 
     List<String> getAllStates();
+
+    Vehicle getVehicleById(int id);
 }

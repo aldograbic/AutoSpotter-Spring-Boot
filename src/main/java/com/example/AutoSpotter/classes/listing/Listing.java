@@ -2,23 +2,33 @@ package com.example.AutoSpotter.classes.listing;
 
 import java.math.BigDecimal;
 
+import com.example.AutoSpotter.classes.vehicle.Vehicle;
+
 public class Listing {
     private int id;
-    private String listingTitle;
     private String listingDescription;
     private BigDecimal listingPrice;
     private int vehicleId;
     private int userId;
 
+    private Vehicle vehicle;
+
     public Listing() {}
 
-    public Listing(int id, String listingTitle, String listingDescription, BigDecimal listingPrice, int vehicleId, int userId) {
+    public Listing(int id, String listingDescription, BigDecimal listingPrice, int vehicleId, int userId) {
         this.id = id;
-        this.listingTitle = listingTitle;
         this.listingDescription = listingDescription;
         this.listingPrice = listingPrice;
         this.vehicleId = vehicleId;
         this.userId = userId;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public int getId() {
@@ -27,14 +37,6 @@ public class Listing {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getListingTitle() {
-        return listingTitle;
-    }
-
-    public void setListingTitle(String listingTitle) {
-        this.listingTitle = listingTitle;
     }
 
     public String getListingDescription() {

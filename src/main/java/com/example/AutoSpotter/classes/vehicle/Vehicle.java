@@ -5,14 +5,18 @@ public class Vehicle {
     private String model;
     private String manufacturer;
     private String state;
+    private int year;
     private int vehicleTypeId;
 
-    public Vehicle(String model, String manufacturer, String state, int vehicleTypeId) {
+    public Vehicle(String model, String manufacturer, String state, int year, int vehicleTypeId) {
         this.model = model;
         this.manufacturer = manufacturer;
         this.state = state;
+        this.year = year;
         this.vehicleTypeId = vehicleTypeId;
     }
+
+    public Vehicle() {}
 
     public int getId() {
         return id;
@@ -44,6 +48,14 @@ public class Vehicle {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public int getVehicleTypeId() {

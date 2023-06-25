@@ -1,6 +1,7 @@
 package com.example.AutoSpotter.controllers;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,12 @@ public class AddListingController {
         List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
         model.addAttribute("vehicleTypes", vehicleTypes);
 
+        List<Integer> years = new ArrayList<>();
+        years.add(2023);
+        years.add(2022);
+
+        model.addAttribute("years", years);
+
         List<String> states = vehicleRepository.getAllStates();
         model.addAttribute("states", states);
 
@@ -72,11 +79,12 @@ public class AddListingController {
     @PostMapping("/oglas-2")
     public String handleStep2FormSubmission(@RequestParam("manufacturer") String manufacturer,
                                             @RequestParam("model") String vehicleModel,
+                                            @RequestParam("year") int year,
                                             @RequestParam("state") String state,
                                             HttpSession session, Model model) {
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
-        Vehicle vehicle = new Vehicle(vehicleModel, manufacturer, state, vehicleTypeId);
+        Vehicle vehicle = new Vehicle(vehicleModel, manufacturer, state, year, vehicleTypeId);
         int vehicleId = vehicleRepository.saveVehicle(vehicle);
         session.setAttribute("vehicleId", vehicleId);
         session.setAttribute("step", 3);
@@ -106,8 +114,7 @@ public class AddListingController {
 
     // Step 4: Listing Title, Description, and Price form submission
     @PostMapping("/oglas-4")
-    public String handleStep4FormSubmission(@RequestParam("title") String title,
-                                            @RequestParam("description") String description,
+    public String handleStep4FormSubmission(@RequestParam("description") String description,
                                             @RequestParam("price") BigDecimal price,
                                             HttpSession session) {
 
@@ -116,7 +123,6 @@ public class AddListingController {
         int userId = 1; // Retrieve the userId from the logged-in user
 
         Listing listing = new Listing();
-        listing.setListingTitle(title);
         listing.setListingDescription(description);
         listing.setListingPrice(price);
         listing.setVehicleId(vehicleId);

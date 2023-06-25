@@ -10,8 +10,18 @@
 
     <main class="flex flex-1">
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
-        <div class="flex flex-col flex-1 w-50 items-center justify-center">
-            
+        <div class="flex flex-col flex-1 w-50 items-center mt-8">
+            <h1 class="text-3xl font-bold text-gray-700 mb-8">Novi oglasi</h1>
+            <ul>
+                <li th:each="listing : ${newListings}" class="flex items-center space-x-4 mb-4 border rounded-md">
+                    <a href=""><img class="w-20 h-20 object-cover rounded" src="img/car-icon.png" alt="Listing Image"></a>
+                    <div>
+                        <a href=""><h2 th:text="${listing.vehicle.manufacturer + ' (' + listing.vehicle.year + ')'}"></h2></a>
+                        <p th:text="${listing.listingPrice} + &euro;" class="text-gray-700"></p>
+                        <p th:text="${listing.listingDescription}" class="text-gray-700"></p>
+                    </div>
+                </li>
+            </ul>
         </div>
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
     </main>
