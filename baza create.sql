@@ -35,14 +35,16 @@ CREATE TABLE `user` (
 CREATE TABLE `vehicle` (
   `id` int NOT NULL AUTO_INCREMENT,
   `manufacturer` varchar(255) NOT NULL,
-  `year` int NOT NULL,
   `model` varchar(255) NOT NULL,
+  `mileage` int DEFAULT NULL,
+  `year` int NOT NULL,
   `state` varchar(255) NOT NULL,
   `vehicle_type_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_vehicle_type` (`vehicle_type_id`),
   CONSTRAINT `fk_vehicle_type` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 CREATE TABLE `vehicle_type` (
   `id` int NOT NULL AUTO_INCREMENT,

@@ -79,12 +79,13 @@ public class AddListingController {
     @PostMapping("/oglas-2")
     public String handleStep2FormSubmission(@RequestParam("manufacturer") String manufacturer,
                                             @RequestParam("model") String vehicleModel,
+                                            @RequestParam("mileage") int mileage,
                                             @RequestParam("year") int year,
                                             @RequestParam("state") String state,
                                             HttpSession session, Model model) {
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
-        Vehicle vehicle = new Vehicle(vehicleModel, manufacturer, state, year, vehicleTypeId);
+        Vehicle vehicle = new Vehicle(vehicleModel, manufacturer, mileage, state, year, vehicleTypeId);
         int vehicleId = vehicleRepository.saveVehicle(vehicle);
         session.setAttribute("vehicleId", vehicleId);
         session.setAttribute("step", 3);

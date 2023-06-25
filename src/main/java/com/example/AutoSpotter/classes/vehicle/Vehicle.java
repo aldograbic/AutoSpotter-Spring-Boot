@@ -4,13 +4,15 @@ public class Vehicle {
     int id;
     private String model;
     private String manufacturer;
+    private int mileage;
     private String state;
     private int year;
     private int vehicleTypeId;
 
-    public Vehicle(String model, String manufacturer, String state, int year, int vehicleTypeId) {
+    public Vehicle(String model, String manufacturer, int mileage, String state, int year, int vehicleTypeId) {
         this.model = model;
         this.manufacturer = manufacturer;
+        this.mileage = mileage;
         this.state = state;
         this.year = year;
         this.vehicleTypeId = vehicleTypeId;
@@ -42,6 +44,14 @@ public class Vehicle {
         this.manufacturer = manufacturer;
     }
 
+    public int getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(int mileage) {
+        this.mileage = mileage;
+    }
+
     public String getState() {
         return state;
     }
@@ -69,7 +79,6 @@ public class Vehicle {
 
 
     // private String vin;
-    // private Date year;
     // private String color;
     // private String engineType;
     // private String transmission;
@@ -85,5 +94,5 @@ public class Vehicle {
     // private double fuelEfficiency;
 
     //Safety Features, Infotainment System, numberOfWheels, registered, price,
-    // kilometers, powerEngine, location, ownerID
+    // kilometers, powerEngine, location
 }

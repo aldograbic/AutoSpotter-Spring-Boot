@@ -15,11 +15,12 @@ public class JdbcVehicleRepository implements VehicleRepository {
 
     @Override
     public int saveVehicle(Vehicle vehicle) {
-        String sql = "INSERT INTO vehicle (manufacturer, model, state, year, vehicle_type_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO vehicle (manufacturer, model, mileage, state, year, vehicle_type_id) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql,
                 vehicle.getManufacturer(),
                 vehicle.getModel(),
+                vehicle.getMileage(),
                 vehicle.getState(),
                 vehicle.getYear(),
                 vehicle.getVehicleTypeId()
@@ -56,7 +57,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
 
     @Override
     public Vehicle getVehicleById(int id) {
-        String sql = "SELECT id, manufacturer, model, state, year, vehicle_type_id FROM vehicle WHERE id = ?";
+        String sql = "SELECT id, manufacturer, model, mileage, state, year, vehicle_type_id FROM vehicle WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new VehicleRowMapper(), id);
     }
 }

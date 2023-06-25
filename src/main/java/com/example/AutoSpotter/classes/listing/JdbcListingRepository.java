@@ -57,7 +57,7 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public List<Listing> getNewListings() {
-        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, v.year, v.manufacturer, v.model FROM listing l INNER JOIN vehicle v ON l.vehicle_id = v.id ORDER BY l.created_at DESC LIMIT 10";
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, v.year, v.manufacturer, v.model, v.mileage, v.state FROM listing l INNER JOIN vehicle v ON l.vehicle_id = v.id ORDER BY l.created_at DESC LIMIT 10";
         return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository));
     }
 }
