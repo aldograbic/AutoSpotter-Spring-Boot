@@ -87,7 +87,6 @@ public class Vehicle {
     }
 
 
-
     // private String vin;
     // private String color;
     // private String engineType;
@@ -104,5 +103,5 @@ public class Vehicle {
     // private double fuelEfficiency;
 
     //Safety Features, Infotainment System, numberOfWheels, registered, price,
-    // kilometers, powerEngine, location
+    // powerEngine, location (promijenit malo)
 }
