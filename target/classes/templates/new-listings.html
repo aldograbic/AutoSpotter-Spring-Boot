@@ -9,19 +9,38 @@
     <th:block th:insert="~{fragments/header :: header}"></th:block>
 
     <main class="flex flex-1 space-x-4">
-        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+        <div th:fragment="sideDiv" class="flex-0 w-1/5 bg-gray-100 border-r-2 text-sm">
+            <div class="flex flex-col m-4">
+                <label for="manufacturer">Proizvođač</label>
+                <select id="manufacturer" class="input">
+                    <option value="" disabled selected>Odabir</option>
+                </select>
+            </div>
+            <div class="flex flex-col m-4">
+                <label for="model">Model</label>
+                <select id="model" class="input">
+                    <option value="" disabled selected>Odabir</option>
+                </select>
+            </div>
+        </div>
         <div class="flex-1 mt-8">
             <h1 class="text-3xl font-bold text-gray-700 mb-8">Novi oglasi</h1>
             <ul>
-                <li th:each="listing : ${newListings}" class="flex items-center space-x-4 mb-4 border rounded-md">
+                <li th:each="listing : ${newListings}" class="relative flex items-center space-x-4 mb-4 border rounded-md">
                     <a href=""><img class="w-56 h-56 object-cover rounded" src="img/car-example.jpg" alt="Slika vozila"></a>
                     <div>
                         <a href="" class="text-cyan-700 text-xl hover:text-cyan-900"><h2 class="mb-4" th:text="${listing.vehicle.manufacturer + ' (' + listing.vehicle.year + ')'}"></h2></a>
-                        <p th:text="&euro; + ${listing.listingPrice}" class="text-gray-700"></p>
+                        <p th:text="&euro; + ${listing.listingPrice}" class="text-gray-700 font-semibold mb-4"></p>
                         <p th:text="${listing.vehicle.state + ', ' + listing.vehicle.mileage + ' km'}" class="text-gray-700"></p>
                         <p th:text="${listing.listingDescription}" class="text-gray-700"></p>
-                        <p th:text="${listing.vehicle.location}" class="text-gray-700"></p>
-                        <a href="" class="hover:text-cyan-900"><p th:text="${listing.user.username}" class="text-gray-700"></p></a>
+                        <p class="flex items-center text-gray-700 absolute top-0 right-0 mt-3 mr-4">
+                            <span class="mr-1"><img class="w-6" src="img/location-icon.png" alt="Lokacija"></span>
+                            <span th:text="${listing.vehicle.location}"></span>
+                        </p>
+                        <a href="" class="flex items-center text-cyan-700 absolute bottom-0 right-0 mb-3 mr-4 hover:text-cyan-900">
+                            <span class="mr-2"><img class="w-6" src="img/user-icon.png" alt="Prodavač"></span>
+                            <span th:text="${listing.user.username}"></span>
+                        </a>                        
                     </div>
                 </li>
             </ul>
