@@ -11,6 +11,12 @@
     <main class="flex flex-1 space-x-4">
         <div th:fragment="sideDiv" class="flex-0 w-1/5 bg-gray-100 border-r-2 text-sm">
             <div class="flex flex-col m-4">
+                <label for="vehicleType">Tip vozila</label>
+                <select id="vehicleType" class="input">
+                    <option value="" selected>Sva vozila</option>
+                </select>
+            </div>
+            <div class="flex flex-col m-4">
                 <label for="manufacturer">Proizvođač</label>
                 <select id="manufacturer" class="input">
                     <option value="" disabled selected>Odabir</option>
@@ -21,6 +27,56 @@
                 <select id="model" class="input">
                     <option value="" disabled selected>Odabir</option>
                 </select>
+            </div>
+            <div class="flex flex-col m-4">
+                <label for="fuelType">Vrsta goriva</label>
+                <select id="fuelType" class="input">
+                    <option value="" disabled selected>Odabir</option>
+                </select>
+            </div>
+            <div class="flex flex-col m-4">
+                <label>Mjenjač</label>
+                <div class="flex">
+                    <button type="button" id="transmissionAll" class="button flex-grow rounded-br-none rounded-tr-none">Sve vrste</button>
+                    <button type="button" id="transmissionManual" class="button flex-grow rounded-none">Ručni</button>
+                    <button type="button" id="transmissionAutomatic" class="button flex-grow rounded-bl-none rounded-tl-none">Automatski</button>
+                </div>
+            </div>
+            
+            <div class="flex flex-col m-4">
+                <label for="location">Lokacija vozila</label>
+                <select id="location" class="input">
+                    <option value="" disabled selected>Odabir</option>
+                </select>
+            </div>
+            <div class="flex flex-col m-4">
+                <label>Godina proizvodnje</label>
+                <div class="flex items-center">
+                    <select id="yearFrom" class="input flex-grow">
+                        <option value="" disabled selected>Odabir</option>
+                    </select>
+                    <p class="text-center mr-4 ml-4">do</p>
+                    <select id="yearTo" class="input flex-grow">
+                        <option value="" disabled selected>Odabir</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex flex-col m-4">
+                <label>Cijena vozila</label>
+                <div class="flex items-center">
+                    <select id="price" class="input flex-grow">
+                        <option value="" disabled selected>Odabir</option>
+                    </select>
+                    <p class="text-center mr-4 ml-4">do</p>
+                    <select id="priceTo" class="input flex-grow">
+                        <option value="" disabled selected>Odabir</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex m-4">
+                <div>
+                    <input type="submit" value="Filtriraj" class="button">
+                </div>
             </div>
         </div>
         <div class="flex-1 mt-8">
