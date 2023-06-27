@@ -564,6 +564,11 @@ video {
   border-color: rgb(8 145 178 / var(--tw-border-opacity));
 }
 
+.selected {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(8 145 178 / var(--tw-bg-opacity)) !important;
+}
+
 .no-arrows::-webkit-inner-spin-button,
     .no-arrows::-webkit-outer-spin-button {
   -webkit-appearance: none;

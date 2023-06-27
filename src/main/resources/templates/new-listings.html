@@ -4,6 +4,7 @@
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <script th:src="@{/filtering.js}" defer="defer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <title>AutoSpotter | Novi oglasi</title>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -45,7 +46,7 @@
             </div>
             <div class="flex flex-col m-4">
                 <label>Mjenjač</label>
-                <div class="flex">
+                <div class="flex" id="transmissionButtons">
                     <button type="button" id="transmissionAll" class="button bg-neutral-400 flex-grow rounded-br-none rounded-tr-none">Sve vrste</button>
                     <button type="button" id="transmissionManual" class="button bg-neutral-400 flex-grow rounded-none">Ručni</button>
                     <button type="button" id="transmissionAutomatic" class="button bg-neutral-400 flex-grow rounded-bl-none rounded-tl-none">Automatski</button>
@@ -79,7 +80,7 @@
             </div>
             <div class="flex flex-col m-4">
                 <label>Tip prodavača</label>
-                <div class="flex">
+                <div class="flex" id="userTypeButtons">
                     <button type="button" id="userTypeAll" class="button bg-neutral-400 flex-grow rounded-br-none rounded-tr-none">Svi prodavači</button>
                     <button type="button" id="userTypePrivate" class="button bg-neutral-400 flex-grow rounded-none">Privatni</button>
                     <button type="button" id="userTypeBusiness" class="button bg-neutral-400 flex-grow rounded-bl-none rounded-tl-none">Poslovni</button>
