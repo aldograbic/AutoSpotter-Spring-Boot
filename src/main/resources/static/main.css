@@ -564,6 +564,16 @@ video {
   border-color: rgb(8 145 178 / var(--tw-border-opacity));
 }
 
+.no-arrows::-webkit-inner-spin-button,
+    .no-arrows::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-arrows {
+  -moz-appearance: textfield;
+}
+
 .absolute {
   position: absolute;
 }
@@ -672,6 +682,10 @@ video {
   width: 20%;
 }
 
+.w-11\/12 {
+  width: 91.666667%;
+}
+
 .w-56 {
   width: 14rem;
 }
@@ -763,6 +777,11 @@ video {
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.bg-neutral-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(163 163 163 / var(--tw-bg-opacity));
 }
 
 .object-cover {

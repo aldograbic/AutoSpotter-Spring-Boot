@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <script th:src="@{/filtering.js}" defer="defer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>AutoSpotter | Novi oglasi</title>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -14,6 +16,7 @@
                 <label for="vehicleType">Tip vozila</label>
                 <select id="vehicleType" class="input">
                     <option value="" selected>Sva vozila</option>
+                    <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}" th:text="${vehicleType}"></option>
                 </select>
             </div>
             <div class="flex flex-col m-4">
@@ -29,6 +32,12 @@
                 </select>
             </div>
             <div class="flex flex-col m-4">
+                <label for="bodyShape">Oblik karoserije</label>
+                <select id="bodyShape" class="input">
+                    <option value="" disabled selected>Odabir</option>
+                </select>
+            </div>
+            <div class="flex flex-col m-4">
                 <label for="fuelType">Vrsta goriva</label>
                 <select id="fuelType" class="input">
                     <option value="" disabled selected>Odabir</option>
@@ -37,12 +46,11 @@
             <div class="flex flex-col m-4">
                 <label>Mjenjač</label>
                 <div class="flex">
-                    <button type="button" id="transmissionAll" class="button flex-grow rounded-br-none rounded-tr-none">Sve vrste</button>
-                    <button type="button" id="transmissionManual" class="button flex-grow rounded-none">Ručni</button>
-                    <button type="button" id="transmissionAutomatic" class="button flex-grow rounded-bl-none rounded-tl-none">Automatski</button>
+                    <button type="button" id="transmissionAll" class="button bg-neutral-400 flex-grow rounded-br-none rounded-tr-none">Sve vrste</button>
+                    <button type="button" id="transmissionManual" class="button bg-neutral-400 flex-grow rounded-none">Ručni</button>
+                    <button type="button" id="transmissionAutomatic" class="button bg-neutral-400 flex-grow rounded-bl-none rounded-tl-none">Automatski</button>
                 </div>
             </div>
-            
             <div class="flex flex-col m-4">
                 <label for="location">Lokacija vozila</label>
                 <select id="location" class="input">
@@ -64,13 +72,17 @@
             <div class="flex flex-col m-4">
                 <label>Cijena vozila</label>
                 <div class="flex items-center">
-                    <select id="price" class="input flex-grow">
-                        <option value="" disabled selected>Odabir</option>
-                    </select>
+                    <input type="number" id="priceFrom" min="0" class="input w-11/12 no-arrows flex-grow">
                     <p class="text-center mr-4 ml-4">do</p>
-                    <select id="priceTo" class="input flex-grow">
-                        <option value="" disabled selected>Odabir</option>
-                    </select>
+                    <input type="number" id="priceTo" min="0" class="input w-11/12 no-arrows flex-grow">
+                </div>
+            </div>
+            <div class="flex flex-col m-4">
+                <label>Tip prodavača</label>
+                <div class="flex">
+                    <button type="button" id="userTypeAll" class="button bg-neutral-400 flex-grow rounded-br-none rounded-tr-none">Svi prodavači</button>
+                    <button type="button" id="userTypePrivate" class="button bg-neutral-400 flex-grow rounded-none">Privatni</button>
+                    <button type="button" id="userTypeBusiness" class="button bg-neutral-400 flex-grow rounded-bl-none rounded-tl-none">Poslovni</button>
                 </div>
             </div>
             <div class="flex m-4">

@@ -9,6 +9,9 @@ public class Vehicle {
     private String state;
     private int year;
     private int vehicleTypeId;
+    // private String fuelType;
+    // private String transmission;
+    // private String bodyShape;
 
     public Vehicle(String model, String manufacturer, int mileage, String location, String state, int year, int vehicleTypeId) {
         this.model = model;
@@ -86,12 +89,12 @@ public class Vehicle {
         this.vehicleTypeId = vehicleTypeId;
     }
 
-
+ 
     // private String vin;
     // private String color;
     // private String engineType;
-    // private String transmission;
-    // private String fuelType;
+    
+    
     // private String seatingCapacity;
     // private double curbWeight;
     // private double maximumPayloadCapacity;
@@ -102,6 +105,6 @@ public class Vehicle {
     // private double acceleration;
     // private double fuelEfficiency;
 
-    //Safety Features, Infotainment System, numberOfWheels, registered, price,
+    //Safety Features, Infotainment System, numberOfWheels, registered,
     // powerEngine, location (promijenit malo)
 }
