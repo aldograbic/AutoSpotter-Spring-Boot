@@ -15,6 +15,7 @@
         <div class="flex-1 mt-8">
             <div>
                 <img class="w-96 h-96 object-cover rounded" src="/img/car-example.jpg" alt="Slika vozila">
+
                 <div>
                     <h2 class="mb-4 text-xl" th:text="${listing.vehicle.manufacturer + ' (' + listing.vehicle.year + ')'}"></h2>
                     <p class="text-gray-700 font-semibold mb-4" th:text="'€' + ${listing.listingPrice}"></p>
@@ -24,11 +25,49 @@
                         <span class="mr-1"><img class="w-6" src="/img/location-icon.png" alt="Lokacija"></span>
                         <span th:text="${listing.vehicle.location}">Vehicle Location</span>
                     </p>
-                    <a class="flex items-center text-cyan-700 mt-3" th:href="@{/korisnicki-profil/{userId}(userId=${listing.user.id})}">
-                        <span class="mr-2"><img class="w-6" src="/img/user-icon.png" alt="Prodavač"></span>
-                        <span th:text="${listing.user.username}">Username</span>
-                    </a>
                 </div>
+
+                <div>
+                    <div class="px-4 sm:px-0">
+                      <h2 class="text-base font-semibold leading-7 text-gray-900">Osnovni podaci</h2>
+                    </div>
+                    <div class="mt-6 border-t border-gray-100">
+                      <dl class="divide-y divide-gray-100">
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                          <dt class="dt"></dt>
+                          <dd class="dd sm:col-span-2 sm:mt-0"></dd>
+                        </div>
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                          <dt class="dt"></dt>
+                          <dd class="dd sm:col-span-2 sm:mt-0"></dd>
+                        </div>
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                          <dt class="dt"></dt>
+                          <dd class="dd sm:col-span-2 sm:mt-0"></dd>
+                        </div>
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                          <dt class="dt"></dt>
+                          <dd class="dd sm:col-span-2 sm:mt-0"></dd>
+                        </div>
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                          <dt class="dt"></dt>
+                          <dd class="dd sm:col-span-2 sm:mt-0"></dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="px-4 sm:px-0">
+                        <h2 class="text-base font-semibold leading-7 text-gray-900">Podaci o prodavatelju</h2>
+                    </div>
+                    <div>
+                        <a class="flex items-center text-cyan-700 mt-3" th:href="@{/korisnicki-profil/{userId}(userId=${listing.user.id})}">
+                            <span class="mr-2"><img class="w-6" src="/img/user-icon.png" alt="Prodavač"></span>
+                            <span th:text="${listing.user.username}">Username</span>
+                        </a>
+                    </div>
+                  </div>
             </div>
         </div>
 
