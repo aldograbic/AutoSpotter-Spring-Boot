@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/showManufacturers.js" defer="defer"></script>
     <link href="main.css" rel="stylesheet">
     <title>AutoSpotter</title>
 </head>
@@ -16,7 +17,7 @@
             </div>
             <ul class="flex space-x-4 flex-grow justify-center">
                 <li><a class="text-gray-700 font-medium hover:text-cyan-700" href="/pretraga">Pretraga</a></li>
-                <li><a class="text-gray-700 font-medium hover:text-cyan-700" href="/novi-oglasi">Novi oglasi</a></li>
+                <li><a class="text-gray-700 font-medium hover:text-cyan-700" href="/oglasi">Oglasi</a></li>
                 <li><a class="text-gray-700 font-medium hover:text-cyan-700" href="/postavi-oglas">Postavi oglas</a></li>
             </ul>
             <div class="flex space-x-4">
@@ -28,8 +29,15 @@
     
     <main class="flex flex-1">
         <div class="flex-0 w-1/5 bg-gray-100"></div>
-        <div class="flex flex-1 justify-center">
+        <div class="flex flex-col flex-1 w-50 mt-8 items-center">
+            <div class="flex gap-x-6 mt-8 cursor-pointer">
+                <img src="/img/car-icon.png" alt="Auto" onclick="showManufacturers('auto')">
+                <img src="/img/motorcycle-icon.png" alt="Motor" onclick="showManufacturers('motor')">
+                <img src="/img/truck-icon.png" alt="Kamion" onclick="showManufacturers('kamion')">
+                <img src="/img/engine-icon.png" alt="Dijelovi" onclick="showManufacturers('dijelovi')">
+            </div>
 
+            <div id="manufacturer-container"></div>
         </div>
         <div class="flex-0 w-1/5 bg-gray-100"></div>
     </main>

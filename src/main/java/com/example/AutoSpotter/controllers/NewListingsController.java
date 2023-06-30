@@ -24,7 +24,7 @@ public class NewListingsController {
         this.vehicleRepository = vehicleRepository;
     }
 
-    @GetMapping("/novi-oglasi")
+    @GetMapping("/oglasi")
     public String showNewListings(Model model) {
         List<Listing> newListings = listingRepository.getNewListings();
         List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
