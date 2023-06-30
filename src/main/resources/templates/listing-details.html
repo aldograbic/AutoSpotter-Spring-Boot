@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:insert="~{fragments/head-dynamic :: head-dynamic}"></th:block>
+    <title th:text="'AutoSpotter | ' + ${listing.vehicle.manufacturer}"></title>
+</head>
+<body class="flex flex-col min-h-screen">
+    
+    <th:block th:insert="~{fragments/header-dynamic :: header-dynamic}"></th:block>
+
+    <main class="flex flex-1 space-x-4">
+
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+
+        <div class="flex-1 mt-8">
+            <div>
+                <img class="w-96 h-96 object-cover rounded" src="/img/car-example.jpg" alt="Slika vozila">
+                <div>
+                    <h2 class="mb-4" th:text="${listing.vehicle.manufacturer + ' (' + listing.vehicle.year + ')'}"></h2>
+                    <p class="text-gray-700 font-semibold mb-4" th:text="'€' + ${listing.listingPrice}"></p>
+                    <p class="text-gray-700" th:text="${listing.vehicle.state + ', ' + listing.vehicle.mileage + ' km'}"></p>
+                    <p class="text-gray-700" th:text="${listing.listingDescription}"></p>
+                    <p class="flex items-center text-gray-700 mt-3">
+                        <span class="mr-1"><img class="w-6" src="/img/location-icon.png" alt="Lokacija"></span>
+                        <span th:text="${listing.vehicle.location}">Vehicle Location</span>
+                    </p>
+                    <a class="flex items-center text-cyan-700 mt-3" th:href="@{/korisnicki-profil/{userId}(userId=${listing.user.id})}">
+                        <span class="mr-2"><img class="w-6" src="/img/user-icon.png" alt="Prodavač"></span>
+                        <span th:text="${listing.user.username}">Username</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+    </main>
+
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+    </footer>
+</body>
+</html>
