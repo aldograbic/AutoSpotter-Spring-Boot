@@ -34,8 +34,8 @@
                 </select>
             </div>
             <div class="flex flex-col m-4">
-                <label for="bodyShape">Oblik karoserije</label>
-                <select id="bodyShape" class="input">
+                <label for="bodyType">Oblik karoserije</label>
+                <select id="bodyType" class="input">
                     <option value="" disabled selected>Odabir</option>
                 </select>
             </div>
@@ -106,7 +106,7 @@
                     <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="w-56 h-56 object-cover rounded" src="img/car-example.jpg" alt="Slika vozila"></a>
                     <div>
                         <a th:href="@{'/oglasi/' + ${listing.id}}" class="text-cyan-700 text-xl hover:text-cyan-900">
-                            <h2 class="mb-4" th:text="${listing.vehicle.manufacturer + ' (' + listing.vehicle.year + ')'}"></h2>
+                            <h2 class="mb-4" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></h2>
                         </a>
                         <p th:text="&euro; + ${listing.listingPrice}" class="text-gray-700 font-semibold mb-4"></p>
                         <p th:text="${listing.vehicle.state + ', ' + listing.vehicle.mileage + ' km'}" class="text-gray-700"></p>

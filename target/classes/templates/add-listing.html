@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <script th:src="@{/showModels.js}" defer="defer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>AutoSpotter | Postavi oglas</title>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -50,9 +52,7 @@
                     <div class="flex flex-col mb-4">
                         <label for="model">Model</label>
                         <select id="model" name="model" required class="input">
-                            <option selected>Primjer</option>
-                            <!-- Use Thymeleaf expression to iterate over models of manufacturer and populate options -->
-                            <option th:each="model : ${models}" th:value="${model}" th:text="${model}"></option>
+                            <option value="" disabled selected>Odabir</option>
                         </select>
                     </div>
 

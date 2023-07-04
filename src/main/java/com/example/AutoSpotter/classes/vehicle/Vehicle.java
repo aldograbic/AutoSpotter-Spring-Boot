@@ -11,7 +11,7 @@ public class Vehicle {
     private int vehicleTypeId;
     // private String fuelType;
     // private String transmission;
-    // private String bodyShape;
+    // private String bodyType;
 
     public Vehicle(String model, String manufacturer, int mileage, String location, String state, int year, int vehicleTypeId) {
         this.model = model;

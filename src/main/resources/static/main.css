@@ -687,12 +687,12 @@ video {
   display: none;
 }
 
-.h-56 {
-  height: 14rem;
+.aspect-video {
+  aspect-ratio: 16 / 9;
 }
 
-.h-96 {
-  height: 24rem;
+.h-56 {
+  height: 14rem;
 }
 
 .min-h-screen {
