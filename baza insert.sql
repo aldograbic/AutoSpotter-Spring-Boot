@@ -8,6 +8,10 @@ INSERT INTO manufacturers VALUES(1, "BMW", 1);
 INSERT INTO manufacturers VALUES(3, "Audi", 1);
 INSERT INTO manufacturers VALUES(2, "Honda", 2);
 
+INSERT INTO models VALUES (1, "Serija 3", 1);
+INSERT INTO models VALUES (2, "A4", 3);
+INSERT INTO models VALUES (3, "G200", 2);
+
 INSERT INTO user VALUES(1, "korisnik1");
 
 INSERT INTO countries VALUES (1, "Hrvatska");

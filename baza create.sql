@@ -77,3 +77,12 @@ CREATE TABLE `vehicle_type` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `models` (
+  `id` int NOT NULL,
+  `model_name` varchar(255) DEFAULT NULL,
+  `manufacturer_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `manufacturer_id` (`manufacturer_id`),
+  CONSTRAINT `models_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `manufacturers` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

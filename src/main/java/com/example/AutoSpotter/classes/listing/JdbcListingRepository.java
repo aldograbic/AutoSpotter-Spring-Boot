@@ -64,7 +64,7 @@ public class JdbcListingRepository implements ListingRepository {
                     "FROM listing l " +
                     "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
                     "INNER JOIN user u ON l.user_id = u.id " +
-                    "ORDER BY l.created_at DESC LIMIT 10";
+                    "ORDER BY l.created_at DESC";
 
         return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository, userRepository));
     }
@@ -78,10 +78,12 @@ public class JdbcListingRepository implements ListingRepository {
         return jdbcTemplate.queryForList(sql, String.class, vehicleType);
     }
 
-
     @Override
     public List<String> getModelsByManufacturer(String manufacturer) {
-        String sql = "SELECT DISTINCT m.model_name FROM models WHERE manufacturer = ?";
+        String sql = "SELECT DISTINCT mo.model_name " +
+                    "FROM models mo " +
+                    "INNER JOIN manufacturers ma ON mo.manufacturer_id = ma.id " +
+                    "WHERE ma.manufacturer_name = ?";
         return jdbcTemplate.queryForList(sql, String.class, manufacturer);
     }
 }

@@ -9,6 +9,5 @@ public class VehicleSearch {
     @GetMapping("/pretraga")
     public String showLoginForm() {
         return "vehicle-search";
-    }
-    
+    } 
 }
