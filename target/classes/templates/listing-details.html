@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:insert="~{fragments/head-dynamic :: head-dynamic}"></th:block>
+    <title th:text="'AutoSpotter | ' + ${listing.vehicle.manufacturer}"></title>
+</head>
+<body class="flex flex-col min-h-screen">
+    
+    <th:block th:insert="~{fragments/header-dynamic :: header-dynamic}"></th:block>
+
+    <main class="flex flex-1 space-x-4">
+
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+
+        <div class="flex-1 mt-8">
+            <div>
+
+              <div class="flex justify-center">
+                <img class="w-96 aspect-video object-cover rounded" src="/img/car-example.jpg" alt="Slika vozila">
+              </div>              
+
+                <div class="text-xl">
+                    <h2 class="mb-4 mt-8" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></h2>
+                    <p class="text-gray-700 mb-4" th:text="'€' + ${listing.listingPrice}"></p>
+                </div>
+
+                <div>
+                    <div class="px-4 sm:px-0">
+                      <h2 class="text-base font-semibold leading-7 text-gray-900">Osnovni podaci</h2>
+                    </div>
+                    <div class="mt-6 border-t border-gray-100">
+                      <dl class="divide-y divide-gray-100">
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                          <dt class="dt">Stanje</dt>
+                          <dd th:text="${listing.vehicle.state}" class="dd sm:col-span-2 sm:mt-0"></dd>
+                        </div>
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                          <dt class="dt">Kilometraža</dt>
+                          <dd th:text="${listing.vehicle.mileage + ' km'}" class="dd sm:col-span-2 sm:mt-0"></dd>
+                        </div>
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                          <dt class="dt">Vrsta goriva</dt>
+                          <dd class="dd sm:col-span-2 sm:mt-0"></dd>
+                        </div>
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                          <dt class="dt">Mjenjač</dt>
+                          <dd class="dd sm:col-span-2 sm:mt-0"></dd>
+                        </div>
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                          <dt class="dt">Snaga motora</dt>
+                          <dd class="dd sm:col-span-2 sm:mt-0"></dd>
+                        </div>
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                          <dt class="dt">Lokacija vozila</dt>
+                          <dd th:text="${listing.vehicle.location}" class="dd sm:col-span-2 sm:mt-0"></dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </div>
+
+                  <div class="px-4 sm:px-0">
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">Opis oglasa</h2>
+                  </div>
+                  <div class="mt-4 mb-6">
+                    <p class="text-gray-700" th:text="${listing.listingDescription}"></p>
+                  </div>
+                  <div>
+                    <div class="px-4 sm:px-0">
+                        <h2 class="text-base font-semibold leading-7 text-gray-900">Podaci o prodavatelju</h2>
+                    </div>
+                    <div>
+                        <a class="flex items-center text-cyan-700 mt-3 mb-4" th:href="@{/korisnicki-profil/{userId}(userId=${listing.user.id})}">
+                            <span class="mr-2"><img class="w-6" src="/img/user-icon.png" alt="Prodavač"></span>
+                            <span th:text="${listing.user.username}">Username</span>
+                        </a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+    </main>
+
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+    </footer>
+</body>
+</html>
