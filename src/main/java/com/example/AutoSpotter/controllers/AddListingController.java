@@ -38,6 +38,13 @@ public class AddListingController {
         }
         model.addAttribute("step", step);
 
+        List<Boolean> completedSteps = new ArrayList<>();
+        for (int i = 1; i <= 4; i++) {
+            boolean isCompleted = i < step;
+            completedSteps.add(isCompleted);
+        }
+        model.addAttribute("completedSteps", completedSteps);
+
         List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
         model.addAttribute("vehicleTypes", vehicleTypes);
 

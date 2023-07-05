@@ -50,6 +50,16 @@
         background-color: rgb(8 145 178 / var(--tw-bg-opacity)) !important;
     }
 
+    .completed {
+        --tw-bg-opacity: 1 !important;
+        background-color: rgb(14 116 144 / var(--tw-bg-opacity)) !important;
+    }
+
+    .completed-light {
+        --tw-bg-opacity: 1 !important;
+        background-color: rgb(8 145 178 / var(--tw-bg-opacity)) !important;
+    }
+
     .no-arrows::-webkit-inner-spin-button,
     .no-arrows::-webkit-outer-spin-button {
         -webkit-appearance: none;
@@ -76,4 +86,21 @@
         --tw-text-opacity: 1;
         color: rgb(55 65 81 / var(--tw-text-opacity));
     }
+    
+    ::-webkit-scrollbar {
+        width: 5px;
+        scrollbar-width: overlay;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }  
 }
