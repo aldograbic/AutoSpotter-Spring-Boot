@@ -23,7 +23,7 @@
                 <form th:action="@{/oglas-1}" method="post">
                     <div class="flex flex-col mb-4">
                         <label for="vehicleType">Prodajem</label>
-                        <select id="vehicleType" name="vehicleType" class="input w-64">
+                        <select id="vehicleType" name="vehicleType" class="input w-96">
                             <option th:each="type : ${vehicleTypes}" th:value="${type}" th:text="${type}"></option>
                         </select>
                     </div>
@@ -36,9 +36,10 @@
             <div th:if="${step eq 2}" class="h-5/6 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <form th:action="@{/oglas-2}" method="post">
+
                     <div class="flex flex-col mb-4">
                         <label for="manufacturer">Proizvođač</label>
-                        <select id="manufacturer" name="manufacturer" required class="input w-64">
+                        <select id="manufacturer" name="manufacturer" required class="input">
                             <option value="" disabled selected>Odabir</option>
                             <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer}" th:text="${manufacturer}"></option>
                         </select>
@@ -51,33 +52,37 @@
                         </select>
                     </div>
 
-                    <div class="flex flex-col mb-4">
-                        <label for="year">Godina proizvodnje</label>
-                        <select id="year" name="year" required class="input">
-                            <option value="" disabled selected>Odabir</option>
-                            <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
-                        </select>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col mb-4">
+                            <label for="year">Godina proizvodnje</label>
+                            <select id="year" name="year" required class="input">
+                                <option value="" disabled selected>Odabir</option>
+                                <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
+                            </select>
+                        </div>
+    
+                        <div class="flex flex-col mb-4">
+                            <label for="mileage">Kilometraža</label>
+                            <input type="number" id="mileage" name="mileage" placeholder="Unesite kilometražu" required class="input">
+                        </div>
                     </div>
 
-                    <div class="flex flex-col mb-4">
-                        <label for="mileage">Kilometraža</label>
-                        <input type="number" id="mileage" name="mileage" placeholder="Unesite kilometražu" required class="input">
-                    </div>
-
-                    <div class="flex flex-col mb-4">
-                        <label for="location">Lokacija vozila</label>
-                        <select id="location" name="location" required class="input">
-                            <option value="" disabled selected>Odabir</option>
-                            <option th:each="location : ${locations}" th:value="${location}" th:text="${location}"></option>
-                        </select>
-                    </div>
-
-                    <div class="flex flex-col mb-4">
-                        <label for="state">Stanje</label>
-                        <select id="state" name="state" required class="input">
-                            <option value="" disabled selected>Odabir</option>
-                            <option th:each="state : ${states}" th:value="${state}" th:text="${state}"></option>
-                        </select>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col mb-4">
+                            <label for="location">Lokacija vozila</label>
+                            <select id="location" name="location" required class="input">
+                                <option value="" disabled selected>Odabir</option>
+                                <option th:each="location : ${locations}" th:value="${location}" th:text="${location}"></option>
+                            </select>
+                        </div>
+    
+                        <div class="flex flex-col mb-4">
+                            <label for="state">Stanje</label>
+                            <select id="state" name="state" required class="input">
+                                <option value="" disabled selected>Odabir</option>
+                                <option th:each="state : ${states}" th:value="${state}" th:text="${state}"></option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="flex flex-col mb-4">
@@ -87,7 +92,7 @@
                 </form>
                 <div th:if="${step > 1}">
                     <form th:action="@{/back}" method="post">
-                        <div class="flex flex-col mb-4 w-64">
+                        <div class="flex flex-col mb-4 w-96">
                             <input type="hidden" name="step" th:value="${step - 1}">
                             <input type="submit" value="Nazad" class="button">
                         </div>

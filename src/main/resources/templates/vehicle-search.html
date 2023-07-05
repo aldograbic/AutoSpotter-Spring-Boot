@@ -26,18 +26,22 @@
                         <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}" th:text="${vehicleType}"></option>
                     </select>
                 </div>
-                <div class="flex flex-col m-4">
-                    <label for="manufacturer">Proizvođač</label>
-                    <div class="flex">
-                        <select id="manufacturer" class="input flex-grow">
+                <div class="grid grid-cols-2 gap-12 m-4">
+                    <div class="flex flex-col mb-4">
+                        <label for="manufacturer">Proizvođač</label>
+                        <select id="manufacturer" name="manufacturer" class="input">
                             <option value="" disabled selected>Odabir</option>
                         </select>
+                    </div>
+
+                    <div class="flex flex-col mb-4">
                         <label for="model">Model</label>
-                        <select id="model" class="input flex-grow">
+                        <select id="model" name="model" class="input">
                             <option value="" disabled selected>Odabir</option>
                         </select>
                     </div>
                 </div>
+                
                 <div class="flex flex-col m-4">
                     <label for="bodyType">Oblik karoserije</label>
                     <select id="bodyType" class="input">
