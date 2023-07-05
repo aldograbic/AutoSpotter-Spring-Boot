@@ -14,7 +14,7 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public User getUserById(int id) {
-        String sql = "SELECT id, username FROM user WHERE id = ?";
+        String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, city_id FROM user WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
     }
 

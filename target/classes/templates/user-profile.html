@@ -13,7 +13,10 @@
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
         <div class="flex-1 mt-8">
-            <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
+            <p><strong>Korisničko ime:</strong> <span th:text="${user.username}"></span></p>
+            <p><strong>Ime i prezime:</strong> <span th:text="${user.firstName + ' ' + user.lastName}"></span></p>
+            <p><strong>Broj telefona:</strong> <span th:text="${user.phoneNumber}"></span></p>
+            <p><strong>E-mail adresa:</strong> <span th:text="${user.email}"></span></p>
         </div>
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
