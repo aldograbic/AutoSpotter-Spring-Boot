@@ -11,7 +11,10 @@
         </ul>
         <div class="flex space-x-4">
             <a class="text-gray-700 font-medium hover:text-cyan-700" href="/kontakt">Kontakt</a>
-            <a class="text-gray-700 font-medium hover:text-cyan-700" href="/prijava">Prijava</a>
+            <span th:if="${session.user != null}">
+                <span th:text="${session.user.username}"></span>
+            </span>
+            <a th:unless="${session.user != null}" class="text-gray-700 font-medium hover:text-cyan-700" href="/prijava">Prijava</a>
         </div>
     </nav>
 </header>
