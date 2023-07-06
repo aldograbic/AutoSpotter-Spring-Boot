@@ -38,7 +38,7 @@ public class AddListingController {
             session.setAttribute("step", step);
         }
         List<Boolean> completedSteps = new ArrayList<>();
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 5; i++) {
             boolean isCompleted = i < step;
             completedSteps.add(isCompleted);
         }
@@ -61,6 +61,7 @@ public class AddListingController {
         } else {
             model.addAttribute("showBodyTypeInput", false);
         }
+        List<String> engineTypes = vehicleRepository.getAllEngineTypes();
 
         model.addAttribute("step", step);
         model.addAttribute("completedSteps", completedSteps);
@@ -69,6 +70,8 @@ public class AddListingController {
         model.addAttribute("cities", cities);     
         model.addAttribute("states", states);
         model.addAttribute("bodyTypes", bodyTypes);
+
+        model.addAttribute("engineTypes", engineTypes);
 
         return "add-listing";
     }
@@ -91,54 +94,72 @@ public class AddListingController {
     @PostMapping("/oglas-2")
     public String handleStep2FormSubmission(@RequestParam("manufacturer") String manufacturer,
                                             @RequestParam("model") String vehicleModel,
+                                            @RequestParam("bodyType") String bodyType,
                                             @RequestParam("mileage") int mileage,
                                             @RequestParam("location") String location,
                                             @RequestParam("year") int year,
                                             @RequestParam("state") String state,
                                             HttpSession session, Model model) {
-        int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
-        Vehicle vehicle = new Vehicle(vehicleModel, manufacturer, mileage, location, state, year, vehicleTypeId);
-        int vehicleId = vehicleRepository.saveVehicle(vehicle);
-        session.setAttribute("vehicleId", vehicleId);
-        session.setAttribute("step", 3);
+        int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
         List<String> manufacturers = vehicleRepository.getManufacturersByVehicleType(vehicleTypeId);
         session.setAttribute("manufacturers", manufacturers);
 
+        session.setAttribute("manufacturer", manufacturer);
+        session.setAttribute("model", vehicleModel);
+        session.setAttribute("bodyType", bodyType);
+        session.setAttribute("mileage", mileage);
+        session.setAttribute("location", location);
+        session.setAttribute("year", year);
+        session.setAttribute("state", state);
+
+        session.setAttribute("step", 3);
         return "redirect:/postavi-oglas";
     }
 
-    @PostMapping("/oglas-3")
-    public String handleStep3FormSubmission(@RequestParam("manufacturer") String manufacturer,
-                                            @RequestParam("model") String vehicleModel,
-                                            @RequestParam("mileage") int mileage,
-                                            @RequestParam("location") String location,
-                                            @RequestParam("year") int year,
-                                            @RequestParam("state") String state,
+    @PostMapping("/oglas-3") //tehnicki detalji
+    public String handleStep3FormSubmission(@RequestParam("engineType") String engineType,
+                                            @RequestParam("engineDisplacement") String engineDisplacement,
+                                            @RequestParam("enginePower") int enginePower,
+                                            @RequestParam("fuelConsumption") String fuelConsumption,
+                                            @RequestParam("transmission") String transmission,
                                             HttpSession session, Model model) {
+
+        String manufacturer = (String) session.getAttribute("manufacturer");
+        String vehicleModel = (String) session.getAttribute("model");
+        String bodyType = (String) session.getAttribute("bodyType");
+        int mileage = (int) session.getAttribute("mileage");
+        String location = (String) session.getAttribute("location");
+        int year = (int) session.getAttribute("year");
+        String state = (String) session.getAttribute("state");
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
-        Vehicle vehicle = new Vehicle(vehicleModel, manufacturer, mileage, location, state, year, vehicleTypeId);
+        Vehicle vehicle = new Vehicle(manufacturer, vehicleModel, bodyType, mileage, location, state, year, engineType,
+                                     engineDisplacement, enginePower, fuelConsumption, transmission, vehicleTypeId);
+
         int vehicleId = vehicleRepository.saveVehicle(vehicle);
         session.setAttribute("vehicleId", vehicleId);
-        session.setAttribute("step", 3);
 
-        List<String> manufacturers = vehicleRepository.getManufacturersByVehicleType(vehicleTypeId);
-        session.setAttribute("manufacturers", manufacturers);
-
-        return "redirect:/postavi-oglas";
-    }
-
-    @PostMapping("/oglas-4")
-    public String handleStep4FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session) {
-        session.setAttribute("images", images);
         session.setAttribute("step", 4);
         return "redirect:/postavi-oglas";
     }
 
+    @PostMapping("/oglas-4") //detaljni detalji
+    public String handleStep4FormSubmission(HttpSession session, Model model) {
+        session.setAttribute("step", 5);
+        return "redirect:/postavi-oglas";
+    }
+
     @PostMapping("/oglas-5")
-    public String handleStep5FormSubmission(@RequestParam("description") String description,
+    public String handleStep5FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session) {
+        session.setAttribute("images", images);
+        session.setAttribute("step", 6);
+        return "redirect:/postavi-oglas";
+    }
+
+    @PostMapping("/oglas-6")
+    public String handleStep6FormSubmission(@RequestParam("description") String description,
                                             @RequestParam("price") BigDecimal price,
                                             HttpSession session) {
 

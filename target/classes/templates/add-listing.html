@@ -72,7 +72,7 @@
     
                         <div class="flex flex-col mb-4">
                             <label for="mileage">Kilometraža</label>
-                            <input type="number" id="mileage" name="mileage" placeholder="Unesite kilometražu" required class="input">
+                            <input type="number" id="mileage" name="mileage" min="0" placeholder="0" required class="input no-arrows">
                         </div>
                     </div>
 
@@ -109,16 +109,46 @@
                 </div>
             </div>
 
-            <!-- Step 3: Vehicle Detailed -->
+            <!-- Step 3: Vehicle Tehnical -->
             <div th:if="${step eq 3}" class="h-5/6 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
-                <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4">Vozilo - detaljno</h2>
-                <form th:action="@{/oglas-3}" method="post" enctype="multipart/form-data">
-                    <div class="flex flex-col mb-4 w-96">
-                        <input type="file" id="images" name="images" accept="image/*" multiple class="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:font-semibold
-                        file:bg-gray-200
-                        hover:file:bg-gray-300">
+                <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4">Vozilo - tehničko</h2>
+                <form th:action="@{/oglas-3}" method="post">
+
+                    <div class="flex flex-col mb-4">
+                        <label for="engineType">Motor</label>
+                        <select id="engineType" name="engineType" class="input">
+                            <option value="" disabled selected>Odabir</option>
+                            <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
+                        </select>
                     </div>
+
+                    <div class="flex flex-col mb-4">
+                        <label for="engineDisplacement">Zapremnina motora</label>
+                        <select id="engineDisplacement" name="engineDisplacement" class="input">
+                            <option value="" selected>Odabir</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col mb-4">
+                        <label for="enginePower">Snaga motora (kW)</label>
+                        <input type="number" id="enginePower" name="enginePower" min="0" placeholder="0" class="input no-arrows">
+                    </div>
+
+                    <div class="flex flex-col mb-4">
+                        <label for="fuelConsumption">Potrošnja goriva</label>
+                        <select id="fuelConsumption" name="fuelConsumption" class="input">
+                            <option value="" selected>Odabir</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col mb-4">
+                        <label for="transmission">Mjenjač</label>
+                        <select id="transmission" name="transmission" class="input">
+                            <option value="" selected>Odabir</option>
+                        </select>
+                    </div>
+
                     <div class="flex flex-col mb-4">
                         <input type="submit" value="Dalje" class="button">
                     </div>
@@ -133,11 +163,31 @@
                 </div>
             </div>
 
-            <!-- Step 3: Vehicle Images -->
+            <!-- Step 4: Vehicle Detailed -->
             <div th:if="${step eq 4}" class="h-5/6 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4">Vozilo - detaljno</h2>
+                <form th:action="@{/oglas-4}" method="post">
+                    
+                    <div class="flex flex-col mb-4">
+                        <input type="submit" value="Dalje" class="button">
+                    </div>
+                </form>
+                <div th:if="${step > 1}">
+                    <form th:action="@{/back}" method="post">
+                        <div class="flex flex-col mb-4 w-96">
+                            <input type="hidden" name="step" th:value="${step - 1}">
+                            <input type="submit" value="Nazad" class="button">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 5: Vehicle Images -->
+            <div th:if="${step eq 5}" class="h-5/6 flex flex-col items-center border rounded-md">
+                <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4">Slike vozila</h2>
-                <form th:action="@{/oglas-4}" method="post" enctype="multipart/form-data">
+                <form th:action="@{/oglas-5}" method="post" enctype="multipart/form-data">
                     <div class="flex flex-col mb-4 w-96">
                         <input type="file" id="images" name="images" accept="image/*" multiple class="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:font-semibold
                         file:bg-gray-200
@@ -157,10 +207,10 @@
                 </div>
             </div>
 
-            <div th:if="${step eq 5}" class="h-5/6 flex flex-col items-center border rounded-md">
+            <div th:if="${step eq 6}" class="h-5/6 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4">Detalji oglasa</h2>
-                <form th:action="@{/oglas-5}" method="post">
+                <form th:action="@{/oglas-6}" method="post">
                     <div class="flex flex-col mb-4">
                         <label for="description">Opis oglasa</label>
                         <textarea id="description" name="description" rows="4" class="input w-96 h-64 resize-none"></textarea>

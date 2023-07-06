@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="~{fragments/head-dynamic :: head-dynamic}"></th:block>
-    <title th:text="'AutoSpotter | ' + ${listing.vehicle.manufacturer}"></title>
+    <title th:text="'AutoSpotter | ' + ${listing.vehicle.manufacturer} + ' ' + ${listing.vehicle.model} "></title>
 </head>
 <body class="flex flex-col min-h-screen">
     
@@ -39,16 +39,16 @@
                           <dd th:text="${listing.vehicle.mileage + ' km'}" class="dd sm:col-span-2 sm:mt-0"></dd>
                         </div>
                         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                          <dt class="dt">Vrsta goriva</dt>
-                          <dd class="dd sm:col-span-2 sm:mt-0"></dd>
+                          <dt class="dt">Motor</dt>
+                          <dd th:text="${listing.vehicle.engineType}" class="dd sm:col-span-2 sm:mt-0"></dd>
                         </div>
                         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                           <dt class="dt">Mjenjač</dt>
-                          <dd class="dd sm:col-span-2 sm:mt-0"></dd>
+                          <dd th:text="${listing.vehicle.transmission}" class="dd sm:col-span-2 sm:mt-0"></dd>
                         </div>
                         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                           <dt class="dt">Snaga motora</dt>
-                          <dd class="dd sm:col-span-2 sm:mt-0"></dd>
+                          <dd th:text="${listing.vehicle.enginePower + ' kW'}" class="dd sm:col-span-2 sm:mt-0"></dd>
                         </div>
                         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                           <dt class="dt">Lokacija vozila</dt>

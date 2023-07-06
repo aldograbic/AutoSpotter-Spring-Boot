@@ -1,25 +1,35 @@
 package com.example.AutoSpotter.classes.vehicle;
 
 public class Vehicle {
-    int id;
-    private String model;
+    private int id;
     private String manufacturer;
+    private String model;
+    private String bodyType;
     private int mileage;
     private String location;
     private String state;
     private int year;
+    private String engineType;
+    private String engineDisplacement;
+    private int enginePower;
+    private String fuelConsumption;
+    private String transmission;
     private int vehicleTypeId;
-    // private String engineType;
-    // private String transmission;
-    // private String bodyType;
 
-    public Vehicle(String model, String manufacturer, int mileage, String location, String state, int year, int vehicleTypeId) {
-        this.model = model;
+    public Vehicle(String manufacturer, String model, String bodyType, int mileage, String location, String state, int year, String engineType,
+                   String engineDisplacement, int enginePower, String fuelConsumption, String transmission, int vehicleTypeId) {
         this.manufacturer = manufacturer;
+        this.model = model;
+        this.bodyType = bodyType;
         this.mileage = mileage;
         this.location = location;
         this.state = state;
         this.year = year;
+        this.engineType = engineType;
+        this.engineDisplacement = engineDisplacement;
+        this.enginePower = enginePower;
+        this.fuelConsumption = fuelConsumption;
+        this.transmission = transmission;
         this.vehicleTypeId = vehicleTypeId;
     }
 
@@ -33,6 +43,14 @@ public class Vehicle {
         this.id = id;
     }
 
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
     public String getModel() {
         return model;
     }
@@ -41,12 +59,12 @@ public class Vehicle {
         this.model = model;
     }
 
-    public String getManufacturer() {
-        return manufacturer;
+    public String getBodyType() {
+        return bodyType;
     }
 
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+    public void setBodyType(String bodyType) {
+        this.bodyType = bodyType;
     }
 
     public int getMileage() {
@@ -81,6 +99,46 @@ public class Vehicle {
         this.year = year;
     }
 
+    public String getEngineType() {
+        return engineType;
+    }
+
+    public void setEngineType(String engineType) {
+        this.engineType = engineType;
+    }
+
+    public String getEngineDisplacement() {
+        return engineDisplacement;
+    }
+
+    public void setEngineDisplacement(String engineDisplacement) {
+        this.engineDisplacement = engineDisplacement;
+    }
+
+    public int getEnginePower() {
+        return enginePower;
+    }
+
+    public void setEnginePower(int enginePower) {
+        this.enginePower = enginePower;
+    }
+
+    public String getFuelConsumption() {
+        return fuelConsumption;
+    }
+
+    public void setFuelConsumption(String fuelConsumption) {
+        this.fuelConsumption = fuelConsumption;
+    }
+
+    public String getTransmission() {
+        return transmission;
+    }
+
+    public void setTransmission(String transmission) {
+        this.transmission = transmission;
+    }
+
     public int getVehicleTypeId() {
         return vehicleTypeId;
     }
@@ -89,7 +147,6 @@ public class Vehicle {
         this.vehicleTypeId = vehicleTypeId;
     }
 
- 
     // private String vin;
     // private String color;
     // private String engineType;
