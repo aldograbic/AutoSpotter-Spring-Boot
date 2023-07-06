@@ -104,3 +104,26 @@ function selectTransmissionButton(buttonId) {
     var selectedButton = document.getElementById(buttonId);
     selectedButton.classList.add('selected');
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const yearFromSelect = document.getElementById("yearFrom");
+  const yearToSelect = document.getElementById("yearTo");
+  const yearError = document.getElementById("yearError");
+
+  yearFromSelect.addEventListener("change", validateYearRange);
+  yearToSelect.addEventListener("change", validateYearRange);
+
+  function validateYearRange() {
+      const yearFrom = parseInt(yearFromSelect.value);
+      const yearTo = parseInt(yearToSelect.value);
+
+      if (yearTo < yearFrom) {
+          yearError.textContent = "Druga odabrana godina mora biti veća od prve.";
+          yearToSelect.classList.add("border", "border-red-500");
+      } else {
+          yearError.textContent = "";
+          yearToSelect.classList.remove("border", "border-red-500");
+      }
+  }
+});

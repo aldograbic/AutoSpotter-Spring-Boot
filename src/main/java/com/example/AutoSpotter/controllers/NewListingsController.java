@@ -1,5 +1,6 @@
 package com.example.AutoSpotter.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,12 @@ public class NewListingsController {
         List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
         List<String> engineTypes = vehicleRepository.getAllEngineTypes();
         List<String> counties = vehicleRepository.getAllCounties();
+        List<Integer> years = new ArrayList<>();
+        for(int i = 2023; i >= 1900; i--) {
+            years.add(i);
+        }
 
+        model.addAttribute("years", years);
         model.addAttribute("newListings", newListings);
         model.addAttribute("vehicleTypes", vehicleTypes);
         model.addAttribute("bodyTypes", bodyTypes);

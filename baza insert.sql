@@ -36,6 +36,6 @@ INSERT INTO user VALUES(1, "agrabic", "$2a$12$N86VahTqVHFFchpiMvJ0g...4PuWtcL9oS
 
 INSERT INTO countries VALUES (1, "Hrvatska");
 
-INSERT INTO counties VALUES (1, "Zagrebačka", 1);
+INSERT INTO counties VALUES (1, "Zagrebačka", "ZŽ", 1);
 
 INSERT INTO cities VALUES (1, "Velika Gorica", 1);

@@ -31,40 +31,44 @@ public class AddListingController {
 
     @GetMapping("/postavi-oglas")
     public String showNewListing(HttpSession session, Model model) {
+
         Integer step = (Integer) session.getAttribute("step");
         if (step == null) {
             step = 1;
             session.setAttribute("step", step);
         }
-        model.addAttribute("step", step);
-
         List<Boolean> completedSteps = new ArrayList<>();
         for (int i = 1; i <= 4; i++) {
             boolean isCompleted = i < step;
             completedSteps.add(isCompleted);
         }
-        model.addAttribute("completedSteps", completedSteps);
-
         List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
-        model.addAttribute("vehicleTypes", vehicleTypes);
-
         List<Integer> years = new ArrayList<>();
         for(int i = 2023; i >= 1900; i--) {
             years.add(i);
         }
-        model.addAttribute("years", years);
-
         List<String> cities = vehicleRepository.getAllCities();
-        model.addAttribute("cities", cities);
-
         List<String> states = vehicleRepository.getAllStates();
-        model.addAttribute("states", states);
-
         Integer vehicleTypeId = (Integer) session.getAttribute("vehicleTypeId");
         if (vehicleTypeId != null) {
             List<String> manufacturers = vehicleRepository.getManufacturersByVehicleType(vehicleTypeId);
             model.addAttribute("manufacturers", manufacturers);
         }
+        List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
+
+        if (step == 2 && 1 == ((Integer) session.getAttribute("vehicleTypeId"))) {
+            model.addAttribute("showBodyTypeInput", true);
+        } else {
+            model.addAttribute("showBodyTypeInput", false);
+        }
+
+        model.addAttribute("step", step);
+        model.addAttribute("completedSteps", completedSteps);
+        model.addAttribute("vehicleTypes", vehicleTypes);  
+        model.addAttribute("years", years);  
+        model.addAttribute("cities", cities);     
+        model.addAttribute("states", states);
+        model.addAttribute("bodyTypes", bodyTypes);
 
         return "add-listing";
     }
@@ -106,14 +110,35 @@ public class AddListingController {
     }
 
     @PostMapping("/oglas-3")
-    public String handleStep3FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session) {
+    public String handleStep3FormSubmission(@RequestParam("manufacturer") String manufacturer,
+                                            @RequestParam("model") String vehicleModel,
+                                            @RequestParam("mileage") int mileage,
+                                            @RequestParam("location") String location,
+                                            @RequestParam("year") int year,
+                                            @RequestParam("state") String state,
+                                            HttpSession session, Model model) {
+        int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
+
+        Vehicle vehicle = new Vehicle(vehicleModel, manufacturer, mileage, location, state, year, vehicleTypeId);
+        int vehicleId = vehicleRepository.saveVehicle(vehicle);
+        session.setAttribute("vehicleId", vehicleId);
+        session.setAttribute("step", 3);
+
+        List<String> manufacturers = vehicleRepository.getManufacturersByVehicleType(vehicleTypeId);
+        session.setAttribute("manufacturers", manufacturers);
+
+        return "redirect:/postavi-oglas";
+    }
+
+    @PostMapping("/oglas-4")
+    public String handleStep4FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session) {
         session.setAttribute("images", images);
         session.setAttribute("step", 4);
         return "redirect:/postavi-oglas";
     }
 
-    @PostMapping("/oglas-4")
-    public String handleStep4FormSubmission(@RequestParam("description") String description,
+    @PostMapping("/oglas-5")
+    public String handleStep5FormSubmission(@RequestParam("description") String description,
                                             @RequestParam("price") BigDecimal price,
                                             HttpSession session) {
 

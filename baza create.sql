@@ -7,6 +7,7 @@ CREATE TABLE `countries` (
 CREATE TABLE `counties` (
   `id` int NOT NULL,
   `county_name` varchar(255) DEFAULT NULL,
+  `county_code_name` varchar(255) DEFAULT NULL,
   `country_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `country_id` (`country_id`),

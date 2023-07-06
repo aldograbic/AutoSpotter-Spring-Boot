@@ -36,14 +36,14 @@
             <div class="flex flex-col m-4">
                 <label for="bodyType">Oblik karoserije</label>
                 <select id="bodyType" class="input">
-                    <option value="" selected>Svi oblici karoserije</option>
+                    <option value="" selected>Svi oblici</option>
                     <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
                 </select>
             </div>
             <div class="flex flex-col m-4">
                 <label for="engineType">Motor</label>
                 <select id="engineType" class="input">
-                    <option value="" selected>Sve vrste motora</option>
+                    <option value="" selected>Sve vrste</option>
                     <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                 </select>
             </div>
@@ -75,12 +75,15 @@
                 <div class="flex items-center">
                     <select id="yearFrom" class="input flex-grow">
                         <option value="" disabled selected>Odabir</option>
+                        <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
                     </select>
                     <p class="text-center mr-4 ml-4">do</p>
                     <select id="yearTo" class="input flex-grow">
                         <option value="" disabled selected>Odabir</option>
+                        <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
                     </select>
                 </div>
+                <p id="yearError" class="text-red-500"></p>
             </div>
             <div class="flex flex-col m-4">
                 <label for="priceFrom">Cijena vozila</label>
