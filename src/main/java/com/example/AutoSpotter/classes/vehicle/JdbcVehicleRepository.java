@@ -27,16 +27,8 @@ public class JdbcVehicleRepository implements VehicleRepository {
                 vehicle.getYear(),
                 vehicle.getVehicleTypeId()
         );
-
-        // Retrieve the generated vehicle ID
         String idSql = "SELECT last_insert_id()";
         return jdbcTemplate.queryForObject(idSql, Integer.class);
-    }
-
-    @Override
-    public List<String> getManufacturersByVehicleType(int vehicleTypeId) {
-        String sql = "SELECT manufacturer_name FROM manufacturers WHERE vehicle_type_id = ? ";
-        return jdbcTemplate.queryForList(sql, String.class, vehicleTypeId);
     }
 
     @Override
@@ -52,8 +44,38 @@ public class JdbcVehicleRepository implements VehicleRepository {
     }
 
     @Override
-    public List<String> getAllLocations() {
+    public Vehicle getVehicleById(int id) {
+        String sql = "SELECT id, manufacturer, model, mileage, location, state, year, vehicle_type_id FROM vehicle WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new VehicleRowMapper(), id);
+    }
+
+    @Override
+    public List<String> getManufacturersByVehicleType(int vehicleTypeId) {
+        String sql = "SELECT manufacturer_name FROM manufacturers WHERE vehicle_type_id = ? ";
+        return jdbcTemplate.queryForList(sql, String.class, vehicleTypeId);
+    }
+
+    @Override
+    public List<String> getAllBodyTypes() {
+        String sql = "SELECT body_type_name FROM body_type";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
+
+    @Override
+    public List<String> getAllEngineTypes() {
+        String sql = "SELECT engine_type_name FROM engine_type";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
+
+    @Override
+    public List<String> getAllCities() {
         String sql = "SELECT city_name FROM cities";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
+
+    @Override
+    public List<String> getAllCounties() {
+        String sql = "SELECT county_name FROM counties";
         return jdbcTemplate.queryForList(sql, String.class);
     }
 
@@ -61,11 +83,5 @@ public class JdbcVehicleRepository implements VehicleRepository {
     public List<String> getAllStates() {
         String sql = "SELECT name FROM states";
         return jdbcTemplate.queryForList(sql, String.class);
-    }
-
-    @Override
-    public Vehicle getVehicleById(int id) {
-        String sql = "SELECT id, manufacturer, model, mileage, location, state, year, vehicle_type_id FROM vehicle WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new VehicleRowMapper(), id);
     }
 }

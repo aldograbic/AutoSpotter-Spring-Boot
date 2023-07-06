@@ -12,9 +12,15 @@ public interface VehicleRepository {
 
     List<String> getAllVehicleTypes();
 
+    List<String> getAllBodyTypes();
+
+    List<String> getAllEngineTypes();
+
     List<String> getAllStates();
 
-    List<String> getAllLocations();
+    List<String> getAllCities();
+
+    List<String> getAllCounties();
 
     Vehicle getVehicleById(int id);
 }

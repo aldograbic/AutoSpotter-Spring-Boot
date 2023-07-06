@@ -10,4 +10,5 @@ public interface ListingRepository {
     List<Listing> getNewListings();
     List<String> getManufacturersByVehicleType(String vehicleType);
     List<String> getModelsByManufacturer(String manufacturer);
+    List<String> getBodyTypes();
 }

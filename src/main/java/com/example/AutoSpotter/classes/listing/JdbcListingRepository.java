@@ -86,4 +86,10 @@ public class JdbcListingRepository implements ListingRepository {
                     "WHERE ma.manufacturer_name = ?";
         return jdbcTemplate.queryForList(sql, String.class, manufacturer);
     }
+
+    @Override
+    public List<String> getBodyTypes() {
+        String sql = "SELECT body_type_name FROM body_type";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
 }

@@ -28,9 +28,15 @@ public class NewListingsController {
     public String showNewListings(Model model) {
         List<Listing> newListings = listingRepository.getNewListings();
         List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
+        List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
+        List<String> engineTypes = vehicleRepository.getAllEngineTypes();
+        List<String> counties = vehicleRepository.getAllCounties();
 
         model.addAttribute("newListings", newListings);
         model.addAttribute("vehicleTypes", vehicleTypes);
+        model.addAttribute("bodyTypes", bodyTypes);
+        model.addAttribute("engineTypes", engineTypes);
+        model.addAttribute("counties", counties);
 
         return "new-listings";
     }

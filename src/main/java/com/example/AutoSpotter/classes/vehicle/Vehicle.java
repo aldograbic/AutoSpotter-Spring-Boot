@@ -9,7 +9,7 @@ public class Vehicle {
     private String state;
     private int year;
     private int vehicleTypeId;
-    // private String fuelType;
+    // private String engineType;
     // private String transmission;
     // private String bodyType;
 

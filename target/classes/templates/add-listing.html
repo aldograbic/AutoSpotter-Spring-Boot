@@ -73,7 +73,7 @@
                             <label for="location">Lokacija vozila</label>
                             <select id="location" name="location" required class="input">
                                 <option value="" disabled selected>Odabir</option>
-                                <option th:each="location : ${locations}" th:value="${location}" th:text="${location}"></option>
+                                <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
                             </select>
                         </div>
     

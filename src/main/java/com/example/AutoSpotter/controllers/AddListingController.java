@@ -54,8 +54,8 @@ public class AddListingController {
         }
         model.addAttribute("years", years);
 
-        List<String> locations = vehicleRepository.getAllLocations();
-        model.addAttribute("locations", locations);
+        List<String> cities = vehicleRepository.getAllCities();
+        model.addAttribute("cities", cities);
 
         List<String> states = vehicleRepository.getAllStates();
         model.addAttribute("states", states);
