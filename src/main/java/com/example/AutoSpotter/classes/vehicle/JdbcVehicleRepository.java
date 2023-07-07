@@ -76,6 +76,12 @@ public class JdbcVehicleRepository implements VehicleRepository {
     }
 
     @Override
+    public List<String> getAllTransmissionTypes() {
+        String sql = "SELECT transmission_name FROM transmission_type";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
+
+    @Override
     public List<String> getAllCities() {
         String sql = "SELECT city_name FROM cities";
         return jdbcTemplate.queryForList(sql, String.class);
