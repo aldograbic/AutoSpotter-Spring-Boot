@@ -147,21 +147,19 @@ public class Vehicle {
         this.vehicleTypeId = vehicleTypeId;
     }
 
-    // private String vin;
     // private String color;
-    // private String engineType;
+    // private Date/boolean registered
     
-    
-    // private String seatingCapacity;
-    // private double curbWeight;
-    // private double maximumPayloadCapacity;
-    // private double width;
-    // private double length;
-    // private double height;
-    // private double maximumSpeed;
-    // private double acceleration;
-    // private double fuelEfficiency;
+    //ZA KAMION
+    // private int numberOfWheels;
+    // najveca dopustena masa
 
-    //Safety Features, Infotainment System, numberOfWheels, registered,
-    // powerEngine, location (promijenit malo)
+    //ZA ELEKTRICNI AUTO
+    //kapacitetu baterije, doseg vozila, vrijeme punjenja
+
+    // Safety Features
+    // Infotainment System
+
+
+    // location (promijenit malo), fuelEfficiency i fuelConsumtion u double
 }

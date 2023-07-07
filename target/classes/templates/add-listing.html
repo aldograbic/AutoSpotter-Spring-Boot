@@ -110,6 +110,9 @@
             </div>
 
             <!-- Step 3: Vehicle Tehnical -->
+            <!-- dodati: pogon  -->
+            <!-- dodati: ako je elektricno vozilo - kapacitetu baterije, doseg vozila, vrijeme punjenja (ili u 4. korak) -->
+            <!-- dodati: ako je kamion - najveca dopustena masa, broj kotaca i to sve... -->
             <div th:if="${step eq 3}" class="h-5/6 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4">Vozilo - tehničko</h2>
@@ -122,23 +125,28 @@
                             <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                         </select>
                     </div>
-
-                    <div class="relative flex flex-col mb-4">
-                        <label for="engineDisplacement">Zapremnina motora</label>
-                        <div class="flex items-center">
-                            <input type="text" id="engineDisplacement" name="engineDisplacement" placeholder="1.0" class="input w-96">
-                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="relative flex flex-col mb-4">
+                            <label for="engineDisplacement">Zapremnina motora</label>
+                            <div class="flex items-center">
+                                <input type="number" id="engineDisplacement" name="engineDisplacement" min="0" placeholder="1.0" class="input no-arrows">
+                                <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
+                            </div>
+                        </div>
+                        <div class="relative flex flex-col mb-4">
+                            <label for="enginePower">Snaga motora</label>
+                            <div class="flex items-center">
+                                <input type="number" id="enginePower" name="enginePower" min="0" placeholder="0" class="input no-arrows">
+                                <span class="absolute right-0 pr-2 text-gray-500 text-xl">kW</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex flex-col mb-4">
-                        <label for="enginePower">Snaga motora (kW)</label>
-                        <input type="number" id="enginePower" name="enginePower" min="0" placeholder="0" class="input no-arrows">
-                    </div>
-
+                    
                     <div class="relative flex flex-col mb-4">
                         <label for="fuelConsumption">Potrošnja goriva</label>
                         <div class="flex items-center">
-                          <input type="text" id="fuelConsumption" name="fuelConsumption" placeholder="1.0" class="input w-96">
+                          <input type="number" id="fuelConsumption" name="fuelConsumption" min="0" placeholder="1.0" class="input w-96 no-arrows">
                           <span class="absolute right-0 pr-2 text-gray-500 text-xl">L/100km</span>
                         </div>
                     </div>
