@@ -28,3 +28,26 @@ function loadModels() {
       });
     }
 }
+
+var registeredYesRadio = document.getElementById("registeredYes");
+var registeredNoRadio = document.getElementById("registeredNo");
+var registeredDateInput = document.getElementById("registeredDateInput");
+var registeredDate = document.getElementById("registeredDate");
+
+registeredYesRadio.addEventListener("change", function() {
+  if (this.checked) {
+    registeredDateInput.style.display = "flex";
+    registeredDate.required = true;
+  } else {
+    registeredDateInput.style.display = "none";
+    registeredDate.required = false;
+  }
+});
+
+registeredNoRadio.addEventListener("change", function() {
+  if (this.checked) {
+    registeredDateInput.style.display = "none";
+    registeredDate.required = false;
+    registeredDate.value = "1001-01-01";
+  }
+});

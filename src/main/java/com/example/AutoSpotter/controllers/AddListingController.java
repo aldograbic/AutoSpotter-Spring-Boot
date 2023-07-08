@@ -1,6 +1,7 @@
 package com.example.AutoSpotter.controllers;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,10 +96,12 @@ public class AddListingController {
     public String handleStep2FormSubmission(@RequestParam("manufacturer") String manufacturer,
                                             @RequestParam("model") String vehicleModel,
                                             @RequestParam("bodyType") String bodyType,
-                                            @RequestParam("mileage") int mileage,
                                             @RequestParam("year") int year,
-                                            @RequestParam("state") String state,
+                                            @RequestParam("registeredDate") Date registered,
+                                            @RequestParam("color") String color,
                                             @RequestParam("city") String city,
+                                            @RequestParam("mileage") int mileage,
+                                            @RequestParam("state") String state,
                                             HttpSession session, Model model) {
 
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
@@ -110,10 +113,12 @@ public class AddListingController {
         session.setAttribute("manufacturer", manufacturer);
         session.setAttribute("model", vehicleModel);
         session.setAttribute("bodyType", bodyType);
-        session.setAttribute("mileage", mileage);
         session.setAttribute("year", year);
-        session.setAttribute("state", state);
+        session.setAttribute("registeredDate", registered);
+        session.setAttribute("color", color);
         session.setAttribute("cityId", cityId);
+        session.setAttribute("mileage", mileage);
+        session.setAttribute("state", state);
 
         session.setAttribute("step", 3);
         return "redirect:/postavi-oglas";
@@ -130,13 +135,16 @@ public class AddListingController {
         String manufacturer = (String) session.getAttribute("manufacturer");
         String vehicleModel = (String) session.getAttribute("model");
         String bodyType = (String) session.getAttribute("bodyType");
+        int year = (int) session.getAttribute("year");
+        String registered = (String) session.getAttribute("registeredDate");
+        String color = (String) session.getAttribute("color");
         int mileage = (int) session.getAttribute("mileage");
         String state = (String) session.getAttribute("state");
-        int year = (int) session.getAttribute("year");
+        
         int cityId = (int) session.getAttribute("cityId");
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
-        Vehicle vehicle = new Vehicle(manufacturer, vehicleModel, bodyType, mileage, state, year, engineType,
+        Vehicle vehicle = new Vehicle(manufacturer, vehicleModel, bodyType, color, registered, mileage, state, year, engineType,
                                      engineDisplacement, enginePower, fuelConsumption, transmission, cityId, vehicleTypeId);
 
         int vehicleId = vehicleRepository.saveVehicle(vehicle);

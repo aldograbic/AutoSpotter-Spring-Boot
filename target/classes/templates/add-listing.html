@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
-    <script th:src="@{/showModels.js}" defer="defer"></script>
+    <script th:src="@{/step2.js}" defer="defer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>AutoSpotter | Postavi oglas</title>
 </head>
@@ -69,20 +69,46 @@
                                 <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
                             </select>
                         </div>
-    
+                    
                         <div class="flex flex-col mb-4">
-                            <label for="mileage">Kilometraža</label>
-                            <input type="number" id="mileage" name="mileage" min="0" placeholder="0" required class="input no-arrows">
+                            <label for="registeredRadio">Registriran</label>
+                            <div class="flex justify-between">
+                                <div class="flex flex-row">
+                                    <input type="radio" name="registeredRadio" id="registeredYes" value="Da" class="mr-2">
+                                    <label for="registeredYes">Da</label>
+                                </div>
+                                <div class="flex flex-row">
+                                    <input type="radio" name="registeredRadio" id="registeredNo" value="Ne" class="mr-2">
+                                    <label for="registeredNo">Ne</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
+                    
+                    <div id="registeredDateInput" class="flex flex-col mb-4 hidden">
+                        <label for="registeredDate">Datum sljedeće registracije</label>
+                        <input type="date" id="registeredDate" name="registeredDate" required class="input">
+                    </div>
+                    
                     <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col mb-4">
+                            <label for="color">Boja vozila</label>
+                            <input type="text" id="color" name="color" placeholder="crna" required class="input">
+                        </div>
+
                         <div class="flex flex-col mb-4">
                             <label for="city">Lokacija vozila</label>
                             <select id="city" name="city" required class="input">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col mb-4">
+                            <label for="mileage">Kilometraža</label>
+                            <input type="number" id="mileage" name="mileage" min="0" placeholder="0" required class="input no-arrows">
                         </div>
     
                         <div class="flex flex-col mb-4">
