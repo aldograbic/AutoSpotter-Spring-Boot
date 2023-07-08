@@ -96,13 +96,14 @@ public class AddListingController {
                                             @RequestParam("model") String vehicleModel,
                                             @RequestParam("bodyType") String bodyType,
                                             @RequestParam("mileage") int mileage,
-                                            @RequestParam("location") String location,
                                             @RequestParam("year") int year,
                                             @RequestParam("state") String state,
+                                            @RequestParam("city") String city,
                                             HttpSession session, Model model) {
 
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
-
+        
+        int cityId = vehicleRepository.getCityIdByName(city);
         List<String> manufacturers = vehicleRepository.getManufacturersByVehicleType(vehicleTypeId);
         session.setAttribute("manufacturers", manufacturers);
 
@@ -110,9 +111,9 @@ public class AddListingController {
         session.setAttribute("model", vehicleModel);
         session.setAttribute("bodyType", bodyType);
         session.setAttribute("mileage", mileage);
-        session.setAttribute("location", location);
         session.setAttribute("year", year);
         session.setAttribute("state", state);
+        session.setAttribute("cityId", cityId);
 
         session.setAttribute("step", 3);
         return "redirect:/postavi-oglas";
@@ -120,9 +121,9 @@ public class AddListingController {
 
     @PostMapping("/oglas-3") //tehnicki detalji
     public String handleStep3FormSubmission(@RequestParam("engineType") String engineType,
-                                            @RequestParam("engineDisplacement") String engineDisplacement,
+                                            @RequestParam("engineDisplacement") double engineDisplacement,
                                             @RequestParam("enginePower") int enginePower,
-                                            @RequestParam("fuelConsumption") String fuelConsumption,
+                                            @RequestParam("fuelConsumption") double fuelConsumption,
                                             @RequestParam("transmission") String transmission,
                                             HttpSession session, Model model) {
 
@@ -130,13 +131,13 @@ public class AddListingController {
         String vehicleModel = (String) session.getAttribute("model");
         String bodyType = (String) session.getAttribute("bodyType");
         int mileage = (int) session.getAttribute("mileage");
-        String location = (String) session.getAttribute("location");
-        int year = (int) session.getAttribute("year");
         String state = (String) session.getAttribute("state");
+        int year = (int) session.getAttribute("year");
+        int cityId = (int) session.getAttribute("cityId");
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
-        Vehicle vehicle = new Vehicle(manufacturer, vehicleModel, bodyType, mileage, location, state, year, engineType,
-                                     engineDisplacement, enginePower, fuelConsumption, transmission, vehicleTypeId);
+        Vehicle vehicle = new Vehicle(manufacturer, vehicleModel, bodyType, mileage, state, year, engineType,
+                                     engineDisplacement, enginePower, fuelConsumption, transmission, cityId, vehicleTypeId);
 
         int vehicleId = vehicleRepository.saveVehicle(vehicle);
         session.setAttribute("vehicleId", vehicleId);

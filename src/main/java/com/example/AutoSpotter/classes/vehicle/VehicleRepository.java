@@ -10,6 +10,8 @@ public interface VehicleRepository {
 
     int getVehicleTypeId(String vehicleType);
 
+    int getCityIdByName(String cityName);
+
     List<String> getAllVehicleTypes();
 
     List<String> getAllBodyTypes();

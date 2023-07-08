@@ -16,15 +16,14 @@ public class JdbcVehicleRepository implements VehicleRepository {
 
     @Override
     public int saveVehicle(Vehicle vehicle) {
-        String sql = "INSERT INTO vehicle (manufacturer, model, body_type, mileage, location, state, year, engine_type, engine_displacement, engine_power, " +
-                    "fuel_consumption, transmission, vehicle_type_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO vehicle (manufacturer, model, body_type, mileage, state, year, engine_type, engine_displacement, engine_power, " +
+                    "fuel_consumption, transmission, city_id, vehicle_type_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql,
                 vehicle.getManufacturer(),
                 vehicle.getModel(),
                 vehicle.getBodyType(),
                 vehicle.getMileage(),
-                vehicle.getLocation(),
                 vehicle.getState(),
                 vehicle.getYear(),
                 vehicle.getEngineType(),
@@ -32,6 +31,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
                 vehicle.getEnginePower(),
                 vehicle.getFuelConsumption(),
                 vehicle.getTransmission(),
+                vehicle.getCityId(),
                 vehicle.getVehicleTypeId()
         );
         String idSql = "SELECT last_insert_id()";
@@ -44,6 +44,11 @@ public class JdbcVehicleRepository implements VehicleRepository {
         return jdbcTemplate.queryForObject(sql, Integer.class, vehicleType);
     }
 
+    public int getCityIdByName(String cityName) {
+        String sql = "SELECT id FROM cities WHERE city_name = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, cityName);
+    }
+
     @Override
     public List<String> getAllVehicleTypes() {
         String sql = "SELECT name FROM vehicle_type";
@@ -52,8 +57,8 @@ public class JdbcVehicleRepository implements VehicleRepository {
 
     @Override
     public Vehicle getVehicleById(int id) {
-        String sql = "SELECT id, manufacturer, model, body_type, mileage, location, state, year, engine_type, engine_displacement, " +
-                    "engine_power, fuel_consumption, transmission, vehicle_type_id FROM vehicle WHERE id = ?";
+        String sql = "SELECT id, manufacturer, model, body_type, mileage, state, year, engine_type, engine_displacement, " +
+                    "engine_power, fuel_consumption, transmission, city_id, vehicle_type_id FROM vehicle WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new VehicleRowMapper(), id);
     }
 

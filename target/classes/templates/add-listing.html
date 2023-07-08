@@ -78,8 +78,8 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex flex-col mb-4">
-                            <label for="location">Lokacija vozila</label>
-                            <select id="location" name="location" required class="input">
+                            <label for="city">Lokacija vozila</label>
+                            <select id="city" name="city" required class="input">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
                             </select>

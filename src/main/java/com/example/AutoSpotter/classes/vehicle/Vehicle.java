@@ -6,23 +6,22 @@ public class Vehicle {
     private String model;
     private String bodyType;
     private int mileage;
-    private String location;
     private String state;
     private int year;
     private String engineType;
-    private String engineDisplacement;
+    private double engineDisplacement;
     private int enginePower;
-    private String fuelConsumption;
+    private double fuelConsumption;
     private String transmission;
+    private int cityId;
     private int vehicleTypeId;
 
-    public Vehicle(String manufacturer, String model, String bodyType, int mileage, String location, String state, int year, String engineType,
-                   String engineDisplacement, int enginePower, String fuelConsumption, String transmission, int vehicleTypeId) {
+    public Vehicle(String manufacturer, String model, String bodyType, int mileage, String state, int year, String engineType,
+                   double engineDisplacement, int enginePower, double fuelConsumption, String transmission, int cityId, int vehicleTypeId) {
         this.manufacturer = manufacturer;
         this.model = model;
         this.bodyType = bodyType;
         this.mileage = mileage;
-        this.location = location;
         this.state = state;
         this.year = year;
         this.engineType = engineType;
@@ -30,6 +29,7 @@ public class Vehicle {
         this.enginePower = enginePower;
         this.fuelConsumption = fuelConsumption;
         this.transmission = transmission;
+        this.cityId = cityId;
         this.vehicleTypeId = vehicleTypeId;
     }
 
@@ -75,14 +75,6 @@ public class Vehicle {
         this.mileage = mileage;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public String getState() {
         return state;
     }
@@ -107,11 +99,11 @@ public class Vehicle {
         this.engineType = engineType;
     }
 
-    public String getEngineDisplacement() {
+    public double getEngineDisplacement() {
         return engineDisplacement;
     }
 
-    public void setEngineDisplacement(String engineDisplacement) {
+    public void setEngineDisplacement(double engineDisplacement) {
         this.engineDisplacement = engineDisplacement;
     }
 
@@ -123,11 +115,11 @@ public class Vehicle {
         this.enginePower = enginePower;
     }
 
-    public String getFuelConsumption() {
+    public double getFuelConsumption() {
         return fuelConsumption;
     }
 
-    public void setFuelConsumption(String fuelConsumption) {
+    public void setFuelConsumption(double fuelConsumption) {
         this.fuelConsumption = fuelConsumption;
     }
 
@@ -137,6 +129,14 @@ public class Vehicle {
 
     public void setTransmission(String transmission) {
         this.transmission = transmission;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
     public int getVehicleTypeId() {
@@ -159,7 +159,4 @@ public class Vehicle {
 
     // Safety Features
     // Infotainment System
-
-
-    // location (promijenit malo), fuelEfficiency i fuelConsumtion u double
 }

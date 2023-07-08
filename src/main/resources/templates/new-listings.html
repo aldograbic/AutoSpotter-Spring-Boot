@@ -120,7 +120,7 @@
                         <p th:text="${listing.listingDescription}" class="text-gray-700"></p>
                         <p class="flex items-center text-gray-700 absolute top-0 right-0 mt-3 mr-4">
                             <span class="mr-1"><img class="w-6" src="img/location-icon.png" alt="Lokacija"></span>
-                            <span th:text="${listing.vehicle.location}"></span>
+                            <!-- <span th:text="${listing.vehicle.location}"></span> -->
                         </p>
                         <a th:href="@{'/korisnicki-profil/' + ${listing.user.id}}" class="flex items-center text-cyan-700 absolute bottom-0 right-0 mb-3 mr-4 hover:text-cyan-900">
                             <span class="mr-2"><img class="w-6" src="img/user-icon.png" alt="Prodavač"></span>

@@ -71,7 +71,6 @@ CREATE TABLE `vehicle` (
   `model` varchar(255) NOT NULL,
   `body_type` varchar(255) NOT NULL,
   `mileage` int DEFAULT NULL,
-  `location` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
   `year` int NOT NULL,
   `engine_type` varchar(255) NOT NULL,
@@ -79,11 +78,15 @@ CREATE TABLE `vehicle` (
   `engine_power` int NOT NULL,
   `fuel_consumption` varchar(255) NOT NULL,
   `transmission` varchar(255) NOT NULL,
+  `city_id` int NOT NULL,
   `vehicle_type_id` int NOT NULL,
   
   PRIMARY KEY (`id`),
   KEY `fk_vehicle_type` (`vehicle_type_id`),
-  CONSTRAINT `fk_vehicle_type` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type` (`id`)
+  KEY `fk_city_name` (`city_id`),
+  CONSTRAINT `fk_vehicle_type` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type` (`id`),
+  CONSTRAINT `fk_city_name` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
+  
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `user` (

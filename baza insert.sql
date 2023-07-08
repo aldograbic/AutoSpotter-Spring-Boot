@@ -32,10 +32,10 @@ INSERT INTO models VALUES (1, "3", 1);
 INSERT INTO models VALUES (2, "A4", 2);
 INSERT INTO models VALUES (3, "G200", 3);
 
-INSERT INTO user VALUES(1, "agrabic", "$2a$12$N86VahTqVHFFchpiMvJ0g...4PuWtcL9oSq/dN/0ZXd9DlHo6BRPa", "Aldo", "Grabić", null, null, "Nikole Tesle 33", "+385 91 26222 17", "aldo.grabic99@gmail.com", 1);
-
 INSERT INTO countries VALUES (1, "Hrvatska");
 
 INSERT INTO counties VALUES (1, "Zagrebačka", "ZŽ", 1);
 
 INSERT INTO cities VALUES (1, "Velika Gorica", 1);
+
+INSERT INTO user VALUES(1, "agrabic", "$2a$12$N86VahTqVHFFchpiMvJ0g...4PuWtcL9oSq/dN/0ZXd9DlHo6BRPa", "Aldo", "Grabić", null, null, "Nikole Tesle 33", "+385 91 26222 17", "aldo.grabic99@gmail.com", 1);
