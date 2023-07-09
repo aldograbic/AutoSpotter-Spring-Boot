@@ -18,7 +18,7 @@
 
             <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-8">Postavi oglas</h1>
 
-            <div th:if="${step eq 1}" class="h-5/6 flex flex-col items-center border rounded-md">
+            <div th:if="${step eq 1}" class="h-full mb-4 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8">Vrsta vozila</h2>
                 <form th:action="@{/oglas-1}" method="post">
@@ -34,7 +34,7 @@
                 </form>
             </div>
 
-            <div th:if="${step eq 2}" class="h-5/6 flex flex-col items-center border rounded-md">
+            <div th:if="${step eq 2}" class="h-full mb-4 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8">Vozilo - osnovno</h2>
                 <form th:action="@{/oglas-2}" method="post">
@@ -92,16 +92,18 @@
                             </select>
                         </div>
                     
-                        <div class="flex flex-col mb-4">
-                            <label for="registeredRadio">Registriran</label>
-                            <div class="flex justify-between">
-                                <div class="flex flex-row">
-                                    <input type="radio" name="registeredRadio" id="registeredYes" value="Da" class="mr-2">
-                                    <label for="registeredYes">Da</label>
+                        <div class="flex flex-col mb-2">
+                            <label for="registeredYes">Registriran</label>
+                            <div class="flex justify-between mt-1">
+                                <div class="flex items-center">
+                                    <input id="registeredYes" type="radio" name="registeredRadio" value="Da" class="hidden" />
+                                    <label for="registeredYes" class="flex items-center cursor-pointer">
+                                     <span class="w-4 h-4 inline-block mr-1 rounded-full border border-grey"></span>Da</label>
                                 </div>
-                                <div class="flex flex-row">
-                                    <input type="radio" name="registeredRadio" id="registeredNo" value="Ne" class="mr-2">
-                                    <label for="registeredNo">Ne</label>
+                                <div class="flex items-center">
+                                    <input id="registeredNo" type="radio" name="registeredRadio" value="Ne" class="hidden" />
+                                    <label for="registeredNo" class="flex items-center cursor-pointer">
+                                     <span class="w-4 h-4 inline-block mr-1 rounded-full border border-grey"></span>Ne</label>
                                 </div>
                             </div>
                         </div>
@@ -142,22 +144,21 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col mb-4">
-                        <input type="hidden" name="vehicleTypeId" th:value="${vehicleTypeId}">
-                        <input type="submit" value="Dalje" class="button">
-                    </div>
-                </form>
-                <div th:if="${step > 1}">
-                    <form th:action="@{/back}" method="post">
-                        <div class="flex flex-col mb-4 w-96">
-                            <input type="hidden" name="step" th:value="${step - 1}">
-                            <input type="submit" value="Nazad" class="button">
+                    <div class="flex justify-between mb-4">
+                        <div class="mt-2">
+                            <div th:if="${step > 1}">
+                                <a th:href="@{/back(step=${step - 1})}" class="button ">Nazad</a>
+                            </div>
                         </div>
-                    </form>
-                </div>
+                        <div>
+                            <input type="hidden" name="vehicleTypeId" th:value="${vehicleTypeId}">
+                            <input type="submit" value="Dalje" class="button">
+                        </div>
+                    </div>
+                </form> 
             </div>
 
-            <div th:if="${step eq 3}" class="h-5/6 flex flex-col items-center border rounded-md">
+            <div th:if="${step eq 3}" class="h-full mb-4 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8">Vozilo - tehničko</h2>
                 <form th:action="@{/oglas-3}" method="post">
@@ -214,22 +215,22 @@
                         </div>
                     </div>
                     
-                    <div class="flex flex-col mb-4">
-                        <input type="submit" value="Dalje" class="button">
+                    <div class="flex justify-between mb-4">
+                        <div class="mt-2">
+                            <div th:if="${step > 1}">
+                                <a th:href="@{/back(step=${step - 1})}" class="button ">Nazad</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="Dalje" class="button">
+                        </div>
                     </div>
                 </form>
-                <div th:if="${step > 1}">
-                    <form th:action="@{/back}" method="post">
-                        <div class="flex flex-col mb-4 w-96">
-                            <input type="hidden" name="step" th:value="${step - 1}">
-                            <input type="submit" value="Nazad" class="button">
-                        </div>
-                    </form>
-                </div>
+                
             </div>
 
             <!-- Step 4: Vehicle Detailed -->
-            <div th:if="${step eq 4}" class="h-5/6 flex flex-col items-center border rounded-md">
+            <div th:if="${step eq 4}" class="h-full mb-4 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8">Vozilo - detaljno</h2>
                 <form th:action="@{/oglas-4}" method="post">
@@ -272,22 +273,21 @@
                         </div>
                     </div>
                     
-                    <div class="flex flex-col mb-4">
-                        <input type="submit" value="Dalje" class="button">
+                    <div class="flex justify-between mb-4">
+                        <div class="mt-2">
+                            <div th:if="${step > 1}">
+                                <a th:href="@{/back(step=${step - 1})}" class="button ">Nazad</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="Dalje" class="button">
+                        </div>
                     </div>
                 </form>
-                <div th:if="${step > 1}">
-                    <form th:action="@{/back}" method="post">
-                        <div class="flex flex-col mb-4 w-96">
-                            <input type="hidden" name="step" th:value="${step - 1}">
-                            <input type="submit" value="Nazad" class="button">
-                        </div>
-                    </form>
-                </div>
             </div>
 
             <!-- Step 5: Vehicle Images -->
-            <div th:if="${step eq 5}" class="h-5/6 flex flex-col items-center border rounded-md">
+            <div th:if="${step eq 5}" class="h-full mb-4 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8">Slike vozila</h2>
                 <form th:action="@{/oglas-5}" method="post" enctype="multipart/form-data">
@@ -296,21 +296,20 @@
                         file:bg-gray-200
                         hover:file:bg-gray-300">
                     </div>
-                    <div class="flex flex-col mb-4">
-                        <input type="submit" value="Dalje" class="button">
+                    <div class="flex justify-between mb-4">
+                        <div class="mt-2">
+                            <div th:if="${step > 1}">
+                                <a th:href="@{/back(step=${step - 1})}" class="button ">Nazad</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="Dalje" class="button">
+                        </div>
                     </div>
                 </form>
-                <div th:if="${step > 1}">
-                    <form th:action="@{/back}" method="post">
-                        <div class="flex flex-col mb-4 w-96">
-                            <input type="hidden" name="step" th:value="${step - 1}">
-                            <input type="submit" value="Nazad" class="button">
-                        </div>
-                    </form>
-                </div>
             </div>
 
-            <div th:if="${step eq 6}" class="h-5/6 flex flex-col items-center border rounded-md">
+            <div th:if="${step eq 6}" class="h-full mb-4 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4">Detalji oglasa</h2>
                 <form th:action="@{/oglas-6}" method="post">
@@ -326,18 +325,17 @@
                             <span class="absolute right-0 pr-2 text-gray-500 text-xl">&euro;</span>
                         </div>
                     </div>
-                    <div class="flex flex-col mb-4">
-                        <input type="submit" value="Potvrdi" class="button">
+                    <div class="flex justify-between mb-4">
+                        <div class="mt-2">
+                            <div th:if="${step > 1}">
+                                <a th:href="@{/back(step=${step - 1})}" class="button ">Nazad</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="Potvrdi" class="button">
+                        </div>
                     </div>
                 </form>
-                <div th:if="${step > 1}">
-                    <form th:action="@{/back}" method="post">
-                        <div class="flex flex-col mb-4 w-96">
-                            <input type="hidden" name="step" th:value="${step - 1}">
-                            <input type="submit" value="Nazad" class="button">
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
 

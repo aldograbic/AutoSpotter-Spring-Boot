@@ -104,11 +104,12 @@ public class AddListingController {
         return "add-listing";
     }
 
-    @PostMapping("/back")
+    @GetMapping("/back")
     public String handleBackButton(@RequestParam("step") int step, HttpSession session) {
         session.setAttribute("step", step);
         return "redirect:/postavi-oglas";
     }
+
 
     @PostMapping("/oglas-1")
     public String handleStep1FormSubmission(@RequestParam("vehicleType") String vehicleType, HttpSession session, Model model) {

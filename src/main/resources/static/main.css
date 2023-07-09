@@ -622,6 +622,25 @@ video {
   background: #555;
 }
 
+input[type="radio"] + label span {
+  transition: background .2s,
+          transform .2s;
+}
+
+input[type="radio"] + label span:hover,
+    input[type="radio"] + label:hover span{
+  transform: scale(1.2);
+}
+
+input[type="radio"]:checked + label span {
+  background-color: rgb(8 145 178);
+  box-shadow: 0px 0px 0px 2px white inset;
+}
+
+input[type="radio"]:checked + label{
+  color: rgb(8 145 178);
+}
+
 .absolute {
   position: absolute;
 }
@@ -644,6 +663,10 @@ video {
 
 .m-4 {
   margin: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .mb-3 {
@@ -686,6 +709,14 @@ video {
   margin-right: 1rem;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
 .mt-3 {
   margin-top: 0.75rem;
 }
@@ -710,6 +741,10 @@ video {
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
 }
@@ -730,8 +765,8 @@ video {
   height: 4rem;
 }
 
-.h-5\/6 {
-  height: 83.333333%;
+.h-4 {
+  height: 1rem;
 }
 
 .h-56 {
@@ -740,6 +775,10 @@ video {
 
 .h-64 {
   height: 16rem;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .min-h-screen {
@@ -768,6 +807,10 @@ video {
 
 .w-28 {
   width: 7rem;
+}
+
+.w-4 {
+  width: 1rem;
 }
 
 .w-56 {
@@ -800,10 +843,6 @@ video {
 
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.flex-row {
-  flex-direction: row;
 }
 
 .flex-col {
@@ -862,6 +901,10 @@ video {
 
 .rounded {
   border-radius: 0.25rem;
+}
+
+.rounded-full {
+  border-radius: 9999px;
 }
 
 .rounded-lg {
