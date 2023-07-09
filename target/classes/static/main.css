@@ -662,6 +662,10 @@ video {
   margin-bottom: 2rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
 .ml-4 {
   margin-left: 1rem;
 }
@@ -762,6 +766,10 @@ video {
   width: 66.666667%;
 }
 
+.w-28 {
+  width: 7rem;
+}
+
 .w-56 {
   width: 14rem;
 }
@@ -800,6 +808,10 @@ video {
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .items-center {
@@ -971,6 +983,10 @@ video {
 
 .pr-2 {
   padding-right: 0.5rem;
+}
+
+.pr-5 {
+  padding-right: 1.25rem;
 }
 
 .text-center {

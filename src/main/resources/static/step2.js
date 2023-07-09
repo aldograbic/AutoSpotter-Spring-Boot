@@ -48,4 +48,8 @@ $(document).ready(function() {
       registeredDate.value = "1001-01-01";
     }
   });
+
+  function validateInput(input) {
+    input.value = input.value.replace(/,/g, '.');
+  }
 });
