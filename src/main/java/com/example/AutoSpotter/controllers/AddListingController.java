@@ -117,7 +117,7 @@ public class AddListingController {
     public String handleStep2FormSubmission(@RequestParam("manufacturer") String manufacturer,
                                             @RequestParam("model") String vehicleModel,
                                             @RequestParam(value = "bodyType", required = false) String bodyType,
-                                            @RequestParam(value = "hiddenNumberOfWheels", required = false) String hiddenNumberOfWheels,
+                                            @RequestParam("numberOfWheels") int numberOfWheels,
                                             @RequestParam(value = "maximumAllowableWeight", required = false) String maximumAllowableWeight,
                                             @RequestParam("year") int year,
                                             @RequestParam("registeredDate") Date registered,
@@ -136,7 +136,7 @@ public class AddListingController {
         session.setAttribute("manufacturer", manufacturer);
         session.setAttribute("model", vehicleModel);
         session.setAttribute("bodyType", bodyType);
-        session.setAttribute("numberOfWheels", hiddenNumberOfWheels);
+        session.setAttribute("numberOfWheels", numberOfWheels);
         session.setAttribute("maximumAllowableWeight", maximumAllowableWeight);
         session.setAttribute("year", year);
         session.setAttribute("registeredDate", registered);
@@ -188,8 +188,7 @@ public class AddListingController {
         String vehicleModel = (String) session.getAttribute("model");
         String bodyType = (String) session.getAttribute("bodyType");
         int year = (int) session.getAttribute("year");
-        String numberOfWheelsStr = (String) session.getAttribute("numberOfWheels");
-        int numberOfWheels = Integer.parseInt(numberOfWheelsStr);
+        int numberOfWheels = (int) session.getAttribute("numberOfWheels");
         double maximumAllowableWeight = (double) session.getAttribute("maximumAllowableWeight");
         Date registered = (Date) session.getAttribute("registeredDate");
         String color = (String) session.getAttribute("color");

@@ -27,10 +27,12 @@ INSERT INTO engine_type VALUES (7, "Vodik");
 INSERT INTO manufacturers VALUES(1, "BMW", 1);
 INSERT INTO manufacturers VALUES(2, "Audi", 1);
 INSERT INTO manufacturers VALUES(3, "Honda", 2);
+INSERT INTO manufacturers VALUES(4, "MAN", 3);
 
 INSERT INTO models VALUES (1, "3", 1);
 INSERT INTO models VALUES (2, "A4", 2);
 INSERT INTO models VALUES (3, "G200", 3);
+INSERT INTO models VALUES (4, "TGL", 4);
 
 INSERT INTO countries VALUES (1, "Hrvatska");
 

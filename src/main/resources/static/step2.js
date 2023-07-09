@@ -48,15 +48,4 @@ $(document).ready(function() {
       registeredDate.value = "1001-01-01";
     }
   });
-
-  $('#vehicleType').change(function() {
-    var selectedVehicleType = $(this).val();
-    if (selectedVehicleType === "Automobil") {
-      $('#hiddenNumberOfWheels').val('4');
-    } else if (selectedVehicleType === "Motor") {
-      $('#hiddenNumberOfWheels').val('2');
-    } else {
-      $('#hiddenNumberOfWheels').val('');
-    }
-  });
 });

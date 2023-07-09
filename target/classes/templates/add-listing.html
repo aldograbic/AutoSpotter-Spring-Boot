@@ -62,11 +62,14 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="hidden" id="hiddenNumberOfWheels" name="hiddenNumberOfWheels" value="">
                         <div th:if="${showNumberOfWheelsInput}" class="flex flex-col mb-4">
                             <label for="numberOfWheels">Broj kotača</label>
                             <input type="number" id="numberOfWheels" name="numberOfWheels" min="4" placeholder="6" required th:value="${initialNumberOfWheels}" class="input no-arrows">
                         </div>
+                        <div th:unless="${showNumberOfWheelsInput}" class="flex flex-col mb-4">
+                            <input type="hidden" name="numberOfWheels" value="0">
+                        </div>
+                        
                         <div th:if="${showMaximumAllowableWeightInput}" class="relative flex flex-col mb-4">
                             <label for="maximumAllowableWeight">Najveća dopuštena masa</label>
                             <div class="flex items-center">
