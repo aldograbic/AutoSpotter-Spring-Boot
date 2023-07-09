@@ -87,6 +87,8 @@ public class AddListingController {
             model.addAttribute("showMaximumAllowableWeightInput", false);
         }
         List<String> engineTypes = vehicleRepository.getAllEngineTypes();
+        List<String> transmissionTypes = vehicleRepository.getAllTransmissionTypes();
+        List<String> driveTrainTypes = vehicleRepository.getAllDriveTrainTypes();
 
         model.addAttribute("step", step);
         model.addAttribute("completedSteps", completedSteps);
@@ -95,8 +97,9 @@ public class AddListingController {
         model.addAttribute("cities", cities);     
         model.addAttribute("states", states);
         model.addAttribute("bodyTypes", bodyTypes);
-
         model.addAttribute("engineTypes", engineTypes);
+        model.addAttribute("transmissionTypes", transmissionTypes);
+        model.addAttribute("driveTrainTypes", driveTrainTypes);
 
         return "add-listing";
     }
@@ -123,7 +126,7 @@ public class AddListingController {
                                             @RequestParam("model") String vehicleModel,
                                             @RequestParam(value = "bodyType", required = false) String bodyType,
                                             @RequestParam("numberOfWheels") int numberOfWheels,
-                                            @RequestParam(value = "maximumAllowableWeight", required = false) String maximumAllowableWeight,
+                                            @RequestParam(value = "maximumAllowableWeight", required = false) Double maximumAllowableWeight,
                                             @RequestParam("year") int year,
                                             @RequestParam("registeredDate") Date registered,
                                             @RequestParam("color") String color,

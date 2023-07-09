@@ -47,6 +47,18 @@ CREATE TABLE `engine_type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `transmission` (
+  `id` int NOT NULL,
+  `transmission_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `drive_train` (
+  `id` int NOT NULL,
+  `drive_train_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `manufacturers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `manufacturer_name` varchar(50) NOT NULL,

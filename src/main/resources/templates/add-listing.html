@@ -70,7 +70,7 @@
                              class="input no-arrows">
                         </div>
                         <div th:unless="${showNumberOfWheelsInput}" class="flex flex-col mb-4">
-                            <input type="hidden" name="numberOfWheels" value="0">
+                            <input type="hidden" name="numberOfWheels" th:value="${initialNumberOfWheels}">
                         </div>
                         
                         <div th:if="${showMaximumAllowableWeightInput}" class="relative flex flex-col mb-4 mt-4">
@@ -199,13 +199,17 @@
                         <div class="flex flex-col mb-4">
                             <label for="transmission">Mjenjač</label>
                             <select id="transmission" name="transmission" class="input" >
-                                <option value="" selected>Odabir</option>
+                                <option value="" disabled selected>Odabir</option>
+                                <option th:each="transmissionType : ${transmissionTypes}" th:value="${transmissionType}" th:text="${transmissionType}"
+                                 th:selected="${transmissionType eq session['transmissionType']}"></option>
                             </select>
                         </div>
                         <div class="flex flex-col mb-4">
                             <label for="driveTrain">Pogon kotača</label>
                             <select id="driveTrain" name="driveTrain" class="input">
-                                <option value="" selected>Odabir</option>
+                                <option value="" disabled selected>Odabir</option>
+                                <option th:each="driveTrainType : ${driveTrainTypes}" th:value="${driveTrainType}" th:text="${driveTrainType}"
+                                 th:selected="${driveTrainType eq session['driveTrainType']}"></option>
                             </select>
                         </div>
                     </div>
@@ -312,11 +316,15 @@
                 <form th:action="@{/oglas-6}" method="post">
                     <div class="flex flex-col mb-4">
                         <label for="description">Opis oglasa</label>
-                        <textarea id="description" name="description" rows="4" class="input w-96 h-64 resize-none"></textarea>
+                        <textarea id="description" name="description" rows="4" required class="input w-96 h-64 resize-none"></textarea>
                     </div>
-                    <div class="flex flex-col mb-4">
+                    <div class="relative flex flex-col mb-4">
                         <label for="price">Cijena</label>
-                        <input type="number" id="price" name="price" class="input">
+                        <div class="flex items-center">
+                            <input type="text" id="price" name="price" class="input w-96" required pattern="[0-9]*\.?[0-9]+"
+                             placeholder="1000.00" oninput="validateInput(this)">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">&euro;</span>
+                        </div>
                     </div>
                     <div class="flex flex-col mb-4">
                         <input type="submit" value="Potvrdi" class="button">

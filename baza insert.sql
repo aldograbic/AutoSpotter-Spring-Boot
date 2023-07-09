@@ -24,6 +24,14 @@ INSERT INTO engine_type VALUES (5, "Plin");
 INSERT INTO engine_type VALUES (6, "Plug-in hibrid");
 INSERT INTO engine_type VALUES (7, "Vodik");
 
+INSERT INTO transmission VALUES (1, "Ručni");
+INSERT INTO transmission VALUES (2, "Automatski");
+INSERT INTO transmission VALUES (3, "Poluautomatski");
+
+INSERT INTO drive_train VALUES (1, "Prednji");
+INSERT INTO drive_train VALUES (2, "Zadnji");
+INSERT INTO drive_train VALUES (3, "Na sva četri");
+
 INSERT INTO manufacturers VALUES(1, "BMW", 1);
 INSERT INTO manufacturers VALUES(2, "Audi", 1);
 INSERT INTO manufacturers VALUES(3, "Honda", 2);
