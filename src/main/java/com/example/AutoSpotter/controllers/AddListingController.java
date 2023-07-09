@@ -111,6 +111,8 @@ public class AddListingController {
     public String handleStep1FormSubmission(@RequestParam("vehicleType") String vehicleType, HttpSession session, Model model) {
         int vehicleTypeId = vehicleRepository.getVehicleTypeId(vehicleType);
         session.setAttribute("vehicleTypeId", vehicleTypeId);
+        session.setAttribute("vehicleType", vehicleType);
+
         session.setAttribute("step", 2);
 
         return "redirect:/postavi-oglas";
