@@ -19,6 +19,7 @@ public class Vehicle {
     private int enginePower;
     private double fuelConsumption;
     private String transmission;
+    private String driveTrain;
     private double batteryCapacity;
     private double chargingTime;
     private double vehicleRange;
@@ -27,7 +28,7 @@ public class Vehicle {
 
     public Vehicle(String manufacturer, String model, String bodyType, String color, Date registered, int mileage,
                    String state, int year, int numberOfWheels, double maximumAllowableWeight, String engineType, double engineDisplacement,
-                   int enginePower, double fuelConsumption, String transmission, double batteryCapacity, double chargingTime,
+                   int enginePower, double fuelConsumption, String transmission, String driveTrain, double batteryCapacity, double chargingTime,
                    double vehicleRange, int cityId, int vehicleTypeId) {
         this.manufacturer = manufacturer;
         this.model = model;
@@ -44,6 +45,7 @@ public class Vehicle {
         this.enginePower = enginePower;
         this.fuelConsumption = fuelConsumption;
         this.transmission = transmission;
+        this.driveTrain = driveTrain;
         this.batteryCapacity = batteryCapacity;
         this.chargingTime = chargingTime;
         this.vehicleRange = vehicleRange;
@@ -179,6 +181,14 @@ public class Vehicle {
 
     public void setTransmission(String transmission) {
         this.transmission = transmission;
+    }
+
+    public String getDriveTrain() {
+        return driveTrain;
+    }
+
+    public void setDriveTrain(String driveTrain) {
+        this.driveTrain = driveTrain;
     }
 
     public double getBatteryCapacity() {

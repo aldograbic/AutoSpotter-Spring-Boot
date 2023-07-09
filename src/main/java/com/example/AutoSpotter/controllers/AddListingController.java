@@ -54,6 +54,20 @@ public class AddListingController {
         if (vehicleTypeId != null) {
             List<String> manufacturers = vehicleRepository.getManufacturersByVehicleType(vehicleTypeId);
             model.addAttribute("manufacturers", manufacturers);
+
+            if (vehicleTypeId == 1) {
+                model.addAttribute("showNumberOfWheelsInput", true);
+                model.addAttribute("initialNumberOfWheels", 4);
+            } else if (vehicleTypeId == 2) {
+                model.addAttribute("showNumberOfWheelsInput", true);
+                model.addAttribute("initialNumberOfWheels", 2);
+            } else if (vehicleTypeId == 3) {
+                model.addAttribute("showNumberOfWheelsInput", true);
+                model.addAttribute("initialNumberOfWheels", null);
+            } else {
+                model.addAttribute("showNumberOfWheelsInput", false);
+                model.addAttribute("initialNumberOfWheels", null);
+            }
         }
         List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
 
@@ -61,6 +75,13 @@ public class AddListingController {
             model.addAttribute("showBodyTypeInput", true);
         } else {
             model.addAttribute("showBodyTypeInput", false);
+        }
+        if (step == 2 && 3 == ((Integer) session.getAttribute("vehicleTypeId"))) {
+            model.addAttribute("showNumberOfWheelsInput", true);
+            model.addAttribute("showMaximumAllowableWeightInput", true);
+        } else {
+            model.addAttribute("showNumberOfWheelsInput", false);
+            model.addAttribute("showMaximumAllowableWeightInput", false);
         }
         List<String> engineTypes = vehicleRepository.getAllEngineTypes();
 
@@ -95,7 +116,9 @@ public class AddListingController {
     @PostMapping("/oglas-2")
     public String handleStep2FormSubmission(@RequestParam("manufacturer") String manufacturer,
                                             @RequestParam("model") String vehicleModel,
-                                            @RequestParam("bodyType") String bodyType,
+                                            @RequestParam(value = "bodyType", required = false) String bodyType,
+                                            @RequestParam(value = "hiddenNumberOfWheels", required = false) String hiddenNumberOfWheels,
+                                            @RequestParam(value = "maximumAllowableWeight", required = false) String maximumAllowableWeight,
                                             @RequestParam("year") int year,
                                             @RequestParam("registeredDate") Date registered,
                                             @RequestParam("color") String color,
@@ -113,6 +136,8 @@ public class AddListingController {
         session.setAttribute("manufacturer", manufacturer);
         session.setAttribute("model", vehicleModel);
         session.setAttribute("bodyType", bodyType);
+        session.setAttribute("numberOfWheels", hiddenNumberOfWheels);
+        session.setAttribute("maximumAllowableWeight", maximumAllowableWeight);
         session.setAttribute("year", year);
         session.setAttribute("registeredDate", registered);
         session.setAttribute("color", color);
@@ -130,32 +155,63 @@ public class AddListingController {
                                             @RequestParam("enginePower") int enginePower,
                                             @RequestParam("fuelConsumption") double fuelConsumption,
                                             @RequestParam("transmission") String transmission,
+                                            @RequestParam("driveTrain") String driveTrain,
                                             HttpSession session, Model model) {
 
-        String manufacturer = (String) session.getAttribute("manufacturer");
-        String vehicleModel = (String) session.getAttribute("model");
-        String bodyType = (String) session.getAttribute("bodyType");
-        int year = (int) session.getAttribute("year");
-        String registered = (String) session.getAttribute("registeredDate");
-        String color = (String) session.getAttribute("color");
-        int mileage = (int) session.getAttribute("mileage");
-        String state = (String) session.getAttribute("state");
-        
-        int cityId = (int) session.getAttribute("cityId");
-        int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
-        Vehicle vehicle = new Vehicle(manufacturer, vehicleModel, bodyType, color, registered, mileage, state, year, engineType,
-                                     engineDisplacement, enginePower, fuelConsumption, transmission, cityId, vehicleTypeId);
-
-        int vehicleId = vehicleRepository.saveVehicle(vehicle);
-        session.setAttribute("vehicleId", vehicleId);
+        session.setAttribute("engineType", engineType);
+        session.setAttribute("engineDisplacement", engineDisplacement);
+        session.setAttribute("enginePower", enginePower);
+        session.setAttribute("fuelConsumption", fuelConsumption);
+        session.setAttribute("transmission", transmission);
+        session.setAttribute("driveTrain", driveTrain);
 
         session.setAttribute("step", 4);
         return "redirect:/postavi-oglas";
     }
 
     @PostMapping("/oglas-4") //detaljni detalji
-    public String handleStep4FormSubmission(HttpSession session, Model model) {
+    public String handleStep4FormSubmission(@RequestParam(value = "batteryCapacity", required = false) Double batteryCapacity,
+                                            @RequestParam(value = "vehicleRange", required = false) Double vehicleRange,
+                                            @RequestParam(value = "chargingTime", required = false) Double chargingTime,
+                                            HttpSession session, Model model) {
+
+        String engineType = (String) session.getAttribute("engineType");
+
+        if ("Električni".equals(engineType)) {
+            model.addAttribute("batteryCapacity", batteryCapacity);
+            model.addAttribute("vehicleRange", vehicleRange);
+            model.addAttribute("chargingTime", chargingTime);
+        }
+
+        String manufacturer = (String) session.getAttribute("manufacturer");
+        String vehicleModel = (String) session.getAttribute("model");
+        String bodyType = (String) session.getAttribute("bodyType");
+        int year = (int) session.getAttribute("year");
+        String numberOfWheelsStr = (String) session.getAttribute("numberOfWheels");
+        int numberOfWheels = Integer.parseInt(numberOfWheelsStr);
+        double maximumAllowableWeight = (double) session.getAttribute("maximumAllowableWeight");
+        Date registered = (Date) session.getAttribute("registeredDate");
+        String color = (String) session.getAttribute("color");
+        int mileage = (int) session.getAttribute("mileage");
+        String state = (String) session.getAttribute("state");
+
+        double engineDisplacement = (double) session.getAttribute("engineDisplacement");
+        int enginePower = (int) session.getAttribute("enginePower");
+        double fuelConsumption = (double) session.getAttribute("fuelConsumption");
+        String transmission = (String) session.getAttribute("transmission");
+        String driveTrain = (String) session.getAttribute("driveTrain");
+
+        int cityId = (int) session.getAttribute("cityId");
+        int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
+
+        Vehicle vehicle = new Vehicle(manufacturer, vehicleModel, bodyType, color, registered, mileage, state, year, numberOfWheels,
+                                    maximumAllowableWeight, engineType, engineDisplacement, enginePower, fuelConsumption, transmission,
+                                    driveTrain, batteryCapacity, chargingTime, vehicleRange, cityId, vehicleTypeId);
+
+        int vehicleId = vehicleRepository.saveVehicle(vehicle);
+        session.setAttribute("vehicleId", vehicleId);
+
         session.setAttribute("step", 5);
         return "redirect:/postavi-oglas";
     }

@@ -62,6 +62,21 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
+                        <input type="hidden" id="hiddenNumberOfWheels" name="hiddenNumberOfWheels" value="">
+                        <div th:if="${showNumberOfWheelsInput}" class="flex flex-col mb-4">
+                            <label for="numberOfWheels">Broj kotača</label>
+                            <input type="number" id="numberOfWheels" name="numberOfWheels" min="4" placeholder="6" required th:value="${initialNumberOfWheels}" class="input no-arrows">
+                        </div>
+                        <div th:if="${showMaximumAllowableWeightInput}" class="relative flex flex-col mb-4">
+                            <label for="maximumAllowableWeight">Najveća dopuštena masa</label>
+                            <div class="flex items-center">
+                                <input type="number" id="maximumAllowableWeight" name="maximumAllowableWeight" min="0" required class="input no-arrows">
+                                <span class="absolute right-0 pr-2 text-gray-500 text-xl">kg</span>
+                            </div> 
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
                         <div class="flex flex-col mb-4">
                             <label for="year">Godina proizvodnje</label>
                             <select id="year" name="year" required class="input">
@@ -138,7 +153,6 @@
             <!-- Step 3: Vehicle Tehnical -->
             <!-- dodati: pogon  -->
             <!-- dodati: ako je elektricno vozilo - kapacitetu baterije, doseg vozila, vrijeme punjenja (ili u 4. korak) -->
-            <!-- dodati: ako je kamion - najveca dopustena masa, broj kotaca i to sve... -->
             <div th:if="${step eq 3}" class="h-5/6 flex flex-col items-center border rounded-md">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4">Vozilo - tehničko</h2>
@@ -176,14 +190,21 @@
                           <span class="absolute right-0 pr-2 text-gray-500 text-xl">L/100km</span>
                         </div>
                     </div>
-
-                    <div class="flex flex-col mb-4">
-                        <label for="transmission">Mjenjač</label>
-                        <select id="transmission" name="transmission" class="input">
-                            <option value="" selected>Odabir</option>
-                        </select>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col mb-4">
+                            <label for="transmission">Mjenjač</label>
+                            <select id="transmission" name="transmission" class="input">
+                                <option value="" selected>Odabir</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col mb-4">
+                            <label for="driveTrain">Pogon kotača</label>
+                            <select id="driveTrain" name="driveTrain" class="input">
+                                <option value="" selected>Odabir</option>
+                            </select>
+                        </div>
                     </div>
-
+                    
                     <div class="flex flex-col mb-4">
                         <input type="submit" value="Dalje" class="button">
                     </div>
@@ -203,7 +224,22 @@
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4">Vozilo - detaljno</h2>
                 <form th:action="@{/oglas-4}" method="post">
-                    
+
+                    <div th:if="${engineType eq 'Električni'}">
+                        <div class="flex flex-col mb-4">
+                            <label for="batteryCapacity">Kapacitet baterije</label>
+                            <input type="text" id="batteryCapacity" name="batteryCapacity" required class="input">
+                        </div>
+                        <div class="flex flex-col mb-4">
+                            <label for="vehicleRange">Doseg vozila</label>
+                            <input type="text" id="vehicleRange" name="vehicleRange" required class="input">
+                        </div>
+                        <div class="flex flex-col mb-4">
+                            <label for="chargingTime">Vrijeme punjenja</label>
+                            <input type="text" id="chargingTime" name="chargingTime" required class="input">
+                        </div>
+                    </div>
+
                     <div class="flex flex-col mb-4">
                         <input type="submit" value="Dalje" class="button">
                     </div>

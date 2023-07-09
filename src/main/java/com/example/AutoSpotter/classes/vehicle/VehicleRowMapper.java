@@ -26,6 +26,7 @@ public class VehicleRowMapper implements RowMapper<Vehicle> {
         vehicle.setEnginePower(rs.getInt("engine_power"));
         vehicle.setFuelConsumption(rs.getDouble("fuel_consumption"));
         vehicle.setTransmission(rs.getString("transmission"));
+        vehicle.setDriveTrain(rs.getString("drive_train"));
         vehicle.setBatteryCapacity(rs.getDouble("battery_capacity"));
         vehicle.setChargingTime(rs.getDouble("charging_time"));
         vehicle.setVehicleRange(rs.getDouble("vehicle_range"));

@@ -17,7 +17,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
     @Override
     public int saveVehicle(Vehicle vehicle) {
         String sql = "INSERT INTO vehicle (manufacturer, model, body_type, color, registered, mileage, state, year, number_of_wheels, " +
-                    "maximum_allowable_weight, engine_type, engine_displacement, engine_power, fuel_consumption, transmission, battery_capacity, " +
+                    "maximum_allowable_weight, engine_type, engine_displacement, engine_power, fuel_consumption, transmission, drive_train, battery_capacity, " +
                     "charging_time, vehicle_range, city_id, vehicle_type_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql,
@@ -36,6 +36,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
                 vehicle.getEnginePower(),
                 vehicle.getFuelConsumption(),
                 vehicle.getTransmission(),
+                vehicle.getDriveTrain(),
                 vehicle.getBatteryCapacity(),
                 vehicle.getChargingTime(),
                 vehicle.getVehicleRange(),
@@ -66,7 +67,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
     @Override
     public Vehicle getVehicleById(int id) {
         String sql = "SELECT id, manufacturer, model, body_type, color, registered, mileage, state, year, number_of_wheels, maximum_allowable_weight, " +
-                    "engine_type, engine_displacement, engine_power, fuel_consumption, transmission, battery_capacity, charging_time, vehicle_range, " +
+                    "engine_type, engine_displacement, engine_power, fuel_consumption, transmission, drive_train, battery_capacity, charging_time, vehicle_range, " +
                     "city_id, vehicle_type_id FROM vehicle WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new VehicleRowMapper(), id);
     }
