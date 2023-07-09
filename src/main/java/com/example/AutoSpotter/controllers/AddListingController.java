@@ -68,6 +68,9 @@ public class AddListingController {
                 model.addAttribute("showNumberOfWheelsInput", false);
                 model.addAttribute("initialNumberOfWheels", null);
             }
+
+            String engineType = (String) session.getAttribute("engineType");
+            model.addAttribute("engineType", engineType);
         }
         List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
 
@@ -158,7 +161,6 @@ public class AddListingController {
                                             @RequestParam("driveTrain") String driveTrain,
                                             HttpSession session, Model model) {
 
-
         session.setAttribute("engineType", engineType);
         session.setAttribute("engineDisplacement", engineDisplacement);
         session.setAttribute("enginePower", enginePower);
@@ -178,18 +180,17 @@ public class AddListingController {
 
         String engineType = (String) session.getAttribute("engineType");
 
-        if ("Električni".equals(engineType)) {
-            model.addAttribute("batteryCapacity", batteryCapacity);
-            model.addAttribute("vehicleRange", vehicleRange);
-            model.addAttribute("chargingTime", chargingTime);
-        }
+        Double actualBatteryCapacity = batteryCapacity != null ? batteryCapacity : -1.0;
+        Double actualVehicleRange = vehicleRange != null ? vehicleRange : -1.0;
+        Double actualChargingTime = chargingTime != null ? chargingTime : -1.0;
 
         String manufacturer = (String) session.getAttribute("manufacturer");
         String vehicleModel = (String) session.getAttribute("model");
         String bodyType = (String) session.getAttribute("bodyType");
         int year = (int) session.getAttribute("year");
         int numberOfWheels = (int) session.getAttribute("numberOfWheels");
-        double maximumAllowableWeight = (double) session.getAttribute("maximumAllowableWeight");
+        Double maximumAllowableWeight = (Double) session.getAttribute("maximumAllowableWeight");
+        double actualMaximumAllowableWeight = maximumAllowableWeight != null ? maximumAllowableWeight : -1.0;
         Date registered = (Date) session.getAttribute("registeredDate");
         String color = (String) session.getAttribute("color");
         int mileage = (int) session.getAttribute("mileage");
@@ -205,8 +206,8 @@ public class AddListingController {
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
         Vehicle vehicle = new Vehicle(manufacturer, vehicleModel, bodyType, color, registered, mileage, state, year, numberOfWheels,
-                                    maximumAllowableWeight, engineType, engineDisplacement, enginePower, fuelConsumption, transmission,
-                                    driveTrain, batteryCapacity, chargingTime, vehicleRange, cityId, vehicleTypeId);
+        actualMaximumAllowableWeight, engineType, engineDisplacement, enginePower, fuelConsumption, transmission,
+                                    driveTrain, actualBatteryCapacity, actualChargingTime, actualVehicleRange, cityId, vehicleTypeId);
 
         int vehicleId = vehicleRepository.saveVehicle(vehicle);
         session.setAttribute("vehicleId", vehicleId);

@@ -163,7 +163,7 @@
 
                     <div class="flex flex-col mb-4">
                         <label for="engineType">Motor</label>
-                        <select id="engineType" name="engineType" class="input w-96">
+                        <select id="engineType" name="engineType" required class="input w-96">
                             <option value="" disabled selected>Odabir</option>
                             <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                         </select>
@@ -173,14 +173,14 @@
                         <div class="relative flex flex-col mb-4">
                             <label for="engineDisplacement">Zapremnina motora</label>
                             <div class="flex items-center">
-                                <input type="number" id="engineDisplacement" name="engineDisplacement" min="0" placeholder="1.0" class="input no-arrows">
+                                <input type="number" id="engineDisplacement" name="engineDisplacement" min="0" placeholder="1.0" required class="input no-arrows">
                                 <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
                             </div>
                         </div>
                         <div class="relative flex flex-col mb-4">
                             <label for="enginePower">Snaga motora</label>
                             <div class="flex items-center">
-                                <input type="number" id="enginePower" name="enginePower" min="0" placeholder="0" class="input no-arrows">
+                                <input type="number" id="enginePower" name="enginePower" min="0" placeholder="0" required class="input no-arrows">
                                 <span class="absolute right-0 pr-2 text-gray-500 text-xl">kW</span>
                             </div>
                         </div>
@@ -189,7 +189,7 @@
                     <div class="relative flex flex-col mb-4">
                         <label for="fuelConsumption">Potrošnja goriva</label>
                         <div class="flex items-center">
-                          <input type="number" id="fuelConsumption" name="fuelConsumption" min="0" placeholder="1.0" class="input w-96 no-arrows">
+                          <input type="number" id="fuelConsumption" name="fuelConsumption" min="0" placeholder="1.0" required class="input w-96 no-arrows">
                           <span class="absolute right-0 pr-2 text-gray-500 text-xl">L/100km</span>
                         </div>
                     </div>
@@ -227,7 +227,6 @@
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4">Vozilo - detaljno</h2>
                 <form th:action="@{/oglas-4}" method="post">
-
                     <div th:if="${engineType eq 'Električni'}">
                         <div class="flex flex-col mb-4">
                             <label for="batteryCapacity">Kapacitet baterije</label>
@@ -241,8 +240,7 @@
                             <label for="chargingTime">Vrijeme punjenja</label>
                             <input type="text" id="chargingTime" name="chargingTime" required class="input">
                         </div>
-                    </div>
-
+                    </div>                    
                     <div class="flex flex-col mb-4">
                         <input type="submit" value="Dalje" class="button">
                     </div>
