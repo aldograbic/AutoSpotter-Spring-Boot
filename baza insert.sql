@@ -35,8 +35,6 @@ INSERT INTO drive_train VALUES (2, "Zadnji");
 INSERT INTO drive_train VALUES (3, "4 X 4");
 
 INSERT INTO manufacturers VALUES
-
---Lista automobila: 
        (1, 'Abarth', 1),
        (2, 'Acura', 1),
        (3, 'Alfa Romeo', 1),
@@ -113,9 +111,8 @@ INSERT INTO manufacturers VALUES
        (74, 'Toyota', 1),
        (75, 'Volvo', 1),
        (76, 'Yugo', 1),
-       (77, 'Zastava', 1);
+       (77, 'Zastava', 1),
 
---Lista kamiona:
        (78, 'DAF', 2),
        (79, 'Fap', 2),
        (80, 'Ford', 2),
@@ -129,9 +126,8 @@ INSERT INTO manufacturers VALUES
        (88, 'Scania', 2),
        (89, 'Tam', 2),
        (90, 'Volvo', 2),
-       (91, 'Zastava', 2);
+       (91, 'Zastava', 2),
 
---Lista kombija:
        (92, 'Citroen', 3),
        (93, 'DFSK', 3),
        (94, 'Fiat', 3),

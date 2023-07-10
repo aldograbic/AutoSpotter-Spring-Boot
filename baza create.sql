@@ -76,45 +76,6 @@ CREATE TABLE `models` (
   CONSTRAINT `models_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `manufacturers` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `vehicle` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `manufacturer` varchar(255) NOT NULL,
-  `model` varchar(255) NOT NULL,
-  `body_type` varchar(255) NULL,
-  `color` varchar(255) NOT NULL,
-  `registered` date NOT NULL,
-  `mileage` int DEFAULT NULL,
-  `state` varchar(255) NOT NULL,
-  `year` int NOT NULL,
-  `number_of_wheels` int NOT NULL,
-  `maximum_allowable_weight` double NULL,
-  `engine_type` varchar(255) NOT NULL,
-  `engine_displacement` varchar(255) NOT NULL,
-  `engine_power` int NOT NULL,
-  `fuel_consumption` varchar(255) NOT NULL,
-  `transmission` varchar(255) NOT NULL,
-  `drive_train` varchar(255) NOT NULL,
-  `battery_capacity` double NULL,
-  `charging_time` double NULL,
-  `vehicle_range` double NULL,
-  `city_id` int NOT NULL,
-  `vehicle_type_id` int NOT NULL,
-  `vehicle_safety_features_id` int NOT NULL,
-  `vehicle_extras_id` int NOT NULL,
-  
-  
-  PRIMARY KEY (`id`),
-  KEY `fk_vehicle_type` (`vehicle_type_id`),
-  KEY `fk_city_name` (`city_id`),
-  KEY `fk_vehicle_safety_features` (`vehicle_safety_features_id`),
-  KEY `fk_vehicle_extras` (`vehicle_extras_id`),
-  CONSTRAINT `fk_vehicle_type` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type` (`id`),
-  CONSTRAINT `fk_city_name` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
-  CONSTRAINT `fk_vehicle_safety_features` FOREIGN KEY (`vehicle_safety_features_id`) REFERENCES `vehicle_safety_features` (`id`)
-  CONSTRAINT `fk_vehicle_extras` FOREIGN KEY (`vehicle_extras_id`) REFERENCES `vehicle_extras` (`id`)
-  
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE `vehicle_safety_features` (
   `id` int NOT NULL,
   `abs` tinyint(1) DEFAULT NULL,
@@ -128,6 +89,7 @@ CREATE TABLE `vehicle_safety_features` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `vehicle_extras` (
+  `id` int NOT NULL,
   `adaptive_cruise_control` tinyint(1) DEFAULT NULL,
   `air_suspension` tinyint(1) DEFAULT NULL,
   `alarm_system` tinyint(1) DEFAULT NULL,
@@ -185,8 +147,48 @@ CREATE TABLE `vehicle_extras` (
   `traffic_sign_recognition` tinyint(1) DEFAULT NULL,
   `tyre_pressure_monitoring` tinyint(1) DEFAULT NULL,
   `usb_port` tinyint(1) DEFAULT NULL,
-  `voice_control` tinyint(1) DEFAULT NULL
+  `voice_control` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `vehicle` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `manufacturer` varchar(255) NOT NULL,
+  `model` varchar(255) NOT NULL,
+  `body_type` varchar(255) NULL,
+  `color` varchar(255) NOT NULL,
+  `registered` date NOT NULL,
+  `mileage` int DEFAULT NULL,
+  `state` varchar(255) NOT NULL,
+  `year` int NOT NULL,
+  `number_of_wheels` int NOT NULL,
+  `maximum_allowable_weight` double NULL,
+  `engine_type` varchar(255) NOT NULL,
+  `engine_displacement` varchar(255) NOT NULL,
+  `engine_power` int NOT NULL,
+  `fuel_consumption` varchar(255) NOT NULL,
+  `transmission` varchar(255) NOT NULL,
+  `drive_train` varchar(255) NOT NULL,
+  `battery_capacity` double NULL,
+  `charging_time` double NULL,
+  `vehicle_range` double NULL,
+  `city_id` int NOT NULL,
+  `vehicle_type_id` int NOT NULL,
+  `vehicle_safety_features_id` int NOT NULL,
+  `vehicle_extras_id` int NOT NULL,
+  
+  
+  PRIMARY KEY (`id`),
+  KEY `fk_vehicle_type` (`vehicle_type_id`),
+  KEY `fk_city_name` (`city_id`),
+  KEY `fk_vehicle_safety_features` (`vehicle_safety_features_id`),
+  KEY `fk_vehicle_extras` (`vehicle_extras_id`),
+  CONSTRAINT `fk_vehicle_type` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type` (`id`),
+  CONSTRAINT `fk_city_name` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
+  CONSTRAINT `fk_vehicle_safety_features` FOREIGN KEY (`vehicle_safety_features_id`) REFERENCES `vehicle_safety_features` (`id`),
+  CONSTRAINT `fk_vehicle_extras` FOREIGN KEY (`vehicle_extras_id`) REFERENCES `vehicle_extras` (`id`)
+  
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
