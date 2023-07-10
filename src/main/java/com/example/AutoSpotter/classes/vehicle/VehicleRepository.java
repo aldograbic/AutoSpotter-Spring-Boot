@@ -24,6 +24,10 @@ public interface VehicleRepository {
 
     List<String> getAllStates();
 
+    int saveVehicleSafetyFeatures(List<String> safetyFeatures);
+
+    int saveVehicleExtras(List<String> extras);
+
     List<String> getAllCities();
 
     List<String> getAllCounties();

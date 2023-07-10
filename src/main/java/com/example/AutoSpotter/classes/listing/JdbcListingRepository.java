@@ -1,5 +1,6 @@
 package com.example.AutoSpotter.classes.listing;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,8 +31,8 @@ public class JdbcListingRepository implements ListingRepository {
                 listing.getListingPrice(),
                 listing.getVehicleId(),
                 listing.getUserId(),
-                listing.getStatus(),
-                listing.getCreatedAt()
+                1,
+                LocalDateTime.now()
         );
     }
 

@@ -77,7 +77,7 @@ CREATE TABLE `models` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `vehicle_safety_features` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `abs` tinyint(1) DEFAULT NULL,
   `esp` tinyint(1) DEFAULT NULL,
   `asr` tinyint(1) DEFAULT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE `vehicle_safety_features` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `vehicle_extras` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `adaptive_cruise_control` tinyint(1) DEFAULT NULL,
   `air_suspension` tinyint(1) DEFAULT NULL,
   `alarm_system` tinyint(1) DEFAULT NULL,
@@ -176,7 +176,6 @@ CREATE TABLE `vehicle` (
   `vehicle_type_id` int NOT NULL,
   `vehicle_safety_features_id` int NOT NULL,
   `vehicle_extras_id` int NOT NULL,
-  
   
   PRIMARY KEY (`id`),
   KEY `fk_vehicle_type` (`vehicle_type_id`),

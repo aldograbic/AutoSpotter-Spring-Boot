@@ -182,7 +182,12 @@ public class AddListingController {
     public String handleStep4FormSubmission(@RequestParam(value = "batteryCapacity", required = false) Double batteryCapacity,
                                             @RequestParam(value = "vehicleRange", required = false) Double vehicleRange,
                                             @RequestParam(value = "chargingTime", required = false) Double chargingTime,
+                                            @RequestParam("safetyFeatures") List<String> safetyFeatures,
+                                            @RequestParam("extras") List<String> extras,
                                             HttpSession session, Model model) {
+
+        int safetyFeaturesId = vehicleRepository.saveVehicleSafetyFeatures(safetyFeatures);
+        int extrasId = vehicleRepository.saveVehicleExtras(extras);
 
         String engineType = (String) session.getAttribute("engineType");
 
@@ -212,8 +217,11 @@ public class AddListingController {
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
         Vehicle vehicle = new Vehicle(manufacturer, vehicleModel, bodyType, color, registered, mileage, state, year, numberOfWheels,
-        actualMaximumAllowableWeight, engineType, engineDisplacement, enginePower, fuelConsumption, transmission,
+                                    actualMaximumAllowableWeight, engineType, engineDisplacement, enginePower, fuelConsumption, transmission,
                                     driveTrain, actualBatteryCapacity, actualChargingTime, actualVehicleRange, cityId, vehicleTypeId);
+
+        vehicle.setVehicleSafetyFeaturesId(safetyFeaturesId);
+        vehicle.setVehicleExtrasId(extrasId);
 
         int vehicleId = vehicleRepository.saveVehicle(vehicle);
         session.setAttribute("vehicleId", vehicleId);

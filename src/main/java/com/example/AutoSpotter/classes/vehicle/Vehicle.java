@@ -31,7 +31,7 @@ public class Vehicle {
     public Vehicle(String manufacturer, String model, String bodyType, String color, Date registered, int mileage,
                    String state, int year, int numberOfWheels, double maximumAllowableWeight, String engineType, double engineDisplacement,
                    int enginePower, double fuelConsumption, String transmission, String driveTrain, double batteryCapacity, double chargingTime,
-                   double vehicleRange, int cityId, int vehicleTypeId, int vehicleSafetyFeaturesId, int vehicleExtrasId) {
+                   double vehicleRange, int cityId, int vehicleTypeId) {
         this.manufacturer = manufacturer;
         this.model = model;
         this.bodyType = bodyType;
@@ -53,8 +53,6 @@ public class Vehicle {
         this.vehicleRange = vehicleRange;
         this.cityId = cityId;
         this.vehicleTypeId = vehicleTypeId;
-        this.vehicleSafetyFeaturesId = vehicleSafetyFeaturesId;
-        this.vehicleExtrasId = vehicleExtrasId;
     }
 
     public Vehicle() {}
