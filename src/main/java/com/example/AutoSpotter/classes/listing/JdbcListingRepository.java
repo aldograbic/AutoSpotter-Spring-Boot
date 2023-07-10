@@ -23,25 +23,29 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public void createListing(Listing listing) {
-        String sql = "INSERT INTO listing (listing_description, listing_price, vehicle_id, user_id) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(
-                sql,
-                listing.getListingDescription(),
-                listing.getListingPrice(),
-                listing.getVehicleId(),
-                listing.getUserId()
-        );
-    }
-
-    @Override
-    public void updateListing(Listing listing) {
-        String sql = "UPDATE listing SET listing_description = ?, listing_price = ?, vehicle_id = ?, user_id = ? WHERE id = ?";
+        String sql = "INSERT INTO listing (listing_description, listing_price, vehicle_id, user_id, status, created_at) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql,
                 listing.getListingDescription(),
                 listing.getListingPrice(),
                 listing.getVehicleId(),
                 listing.getUserId(),
+                listing.getStatus(),
+                listing.getCreatedAt()
+        );
+    }
+
+    @Override
+    public void updateListing(Listing listing) {
+        String sql = "UPDATE listing SET listing_description = ?, listing_price = ?, vehicle_id = ?, user_id = ?, status = ?, created_at = ? WHERE id = ?";
+        jdbcTemplate.update(
+                sql,
+                listing.getListingDescription(),
+                listing.getListingPrice(),
+                listing.getVehicleId(),
+                listing.getUserId(),
+                listing.getStatus(),
+                listing.getCreatedAt(),
                 listing.getId()
         );
     }
@@ -54,13 +58,14 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public Listing getListingById(int id) {
-        String sql = "SELECT id, listing_description, listing_price, vehicle_id, user_id FROM listing WHERE id = ?";
+        String sql = "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at FROM listing WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new ListingRowMapper(vehicleRepository, userRepository), id);
     }
 
     @Override
     public List<Listing> getNewListings() {
-        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+                    "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
                     "FROM listing l " +
                     "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
                     "INNER JOIN user u ON l.user_id = u.id " +

@@ -28,6 +28,8 @@ public class ListingRowMapper implements RowMapper<Listing> {
         listing.setListingPrice(rs.getBigDecimal("listing_price"));
         listing.setVehicleId(rs.getInt("vehicle_id"));
         listing.setUserId(rs.getInt("user_id"));
+        listing.setStatus(rs.getBoolean("status"));
+        listing.setCreatedAt(rs.getTimestamp("created_at"));
 
         int vehicleId = rs.getInt("vehicle_id");
         Vehicle vehicle = vehicleRepository.getVehicleById(vehicleId);

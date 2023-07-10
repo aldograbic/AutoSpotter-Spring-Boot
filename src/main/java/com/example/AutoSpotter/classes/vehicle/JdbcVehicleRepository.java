@@ -18,7 +18,8 @@ public class JdbcVehicleRepository implements VehicleRepository {
     public int saveVehicle(Vehicle vehicle) {
         String sql = "INSERT INTO vehicle (manufacturer, model, body_type, color, registered, mileage, state, year, number_of_wheels, " +
                     "maximum_allowable_weight, engine_type, engine_displacement, engine_power, fuel_consumption, transmission, drive_train, battery_capacity, " +
-                    "charging_time, vehicle_range, city_id, vehicle_type_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "charging_time, vehicle_range, city_id, vehicle_type_id, vehicle_safety_features_id, vehicle_extras_id) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql,
                 vehicle.getManufacturer(),
@@ -41,7 +42,9 @@ public class JdbcVehicleRepository implements VehicleRepository {
                 vehicle.getChargingTime(),
                 vehicle.getVehicleRange(),
                 vehicle.getCityId(),
-                vehicle.getVehicleTypeId()
+                vehicle.getVehicleTypeId(),
+                vehicle.getVehicleSafetyFeaturesId(),
+                vehicle.getVehicleExtrasId()
         );
         String idSql = "SELECT last_insert_id()";
         return jdbcTemplate.queryForObject(idSql, Integer.class);
@@ -68,7 +71,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
     public Vehicle getVehicleById(int id) {
         String sql = "SELECT id, manufacturer, model, body_type, color, registered, mileage, state, year, number_of_wheels, maximum_allowable_weight, " +
                     "engine_type, engine_displacement, engine_power, fuel_consumption, transmission, drive_train, battery_capacity, charging_time, vehicle_range, " +
-                    "city_id, vehicle_type_id FROM vehicle WHERE id = ?";
+                    "city_id, vehicle_type_id, vehicle_safety_features_id, vehicle_extras_id FROM vehicle WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new VehicleRowMapper(), id);
     }
 

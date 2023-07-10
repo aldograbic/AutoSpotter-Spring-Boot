@@ -1,6 +1,7 @@
 package com.example.AutoSpotter.classes.listing;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.vehicle.Vehicle;
@@ -11,18 +12,22 @@ public class Listing {
     private BigDecimal listingPrice;
     private int vehicleId;
     private int userId;
+    private boolean status;
+    private Timestamp createdAt;
 
     private Vehicle vehicle;
     private User user;
 
     public Listing() {}
 
-    public Listing(int id, String listingDescription, BigDecimal listingPrice, int vehicleId, int userId) {
+    public Listing(int id, String listingDescription, BigDecimal listingPrice, int vehicleId, int userId, boolean status, Timestamp createdAt) {
         this.id = id;
         this.listingDescription = listingDescription;
         this.listingPrice = listingPrice;
         this.vehicleId = vehicleId;
         this.userId = userId;
+        this.status = status;
+        this.createdAt = createdAt;
     }
 
     public Vehicle getVehicle() {
@@ -79,5 +84,21 @@ public class Listing {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 }

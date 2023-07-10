@@ -4,6 +4,7 @@
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <script th:src="@{/step2.js}" defer="defer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.0/dist/alpine.js"></script>
     <title>AutoSpotter | Postavi oglas</title>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -272,6 +273,68 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="relative inline-block text-left">
+                        <div>
+                          <span class="rounded-md shadow-sm">
+                            <button type="button" id="selectButton" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" aria-haspopup="true" aria-expanded="false">
+                              <span class="flex items-center">
+                                <span class="ml-2">Select options</span>
+                              </span>
+                              <svg class="ml-2.5 -mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                                <path d="M7 7l3-3 3 3m0 6l-3 3-3-3" />
+                              </svg>
+                            </button>
+                          </span>
+                        </div>
+                        <div id="optionsContainer" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg hidden">
+                          <div class="rounded-md bg-white shadow-xs">
+                            <div class="flex items-center border-b border-gray-200 px-4 py-3">
+                              <input type="text" id="searchInput" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Search">
+                            </div>
+                            <div class="max-h-56 overflow-y-auto">
+                              <ul class="py-1" id="multiselectOptions">
+                                <!-- Add your options here -->
+                                <li class="cursor-pointer px-4 py-2 hover:bg-gray-100">
+                                  <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out" value="Option 1">
+                                  <span class="ml-2 text-gray-700">Option 1</span>
+                                </li>
+                                <li class="cursor-pointer px-4 py-2 hover:bg-gray-100">
+                                  <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out" value="Option 2">
+                                  <span class="ml-2 text-gray-700">Option 2</span>
+                                </li>
+                                <li class="cursor-pointer px-4 py-2 hover:bg-gray-100">
+                                  <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out" value="Option 3">
+                                  <span class="ml-2 text-gray-700">Option 3</span>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mt-2">
+                          <ul id="selectedOptions" class="flex flex-wrap">
+                            <!-- Selected options will be dynamically added here -->
+                          </ul>
+                        </div>
+                      </div>
+
+                      <script>
+                        // JavaScript code
+                        document.addEventListener("DOMContentLoaded", function() {
+                          var selectButton = document.getElementById("selectButton");
+                          var optionsContainer = document.getElementById("optionsContainer");
+                      
+                          // Hide options on page load
+                          optionsContainer.classList.add("hidden");
+                      
+                          // Toggle options on button click
+                          selectButton.addEventListener("click", function() {
+                            var expanded = selectButton.getAttribute("aria-expanded") === "true";
+                            selectButton.setAttribute("aria-expanded", !expanded);
+                            optionsContainer.classList.toggle("hidden");
+                          });
+                        });
+                      </script>
                     
                     <div class="flex justify-between mb-4">
                         <div class="mt-2">

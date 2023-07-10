@@ -32,6 +32,8 @@ public class VehicleRowMapper implements RowMapper<Vehicle> {
         vehicle.setVehicleRange(rs.getDouble("vehicle_range"));
         vehicle.setCityId(rs.getInt("city_id"));
         vehicle.setVehicleTypeId(rs.getInt("vehicle_type_id"));
+        vehicle.setVehicleSafetyFeaturesId(rs.getInt("vehicle_safety_features_id"));
+        vehicle.setVehicleExtrasId(rs.getInt("vehicle_extras_id"));
         return vehicle;
     }
 }

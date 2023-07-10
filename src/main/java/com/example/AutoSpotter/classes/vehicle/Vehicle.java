@@ -25,11 +25,13 @@ public class Vehicle {
     private double vehicleRange;
     private int cityId;
     private int vehicleTypeId;
+    private int vehicleSafetyFeaturesId;
+    private int vehicleExtrasId;
 
     public Vehicle(String manufacturer, String model, String bodyType, String color, Date registered, int mileage,
                    String state, int year, int numberOfWheels, double maximumAllowableWeight, String engineType, double engineDisplacement,
                    int enginePower, double fuelConsumption, String transmission, String driveTrain, double batteryCapacity, double chargingTime,
-                   double vehicleRange, int cityId, int vehicleTypeId) {
+                   double vehicleRange, int cityId, int vehicleTypeId, int vehicleSafetyFeaturesId, int vehicleExtrasId) {
         this.manufacturer = manufacturer;
         this.model = model;
         this.bodyType = bodyType;
@@ -51,6 +53,8 @@ public class Vehicle {
         this.vehicleRange = vehicleRange;
         this.cityId = cityId;
         this.vehicleTypeId = vehicleTypeId;
+        this.vehicleSafetyFeaturesId = vehicleSafetyFeaturesId;
+        this.vehicleExtrasId = vehicleExtrasId;
     }
 
     public Vehicle() {}
@@ -231,6 +235,19 @@ public class Vehicle {
         this.vehicleTypeId = vehicleTypeId;
     }
 
-    // Safety Features
-    // Infotainment System
+    public int getVehicleSafetyFeaturesId() {
+        return vehicleSafetyFeaturesId;
+    }
+
+    public void setVehicleSafetyFeaturesId(int vehicleSafetyFeaturesId) {
+        this.vehicleSafetyFeaturesId = vehicleSafetyFeaturesId;
+    }
+
+    public int getVehicleExtrasId() {
+        return vehicleExtrasId;
+    }
+
+    public void setVehicleExtrasId(int vehicleExtrasId) {
+        this.vehicleExtrasId = vehicleExtrasId;
+    }
 }
