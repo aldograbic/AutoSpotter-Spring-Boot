@@ -27,40 +27,43 @@ $(document).ready(function() {
   }
 
   var registeredYesRadio = document.getElementById("registeredYes");
-  var registeredNoRadio = document.getElementById("registeredNo");
-  var registeredDateInput = document.getElementById("registeredDateInput");
-  var registeredDate = document.getElementById("registeredDate");
-  
-  var previousRegisteredOption = "";
-  
-  registeredYesRadio.addEventListener("change", function() {
+var registeredNoRadio = document.getElementById("registeredNo");
+var registeredDateInput = document.getElementById("registeredDateInput");
+var registeredDate = document.getElementById("registeredDate");
+
+var previousRegisteredOption = "";
+
+registeredYesRadio.addEventListener("change", function() {
     if (this.checked) {
-      registeredDateInput.style.display = "flex";
-      registeredDate.required = true;
-  
-      if (previousRegisteredOption === "Ne") {
-        registeredDate.value = "";
-      }
+        registeredDateInput.style.display = "flex";
+        registeredDate.required = true;
+
+        if (previousRegisteredOption === "Ne") {
+            registeredDate.value = "";
+        }
     } else {
-      registeredDateInput.style.display = "none";
-      registeredDate.required = false;
+        registeredDateInput.style.display = "none";
+        registeredDate.required = false;
     }
-  
+
     previousRegisteredOption = "Da";
-  });
-  
-  registeredNoRadio.addEventListener("change", function() {
+});
+
+registeredNoRadio.addEventListener("change", function() {
     if (this.checked) {
-      registeredDateInput.style.display = "none";
-      registeredDate.required = false;
-  
-      if (previousRegisteredOption === "Da") {
-        registeredDate.value = "1001-01-01";
-      }
+        registeredDateInput.style.display = "none";
+        registeredDate.required = false;
+
+        if (previousRegisteredOption === "Da") {
+            registeredDate.value = "1001-01-01";
+        } else if (registeredDate.value === "") {
+            registeredDate.value = "1001-01-01";
+        }
     }
-  
+
     previousRegisteredOption = "Ne";
-  });
+});
+
   
 
   const selectedOptions = [];

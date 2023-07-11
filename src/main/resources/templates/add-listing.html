@@ -44,7 +44,7 @@
                         <select id="manufacturer" name="manufacturer" required class="input">
                             <option value="" disabled selected>Odabir</option>
                             <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer}" th:text="${manufacturer}"
-                             ></option>
+                             th:selected="${manufacturer eq session['manufacturer']}"></option>
                         </select>
                     </div>
                     
@@ -118,7 +118,7 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex flex-col mb-4">
                             <label for="color">Boja vozila</label>
-                            <input type="text" id="color" name="color" placeholder="crna" required class="input">
+                            <input type="text" id="color" name="color" placeholder="crna" required class="input" th:value="${session['color']}">
                         </div>
 
                         <div class="flex flex-col mb-4">
@@ -133,7 +133,7 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex flex-col mb-4">
                             <label for="mileage">Kilometraža</label>
-                            <input type="number" id="mileage" name="mileage" min="0" placeholder="0" required class="input no-arrows">
+                            <input type="number" id="mileage" name="mileage" min="0" placeholder="0" required class="input no-arrows" th:value="${session['mileage']}">
                         </div>
     
                         <div class="flex flex-col mb-4">
@@ -177,14 +177,14 @@
                             <label for="engineDisplacement">Zapremnina motora</label>
                             <div class="flex items-center">
                                 <input type="text" id="engineDisplacement" name="engineDisplacement" placeholder="1.0" pattern="[0-9]*\.?[0-9]+" required
-                                 class="input" oninput="validateInput(this)">
+                                 class="input" oninput="validateInput(this)" th:value="${session['engineDisplacement']}">
                                 <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
                             </div>
                         </div>
                         <div class="relative flex flex-col mb-4">
                             <label for="enginePower">Snaga motora</label>
                             <div class="flex items-center">
-                                <input type="number" id="enginePower" name="enginePower" min="0" placeholder="50" required class="input no-arrows">
+                                <input type="number" id="enginePower" name="enginePower" min="0" placeholder="50" required class="input no-arrows" th:value="${session['enginePower']}">
                                 <span class="absolute right-0 pr-2 text-gray-500 text-xl">kW</span>
                             </div>
                         </div>
@@ -194,7 +194,7 @@
                         <label for="fuelConsumption">Potrošnja goriva</label>
                         <div class="flex items-center">
                           <input type="text" id="fuelConsumption" name="fuelConsumption" placeholder="1.0" pattern="[0-9]*\.?[0-9]+" required
-                           class="input w-96" oninput="validateInput(this)">
+                           class="input w-96" oninput="validateInput(this)" th:value="${session['fuelConsumption']}">
                           <span class="absolute right-0 pr-2 text-gray-500 text-xl">L/100km</span>
                         </div>
                     </div>
@@ -204,7 +204,7 @@
                             <select id="transmission" name="transmission" required class="input" >
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="transmissionType : ${transmissionTypes}" th:value="${transmissionType}" th:text="${transmissionType}"
-                                 th:selected="${transmissionType eq session['transmissionType']}"></option>
+                                 th:selected="${transmissionType eq session['transmission']}"></option>
                             </select>
                         </div>
                         <div class="flex flex-col mb-4">
@@ -212,7 +212,7 @@
                             <select id="driveTrain" name="driveTrain" required class="input">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="driveTrainType : ${driveTrainTypes}" th:value="${driveTrainType}" th:text="${driveTrainType}"
-                                 th:selected="${driveTrainType eq session['driveTrainType']}"></option>
+                                 th:selected="${driveTrainType eq session['driveTrain']}"></option>
                             </select>
                         </div>
                     </div>
@@ -244,7 +244,7 @@
                                         <label for="batteryCapacity">Kapacitet baterije</label>
                                         <div class="flex items-center">
                                             <input type="text" id="batteryCapacity" name="batteryCapacity" required pattern="[0-9]*\.?[0-9]+" class="input w-28"
-                                             placeholder="50" oninput="validateInput(this)">
+                                             placeholder="50" oninput="validateInput(this)" th:value="${session['batteryCapacity']}">
                                             <span class="absolute right-0 pr-5 text-gray-500 text-xl">kWh</span>
                                         </div>
                                     </div>
@@ -255,7 +255,7 @@
                                         <label for="vehicleRange">Doseg vozila</label>
                                         <div class="flex items-center">
                                             <input type="text" id="vehicleRange" name="vehicleRange" required pattern="[0-9]*\.?[0-9]+" class="input w-28"
-                                             placeholder="100" oninput="validateInput(this)">
+                                             placeholder="100" oninput="validateInput(this)" th:value="${session['vehicleRange']}">
                                             <span class="absolute right-0 pr-2 text-gray-500 text-xl">km</span>
                                         </div>
                                     </div>
@@ -266,7 +266,7 @@
                                         <label for="chargingTime">Vrijeme punjenja</label>
                                         <div class="flex items-center ml-2">
                                             <input type="text" id="chargingTime" name="chargingTime" required pattern="[0-9]*\.?[0-9]+" class="input w-28"
-                                             placeholder="1" oninput="validateInput(this)">
+                                             placeholder="1" oninput="validateInput(this)" th:value="${session['chargingTime']}">
                                             <span class="absolute right-0 pr-2 text-gray-500 text-xl">h</span>
                                         </div>
                                     </div>
@@ -279,11 +279,9 @@
                                 <div class="relative" x-data="{ open: false }">
                                     <div class="flex items-center w-96 justify-between border border-gray-400 rounded p-2 cursor-pointer" @click="open = !open">
                                         <span>Odabir</span>
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" :class="{ 'rotate-180': open }">
-                                            <path fill-rule="evenodd" d="M9.293 13.293a1 1 0 001.414 0L14 10.414l.293.293A1 1 0 0015 11a1 1 0 01-1 1H6a1 1 0 01-1-1 1 1 0
-                                             001.707-.707l.293-.293 3.293 3.293zM5 9a1 1 0 112 0v2a1 1 0 11-2 0V9zm4-4a1 1 0 100 2h2a1 1 0 100-2H9zm6 6a1 1 0 11-2 0V9a1 1
-                                             0 112 0v2zm0-4a1 1 0 100-2h-2a1 1 0 100 2h2z" clip-rule="evenodd"></path>
-                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-transform duration-300 ease-in-out">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                        </svg> 
                                     </div>
                                     <div class="absolute w-full z-10" x-show="open" @click.away="open = false">
 
@@ -352,12 +350,11 @@
                                 <div class="relative" x-data="{ open: false }">
                                     <div class="flex items-center w-96 justify-between border border-gray-400 rounded p-2 cursor-pointer" @click="open = !open">
                                         <span>Odabir</span>
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" :class="{ 'rotate-180': open }">
-                                            <path fill-rule="evenodd" d="M9.293 13.293a1 1 0 001.414 0L14 10.414l.293.293A1 1 0 0015 11a1 1 0 01-1 1H6a1 1 0 01-1-1 1 1 0
-                                             001.707-.707l.293-.293 3.293 3.293zM5 9a1 1 0 112 0v2a1 1 0 11-2 0V9zm4-4a1 1 0 100 2h2a1 1 0 100-2H9zm6 6a1 1 0 11-2 0V9a1 1
-                                             0 112 0v2zm0-4a1 1 0 100-2h-2a1 1 0 100 2h2z" clip-rule="evenodd"></path>
-                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-transform duration-300 ease-in-out">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                        </svg> 
                                     </div>
+                                      
                                     <div class="absolute w-full z-10" x-show="open" @click.away="open = false">
                                         <div class="bg-white border border-gray-400 rounded mt-2 flex flex-wrap">
 
@@ -931,13 +928,13 @@
                 <form th:action="@{/oglas-6}" method="post">
                     <div class="flex flex-col mb-4">
                         <label for="description">Opis oglasa</label>
-                        <textarea id="description" name="description" rows="4" required class="input w-96 h-64 resize-none"></textarea>
+                        <textarea id="description" name="description" rows="4" required class="input w-96 h-64 resize-none" th:value="${session['description']}"></textarea>
                     </div>
                     <div class="relative flex flex-col mb-4">
                         <label for="price">Cijena</label>
                         <div class="flex items-center">
                             <input type="text" id="price" name="price" class="input w-96" required pattern="[0-9]*\.?[0-9]+"
-                             placeholder="1000.00" oninput="validateInput(this)">
+                             placeholder="1000.00" oninput="validateInput(this)" th:value="${session['price']}">
                             <span class="absolute right-0 pr-2 text-gray-500 text-xl">&euro;</span>
                         </div>
                     </div>

@@ -126,4 +126,24 @@ document.addEventListener("DOMContentLoaded", function () {
           yearToSelect.classList.remove("border", "border-red-500");
       }
   }
+
+  const priceFromSelect = document.getElementById("priceFrom");
+  const priceToSelect = document.getElementById("priceTo");
+  const priceError = document.getElementById("priceError");
+
+  priceFromSelect.addEventListener("change", validatePriceRange);
+  priceToSelect.addEventListener("change", validatePriceRange);
+
+  function validatePriceRange() {
+      const priceFrom = parseInt(priceFromSelect.value);
+      const priceTo = parseInt(priceToSelect.value);
+
+      if (priceTo < priceFrom) {
+          priceError.textContent = "Druga odabrana cijena mora biti veća od prve.";
+          priceToSelect.classList.add("border", "border-red-500");
+      } else {
+          priceError.textContent = "";
+          priceToSelect.classList.remove("border", "border-red-500");
+      }
+  }
 });

@@ -1152,6 +1152,20 @@ input[type="checkbox"]:checked + label {
   color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .file\:mr-4::file-selector-button {
   margin-right: 1rem;
 }
@@ -1232,9 +1246,5 @@ input[type="checkbox"]:checked + label {
 @media (min-width: 768px) {
   .md\:w-1\/2 {
     width: 50%;
-  }
-
-  .md\:w-1\/6 {
-    width: 16.666667%;
   }
 }
