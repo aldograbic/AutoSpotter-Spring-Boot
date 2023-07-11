@@ -294,12 +294,49 @@
                                                      ABS
                                                 </label>
                                             </div>
+
                                             <div class="w-full md:w-1/2">
-                                                <input type="checkbox" id="asrCheckbox" name="safetyFeatures" value="asr" class="hidden" x-model="selectedOptions"/>
-                                                <label for="asrCheckbox" class="flex items-center cursor-pointer p-2">
+                                                <input type="checkbox" id="espCheckbox" name="safetyFeatures" value="esp" class="hidden" x-model="selectedOptions"/>
+                                                <label for="espCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
-                                                     x-bind:class="{ 'bg-gray-400': selectedOptions.includes('asr') }"></span>
-                                                     ASR
+                                                     x-bind:class="{ 'bg-gray-400': selectedOptions.includes('esp') }"></span>
+                                                     ESP
+                                                </label>
+                                            </div>
+
+                                            <div class="w-full md:w-1/2">
+                                                <input type="checkbox" id="centralLockingCheckbox" name="safetyFeatures" value="central_locking" class="hidden" x-model="selectedOptions"/>
+                                                <label for="centralLockingCheckbox" class="flex items-center cursor-pointer p-2">
+                                                    <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                                     x-bind:class="{ 'bg-gray-400': selectedOptions.includes('central_locking') }"></span>
+                                                     Centralno zaključavanje
+                                                </label>
+                                            </div>
+
+                                            <div class="w-full md:w-1/2">
+                                                <input type="checkbox" id="frontSideAirbagCheckbox" name="safetyFeatures" value="front_side_airbag" class="hidden" x-model="selectedOptions"/>
+                                                <label for="frontSideAirbagCheckbox" class="flex items-center cursor-pointer p-2">
+                                                    <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                                     x-bind:class="{ 'bg-gray-400': selectedOptions.includes('front_side_airbag') }"></span>
+                                                     Prednji zračni jastuci
+                                                </label>
+                                            </div>
+
+                                            <div class="w-full md:w-1/2">
+                                                <input type="checkbox" id="tractionControlCheckbox" name="safetyFeatures" value="traction_control" class="hidden" x-model="selectedOptions"/>
+                                                <label for="tractionControlCheckbox" class="flex items-center cursor-pointer p-2">
+                                                    <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                                     x-bind:class="{ 'bg-gray-400': selectedOptions.includes('traction_control') }"></span>
+                                                     TCS
+                                                </label>
+                                            </div>
+
+                                            <div class="w-full md:w-1/2">
+                                                <input type="checkbox" id="rearSideAirbagCheckbox" name="safetyFeatures" value="rear_side_airbag" class="hidden" x-model="selectedOptions"/>
+                                                <label for="rearSideAirbagCheckbox" class="flex items-center cursor-pointer p-2">
+                                                    <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                                     x-bind:class="{ 'bg-gray-400': selectedOptions.includes('rear_side_airbag') }"></span>
+                                                     Zadnji zračni jastuci
                                                 </label>
                                             </div>
                                         </div>

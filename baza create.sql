@@ -80,7 +80,6 @@ CREATE TABLE `vehicle_safety_features` (
   `id` int NOT NULL AUTO_INCREMENT,
   `abs` tinyint(1) DEFAULT NULL,
   `esp` tinyint(1) DEFAULT NULL,
-  `asr` tinyint(1) DEFAULT NULL,
   `central_locking` tinyint(1) DEFAULT NULL,
   `traction_control` tinyint(1) DEFAULT NULL,
   `front_side_airbag` tinyint(1) DEFAULT NULL,

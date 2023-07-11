@@ -107,13 +107,12 @@ public class JdbcVehicleRepository implements VehicleRepository {
 
     @Override
 public int saveVehicleSafetyFeatures(List<String> safetyFeatures) {
-    String sql = "INSERT INTO vehicle_safety_features (abs, esp, asr, central_locking, " +
+    String sql = "INSERT INTO vehicle_safety_features (abs, esp, central_locking, " +
                  "traction_control, front_side_airbag, rear_side_airbag) " +
                  "VALUES (?, ?, ?, ?, ?, ?, ?)";
     Object[] params = new Object[]{
         safetyFeatures.contains("abs"),
         safetyFeatures.contains("esp"),
-        safetyFeatures.contains("asr"),
         safetyFeatures.contains("central_locking"),
         safetyFeatures.contains("traction_control"),
         safetyFeatures.contains("front_side_airbag"),
