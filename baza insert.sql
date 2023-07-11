@@ -210,12 +210,22 @@ INSERT INTO manufacturers VALUES
        (170, 'Yamaha', 4),
        (171, 'Zongshen', 4);
 
-INSERT INTO models VALUES (1, "3", 1);
-INSERT INTO models VALUES (2, "5", 1);
-INSERT INTO models VALUES (3, "A4", 2);
-INSERT INTO models VALUES (4, "A6", 2);
-INSERT INTO models VALUES (5, "G200", 3);
-INSERT INTO models VALUES (6, "TGL", 4);
+INSERT INTO models VALUES 
+       (1, '124 GT', 1),
+       (2, '124 Spider', 1),
+       (3, '500', 1),
+       (4, '500C', 1),
+       (5, '500e', 1),
+       (6, '500e Cabriolet', 1),
+       (7, '595', 1),
+       (8, '595 Competizione', 1),
+       (9, '595 Esseesse', 1),
+       (10, '595 Pista', 1),
+       (11, '595 Turismo', 1),
+       (12, '695', 1),
+       (13, 'Grande Punto', 1),
+       (14, 'Punto', 1),
+       (15, 'Punto Evo', 1);
 
 INSERT INTO countries VALUES (1, "Hrvatska");
 
