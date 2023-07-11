@@ -4,6 +4,7 @@
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <script th:src="@{/step2.js}" defer="defer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>AutoSpotter | Postavi oglas</title>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -268,65 +269,78 @@
                                             <span class="absolute right-0 pr-2 text-gray-500 text-xl">h</span>
                                         </div>
                                     </div>
+                                </div>             
+                            </div>
+                            
+                            <div class="flex flex-col flex-wrap gap-4">
+                                <h3 class="text-lg font-bold text-gray-700 mb-4">Sigurnosne karakteristike</h3>
+                              
+                                <div class="relative" x-data="{ open: false }">
+                                    <div class="flex items-center w-96 justify-between border border-gray-400 rounded p-2 cursor-pointer" @click="open = !open">
+                                        <span>Selected options</span>
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" :class="{ 'rotate-180': open }">
+                                            <path fill-rule="evenodd" d="M9.293 13.293a1 1 0 001.414 0L14 10.414l.293.293A1 1 0 0015 11a1 1 0 01-1 1H6a1 1 0 01-1-1 1 1 0
+                                             001.707-.707l.293-.293 3.293 3.293zM5 9a1 1 0 112 0v2a1 1 0 11-2 0V9zm4-4a1 1 0 100 2h2a1 1 0 100-2H9zm6 6a1 1 0 11-2 0V9a1 1
+                                             0 112 0v2zm0-4a1 1 0 100-2h-2a1 1 0 100 2h2z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute w-full z-10" x-show="open" @click.away="open = false">
+                                        <div class="bg-white border border-gray-400 rounded mt-2 flex flex-wrap">
+                                            <div class="w-full md:w-1/2">
+                                                <input type="checkbox" id="absCheckbox" name="safetyFeatures" value="abs" class="hidden" x-model="selectedOptions"/>
+                                                <label for="absCheckbox" class="flex items-center cursor-pointer p-2">
+                                                    <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                                     x-bind:class="{ 'bg-gray-400': selectedOptions.includes('abs') }"></span>
+                                                     ABS
+                                                </label>
+                                            </div>
+                                            <div class="w-full md:w-1/2">
+                                                <input type="checkbox" id="asrCheckbox" name="safetyFeatures" value="asr" class="hidden" x-model="selectedOptions"/>
+                                                <label for="asrCheckbox" class="flex items-center cursor-pointer p-2">
+                                                    <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                                     x-bind:class="{ 'bg-gray-400': selectedOptions.includes('asr') }"></span>
+                                                     ASR
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
 
-                                <div class="flex flex-col flex-wrap gap-4">
-                                    <h3 class="text-lg font-bold text-gray-700 mb-4">Sigurnosne karakteristike</h3>
-                                
-                                    <input type="checkbox" id="absCheckbox" name="safetyFeatures" value="abs" class="hidden" />
-                                    <label for="absCheckbox" class="flex items-center cursor-pointer">
-                                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>ABS
-                                    </label>
+                            <div class="flex flex-col flex-wrap gap-4">
+                                <h3 class="text-lg font-bold text-gray-700 mb-4">Dodaci</h3>
+                              
+                                <div class="relative" x-data="{ open: false }">
+                                    <div class="flex items-center w-96 justify-between border border-gray-400 rounded p-2 cursor-pointer" @click="open = !open">
+                                        <span>Selected options</span>
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" :class="{ 'rotate-180': open }">
+                                            <path fill-rule="evenodd" d="M9.293 13.293a1 1 0 001.414 0L14 10.414l.293.293A1 1 0 0015 11a1 1 0 01-1 1H6a1 1 0 01-1-1 1 1 0
+                                             001.707-.707l.293-.293 3.293 3.293zM5 9a1 1 0 112 0v2a1 1 0 11-2 0V9zm4-4a1 1 0 100 2h2a1 1 0 100-2H9zm6 6a1 1 0 11-2 0V9a1 1
+                                             0 112 0v2zm0-4a1 1 0 100-2h-2a1 1 0 100 2h2z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute w-full z-10" x-show="open" @click.away="open = false">
+                                        <div class="bg-white border border-gray-400 rounded mt-2 flex flex-wrap">
 
-                                    <input type="checkbox" id="asrCheckbox" name="safetyFeatures" value="asr" class="hidden" />
-                                    <label for="asrCheckbox" class="flex items-center cursor-pointer">
-                                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>ASR
-                                    </label>
+                                            <div class="w-full md:w-1/2">
+                                                <input type="checkbox" id="accCheckbox" name="extras" value="adaptive_cruise_control" class="hidden" x-model="selectedOptions">
+                                                <label for="accCheckbox" class="flex items-center cursor-pointer p-2">
+                                                    <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                                     x-bind:class="{ 'bg-gray-400': selectedOptions.includes('adaptive_cruise_control') }"></span>
+                                                     Adaptivni tempomat
+                                                </label>
+                                            </div>
 
-                                    <input type="checkbox" id="centralLockingCheckbox" name="safetyFeatures" value="central_locking" class="hidden" />
-                                    <label for="centralLockingCheckbox" class="flex items-center cursor-pointer">
-                                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>Centralno zaključavanje
-                                    </label>
-                                
-                                    <input type="checkbox" id="espCheckbox" name="safetyFeatures" value="esp" class="hidden" />
-                                    <label for="espCheckbox" class="flex items-center cursor-pointer">
-                                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>ESP
-                                    </label>
-
-                                    <input type="checkbox" id="frontSideAirbagCheckbox" name="safetyFeatures" value="front_side_airbag" class="hidden" />
-                                    <label for="frontSideAirbagCheckbox" class="flex items-center cursor-pointer">
-                                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>Prednji zračni jastuci
-                                    </label>
-
-                                    <input type="checkbox" id="tcsCheckbox" name="safetyFeatures" value="traction_control" class="hidden" />
-                                    <label for="tcsCheckbox" class="flex items-center cursor-pointer">
-                                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>TCS
-                                    </label>
-
-                                    <input type="checkbox" id="rearSideAirbagCheckbox" name="safetyFeatures" value="rear_side_airbag" class="hidden" />
-                                    <label for="rearSideAirbagCheckbox" class="flex items-center cursor-pointer">
-                                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>Zadnji zračni jastuci
-                                    </label>
-
-                                    
-                                    <!-- Add more checkboxes for other safety features -->
-                                    <!-- ASR I TCS SU ISTI KURAC -->
-                                </div>
-                                
-                                <div class="flex flex-col flex-wrap gap-4">
-                                    <h3 class="text-lg font-bold text-gray-700 mb-4">Dodaci</h3>
-                                    
-                                    <input type="checkbox" id="accCheckbox" name="extras" value="adaptive_cruise_control" class="hidden">
-                                    <label for="accCheckbox" class="flex items-center cursor-pointer">
-                                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>Adaptivni tempomat
-                                    </label>
-
-                                    <input type="checkbox" id="airSuspCheckbox" name="extras" value="air_suspension" class="hidden">
-                                    <label for="airSuspCheckbox" class="flex items-center cursor-pointer">
-                                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>Podesivo ogibljenje
-                                    </label>
-                                    <!-- Add more checkboxes for other extras -->
-                                    <!-- TREBAT CE PODESIT BAZU JER SU NEKI IZ DODATAKA USTVARI ZA SIGURNOST -->
+                                            <div class="w-full md:w-1/2">
+                                                <input type="checkbox" id="airSuspCheckbox" name="extras" value="air_suspension" class="hidden" x-model="selectedOptions">
+                                                <label for="airSuspCheckbox" class="flex items-center cursor-pointer p-2">
+                                                    <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                                     x-bind:class="{ 'bg-gray-400': selectedOptions.includes('air_suspension') }"></span>
+                                                     Podesivo ogibljenje
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

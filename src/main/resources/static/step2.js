@@ -49,6 +49,17 @@ $(document).ready(function() {
     }
   });
 
+  const selectedOptions = [];
+                                  
+ function toggleOption(value) {
+   const index = selectedOptions.indexOf(value)
+   if (index === -1) {
+     selectedOptions.push(value)
+   } else {
+     selectedOptions.splice(index, 1)
+   }
+ }
+
   function validateInput(input) {
     input.value = input.value.replace(/,/g, '.');
   }
