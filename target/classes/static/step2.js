@@ -30,24 +30,38 @@ $(document).ready(function() {
   var registeredNoRadio = document.getElementById("registeredNo");
   var registeredDateInput = document.getElementById("registeredDateInput");
   var registeredDate = document.getElementById("registeredDate");
-
+  
+  var previousRegisteredOption = "";
+  
   registeredYesRadio.addEventListener("change", function() {
     if (this.checked) {
       registeredDateInput.style.display = "flex";
       registeredDate.required = true;
+  
+      if (previousRegisteredOption === "Ne") {
+        registeredDate.value = "";
+      }
     } else {
       registeredDateInput.style.display = "none";
       registeredDate.required = false;
     }
+  
+    previousRegisteredOption = "Da";
   });
-
+  
   registeredNoRadio.addEventListener("change", function() {
     if (this.checked) {
       registeredDateInput.style.display = "none";
       registeredDate.required = false;
-      registeredDate.value = "1001-01-01";
+  
+      if (previousRegisteredOption === "Da") {
+        registeredDate.value = "1001-01-01";
+      }
     }
+  
+    previousRegisteredOption = "Ne";
   });
+  
 
   const selectedOptions = [];
                                   

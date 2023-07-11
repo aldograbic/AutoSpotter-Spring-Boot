@@ -5,7 +5,17 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.example.AutoSpotter.classes.location.City;
+import com.example.AutoSpotter.classes.location.County;
+import com.example.AutoSpotter.classes.location.LocationRepository;
+
 public class VehicleRowMapper implements RowMapper<Vehicle> {
+
+    private final LocationRepository locationRepository;
+
+    public VehicleRowMapper(LocationRepository locationRepository) {
+        this.locationRepository = locationRepository;
+    }
 
     @Override
     public Vehicle mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -34,6 +44,15 @@ public class VehicleRowMapper implements RowMapper<Vehicle> {
         vehicle.setVehicleTypeId(rs.getInt("vehicle_type_id"));
         vehicle.setVehicleSafetyFeaturesId(rs.getInt("vehicle_safety_features_id"));
         vehicle.setVehicleExtrasId(rs.getInt("vehicle_extras_id"));
+
+        int cityId = rs.getInt("city_id");
+        City city = locationRepository.getCityById(cityId);
+        vehicle.setCity(city);
+
+        int countyId = city.getCountyId();
+        County county = locationRepository.getCountyById(countyId);
+        vehicle.setCounty(county);
+
         return vehicle;
     }
 }

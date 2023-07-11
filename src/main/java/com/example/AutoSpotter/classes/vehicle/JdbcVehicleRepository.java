@@ -5,13 +5,17 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.example.AutoSpotter.classes.location.LocationRepository;
+
 @Repository
 public class JdbcVehicleRepository implements VehicleRepository {
     
     private final JdbcTemplate jdbcTemplate;
+    private final LocationRepository locationRepository;
 
-    public JdbcVehicleRepository(JdbcTemplate jdbcTemplate) {
+    public JdbcVehicleRepository(JdbcTemplate jdbcTemplate, LocationRepository locationRepository) {
         this.jdbcTemplate = jdbcTemplate;
+        this.locationRepository = locationRepository;
     }
 
     @Override
@@ -72,7 +76,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
         String sql = "SELECT id, manufacturer, model, body_type, color, registered, mileage, state, year, number_of_wheels, maximum_allowable_weight, " +
                     "engine_type, engine_displacement, engine_power, fuel_consumption, transmission, drive_train, battery_capacity, charging_time, vehicle_range, " +
                     "city_id, vehicle_type_id, vehicle_safety_features_id, vehicle_extras_id FROM vehicle WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new VehicleRowMapper(), id);
+        return jdbcTemplate.queryForObject(sql, new VehicleRowMapper(locationRepository), id);
     }
 
     @Override
@@ -109,7 +113,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
 public int saveVehicleSafetyFeatures(List<String> safetyFeatures) {
     String sql = "INSERT INTO vehicle_safety_features (abs, esp, central_locking, " +
                  "traction_control, front_side_airbag, rear_side_airbag) " +
-                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                 "VALUES (?, ?, ?, ?, ?, ?)";
     Object[] params = new Object[]{
         safetyFeatures.contains("abs"),
         safetyFeatures.contains("esp"),

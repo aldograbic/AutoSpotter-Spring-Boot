@@ -2,6 +2,9 @@ package com.example.AutoSpotter.classes.vehicle;
 
 import java.sql.Date;
 
+import com.example.AutoSpotter.classes.location.City;
+import com.example.AutoSpotter.classes.location.County;
+
 public class Vehicle {
     private int id;
     private String manufacturer;
@@ -27,6 +30,9 @@ public class Vehicle {
     private int vehicleTypeId;
     private int vehicleSafetyFeaturesId;
     private int vehicleExtrasId;
+
+    private City city;
+    private County county;
 
     public Vehicle(String manufacturer, String model, String bodyType, String color, Date registered, int mileage,
                    String state, int year, int numberOfWheels, double maximumAllowableWeight, String engineType, double engineDisplacement,
@@ -247,5 +253,21 @@ public class Vehicle {
 
     public void setVehicleExtrasId(int vehicleExtrasId) {
         this.vehicleExtrasId = vehicleExtrasId;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public County getCounty() {
+        return county;
+    }
+
+    public void setCounty(County county) {
+        this.county = county;
     }
 }
