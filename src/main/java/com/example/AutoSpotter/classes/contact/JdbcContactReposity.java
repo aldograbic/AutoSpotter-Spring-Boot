@@ -1,7 +1,9 @@
 package com.example.AutoSpotter.classes.contact;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class JdbcContactReposity implements ContactRepository{
 
     private final JdbcTemplate jdbcTemplate;
