@@ -80,4 +80,16 @@ registeredNoRadio.addEventListener("change", function() {
   function validateInput(input) {
     input.value = input.value.replace(/,/g, '.');
   }
+
+  function updateSelectedOptions() {
+    const selectedCheckboxes = document.querySelectorAll('input[name="safetyFeatures"]:checked');
+  }
+  
+  document.addEventListener('alpine:init', () => {
+    const checkboxes = document.querySelectorAll('input[name="safetyFeatures"]');
+  
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener('change', updateSelectedOptions);
+    });
+  });
 });

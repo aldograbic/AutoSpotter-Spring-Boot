@@ -276,9 +276,9 @@
                             <div class="flex flex-col flex-wrap gap-4">
                                 <h3 class="text-lg font-bold text-gray-700 mb-4">Sigurnosne karakteristike</h3>
                               
-                                <div class="relative" x-data="{ open: false }">
+                                <div class="relative" x-data="{ open: false, selectedOptions: [] }">
                                     <div class="flex items-center w-96 justify-between border border-gray-400 rounded p-2 cursor-pointer" @click="open = !open">
-                                        <span>Odabir</span>
+                                        <span x-text="'Odabir (' + selectedOptions.length + ')'">Odabir (0)</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-transform duration-300 ease-in-out">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                         </svg> 
@@ -287,7 +287,7 @@
 
                                         <div class="bg-white border border-gray-400 rounded mt-2 flex flex-wrap">
                                             <div class="w-full md:w-1/2">
-                                                <input type="checkbox" id="absCheckbox" name="safetyFeatures" value="abs" class="hidden" x-model="selectedOptions"/>
+                                                <input type="checkbox" id="absCheckbox" name="safetyFeatures" value="abs" class="hidden" x-model="selectedOptions" x-on:click="updateSelectedOptions()"/>
                                                 <label for="absCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
                                                      x-bind:class="{ 'bg-gray-400': selectedOptions.includes('abs') }"></span>
@@ -347,18 +347,18 @@
                             <div class="flex flex-col flex-wrap gap-4">
                                 <h3 class="text-lg font-bold text-gray-700 mb-4 mt-8">Dodaci</h3>
                               
-                                <div class="relative" x-data="{ open: false }">
+                                <div class="relative" x-data="{ open: false, selectedOptions: [] }">
                                     <div class="flex items-center w-96 justify-between border border-gray-400 rounded p-2 cursor-pointer" @click="open = !open">
-                                        <span>Odabir</span>
+                                        <span x-text="'Odabir (' + selectedOptions.length + ')'">Odabir (0)</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-transform duration-300 ease-in-out">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                         </svg> 
                                     </div>
                                       
-                                    <div class="absolute w-full z-10" x-show="open" @click.away="open = false">
+                                    <div class="left-1/2 transform -translate-x-80 mt-2 w-[64rem]" x-show="open" @click.away="open = false">
                                         <div class="bg-white border border-gray-400 rounded mt-2 flex flex-wrap">
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="accCheckbox" name="extras" value="adaptive_cruise_control" class="hidden" x-model="selectedOptions">
                                                 <label for="accCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -367,7 +367,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="airSuspCheckbox" name="extras" value="air_suspension" class="hidden" x-model="selectedOptions">
                                                 <label for="airSuspCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -376,7 +376,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="alarmSystemCheckbox" name="extras" value="alarm_system" class="hidden" x-model="selectedOptions">
                                                 <label for="alarmSystemCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -385,7 +385,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="ambientLightingCheckbox" name="extras" value="ambient_lighting" class="hidden" x-model="selectedOptions">
                                                 <label for="ambientLightingCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -394,7 +394,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="androidAutoCheckbox" name="extras" value="android_auto" class="hidden" x-model="selectedOptions">
                                                 <label for="androidAutoCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -403,7 +403,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="appleCarplayCheckbox" name="extras" value="apple_carplay" class="hidden" x-model="selectedOptions">
                                                 <label for="appleCarplayCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -412,7 +412,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="armRestCheckbox" name="extras" value="arm_rest" class="hidden" x-model="selectedOptions">
                                                 <label for="armRestCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -421,7 +421,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="automaticAirConditioningCheckbox" name="extras" value="automatic_air_conditioning" class="hidden" x-model="selectedOptions">
                                                 <label for="automaticAirConditioningCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -430,7 +430,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="automatic2ZoneClimatisationsCheckbox" name="extras" value="automatic_2_zone_climatisations" class="hidden" x-model="selectedOptions">
                                                 <label for="automatic2ZoneClimatisationsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -439,7 +439,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="automatic3ZoneClimatisationsCheckbox" name="extras" value="automatic_3_zone_climatisations" class="hidden" x-model="selectedOptions">
                                                 <label for="automatic3ZoneClimatisationsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -448,7 +448,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="automatic4ZoneClimatisationsCheckbox" name="extras" value="automatic_4_zone_climatisations" class="hidden" x-model="selectedOptions">
                                                 <label for="automatic4ZoneClimatisationsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -457,7 +457,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="biXenonHeadlightsCheckbox" name="extras" value="bi_xenon_headlights" class="hidden" x-model="selectedOptions">
                                                 <label for="biXenonHeadlightsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -466,7 +466,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="bluetoothCheckbox" name="extras" value="bluetooth" class="hidden" x-model="selectedOptions">
                                                 <label for="bluetoothCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -475,7 +475,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="blindSpotAssistCheckbox" name="extras" value="blind_spot_assist" class="hidden" x-model="selectedOptions">
                                                 <label for="blindSpotAssistCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -484,7 +484,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="cdPlayerCheckbox" name="extras" value="cd_player" class="hidden" x-model="selectedOptions">
                                                 <label for="cdPlayerCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -493,7 +493,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="cruiseControlCheckbox" name="extras" value="cruise_control" class="hidden" x-model="selectedOptions">
                                                 <label for="cruiseControlCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -502,7 +502,7 @@
                                                 </label>
                                             </div>
                                             
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="dabRadioCheckbox" name="extras" value="dab_radio" class="hidden" x-model="selectedOptions">
                                                 <label for="dabRadioCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -511,7 +511,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="distanceWarningSystemCheckbox" name="extras" value="distance_warning_system" class="hidden" x-model="selectedOptions">
                                                 <label for="distanceWarningSystemCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -520,7 +520,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="electricSeatAdjustmentCheckbox" name="extras" value="electric_seat_adjustment" class="hidden" x-model="selectedOptions">
                                                 <label for="electricSeatAdjustmentCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -529,7 +529,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="electricSideMirrorCheckbox" name="extras" value="electric_side_mirror" class="hidden" x-model="selectedOptions">
                                                 <label for="electricSideMirrorCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -538,7 +538,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="electricWindowsCheckbox" name="extras" value="electric_windows" class="hidden" x-model="selectedOptions">
                                                 <label for="electricWindowsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -547,7 +547,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="emergencyCallSystemCheckbox" name="extras" value="emergency_call_system" class="hidden" x-model="selectedOptions">
                                                 <label for="emergencyCallSystemCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -556,7 +556,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="emergencyTyreRepairKitCheckbox" name="extras" value="emergency_tyre_repair_kit" class="hidden" x-model="selectedOptions">
                                                 <label for="emergencyTyreRepairKitCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -565,7 +565,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="fogLampCheckbox" name="extras" value="fog_lamp" class="hidden" x-model="selectedOptions">
                                                 <label for="fogLampCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -574,7 +574,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="handsFreeKitCheckbox" name="extras" value="hands_free_kit" class="hidden" x-model="selectedOptions">
                                                 <label for="handsFreeKitCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -583,7 +583,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="headUpDisplayCheckbox" name="extras" value="head_up_display" class="hidden" x-model="selectedOptions">
                                                 <label for="headUpDisplayCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -592,7 +592,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="headlightWasherSystemCheckbox" name="extras" value="headlight_washer_system" class="hidden" x-model="selectedOptions">
                                                 <label for="headlightWasherSystemCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -601,7 +601,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="heatedRearSeatsCheckbox" name="extras" value="heated_rear_seats" class="hidden" x-model="selectedOptions">
                                                 <label for="heatedRearSeatsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -610,7 +610,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="heatedSeatsCheckbox" name="extras" value="heated_seats" class="hidden" x-model="selectedOptions">
                                                 <label for="heatedSeatsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -619,7 +619,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="heatedSteeringWheelCheckbox" name="extras" value="heated_steering_wheel" class="hidden" x-model="selectedOptions">
                                                 <label for="heatedSteeringWheelCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -628,7 +628,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="hillStartAssistCheckbox" name="extras" value="hill_start_assist" class="hidden" x-model="selectedOptions">
                                                 <label for="hillStartAssistCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -637,7 +637,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="inductionChargingForSmartphonesCheckbox" name="extras" value="induction_charging_for_smartphones" class="hidden" x-model="selectedOptions">
                                                 <label for="inductionChargingForSmartphonesCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -646,7 +646,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="isofixCheckbox" name="extras" value="isofix" class="hidden" x-model="selectedOptions">
                                                 <label for="isofixCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -655,7 +655,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="keylessCentralLockingCheckbox" name="extras" value="keyless_central_locking" class="hidden" x-model="selectedOptions">
                                                 <label for="keylessCentralLockingCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -664,7 +664,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="laneChangeAssistCheckbox" name="extras" value="lane_change_assist" class="hidden" x-model="selectedOptions">
                                                 <label for="laneChangeAssistCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -673,7 +673,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="laserHeadlightsCheckbox" name="extras" value="laser_headlights" class="hidden" x-model="selectedOptions">
                                                 <label for="laserHeadlightsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -682,7 +682,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="leatherSteeringWheelCheckbox" name="extras" value="leather_steering_wheel" class="hidden" x-model="selectedOptions">
                                                 <label for="leatherSteeringWheelCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -691,7 +691,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="ledHeadlightsCheckbox" name="extras" value="led_headlights" class="hidden" x-model="selectedOptions">
                                                 <label for="ledHeadlightsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -700,7 +700,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="lumbarSupportCheckbox" name="extras" value="lumbar_support" class="hidden" x-model="selectedOptions">
                                                 <label for="lumbarSupportCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -709,7 +709,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="manualClimatisationCheckbox" name="extras" value="manual_climatisation" class="hidden" x-model="selectedOptions">
                                                 <label for="manualClimatisationCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -718,7 +718,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="massageSeatsCheckbox" name="extras" value="massage_seats" class="hidden" x-model="selectedOptions">
                                                 <label for="massageSeatsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -727,7 +727,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="multifunctionSteeringWheelCheckbox" name="extras" value="multifunction_steering_wheel" class="hidden" x-model="selectedOptions">
                                                 <label for="multifunctionSteeringWheelCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -736,7 +736,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="navigationSystemCheckbox" name="extras" value="navigation_system" class="hidden" x-model="selectedOptions">
                                                 <label for="navigationSystemCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -745,7 +745,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="onBoardComputerCheckbox" name="extras" value="on_board_computer" class="hidden" x-model="selectedOptions">
                                                 <label for="onBoardComputerCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -754,7 +754,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="paddleShiftersCheckbox" name="extras" value="paddle_shifters" class="hidden" x-model="selectedOptions">
                                                 <label for="paddleShiftersCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -763,7 +763,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="panoramicRoofCheckbox" name="extras" value="panoramic_roof" class="hidden" x-model="selectedOptions">
                                                 <label for="panoramicRoofCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -772,7 +772,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="parkingSensorsCheckbox" name="extras" value="parking_sensors" class="hidden" x-model="selectedOptions">
                                                 <label for="parkingSensorsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -781,7 +781,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="powerAssistedSteeringCheckbox" name="extras" value="power_assisted_steering" class="hidden" x-model="selectedOptions">
                                                 <label for="powerAssistedSteeringCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -790,7 +790,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="rainSensorCheckbox" name="extras" value="rain_sensor" class="hidden" x-model="selectedOptions">
                                                 <label for="rainSensorCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -799,7 +799,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="roofRackCheckbox" name="extras" value="roof_rack" class="hidden" x-model="selectedOptions">
                                                 <label for="roofRackCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -808,7 +808,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="spareTyreCheckbox" name="extras" value="spare_tyre" class="hidden" x-model="selectedOptions">
                                                 <label for="spareTyreCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -817,7 +817,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="sportSeatsCheckbox" name="extras" value="sport_seats" class="hidden" x-model="selectedOptions">
                                                 <label for="sportSeatsCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -826,7 +826,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="startStopSystemCheckbox" name="extras" value="start_stop_system" class="hidden" x-model="selectedOptions">
                                                 <label for="startStopSystemCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -835,7 +835,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="sunroofCheckbox" name="extras" value="sunroof" class="hidden" x-model="selectedOptions">
                                                 <label for="sunroofCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -844,7 +844,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="trafficSignRecognitionCheckbox" name="extras" value="traffic_sign_recognition" class="hidden" x-model="selectedOptions">
                                                 <label for="trafficSignRecognitionCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -853,7 +853,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="tyrePressureMonitoringCheckbox" name="extras" value="tyre_pressure_monitoring" class="hidden" x-model="selectedOptions">
                                                 <label for="tyrePressureMonitoringCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -862,7 +862,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="usbPortCheckbox" name="extras" value="usb_port" class="hidden" x-model="selectedOptions">
                                                 <label for="usbPortCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -871,7 +871,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="w-full md:w-1/2">
+                                            <div class="w-full md:w-1/4">
                                                 <input type="checkbox" id="voiceControlCheckbox" name="extras" value="voice_control" class="hidden" x-model="selectedOptions">
                                                 <label for="voiceControlCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
@@ -889,7 +889,7 @@
                     <div class="flex justify-between mb-4">
                         <div class="mt-8">
                             <div th:if="${step > 1}">
-                                <a th:href="@{/back(step=${step - 1})}" class="button ">Nazad</a>
+                                <a th:href="@{/back(step=${step - 1})}" class="button">Nazad</a>
                             </div>
                         </div>
                         <div class="mt-6">
