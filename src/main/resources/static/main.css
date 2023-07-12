@@ -791,8 +791,16 @@ input[type="checkbox"]:checked + label {
   height: 1rem;
 }
 
+.h-48 {
+  height: 12rem;
+}
+
 .h-56 {
   height: 14rem;
+}
+
+.h-6 {
+  height: 1.5rem;
 }
 
 .h-64 {
@@ -1125,6 +1133,10 @@ input[type="checkbox"]:checked + label {
 
 .leading-7 {
   line-height: 1.75rem;
+}
+
+.leading-loose {
+  line-height: 2;
 }
 
 .text-cyan-700 {
