@@ -58,10 +58,10 @@ public class AddListingController {
             if (vehicleTypeId == 1) {
                 model.addAttribute("showNumberOfWheelsInput", true);
                 model.addAttribute("initialNumberOfWheels", 4);
-            } else if (vehicleTypeId == 2) {
+            } else if (vehicleTypeId == 4) {
                 model.addAttribute("showNumberOfWheelsInput", true);
                 model.addAttribute("initialNumberOfWheels", 2);
-            } else if (vehicleTypeId == 3) {
+            } else if (vehicleTypeId == 2) {
                 model.addAttribute("showNumberOfWheelsInput", true);
                 model.addAttribute("initialNumberOfWheels", null);
             } else {
@@ -79,7 +79,7 @@ public class AddListingController {
         } else {
             model.addAttribute("showBodyTypeInput", false);
         }
-        if (step == 2 && 3 == ((Integer) session.getAttribute("vehicleTypeId"))) {
+        if (step == 2 && 2 == ((Integer) session.getAttribute("vehicleTypeId"))) {
             model.addAttribute("showNumberOfWheelsInput", true);
             model.addAttribute("showMaximumAllowableWeightInput", true);
         } else {
