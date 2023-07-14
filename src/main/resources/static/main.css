@@ -1115,6 +1115,10 @@ input[type="checkbox"]:checked + label {
   padding-right: 0.5rem;
 }
 
+.pr-4 {
+  padding-right: 1rem;
+}
+
 .pr-5 {
   padding-right: 1.25rem;
 }

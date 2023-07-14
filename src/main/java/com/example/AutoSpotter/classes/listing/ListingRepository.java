@@ -8,7 +8,4 @@ public interface ListingRepository {
     void deleteListing(int id);
     Listing getListingById(int id);
     List<Listing> getNewListings();
-    List<String> getManufacturersByVehicleType(String vehicleType);
-    List<String> getModelsByManufacturer(String manufacturer);
-    List<String> getBodyTypes();
 }

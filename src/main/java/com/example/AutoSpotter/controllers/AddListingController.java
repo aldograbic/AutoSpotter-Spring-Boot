@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.AutoSpotter.classes.listing.Listing;
 import com.example.AutoSpotter.classes.listing.ListingRepository;
+import com.example.AutoSpotter.classes.location.LocationRepository;
 import com.example.AutoSpotter.classes.vehicle.Vehicle;
 import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
 
@@ -25,10 +26,12 @@ public class AddListingController {
 
     private final ListingRepository listingRepository;
     private final VehicleRepository vehicleRepository;
+    private final LocationRepository locationRepository;
 
-    public AddListingController(ListingRepository listingRepository, VehicleRepository vehicleRepository) {
+    public AddListingController(ListingRepository listingRepository, VehicleRepository vehicleRepository, LocationRepository locationRepository) {
         this.listingRepository = listingRepository;
         this.vehicleRepository = vehicleRepository;
+        this.locationRepository = locationRepository;
     }
 
     @GetMapping("/postavi-oglas")
@@ -50,8 +53,8 @@ public class AddListingController {
             years.add(i);
         }
         List<String> states = vehicleRepository.getAllStates();
-        List<String> counties = vehicleRepository.getAllCounties();
-        Map<String, List<String>> citiesByCounty = vehicleRepository.getCitiesByCounty();
+        List<String> counties = locationRepository.getAllCounties();
+        Map<String, List<String>> citiesByCounty = locationRepository.getCitiesByCounty();
         List<String> engineTypes = vehicleRepository.getAllEngineTypes();
         List<String> transmissionTypes = vehicleRepository.getAllTransmissionTypes();
         List<String> driveTrainTypes = vehicleRepository.getAllDriveTrainTypes();
@@ -142,7 +145,7 @@ public class AddListingController {
 
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
         
-        int cityId = vehicleRepository.getCityIdByName(city);
+        int cityId = locationRepository.getCityIdByName(city);
         List<String> manufacturers = vehicleRepository.getManufacturersByVehicleType(vehicleTypeId);
         session.setAttribute("manufacturers", manufacturers);
 
@@ -155,6 +158,7 @@ public class AddListingController {
         session.setAttribute("registeredDate", registered);
         session.setAttribute("color", color);
         session.setAttribute("cityId", cityId);
+        session.setAttribute("city", city);
         session.setAttribute("mileage", mileage);
         session.setAttribute("state", state);
 
@@ -189,6 +193,11 @@ public class AddListingController {
                                             @RequestParam("safetyFeatures") List<String> safetyFeatures,
                                             @RequestParam("extras") List<String> extras,
                                             HttpSession session, Model model) {
+
+        session.setAttribute("batteryCapacity", batteryCapacity);
+        session.setAttribute("vehicleRange", vehicleRange);
+        session.setAttribute("chargingTime", chargingTime);
+        session.setAttribute("safetyFeatures", safetyFeatures);
 
         int safetyFeaturesId = vehicleRepository.saveVehicleSafetyFeatures(safetyFeatures);
         int extrasId = vehicleRepository.saveVehicleExtras(extras);

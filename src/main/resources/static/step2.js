@@ -27,55 +27,67 @@ $(document).ready(function() {
   }
 
   var registeredYesRadio = document.getElementById("registeredYes");
-var registeredNoRadio = document.getElementById("registeredNo");
-var registeredDateInput = document.getElementById("registeredDateInput");
-var registeredDate = document.getElementById("registeredDate");
-
-var previousRegisteredOption = "";
-
-registeredYesRadio.addEventListener("change", function() {
-    if (this.checked) {
-        registeredDateInput.style.display = "flex";
-        registeredDate.required = true;
-
-        if (previousRegisteredOption === "Ne") {
-            registeredDate.value = "";
-        }
-    } else {
-        registeredDateInput.style.display = "none";
-        registeredDate.required = false;
-    }
-
-    previousRegisteredOption = "Da";
-});
-
-registeredNoRadio.addEventListener("change", function() {
-    if (this.checked) {
-        registeredDateInput.style.display = "none";
-        registeredDate.required = false;
-
-        if (previousRegisteredOption === "Da") {
-            registeredDate.value = "1001-01-01";
-        } else if (registeredDate.value === "") {
-            registeredDate.value = "1001-01-01";
-        }
-    }
-
-    previousRegisteredOption = "Ne";
-});
-
+  var registeredNoRadio = document.getElementById("registeredNo");
+  var registeredDateInput = document.getElementById("registeredDateInput");
+  var registeredDate = document.getElementById("registeredDate");
+  
+  var previousRegisteredOption = "";
+  
+  // Retrieve the session value for the previousRegisteredOption
+  var previousRegisteredOptionValue = "<%= session.getAttribute('previousRegisteredOption') %>";
+  if (previousRegisteredOptionValue) {
+      previousRegisteredOption = previousRegisteredOptionValue;
+  }
+  
+  registeredYesRadio.addEventListener("change", function() {
+      if (this.checked) {
+          registeredDateInput.style.display = "flex";
+          registeredDate.required = true;
+  
+          if (previousRegisteredOption === "Ne") {
+              registeredDate.value = "";
+          }
+      } else {
+          registeredDateInput.style.display = "none";
+          registeredDate.required = false;
+      }
+  
+      previousRegisteredOption = "Da";
+  });
+  
+  registeredNoRadio.addEventListener("change", function() {
+      if (this.checked) {
+          registeredDateInput.style.display = "none";
+          registeredDate.required = false;
+  
+          if (previousRegisteredOption === "Da") {
+              registeredDate.value = "1001-01-01";
+          } else if (registeredDate.value === "") {
+              registeredDate.value = "1001-01-01";
+          }
+      }
+  
+      previousRegisteredOption = "Ne";
+  });
+  
+  // Check the appropriate radio button based on the session value
+  if (previousRegisteredOption === "Da") {
+      registeredYesRadio.checked = true;
+  } else if (previousRegisteredOption === "Ne") {
+      registeredNoRadio.checked = true;
+  }
   
 
   const selectedOptions = [];
                                   
- function toggleOption(value) {
-   const index = selectedOptions.indexOf(value)
-   if (index === -1) {
-     selectedOptions.push(value)
-   } else {
-     selectedOptions.splice(index, 1)
-   }
- }
+  function toggleOption(value) {
+    const index = selectedOptions.indexOf(value)
+    if (index === -1) {
+      selectedOptions.push(value)
+    } else {
+      selectedOptions.splice(index, 1)
+    }
+  }
 
   function validateInput(input) {
     input.value = input.value.replace(/,/g, '.');

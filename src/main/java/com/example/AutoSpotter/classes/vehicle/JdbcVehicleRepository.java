@@ -1,9 +1,6 @@
 package com.example.AutoSpotter.classes.vehicle;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -63,11 +60,6 @@ public class JdbcVehicleRepository implements VehicleRepository {
         return jdbcTemplate.queryForObject(sql, Integer.class, vehicleType);
     }
 
-    public int getCityIdByName(String cityName) {
-        String sql = "SELECT id FROM cities WHERE city_name = ?";
-        return jdbcTemplate.queryForObject(sql, Integer.class, cityName);
-    }
-
     @Override
     public List<String> getAllVehicleTypes() {
         String sql = "SELECT name FROM vehicle_type";
@@ -86,6 +78,24 @@ public class JdbcVehicleRepository implements VehicleRepository {
     public List<String> getManufacturersByVehicleType(int vehicleTypeId) {
         String sql = "SELECT manufacturer_name FROM manufacturers WHERE vehicle_type_id = ? ";
         return jdbcTemplate.queryForList(sql, String.class, vehicleTypeId);
+    }
+
+    @Override
+    public List<String> getManufacturersByVehicleTypeName(String vehicleType) {
+        String sql = "SELECT DISTINCT m.manufacturer_name " +
+                    "FROM manufacturers m " +
+                    "INNER JOIN vehicle_type vt ON m.vehicle_type_id = vt.id " +
+                    "WHERE vt.name = ?";
+        return jdbcTemplate.queryForList(sql, String.class, vehicleType);
+    }
+
+    @Override
+    public List<String> getModelsByManufacturer(String manufacturer) {
+        String sql = "SELECT DISTINCT mo.model_name " +
+                    "FROM models mo " +
+                    "INNER JOIN manufacturers ma ON mo.manufacturer_id = ma.id " +
+                    "WHERE ma.manufacturer_name = ?";
+        return jdbcTemplate.queryForList(sql, String.class, manufacturer);
     }
 
     @Override
@@ -113,21 +123,27 @@ public class JdbcVehicleRepository implements VehicleRepository {
     }
 
     @Override
-public int saveVehicleSafetyFeatures(List<String> safetyFeatures) {
-    String sql = "INSERT INTO vehicle_safety_features (abs, esp, central_locking, " +
-                 "traction_control, front_side_airbag, rear_side_airbag) " +
-                 "VALUES (?, ?, ?, ?, ?, ?)";
-    Object[] params = new Object[]{
-        safetyFeatures.contains("abs"),
-        safetyFeatures.contains("esp"),
-        safetyFeatures.contains("central_locking"),
-        safetyFeatures.contains("traction_control"),
-        safetyFeatures.contains("front_side_airbag"),
-        safetyFeatures.contains("rear_side_airbag")
-    };
-    jdbcTemplate.update(sql, params);
-    return jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-}
+    public List<String> getAllStates() {
+        String sql = "SELECT name FROM states";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
+
+    @Override
+    public int saveVehicleSafetyFeatures(List<String> safetyFeatures) {
+        String sql = "INSERT INTO vehicle_safety_features (abs, esp, central_locking, " +
+                    "traction_control, front_side_airbag, rear_side_airbag) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+        Object[] params = new Object[]{
+            safetyFeatures.contains("abs"),
+            safetyFeatures.contains("esp"),
+            safetyFeatures.contains("central_locking"),
+            safetyFeatures.contains("traction_control"),
+            safetyFeatures.contains("front_side_airbag"),
+            safetyFeatures.contains("rear_side_airbag")
+        };
+        jdbcTemplate.update(sql, params);
+        return jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+    }
 
     @Override
     public int saveVehicleExtras(List<String> extras) {
@@ -215,49 +231,5 @@ public int saveVehicleSafetyFeatures(List<String> safetyFeatures) {
         };
         jdbcTemplate.update(sql, params);
         return jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-    }
-
-    @Override
-    public List<String> getAllCities() {
-        String sql = "SELECT city_name FROM cities";
-        return jdbcTemplate.queryForList(sql, String.class);
-    }
-
-    @Override
-    public List<String> getAllCounties() {
-        String sql = "SELECT county_name FROM counties";
-        return jdbcTemplate.queryForList(sql, String.class);
-    }
-
-    @Override
-    public Map<String, List<String>> getCitiesByCounty() {
-        String sql = "SELECT c.county_name, ct.city_name, ct.county_id " +
-                    "FROM cities ct " +
-                    "INNER JOIN counties c ON ct.county_id = c.id " +
-                    "ORDER BY c.county_name";
-
-        return jdbcTemplate.query(sql, (rs) -> {
-            Map<String, List<String>> citiesByCounty = new LinkedHashMap<>();
-
-            while (rs.next()) {
-                String countyName = rs.getString("county_name");
-                String cityName = rs.getString("city_name");
-
-                if (!citiesByCounty.containsKey(countyName)) {
-                    citiesByCounty.put(countyName, new ArrayList<>());
-                }
-
-                citiesByCounty.get(countyName).add(cityName);
-            }
-
-            return citiesByCounty;
-        });
-    }
-
-
-    @Override
-    public List<String> getAllStates() {
-        String sql = "SELECT name FROM states";
-        return jdbcTemplate.queryForList(sql, String.class);
     }
 }

@@ -125,12 +125,16 @@
                             <label for="city">Lokacija vozila</label>
                             <select id="city" name="city" required class="input">
                                 <option value="" disabled selected>Odabir</option>
-                                <optgroup th:each="county : ${counties}" th:label="${county}" th:text="${county}">
-                                    <option th:each="city : ${citiesByCounty[county]}" th:value="${city}" th:text="${city}"></option>
-                                </optgroup>
+                                <th:block th:each="entry : ${citiesByCounty}">
+                                    <optgroup th:label="${entry.key}">
+                                        <th:block th:each="city : ${entry.value}">
+                                            <option th:value="${city}" th:text="${city}" th:selected="${city eq session['city']}"></option>
+                                        </th:block>
+                                    </optgroup>
+                                </th:block>
                             </select>
                         </div>
-                        
+
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
