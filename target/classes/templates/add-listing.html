@@ -125,9 +125,12 @@
                             <label for="city">Lokacija vozila</label>
                             <select id="city" name="city" required class="input">
                                 <option value="" disabled selected>Odabir</option>
-                                <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+                                <optgroup th:each="county : ${counties}" th:label="${county}" th:text="${county}">
+                                    <option th:each="city : ${citiesByCounty[county]}" th:value="${city}" th:text="${city}"></option>
+                                </optgroup>
                             </select>
                         </div>
+                        
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
@@ -309,7 +312,7 @@
                                                 <label for="centralLockingCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
                                                      x-bind:class="{ 'bg-gray-400': selectedOptions.includes('central_locking') }"></span>
-                                                     Centralno zaključavanje
+                                                     Centr. zaključavanje
                                                 </label>
                                             </div>
 
@@ -516,7 +519,7 @@
                                                 <label for="distanceWarningSystemCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
                                                      x-bind:class="{ 'bg-gray-400': selectedOptions.includes('distance_warning_system') }"></span>
-                                                     Sustav upozorenja na udaljenost
+                                                     Upozorenje za udaljenost
                                                 </label>
                                             </div>
 
@@ -642,7 +645,7 @@
                                                 <label for="inductionChargingForSmartphonesCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
                                                      x-bind:class="{ 'bg-gray-400': selectedOptions.includes('induction_charging_for_smartphones') }"></span>
-                                                     Induktivno punjenje za pametne telefone
+                                                     Punjenje za pametne telefone
                                                 </label>
                                             </div>
 
@@ -660,7 +663,7 @@
                                                 <label for="keylessCentralLockingCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
                                                      x-bind:class="{ 'bg-gray-400': selectedOptions.includes('keyless_central_locking') }"></span>
-                                                     Centralno zaključavanje bez ključa
+                                                     Zaključavanje bez ključa
                                                 </label>
                                             </div>
 
@@ -849,7 +852,7 @@
                                                 <label for="trafficSignRecognitionCheckbox" class="flex items-center cursor-pointer p-2">
                                                     <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
                                                      x-bind:class="{ 'bg-gray-400': selectedOptions.includes('traffic_sign_recognition') }"></span>
-                                                     Prepoznavanje prometnih znakova
+                                                     Prepoznavanje znakova
                                                 </label>
                                             </div>
 

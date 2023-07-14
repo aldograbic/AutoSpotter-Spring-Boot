@@ -1,6 +1,9 @@
 package com.example.AutoSpotter.classes.vehicle;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -225,6 +228,32 @@ public int saveVehicleSafetyFeatures(List<String> safetyFeatures) {
         String sql = "SELECT county_name FROM counties";
         return jdbcTemplate.queryForList(sql, String.class);
     }
+
+    @Override
+    public Map<String, List<String>> getCitiesByCounty() {
+        String sql = "SELECT c.county_name, ct.city_name, ct.county_id " +
+                    "FROM cities ct " +
+                    "INNER JOIN counties c ON ct.county_id = c.id " +
+                    "ORDER BY c.county_name";
+
+        return jdbcTemplate.query(sql, (rs) -> {
+            Map<String, List<String>> citiesByCounty = new LinkedHashMap<>();
+
+            while (rs.next()) {
+                String countyName = rs.getString("county_name");
+                String cityName = rs.getString("city_name");
+
+                if (!citiesByCounty.containsKey(countyName)) {
+                    citiesByCounty.put(countyName, new ArrayList<>());
+                }
+
+                citiesByCounty.get(countyName).add(cityName);
+            }
+
+            return citiesByCounty;
+        });
+    }
+
 
     @Override
     public List<String> getAllStates() {

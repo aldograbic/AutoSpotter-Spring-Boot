@@ -1,6 +1,7 @@
 package com.example.AutoSpotter.classes.vehicle;
 
 import java.util.List;
+import java.util.Map;
 
 public interface VehicleRepository {
 
@@ -31,6 +32,8 @@ public interface VehicleRepository {
     List<String> getAllCities();
 
     List<String> getAllCounties();
+
+    Map<String, List<String>> getCitiesByCounty();
 
     Vehicle getVehicleById(int id);
 }

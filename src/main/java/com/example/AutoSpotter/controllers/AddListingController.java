@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,8 +49,13 @@ public class AddListingController {
         for(int i = 2023; i >= 1900; i--) {
             years.add(i);
         }
-        List<String> cities = vehicleRepository.getAllCities();
         List<String> states = vehicleRepository.getAllStates();
+        List<String> counties = vehicleRepository.getAllCounties();
+        Map<String, List<String>> citiesByCounty = vehicleRepository.getCitiesByCounty();
+        List<String> engineTypes = vehicleRepository.getAllEngineTypes();
+        List<String> transmissionTypes = vehicleRepository.getAllTransmissionTypes();
+        List<String> driveTrainTypes = vehicleRepository.getAllDriveTrainTypes();
+
         Integer vehicleTypeId = (Integer) session.getAttribute("vehicleTypeId");
         if (vehicleTypeId != null) {
             List<String> manufacturers = vehicleRepository.getManufacturersByVehicleType(vehicleTypeId);
@@ -86,20 +92,18 @@ public class AddListingController {
             model.addAttribute("showNumberOfWheelsInput", false);
             model.addAttribute("showMaximumAllowableWeightInput", false);
         }
-        List<String> engineTypes = vehicleRepository.getAllEngineTypes();
-        List<String> transmissionTypes = vehicleRepository.getAllTransmissionTypes();
-        List<String> driveTrainTypes = vehicleRepository.getAllDriveTrainTypes();
-
+        
         model.addAttribute("step", step);
         model.addAttribute("completedSteps", completedSteps);
         model.addAttribute("vehicleTypes", vehicleTypes);  
-        model.addAttribute("years", years);  
-        model.addAttribute("cities", cities);     
+        model.addAttribute("years", years);      
         model.addAttribute("states", states);
         model.addAttribute("bodyTypes", bodyTypes);
         model.addAttribute("engineTypes", engineTypes);
         model.addAttribute("transmissionTypes", transmissionTypes);
         model.addAttribute("driveTrainTypes", driveTrainTypes);
+        model.addAttribute("counties", counties);
+        model.addAttribute("citiesByCounty", citiesByCounty);
 
         return "add-listing";
     }

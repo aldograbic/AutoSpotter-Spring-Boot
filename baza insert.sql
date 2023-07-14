@@ -714,7 +714,7 @@ INSERT INTO models VALUES
        (501, 'Spirit', 20),
        (502, 'Stealth', 20),
        (503, 'Stratus', 20),
-       (504, 'Viper', 20),
+       (504, 'Viper', 20);
 
 INSERT INTO countries VALUES (1, "Hrvatska");
 
