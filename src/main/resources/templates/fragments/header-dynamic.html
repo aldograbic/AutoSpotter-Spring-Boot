@@ -11,7 +11,23 @@
         </ul>
         <div class="flex space-x-4">
             <a class="text-gray-700 font-medium hover:text-cyan-700" href="/kontakt">Kontakt</a>
-            <a class="text-gray-700 font-medium hover:text-cyan-700" href="/prijava">Prijava</a>
+            <div x-data="{ open: false }" class="relative inline-block text-left">
+              <div>
+                  <button @click="open = !open" type="button" class="text-gray-700 font-medium hover:text-cyan-700 inline-flex items-center">Korisnički račun
+                      <svg class="w-4 h-4 ml-1" viewBox="0 0 20 14" fill="currentColor">
+                        <path fill-rule="evenodd" d="M6 6l4 4 4-4H6z" />
+                      </svg>
+                  </button>
+              </div>
+              <div x-show="open" @click.away="open = false" id="dropdown-menu" class="origin-top-right absolute right-0 mt-2 w-[8.5rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                  <a th:unless="${session.user != null}" href="/prijava" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100" role="menuitem">Prijava</a>
+                  <a th:unless="${session.user != null}" href="/registracija" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100" role="menuitem">Registracija</a>
+                  <a th:if="${session.user != null}" href="/korisnicki-racun" class="block px-4 py-2 text-gray-700" th:text="${session.user.username}"></a>
+                  <a th:if="${session.user != null}" href="/odjava" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100" role="menuitem">Odjava</a>
+                </div>
+              </div>
+          </div>
         </div>
     </nav>
 </header>
