@@ -1015,6 +1015,10 @@ input[type="checkbox"]:checked + label {
   border-color: rgb(243 244 246 / var(--tw-divide-opacity));
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }
@@ -1148,6 +1152,11 @@ input[type="checkbox"]:checked + label {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .py-6 {
