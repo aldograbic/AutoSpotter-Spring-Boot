@@ -25,10 +25,16 @@
                 <form th:action="@{/oglas-1}" method="post">
                     <div class="flex flex-col mb-4">
                         <label for="vehicleType">Prodajem</label>
-                        <select id="vehicleType" name="vehicleType" class="input w-96">
+                        <div class="relative inline-block w-96">
+                          <select id="vehicleType" name="vehicleType" class="input appearance-none w-full pr-8">
                             <option th:each="type : ${vehicleTypes}" th:value="${type}" th:text="${type}" th:selected="${type eq session['vehicleType']}"></option>
-                        </select>
-                    </div>
+                          </select>
+                          <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                          </svg>
+                        </div>
+                      </div>
+                      
                     <div class="flex flex-col mb-4">
                         <input type="submit" value="Dalje" class="button">
                     </div>
@@ -41,27 +47,45 @@
                 <form th:action="@{/oglas-2}" method="post">
                     <div class="flex flex-col mb-4">
                         <label for="manufacturer">Proizvođač</label>
-                        <select id="manufacturer" name="manufacturer" required class="input">
-                            <option value="" disabled selected>Odabir</option>
-                            <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer}" th:text="${manufacturer}"
-                             th:selected="${manufacturer eq session['manufacturer']}"></option>
-                        </select>
+                        <div class="relative inline-block w-96">
+                            <select id="manufacturer" name="manufacturer" required class="input w-96">
+                                <option value="" disabled selected>Odabir</option>
+                                <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer}" th:text="${manufacturer}"
+                                 th:selected="${manufacturer eq session['manufacturer']}"></option>
+                            </select>
+                            <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        
                     </div>
                     
                     <div class="flex flex-col">
                         <label for="model">Model</label>
-                        <select id="model" name="model" required class="input">
-                            <option value="" disabled selected>Odabir</option>
-                        </select>
+                        <div class="relative inline-block w-96">
+                            <select id="model" name="model" required class="input w-96">
+                                <option value="" disabled selected>Odabir</option>
+                            </select>
+                            <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        
                     </div>
 
                     <div th:if="${showBodyTypeInput}" class="flex flex-col mt-4">
                         <label for="bodyType">Oblik karoserije</label>
-                        <select id="bodyType" name="bodyType" required class="input">
-                            <option value="" disabled selected>Odabir</option>
-                            <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"
-                             th:selected="${bodyType eq session['bodyType']}"></option>
-                        </select>
+                        <div class="relative inline-block w-96">
+                            <select id="bodyType" name="bodyType" required class="input w-96">
+                                <option value="" disabled selected>Odabir</option>
+                                <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"
+                                 th:selected="${bodyType eq session['bodyType']}"></option>
+                            </select>
+                            <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
@@ -84,13 +108,19 @@
                         </div>
                     </div>
                     
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-8">
                         <div class="flex flex-col mb-4">
                             <label for="year">Godina proizvodnje</label>
-                            <select id="year" name="year" required class="input">
-                                <option value="" disabled selected>Odabir</option>
-                                <option th:each="year : ${years}" th:value="${year}" th:text="${year}" th:selected="${year eq session['year']}"></option>
-                            </select>
+                            <div class="relative inline-block w-44">
+                                <select id="year" name="year" required class="input w-44">
+                                    <option value="" disabled selected>Odabir</option>
+                                    <option th:each="year : ${years}" th:value="${year}" th:text="${year}" th:selected="${year eq session['year']}"></option>
+                                </select>
+                                <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
+                            
                         </div>
                     
                         <div class="flex flex-col mb-2">
@@ -115,40 +145,49 @@
                         <input type="date" id="registeredDate" name="registeredDate" required class="input">
                     </div>
                     
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-8">
                         <div class="flex flex-col mb-4">
                             <label for="color">Boja vozila</label>
-                            <input type="text" id="color" name="color" placeholder="crna" required class="input" th:value="${session['color']}">
+                            <input type="text" id="color" name="color" placeholder="crna" required class="input w-44" th:value="${session['color']}">
                         </div>
 
                         <div class="flex flex-col mb-4">
                             <label for="city">Lokacija vozila</label>
-                            <select id="city" name="city" required class="input">
+                            <div class="relative inline-block w-44">
+                              <select id="city" name="city" required class="input w-44">
                                 <option value="" disabled selected>Odabir</option>
                                 <th:block th:each="entry : ${citiesByCounty}">
-                                    <optgroup th:label="${entry.key}">
-                                        <th:block th:each="city : ${entry.value}">
-                                            <option th:value="${city}" th:text="${city}" th:selected="${city eq session['city']}"></option>
-                                        </th:block>
-                                    </optgroup>
+                                  <optgroup th:label="${entry.key}">
+                                    <th:block th:each="city : ${entry.value}">
+                                      <option th:value="${city}" th:text="${city}" th:selected="${city eq session['city']}"></option>
+                                    </th:block>
+                                  </optgroup>
                                 </th:block>
-                            </select>
+                              </select>
+                              <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                              </svg>
+                            </div>
                         </div>
-
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-8">
                         <div class="flex flex-col mb-4">
                             <label for="mileage">Kilometraža</label>
-                            <input type="number" id="mileage" name="mileage" min="0" placeholder="0" required class="input no-arrows" th:value="${session['mileage']}">
+                            <input type="number" id="mileage" name="mileage" min="0" placeholder="0" required class="input no-arrows w-44" th:value="${session['mileage']}">
                         </div>
     
                         <div class="flex flex-col mb-4">
                             <label for="state">Stanje</label>
-                            <select id="state" name="state" required class="input">
-                                <option value="" disabled selected>Odabir</option>
-                                <option th:each="state : ${states}" th:value="${state}" th:text="${state}" th:selected="${state eq session['state']}"></option>
-                            </select>
+                            <div class="relative inline-block w-44">
+                                <select id="state" name="state" required class="input w-44">
+                                    <option value="" disabled selected>Odabir</option>
+                                    <option th:each="state : ${states}" th:value="${state}" th:text="${state}" th:selected="${state eq session['state']}"></option>
+                                </select>
+                                <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
 
@@ -173,25 +212,30 @@
 
                     <div class="flex flex-col mb-4">
                         <label for="engineType">Motor</label>
-                        <select id="engineType" name="engineType" required class="input w-96">
-                            <option value="" disabled selected>Odabir</option>
-                            <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}" th:selected="${engineType eq session['engineType']}"></option>
-                        </select>
+                        <div class="relative inline-block w-96">
+                            <select id="engineType" name="engineType" required class="input w-96">
+                                <option value="" disabled selected>Odabir</option>
+                                <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}" th:selected="${engineType eq session['engineType']}"></option>
+                            </select>
+                            <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
                     </div>
                     
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-8">
                         <div class="relative flex flex-col mb-4">
                             <label for="engineDisplacement">Zapremnina motora</label>
                             <div class="flex items-center">
                                 <input type="text" id="engineDisplacement" name="engineDisplacement" placeholder="1.0" pattern="[0-9]*\.?[0-9]+" required
-                                 class="input" oninput="validateInput(this)" th:value="${session['engineDisplacement']}">
+                                 class="input w-44" oninput="validateInput(this)" th:value="${session['engineDisplacement']}">
                                 <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
                             </div>
                         </div>
                         <div class="relative flex flex-col mb-4">
                             <label for="enginePower">Snaga motora</label>
                             <div class="flex items-center">
-                                <input type="number" id="enginePower" name="enginePower" min="0" placeholder="50" required class="input no-arrows" th:value="${session['enginePower']}">
+                                <input type="number" id="enginePower" name="enginePower" min="0" placeholder="50" required class="input w-44 no-arrows" th:value="${session['enginePower']}">
                                 <span class="absolute right-0 pr-2 text-gray-500 text-xl">kW</span>
                             </div>
                         </div>
@@ -205,22 +249,32 @@
                           <span class="absolute right-0 pr-2 text-gray-500 text-xl">L/100km</span>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-8">
                         <div class="flex flex-col mb-4">
                             <label for="transmission">Mjenjač</label>
-                            <select id="transmission" name="transmission" required class="input" >
-                                <option value="" disabled selected>Odabir</option>
-                                <option th:each="transmissionType : ${transmissionTypes}" th:value="${transmissionType}" th:text="${transmissionType}"
-                                 th:selected="${transmissionType eq session['transmission']}"></option>
-                            </select>
+                            <div class="relative inline-block w-44">
+                                <select id="transmission" name="transmission" required class="input w-44">
+                                    <option value="" disabled selected>Odabir</option>
+                                    <option th:each="transmissionType : ${transmissionTypes}" th:value="${transmissionType}" th:text="${transmissionType}"
+                                     th:selected="${transmissionType eq session['transmission']}"></option>
+                                </select>
+                                <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
                         </div>
                         <div class="flex flex-col mb-4">
                             <label for="driveTrain">Pogon kotača</label>
-                            <select id="driveTrain" name="driveTrain" required class="input">
-                                <option value="" disabled selected>Odabir</option>
-                                <option th:each="driveTrainType : ${driveTrainTypes}" th:value="${driveTrainType}" th:text="${driveTrainType}"
-                                 th:selected="${driveTrainType eq session['driveTrain']}"></option>
-                            </select>
+                            <div class="relative inline-block w-44">
+                                <select id="driveTrain" name="driveTrain" required class="input w-44">
+                                    <option value="" disabled selected>Odabir</option>
+                                    <option th:each="driveTrainType : ${driveTrainTypes}" th:value="${driveTrainType}" th:text="${driveTrainType}"
+                                     th:selected="${driveTrainType eq session['driveTrain']}"></option>
+                                </select>
+                                <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                     

@@ -4,6 +4,7 @@
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <script th:src="@{/filtering.js}" defer="defer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>AutoSpotter | Oglasi</title>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -13,38 +14,64 @@
     <main class="flex flex-1 space-x-4">
         <div th:fragment="sideDiv" class="flex-0 w-1/5 bg-gray-100 border-r-2 text-sm">
             <h2 class="text-xl font-bold text-gray-700 mb-6 mt-8 ml-4">Filtriraj</h2>
-            <div class="flex flex-col m-4">
+            <div class="flex flex-col m-4" x-data="{ open: false }">
                 <label for="vehicleType">Tip vozila</label>
-                <select id="vehicleType" class="input">
-                    <option value="" selected>Sva vozila</option>
-                    <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}" th:text="${vehicleType}"></option>
-                </select>
+                <div class="relative inline-block w-auto">
+                    <select id="vehicleType" class="input w-[21.8rem]">
+                        <option value="" selected>Sva vozila</option>
+                        <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}" th:text="${vehicleType}"></option>
+                    </select>
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </div>
             </div>
             <div class="flex flex-col m-4">
                 <label for="manufacturer">Proizvođač</label>
-                <select id="manufacturer" class="input">
-                    <option value="" disabled selected>Odabir</option>
-                </select>
+                <div class="relative inline-block w-auto">
+                    <select id="manufacturer" class="input w-[21.8rem]">
+                        <option value="" disabled selected>Odabir</option>
+                    </select>
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </div>
+                
             </div>
             <div class="flex flex-col m-4">
                 <label for="model">Model</label>
-                <select id="model" class="input">
-                    <option value="" disabled selected>Odabir</option>
-                </select>
+                <div class="relative inline-block w-auto">
+                    <select id="model" class="input w-[21.8rem]">
+                        <option value="" disabled selected>Odabir</option>
+                    </select>
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </div>
             </div>
             <div class="flex flex-col m-4">
                 <label for="bodyType">Oblik karoserije</label>
-                <select id="bodyType" class="input">
-                    <option value="" selected>Svi oblici</option>
-                    <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
-                </select>
+                <div class="relative inline-block w-auto">
+                    <select id="bodyType" class="input w-[21.8rem]">
+                        <option value="" selected>Svi oblici</option>
+                        <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
+                    </select>
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </div>
             </div>
             <div class="flex flex-col m-4">
                 <label for="engineType">Motor</label>
-                <select id="engineType" class="input">
-                    <option value="" selected>Sve vrste</option>
-                    <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
-                </select>
+                <div class="relative inline-block w-auto">
+                    <select id="engineType" class="input w-[21.8rem]">
+                        <option value="" selected>Sve vrste</option>
+                        <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
+                    </select>
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </div>
             </div>
             <div class="flex flex-col m-4">
                 <label for="transmissionButtons">Mjenjač</label>
@@ -57,10 +84,15 @@
             </div>
             <div class="flex flex-col m-4">
                 <label for="location">Lokacija vozila</label>
-                <select id="location" class="input">
-                    <option value="" disabled selected>Odabir</option>
-                    <option th:each="county : ${counties}" th:value="${county}" th:text="${county}"></option>
-                </select>
+                <div class="relative inline-block w-auto">
+                    <select id="location" class="input w-[21.8rem]">
+                        <option value="" disabled selected>Odabir</option>
+                        <option th:each="county : ${counties}" th:value="${county}" th:text="${county}"></option>
+                    </select>
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </div>
             </div>
             <div class="flex flex-col m-4">
                 <label for="mileageFrom">Kilometraža vozila</label>
@@ -73,15 +105,25 @@
             <div class="flex flex-col m-4">
                 <label for="yearFrom">Godina proizvodnje</label>
                 <div class="flex items-center">
-                    <select id="yearFrom" class="input flex-grow">
-                        <option value="" disabled selected>Odabir</option>
-                        <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
-                    </select>
+                    <div class="relative inline-block w-[9.35rem]">
+                        <select id="yearFrom" class="input flex-grow w-[9.35rem]">
+                            <option value="" disabled selected>Odabir</option>
+                            <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </div>
                     <p class="text-center mr-4 ml-4">do</p>
-                    <select id="yearTo" class="input flex-grow">
-                        <option value="" disabled selected>Odabir</option>
-                        <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
-                    </select>
+                    <div class="relative inline-block w-[9.35rem]">
+                        <select id="yearTo" class="input flex-grow w-[9.35rem]">
+                            <option value="" disabled selected>Odabir</option>
+                            <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </div>
                 </div>
                 <p id="yearError" class="text-red-500"></p>
             </div>
