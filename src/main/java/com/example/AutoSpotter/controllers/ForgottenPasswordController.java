@@ -1,11 +1,20 @@
 package com.example.AutoSpotter.controllers;
 
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ForgottenPasswordController {
+
+    private final JavaMailSender mailSender;
+
+    public ForgottenPasswordController(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
 
     @GetMapping("/zaboravljena-lozinka")
     public String showForgottenPasswordForm() {
@@ -13,10 +22,15 @@ public class ForgottenPasswordController {
     }
 
     @PostMapping("/zaboravljena-lozinka")
-    public String processForgottenPassword() {
-        // Logika za slanje maila za reset sifre
+    public String processForgottenPassword(@RequestParam("email") String email) {
 
-        // Prikazati poruku na toj stranici da se provjeri mail
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject("Zaboravljena lozinka");
+        message.setText("Kliknite na link ispod kako bi resetirali svoju lozinku.");
+        mailSender.send(message);
+
+        // obavijest da je otislo na mail
         return "redirect:/";
     }
     
