@@ -1,8 +1,10 @@
 package com.example.AutoSpotter.classes.vehicle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import com.example.AutoSpotter.classes.location.LocationRepository;
@@ -71,7 +73,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
         String sql = "SELECT id, manufacturer, model, body_type, color, registered, mileage, state, year, number_of_wheels, maximum_allowable_weight, " +
                     "engine_type, engine_displacement, engine_power, fuel_consumption, transmission, drive_train, battery_capacity, charging_time, vehicle_range, " +
                     "city_id, vehicle_type_id, vehicle_safety_features_id, vehicle_extras_id FROM vehicle WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new VehicleRowMapper(locationRepository), id);
+        return jdbcTemplate.queryForObject(sql, new VehicleRowMapper(locationRepository, this), id);
     }
 
     @Override
@@ -232,4 +234,107 @@ public class JdbcVehicleRepository implements VehicleRepository {
         jdbcTemplate.update(sql, params);
         return jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
     }
+
+    @Override
+    public List<String> getVehicleSafetyFeatures(int safetyFeaturesId) {
+        String sql = "SELECT abs, esp, central_locking, traction_control, front_side_airbag, rear_side_airbag " +
+                     "FROM vehicle_safety_features WHERE id = ?";
+        return jdbcTemplate.query(sql, (ResultSetExtractor<List<String>>) rs -> {
+            List<String> safetyFeatures = new ArrayList<>();
+            if (rs.next()) {
+                safetyFeatures.add(rs.getString("abs"));
+                safetyFeatures.add(rs.getString("esp"));
+                safetyFeatures.add(rs.getString("central_locking"));
+                safetyFeatures.add(rs.getString("traction_control"));
+                safetyFeatures.add(rs.getString("front_side_airbag"));
+                safetyFeatures.add(rs.getString("rear_side_airbag"));
+            }
+            return safetyFeatures;
+        }, safetyFeaturesId);
+    }
+
+
+    @Override
+    public List<String> getVehicleExtras(int extrasId) {
+        String sql = "SELECT adaptive_cruise_control, air_suspension, alarm_system, ambient_lighting, android_auto, " +
+                     "apple_carplay, arm_rest, automatic_air_conditioning, automatic_2_zone_climatisations, " +
+                     "automatic_3_zones_climatisation, automatic_4_zones_climatisation, bi_xenon_headlights, " +
+                     "bluetooth, blind_spot_assist, cd_player, cruise_control, dab_radio, " +
+                     "distance_warning_system, electric_seat_adjustment, electric_side_mirror, electric_windows, " +
+                     "emergency_call_system, emergency_tyre_repair_kit, fog_lamp, hands_free_kit, " +
+                     "head_up_display, headlight_washer_system, heated_rear_seats, heated_seats, " +
+                     "heated_steering_wheel, hill_start_assist, induction_charging_for_smartphones, isofix, " +
+                     "keyless_central_locking, lane_change_assist, laser_headlights, leather_steering_wheel, " +
+                     "led_headlights, lumbar_support, manual_climatisation, massage_seats, " +
+                     "multifunction_steering_wheel, navigation_system, on_board_computer, paddle_shifters, " +
+                     "panoramic_roof, parking_sensors, power_assisted_steering, rain_sensor, " +
+                     "roof_rack, spare_tyre, sport_seats, start_stop_system, " +
+                     "sunroof, traffic_sign_recognition, tyre_pressure_monitoring, usb_port, voice_control " +
+                     "FROM vehicle_extras WHERE id = ?";
+        return jdbcTemplate.query(sql, (ResultSetExtractor<List<String>>) rs -> {
+            List<String> extras = new ArrayList<>();
+            if (rs.next()) {
+                extras.add(rs.getString("adaptive_cruise_control"));
+                extras.add(rs.getString("air_suspension"));
+                extras.add(rs.getString("alarm_system"));
+                extras.add(rs.getString("ambient_lighting"));
+                extras.add(rs.getString("android_auto"));
+                extras.add(rs.getString("apple_carplay"));
+                extras.add(rs.getString("arm_rest"));
+                extras.add(rs.getString("automatic_air_conditioning"));
+                extras.add(rs.getString("automatic_2_zone_climatisations"));
+                extras.add(rs.getString("automatic_3_zones_climatisation"));
+                extras.add(rs.getString("automatic_4_zones_climatisation"));
+                extras.add(rs.getString("bi_xenon_headlights"));
+                extras.add(rs.getString("bluetooth"));
+                extras.add(rs.getString("blind_spot_assist"));
+                extras.add(rs.getString("cd_player"));
+                extras.add(rs.getString("cruise_control"));
+                extras.add(rs.getString("dab_radio"));
+                extras.add(rs.getString("distance_warning_system"));
+                extras.add(rs.getString("electric_seat_adjustment"));
+                extras.add(rs.getString("electric_side_mirror"));
+                extras.add(rs.getString("electric_windows"));
+                extras.add(rs.getString("emergency_call_system"));
+                extras.add(rs.getString("emergency_tyre_repair_kit"));
+                extras.add(rs.getString("fog_lamp"));
+                extras.add(rs.getString("hands_free_kit"));
+                extras.add(rs.getString("head_up_display"));
+                extras.add(rs.getString("headlight_washer_system"));
+                extras.add(rs.getString("heated_rear_seats"));
+                extras.add(rs.getString("heated_seats"));
+                extras.add(rs.getString("heated_steering_wheel"));
+                extras.add(rs.getString("hill_start_assist"));
+                extras.add(rs.getString("induction_charging_for_smartphones"));
+                extras.add(rs.getString("isofix"));
+                extras.add(rs.getString("keyless_central_locking"));
+                extras.add(rs.getString("lane_change_assist"));
+                extras.add(rs.getString("laser_headlights"));
+                extras.add(rs.getString("leather_steering_wheel"));
+                extras.add(rs.getString("led_headlights"));
+                extras.add(rs.getString("lumbar_support"));
+                extras.add(rs.getString("manual_climatisation"));
+                extras.add(rs.getString("massage_seats"));
+                extras.add(rs.getString("multifunction_steering_wheel"));
+                extras.add(rs.getString("navigation_system"));
+                extras.add(rs.getString("on_board_computer"));
+                extras.add(rs.getString("paddle_shifters"));
+                extras.add(rs.getString("panoramic_roof"));
+                extras.add(rs.getString("parking_sensors"));
+                extras.add(rs.getString("power_assisted_steering"));
+                extras.add(rs.getString("rain_sensor"));
+                extras.add(rs.getString("roof_rack"));
+                extras.add(rs.getString("spare_tyre"));
+                extras.add(rs.getString("sport_seats"));
+                extras.add(rs.getString("start_stop_system"));
+                extras.add(rs.getString("sunroof"));
+                extras.add(rs.getString("traffic_sign_recognition"));
+                extras.add(rs.getString("tyre_pressure_monitoring"));
+                extras.add(rs.getString("usb_port"));
+                extras.add(rs.getString("voice_control"));
+            }
+            return extras;
+        }, extrasId);
+    }
+
 }

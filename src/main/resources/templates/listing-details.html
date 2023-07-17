@@ -4,9 +4,9 @@
     <th:block th:insert="~{fragments/head-dynamic :: head-dynamic}"></th:block>
     <title th:text="'AutoSpotter | ' + ${listing.vehicle.manufacturer} + ' ' + ${listing.vehicle.model} "></title>
 </head>
+
 <body class="flex flex-col min-h-screen">
 
-    
     <th:block th:insert="~{fragments/header-dynamic :: header-dynamic}"></th:block>
 
     <main class="flex flex-1 space-x-4">
@@ -16,7 +16,7 @@
         <div class="flex-1 mt-8">
             <div class="flex justify-center">
                 <img class="w-96 aspect-video object-cover rounded" src="/img/car-example.jpg" alt="Slika vozila">
-            </div>              
+            </div>
 
             <div class="text-xl ml-10 ">
                 <h2 class="mb-4 ml mt-8 font-semibold" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></h2>
@@ -158,10 +158,13 @@
             <div class="px-4 sm:px-0 mt-8">
               <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Sigurnost i oprema</h2>
               <div class="mt-6 border-t border-gray-100">
-
+                  <ul>
+                      <li th:each="feature : ${listing.vehicle.safetyFeatures}" th:text="${feature}"></li>
+                      <li th:each="extra : ${listing.vehicle.extras}" th:text="${extra}"></li>
+                  </ul>
               </div>
             </div>
-            
+          
             <div class="px-4 sm:px-0 mt-8">
                 <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Opis oglasa</h2>
                 <div class="mt-6 border-t border-gray-100">

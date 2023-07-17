@@ -2,6 +2,7 @@ package com.example.AutoSpotter.classes.vehicle;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -12,9 +13,11 @@ import com.example.AutoSpotter.classes.location.LocationRepository;
 public class VehicleRowMapper implements RowMapper<Vehicle> {
 
     private final LocationRepository locationRepository;
+    private final VehicleRepository vehicleRepository;
 
-    public VehicleRowMapper(LocationRepository locationRepository) {
+    public VehicleRowMapper(LocationRepository locationRepository, VehicleRepository vehicleRepository) {
         this.locationRepository = locationRepository;
+        this.vehicleRepository = vehicleRepository;
     }
 
     @Override
@@ -52,6 +55,14 @@ public class VehicleRowMapper implements RowMapper<Vehicle> {
         int countyId = city.getCountyId();
         County county = locationRepository.getCountyById(countyId);
         vehicle.setCounty(county);
+
+        int safetyFeaturesId = rs.getInt("vehicle_safety_features_id");
+        List<String> safetyFeatures = vehicleRepository.getVehicleSafetyFeatures(safetyFeaturesId);
+        vehicle.setSafetyFeatures(safetyFeatures);
+
+        int extrasId = rs.getInt("vehicle_extras_id");
+        List<String> extras = vehicleRepository.getVehicleExtras(extrasId);
+        vehicle.setExtras(extras);
 
         return vehicle;
     }

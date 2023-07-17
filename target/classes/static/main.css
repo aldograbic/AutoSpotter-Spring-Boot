@@ -852,10 +852,6 @@ input[type="checkbox"]:checked + label {
   height: 2rem;
 }
 
-.h-96 {
-  height: 24rem;
-}
-
 .h-full {
   height: 100%;
 }

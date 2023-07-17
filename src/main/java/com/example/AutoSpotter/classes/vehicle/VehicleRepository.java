@@ -31,4 +31,8 @@ public interface VehicleRepository {
     int saveVehicleSafetyFeatures(List<String> safetyFeatures);
 
     int saveVehicleExtras(List<String> extras);
+
+    List<String> getVehicleSafetyFeatures(int safetyFeaturesId);
+
+    List<String> getVehicleExtras(int extrasId);
 }

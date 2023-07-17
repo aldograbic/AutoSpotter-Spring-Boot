@@ -9,6 +9,7 @@ import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ListingRowMapper implements RowMapper<Listing> {
 
@@ -38,6 +39,12 @@ public class ListingRowMapper implements RowMapper<Listing> {
         int userId = rs.getInt("user_id");
         User user = userRepository.getUserById(userId);
         listing.setUser(user);
+
+        List<String> safetyFeatures = vehicleRepository.getVehicleSafetyFeatures(vehicle.getVehicleSafetyFeaturesId());
+        listing.getVehicle().setSafetyFeatures(safetyFeatures);
+
+        List<String> extras = vehicleRepository.getVehicleExtras(vehicle.getVehicleExtrasId());
+        listing.getVehicle().setExtras(extras);
 
         return listing;
     }
