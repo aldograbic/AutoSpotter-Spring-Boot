@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import com.example.AutoSpotter.classes.user.UserRepository;
@@ -71,8 +72,18 @@ public class JdbcListingRepository implements ListingRepository {
                     "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
                     "INNER JOIN user u ON l.user_id = u.id " +
                     "INNER JOIN cities c ON v.city_id = c.id " +
+                    "WHERE l.status = 1 " +
                     "ORDER BY l.created_at DESC";
 
         return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository, userRepository));
+    }
+
+
+    @Scheduled(cron = "0 0 0 * * *") // Runs every day at midnight
+    public void updateListingStatus() {
+        LocalDateTime thirtyDaysAgo = LocalDateTime.now().minusDays(30);
+
+        String sql = "UPDATE listing SET status = 0 WHERE created_at < ?";
+        jdbcTemplate.update(sql, thirtyDaysAgo);
     }
 }

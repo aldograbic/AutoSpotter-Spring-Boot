@@ -44,4 +44,10 @@ public class JdbcUserRepository implements UserRepository{
         String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, city_id FROM user WHERE email = ?";
         return jdbcTemplate.queryForObject(sql, new UserRowMapper(), email);
     }
+
+    @Override
+    public User findByUsernameAndPassword(String username, String password) {
+        String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, city_id FROM user WHERE username = ? AND password = ?";
+        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username, password);
+    }
 }
