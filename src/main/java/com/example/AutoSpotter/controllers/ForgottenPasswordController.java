@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.user.UserRepository;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,13 +22,13 @@ public class ForgottenPasswordController {
     private final JavaMailSender mailSender;
     private final Map<String, String> passwordResetTokens;
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    // private final PasswordEncoder passwordEncoder;
 
-    public ForgottenPasswordController(JavaMailSender mailSender, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public ForgottenPasswordController(JavaMailSender mailSender, UserRepository userRepository) {
         this.mailSender = mailSender;
         this.passwordResetTokens = new HashMap<>();
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+        // this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/zaboravljena-lozinka")
@@ -71,7 +71,7 @@ public class ForgottenPasswordController {
             // Token is valid, update the user's password
             User user = userRepository.findByEmail(email);
             if (user != null) {
-                user.setPassword(passwordEncoder.encode(password));
+                // user.setPassword(passwordEncoder.encode(password));
                 userRepository.save(user);
 
                 passwordResetTokens.remove(token);

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <title>AutoSpotter | Prijava</title>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <th:block th:insert="~{fragments/header :: header}"></th:block>
+
+    <main class="flex flex-1">
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+
+        <div class="flex flex-col flex-1 w-50 items-center justify-center">
+            <h1 class="text-3xl font-bold text-gray-700 mb-8">Prijava</h1>
+            <form th:action="@{/prijava}" method="post">
+                <div class="flex flex-col mb-4">
+                    <label for="username">Korisničko ime</label>
+                    <input type="text" id="username" name="username" required class="input"/>
+                </div>
+                <div class="flex flex-col mb-4">
+                    <label for="password">Lozinka</label>
+                    <input type="password" id="password" name="password" required class="input"/>
+                </div>
+                <div class="flex flex-col mb-4">
+                    <input type="submit" value="Potvrdi" class="button"/>
+                </div>
+                <div class="mt-4 text-center">
+                    <a href="/zaboravljena-lozinka" class="text-cyan-700 hover:text-cyan-900">Zaboravljena lozinka?</a>
+                </div>
+                <div class="mt-8">
+                    <p>Nemate korisnički račun? <a href="/registracija" class="text-cyan-700 hover:text-cyan-900">Registrirajte se</a></p>
+                </div>
+            </form>
+        </div>
+
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+    </main>
+
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+    </footer>
+</body>
+</html>
