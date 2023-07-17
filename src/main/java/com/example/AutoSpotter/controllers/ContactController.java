@@ -1,5 +1,6 @@
 package com.example.AutoSpotter.controllers;
 
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,13 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.AutoSpotter.classes.contact.Contact;
 import com.example.AutoSpotter.classes.contact.ContactRepository;
 
+import org.springframework.mail.javamail.JavaMailSender;
+
 @Controller
 public class ContactController {
 
     private final ContactRepository contactRepository;
+    private final JavaMailSender javaMailSender;
 
-    public ContactController(ContactRepository contactRepository) {
+    public ContactController(ContactRepository contactRepository, JavaMailSender javaMailSender) {
         this.contactRepository = contactRepository;
+        this.javaMailSender = javaMailSender;
     }
 
     @GetMapping("/kontakt")
@@ -24,9 +29,20 @@ public class ContactController {
 
     @PostMapping("/kontakt")
     public String processContactForm(@ModelAttribute Contact contact) {
-        
+
         contactRepository.saveContact(contact);
-        // Prikaz poruke hvala na kontaktiranju..
+        
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("aldo.grabic99@gmail.com");
+        message.setTo("aldo.grabic99@gmail.com");
+        message.setSubject("Nova kontakt poruka!");
+        message.setText("Detalji poruke:\n\n" +
+                "Ime: " + contact.getName() + "\n" +
+                "Email: " + contact.getEmail() + "\n" +
+                "Poruka: " + contact.getMessage());
+
+        javaMailSender.send(message);
+        
         return "redirect:/";
     }
 }
