@@ -1,8 +1,5 @@
 package com.example.AutoSpotter.classes.user;
 
-import com.example.AutoSpotter.classes.user.User;
-import com.example.AutoSpotter.classes.user.UserRepository;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +9,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UsersDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;

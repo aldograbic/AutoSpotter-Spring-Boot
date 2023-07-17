@@ -14,29 +14,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.example.AutoSpotter.classes.user.UserRepository;
-import com.example.AutoSpotter.classes.user.UsersDetailsService;
-
 @Configuration
 public class SecurityConfig {
 
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) ->
             authorize
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/", "/login").permitAll()
+                .requestMatchers("/").permitAll()
                 .anyRequest().authenticated()
         )
         .formLogin((formLogin) ->
             formLogin
-                .loginPage("/login")
+                .loginPage("/prijava")
                 .permitAll()
         );
         return http.build();
@@ -59,10 +58,5 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return new UsersDetailsService(userRepository);
     }
 }
