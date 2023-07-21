@@ -1,6 +1,7 @@
 package com.example.AutoSpotter.classes.listing;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -76,6 +77,58 @@ public class JdbcListingRepository implements ListingRepository {
                     "ORDER BY l.created_at DESC";
 
         return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository, userRepository));
+    }
+
+    @Override
+    public List<Listing> getFilteredListings(String vehicleType, String manufacturer, String model,
+                                            String bodyType, String engineType, String transmission) {
+        // Build the SQL query with filtering conditions
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+                 "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
+                 "FROM listing l " +
+                 "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
+                 "INNER JOIN user u ON l.user_id = u.id " +
+                 "INNER JOIN cities c ON v.city_id = c.id " +
+                 "INNER JOIN vehicle_type vt ON v.vehicle_type_id = vt.id " +
+                 "WHERE l.status = 1 ";
+
+        List<Object> params = new ArrayList<>();
+
+        if (vehicleType != null && !vehicleType.isEmpty()) {
+            sql += "AND vt.name = ? ";
+            params.add(vehicleType);
+        }
+
+        if (manufacturer != null && !manufacturer.isEmpty()) {
+            sql += "AND v.manufacturer = ? ";
+            params.add(manufacturer);
+        }
+
+        if (model != null && !model.isEmpty()) {
+            sql += "AND v.model = ? ";
+            params.add(model);
+        }
+
+        if (bodyType != null && !bodyType.isEmpty()) {
+            sql += "AND v.body_type = ? ";
+            params.add(bodyType);
+        }
+
+        if (engineType != null && !engineType.isEmpty()) {
+            sql += "AND v.engine_type = ? ";
+            params.add(engineType);
+        }
+
+        if (transmission != null && !transmission.isEmpty()) {
+            sql += "AND v.transmission = ? ";
+            params.add(transmission);
+        }
+
+        // Add more filtering conditions as needed
+
+        sql += "ORDER BY l.created_at DESC";
+
+        return jdbcTemplate.query(sql, params.toArray(), new ListingRowMapper(vehicleRepository, userRepository));
     }
 
 

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.AutoSpotter.classes.listing.JdbcListingRepository;
@@ -29,8 +30,25 @@ public class NewListingsController {
     }
 
     @GetMapping("/oglasi")
-    public String showNewListings(Model model) {
-        List<Listing> newListings = listingRepository.getNewListings();
+    public String showNewListings(@RequestParam(required = false) String vehicleType,
+                              @RequestParam(required = false) String manufacturer,
+                              @RequestParam(required = false) String vehicleModel,
+                              @RequestParam(required = false) String bodyType,
+                              @RequestParam(required = false) String engineType,
+                              @RequestParam(required = false) String transmission,
+                              // Add other filter parameters as needed
+                              Model model) {
+
+        List<Listing> newListings;
+
+        if (vehicleType != null || manufacturer != null || vehicleModel != null || bodyType != null || engineType != null || transmission != null) {
+            // If any filter parameters are present, apply the filtering
+            newListings = listingRepository.getFilteredListings(vehicleType, manufacturer, vehicleModel, bodyType, engineType, transmission);
+        } else {
+            // If no filters are applied, get all new listings
+            newListings = listingRepository.getNewListings();
+        }
+
         List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
         List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
         List<String> engineTypes = vehicleRepository.getAllEngineTypes();

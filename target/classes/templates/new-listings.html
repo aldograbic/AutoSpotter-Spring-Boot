@@ -13,11 +13,11 @@
 
         <div th:fragment="sideDiv" class="flex-0 w-1/5 bg-gray-100 border-r-2 text-sm">
             <h2 class="text-xl font-bold text-gray-700 mb-6 mt-8 ml-4">Filtriraj</h2>
-            <form>
+            <form action="/oglasi" method="get">
                 <div class="flex flex-col m-4" x-data="{ open: false }">
                     <label for="vehicleType">Tip vozila</label>
                     <div class="relative inline-block w-auto">
-                        <select id="vehicleType" class="input w-[21.8rem]">
+                        <select id="vehicleType" name="vehicleType" class="input w-[21.8rem]">
                             <option value="" selected>Sva vozila</option>
                             <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}" th:text="${vehicleType}"></option>
                         </select>
@@ -29,7 +29,7 @@
                 <div class="flex flex-col m-4">
                     <label for="manufacturer">Proizvođač</label>
                     <div class="relative inline-block w-auto">
-                        <select id="manufacturer" class="input w-[21.8rem]">
+                        <select id="manufacturer" name="manufacturer" class="input w-[21.8rem]">
                             <option value="" disabled selected>Odabir</option>
                         </select>
                         <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
@@ -41,7 +41,7 @@
                 <div class="flex flex-col m-4">
                     <label for="model">Model</label>
                     <div class="relative inline-block w-auto">
-                        <select id="model" class="input w-[21.8rem]">
+                        <select id="model" name="model" class="input w-[21.8rem]">
                             <option value="" disabled selected>Odabir</option>
                         </select>
                         <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
@@ -52,7 +52,7 @@
                 <div class="flex flex-col m-4">
                     <label for="bodyType">Oblik karoserije</label>
                     <div class="relative inline-block w-auto">
-                        <select id="bodyType" class="input w-[21.8rem]">
+                        <select id="bodyType" name="bodyType" class="input w-[21.8rem]">
                             <option value="" selected>Svi oblici</option>
                             <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
                         </select>
@@ -64,7 +64,7 @@
                 <div class="flex flex-col m-4">
                     <label for="engineType">Motor</label>
                     <div class="relative inline-block w-auto">
-                        <select id="engineType" class="input w-[21.8rem]">
+                        <select id="engineType" name="engineType" class="input w-[21.8rem]">
                             <option value="" selected>Sve vrste</option>
                             <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                         </select>
@@ -156,7 +156,21 @@
         <div class="flex-1 mt-8">
             <div class="flex items-center justify-between">
                 <h1 class="text-3xl font-bold text-gray-700 mb-8">Oglasi</h1>
-                <a class="mb-6" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="M25 14L16 5L7 14"/><path d="M15.9917 31V5"/><path d="M42 34L33 43L24 34"/><path d="M32.9917 17V43"/></g></svg></a>
+                <div x-data="{ open: false }" class="relative inline-block text-left">
+                    <div>
+                        <button @click="open = !open" type="button" class="text-gray-700 font-medium hover:text-cyan-700 inline-flex items-center">
+                            <a class="mb-6" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="M25 14L16 5L7 14"/><path d="M15.9917 31V5"/><path d="M42 34L33 43L24 34"/><path d="M32.9917 17V43"/></g></svg>
+                            </a>
+                        </button>
+                    </div>
+                    <div x-show="open" @click.away="open = false" id="dropdown-menu" class="origin-top-right absolute right-0 z-10  w-[8.5rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                      <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100" role="menuitem">Najniža cijena</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100" role="menuitem">Najviša cijena</a>
+                      </div>
+                    </div>
+                </div>
             </div>
             
             <ul>
@@ -187,6 +201,14 @@
                     </div>
                 </li>
             </ul>
+
+            <div th:if="${#lists.isEmpty(newListings)}" class="text-center">
+                <p class="text-gray-700 font-semibold mt-8">Nije pronađen nijedan oglas s odabranim filterima.</p>
+                <h2 class="text-xl font-semibold text-gray-700 mb-4 mt-8">Slični oglasi</h2>
+                <ul>
+                    <!-- Add Thymeleaf code to iterate over and display similar listings -->
+                </ul>
+            </div>
         </div>
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
