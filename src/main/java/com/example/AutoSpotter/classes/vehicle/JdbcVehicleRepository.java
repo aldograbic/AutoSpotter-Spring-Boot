@@ -336,5 +336,4 @@ public class JdbcVehicleRepository implements VehicleRepository {
             return extras;
         }, extrasId);
     }
-
 }

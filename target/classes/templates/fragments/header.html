@@ -5,9 +5,9 @@
             <p>AutoSpotter</p>
         </div>
         <ul class="flex space-x-4 flex-grow justify-center">
-            <li><a class="text-gray-700 font-medium hover:text-cyan-700" href="/pretraga">Pretraga</a></li>
-            <li><a class="text-gray-700 font-medium hover:text-cyan-700" href="/oglasi">Oglasi</a></li>
-            <li><a class="text-gray-700 font-medium hover:text-cyan-700" href="/postavi-oglas">Postavi oglas</a></li>
+            <li><a class="text-gray-700 font-medium hover:text-cyan-700 header-link" href="/pretraga">Pretraga</a></li>
+            <li><a class="text-gray-700 font-medium hover:text-cyan-700 header-link" href="/oglasi">Oglasi</a></li>
+            <li><a class="text-gray-700 font-medium hover:text-cyan-700 header-link" href="/postavi-oglas">Postavi oglas</a></li>
             <!-- <li>
                 <span th:if="${session.user != null}">
                     <a class="text-gray-700 font-medium hover:text-cyan-700" href="/postavi-oglas">Postavi oglas</a>
@@ -18,10 +18,10 @@
             </li> -->
         </ul>
         <div class="flex space-x-4">
-            <a class="text-gray-700 font-medium hover:text-cyan-700" href="/kontakt">Kontakt</a>
+            <a class="text-gray-700 font-medium hover:text-cyan-700 header-link" href="/kontakt">Kontakt</a>
             <div x-data="{ open: false }" class="relative inline-block text-left">
                 <div>
-                    <button @click="open = !open" type="button" class="text-gray-700 font-medium hover:text-cyan-700 inline-flex items-center">Korisnički račun
+                    <button @click="open = !open" type="button" class="text-gray-700 font-medium hover:text-cyan-700 inline-flex items-center header-link">Korisnički račun
                         <svg class="w-4 h-4 ml-1" viewBox="0 0 20 14" fill="currentColor">
                           <path fill-rule="evenodd" d="M6 6l4 4 4-4H6z" />
                         </svg>
