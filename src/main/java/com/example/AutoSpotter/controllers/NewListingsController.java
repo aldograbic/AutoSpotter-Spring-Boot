@@ -30,43 +30,62 @@ public class NewListingsController {
     }
 
     @GetMapping("/oglasi")
-    public String showNewListings(@RequestParam(required = false) String vehicleType,
+public String showNewListings(@RequestParam(required = false) String vehicleType,
                               @RequestParam(required = false) String manufacturer,
                               @RequestParam(required = false) String vehicleModel,
                               @RequestParam(required = false) String bodyType,
                               @RequestParam(required = false) String engineType,
                               @RequestParam(required = false) String transmission,
                               // Add other filter parameters as needed
+                              @RequestParam(defaultValue = "1") int page,
                               Model model) {
 
-        List<Listing> newListings;
+    int itemsPerPage = 15;
 
-        if (vehicleType != null || manufacturer != null || vehicleModel != null || bodyType != null || engineType != null || transmission != null) {
-            // If any filter parameters are present, apply the filtering
-            newListings = listingRepository.getFilteredListings(vehicleType, manufacturer, vehicleModel, bodyType, engineType, transmission);
-        } else {
-            // If no filters are applied, get all new listings
-            newListings = listingRepository.getNewListings();
-        }
+    List<Listing> newListings;
+    List<Listing> allNewListings = listingRepository.getNewListings();
 
-        List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
-        List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
-        List<String> engineTypes = vehicleRepository.getAllEngineTypes();
-        List<String> counties = locationRepository.getAllCounties();
-        List<Integer> years = new ArrayList<>();
-        for(int i = 2023; i >= 1900; i--) {
-            years.add(i);
-        }
-
-        model.addAttribute("years", years);
-        model.addAttribute("newListings", newListings);
-        model.addAttribute("vehicleTypes", vehicleTypes);
-        model.addAttribute("bodyTypes", bodyTypes);
-        model.addAttribute("engineTypes", engineTypes);
-        model.addAttribute("counties", counties);
-
-        return "new-listings";
+    if (vehicleType != null || manufacturer != null || vehicleModel != null || bodyType != null || engineType != null || transmission != null) {
+        newListings = listingRepository.getFilteredListings(vehicleType, manufacturer, vehicleModel, bodyType, engineType, transmission);
+    } else {
+        newListings = allNewListings;
     }
+
+    int totalItems = newListings.size();
+    int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+
+    if (page < 1) {
+        page = 1;
+    } else if (page > totalPages) {
+        page = totalPages;
+    }
+
+    int startIndex = (page - 1) * itemsPerPage;
+    int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+
+    List<Listing> displayedNewListings = newListings.subList(startIndex, endIndex);
+
+    List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
+    List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
+    List<String> engineTypes = vehicleRepository.getAllEngineTypes();
+    List<String> counties = locationRepository.getAllCounties();
+    List<Integer> years = new ArrayList<>();
+    for (int i = 2023; i >= 1900; i--) {
+        years.add(i);
+    }
+
+    model.addAttribute("years", years);
+    model.addAttribute("newListings", displayedNewListings);
+    model.addAttribute("vehicleTypes", vehicleTypes);
+    model.addAttribute("bodyTypes", bodyTypes);
+    model.addAttribute("engineTypes", engineTypes);
+    model.addAttribute("counties", counties);
+    model.addAttribute("currentPage", page);
+    model.addAttribute("totalPages", totalPages);
+
+    return "new-listings";
+}
+
 
     @PostMapping("/manufacturers")
     @ResponseBody

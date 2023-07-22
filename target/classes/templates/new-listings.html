@@ -180,7 +180,8 @@
                         <a th:href="@{'/oglasi/' + ${listing.id}}" class="text-cyan-700 text-xl hover:text-cyan-900">
                             <h2 class="mb-4 inline-block" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></h2>
                         </a>
-                        <p th:text="&euro; + ${listing.listingPrice}" class="text-gray-700 text-lg font-semibold mb-4"></p>
+                        <p th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}" class="text-gray-700 text-lg font-semibold mb-4"></p>
+
                         <p th:text="${listing.vehicle.state + ', ' + listing.vehicle.mileage + ' km'}" class="text-gray-700"></p>
                         <p class="text-gray-700">
                             <span th:if="${#strings.length(listing.listingDescription) > 75}" th:text="${#strings.substring(listing.listingDescription, 0, 75) + '...'}"></span>
@@ -191,13 +192,21 @@
                         </p>
                         <p class="mt-10 text-gray-700" th:text="${#dates.format(listing.createdAt, 'dd.MM.yyyy')}"></p>
                         <p class="flex items-center text-gray-700 absolute top-0 right-0 mt-3 mr-4">
-                            <span class="mr-1"><img class="w-6" src="img/location-icon.png" alt="Lokacija"></span>
+                            <span class="mr-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-cyan-700">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                </svg>
+                            </span>
                             <span th:text="${listing.vehicle.city.cityName}"></span>
                         </p>
                         <a th:href="@{'/korisnicki-profil/' + ${listing.user.id}}" class="flex items-center text-cyan-700 absolute bottom-0 right-0 mb-3 mr-4 hover:text-cyan-900">
-                            <span class="mr-2"><img class="w-6" src="img/user-icon.png" alt="Prodavač"></span>
+                            <span class="mr-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                              </svg>
+                              </span>
                             <span th:text="${listing.user.username}"></span>
-                        </a>               
+                        </a>
                     </div>
                 </li>
             </ul>
@@ -209,6 +218,15 @@
                     <!-- Add Thymeleaf code to iterate over and display similar listings -->
                 </ul>
             </div>
+
+            <div class="flex justify-center mb-4">
+                <nav class="inline-flex">
+                    <a th:href="@{'/oglasi?page=' + ${currentPage - 1}}" class="px-3 border rounded-l-md border-gray-300 flex hover:bg-gray-50" th:if="${currentPage > 1}"><svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg></a>
+                    <span class="px-4 py-2 border-t border-b border-gray-300 bg-white font-semibold text-gray-700" th:text="${currentPage}"></span>
+                    <a th:href="@{'/oglasi?page=' + ${currentPage + 1}}" class="px-3 border rounded-r-md border-gray-300 flex hover:bg-gray-50" th:if="${currentPage < totalPages}"><svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24"><path d="M13.1714 12.0007L8.22168 7.05093L9.63589 5.63672L15.9999 12.0007L9.63589 18.3646L8.22168 16.9504L13.1714 12.0007Z"></path></svg></a>
+                </nav>
+            </div>
+
         </div>
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
