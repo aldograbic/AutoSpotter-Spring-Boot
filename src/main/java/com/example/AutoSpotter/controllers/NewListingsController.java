@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.AutoSpotter.classes.listing.JdbcListingRepository;
 import com.example.AutoSpotter.classes.listing.Listing;
+import com.example.AutoSpotter.classes.location.County;
 import com.example.AutoSpotter.classes.location.JdbcLocationRepository;
 import com.example.AutoSpotter.classes.vehicle.JdbcVehicleRepository;
 
@@ -30,61 +31,83 @@ public class NewListingsController {
     }
 
     @GetMapping("/oglasi")
-public String showNewListings(@RequestParam(required = false) String vehicleType,
-                              @RequestParam(required = false) String manufacturer,
-                              @RequestParam(required = false) String vehicleModel,
-                              @RequestParam(required = false) String bodyType,
-                              @RequestParam(required = false) String engineType,
-                              @RequestParam(required = false) String transmission,
-                              // Add other filter parameters as needed
-                              @RequestParam(defaultValue = "1") int page,
-                              Model model) {
+    public String showNewListings(@RequestParam(required = false) String vehicleType,
+                                @RequestParam(required = false) String manufacturer,
+                                @RequestParam(required = false) String vehicleModel,
+                                @RequestParam(required = false) String bodyType,
+                                @RequestParam(required = false) String engineType,
+                                @RequestParam(required = false) String transmission,
+                                @RequestParam(required = false) String location,
+                                @RequestParam(required = false) Integer mileageFrom,
+                                @RequestParam(required = false) Integer mileageTo,
+                                @RequestParam(required = false) Integer yearFrom,
+                                @RequestParam(required = false) Integer yearTo,
+                                @RequestParam(required = false) Integer priceFrom,
+                                @RequestParam(required = false) Integer priceTo,
+                                @RequestParam(required = false) String userType,
+                                @RequestParam(defaultValue = "1") int page,
+                                Model model) {
 
-    int itemsPerPage = 15;
+        int itemsPerPage = 15;
 
-    List<Listing> newListings;
-    List<Listing> allNewListings = listingRepository.getNewListings();
+        List<Listing> newListings;
+        List<Listing> allNewListings = listingRepository.getNewListings();
 
-    if (vehicleType != null || manufacturer != null || vehicleModel != null || bodyType != null || engineType != null || transmission != null) {
-        newListings = listingRepository.getFilteredListings(vehicleType, manufacturer, vehicleModel, bodyType, engineType, transmission);
-    } else {
-        newListings = allNewListings;
+        if (vehicleType != null || manufacturer != null || vehicleModel != null || bodyType != null || engineType != null || transmission != null || location != null || 
+            mileageFrom != null || mileageTo != null  || yearFrom != null || yearTo != null || priceFrom != null || priceTo != null || userType != null) {
+
+            newListings = listingRepository.getFilteredListings(vehicleType, manufacturer, vehicleModel, bodyType, engineType, transmission, location, mileageFrom, mileageTo, yearFrom, yearTo, priceFrom, priceTo, userType);
+
+        } else {
+
+            newListings = allNewListings;
+        }
+
+        int totalItems = newListings.size();
+        int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+
+        if (page < 1) {
+            page = 1;
+        } else if (page > totalPages) {
+            page = totalPages;
+        }
+
+        int startIndex = (page - 1) * itemsPerPage;
+        int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+
+        if (startIndex >= totalItems) {
+            startIndex = Math.max(0, totalItems - 1);
+            endIndex = startIndex;
+        }
+
+        List<Listing> displayedNewListings = newListings.subList(Math.max(startIndex, 0), Math.max(endIndex, 0));
+
+
+        List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
+        List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
+        List<String> engineTypes = vehicleRepository.getAllEngineTypes();
+        List<County> counties = locationRepository.getAllCounties();
+        List<Integer> years = new ArrayList<>();
+        for (int i = 2023; i >= 1900; i--) {
+            years.add(i);
+        }
+
+        model.addAttribute("years", years);
+        model.addAttribute("newListings", displayedNewListings);
+        model.addAttribute("vehicleTypes", vehicleTypes);
+        model.addAttribute("bodyTypes", bodyTypes);
+        model.addAttribute("engineTypes", engineTypes);
+        model.addAttribute("counties", counties);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+
+        if (newListings.isEmpty()) {
+            model.addAttribute("noListingsFoundMessage", "Nije pronađen nijedan oglas s odabranim filterima.");
+            return "new-listings";
+        }
+
+        return "new-listings";
     }
-
-    int totalItems = newListings.size();
-    int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
-
-    if (page < 1) {
-        page = 1;
-    } else if (page > totalPages) {
-        page = totalPages;
-    }
-
-    int startIndex = (page - 1) * itemsPerPage;
-    int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
-
-    List<Listing> displayedNewListings = newListings.subList(startIndex, endIndex);
-
-    List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
-    List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
-    List<String> engineTypes = vehicleRepository.getAllEngineTypes();
-    List<String> counties = locationRepository.getAllCounties();
-    List<Integer> years = new ArrayList<>();
-    for (int i = 2023; i >= 1900; i--) {
-        years.add(i);
-    }
-
-    model.addAttribute("years", years);
-    model.addAttribute("newListings", displayedNewListings);
-    model.addAttribute("vehicleTypes", vehicleTypes);
-    model.addAttribute("bodyTypes", bodyTypes);
-    model.addAttribute("engineTypes", engineTypes);
-    model.addAttribute("counties", counties);
-    model.addAttribute("currentPage", page);
-    model.addAttribute("totalPages", totalPages);
-
-    return "new-listings";
-}
 
 
     @PostMapping("/manufacturers")

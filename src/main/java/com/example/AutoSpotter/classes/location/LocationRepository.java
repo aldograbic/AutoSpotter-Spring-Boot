@@ -13,7 +13,7 @@ public interface LocationRepository {
 
     List<String> getAllCities();
 
-    List<String> getAllCounties();
+    List<County> getAllCounties();
 
     Map<String, List<String>> getCitiesByCounty();
 }

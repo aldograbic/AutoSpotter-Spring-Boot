@@ -405,7 +405,7 @@ INSERT INTO models VALUES
        (192, 'Mulsanne', 8),
        (193, 'Turbo R', 8),
        (194, 'Centodieci', 9),
-       (195, 'Chrion', 9),
+       (195, 'Chiron', 9),
        (196, 'Divo', 9),
        (197, 'EB 110', 9),
        (198, 'EB 112', 9),

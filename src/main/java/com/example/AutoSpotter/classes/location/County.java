@@ -37,4 +37,13 @@ public class County {
     public void setCountryId(int countryId) {
         this.countryId = countryId;
     }
+
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return countyName;
+    }
 }

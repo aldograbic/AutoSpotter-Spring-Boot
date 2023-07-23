@@ -49,7 +49,7 @@
                         </svg>
                     </div>
                 </div>
-                <div class="flex flex-col m-4">
+                <div class="flex flex-col m-4" id="bodyTypeSection">
                     <label for="bodyType">Oblik karoserije</label>
                     <div class="relative inline-block w-auto">
                         <select id="bodyType" name="bodyType" class="input w-[21.8rem]">
@@ -81,11 +81,12 @@
                         <button type="button" id="transmissionAutomatic" class="button bg-neutral-400 flex-grow rounded-none">Automatski</button>
                         <button type="button" id="transmissionSemiAutomatic" class="button bg-neutral-400 flex-grow rounded-bl-none rounded-tl-none">Poluautom.</button>
                     </div>
+                    <input type="hidden" id="selectedTransmission" name="transmission" value="">
                 </div>
                 <div class="flex flex-col m-4">
                     <label for="location">Lokacija vozila</label>
                     <div class="relative inline-block w-auto">
-                        <select id="location" class="input w-[21.8rem]">
+                        <select id="location" name="location" class="input w-[21.8rem]">
                             <option value="" disabled selected>Odabir</option>
                             <option th:each="county : ${counties}" th:value="${county}" th:text="${county}"></option>
                         </select>
@@ -97,16 +98,17 @@
                 <div class="flex flex-col m-4">
                     <label for="mileageFrom">Kilometraža vozila</label>
                     <div class="flex items-center">
-                        <input type="number" id="mileageFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" name="mileageFrom" id="mileageFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="mileageTo" min="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" name="mileageTo" id="mileageTo" min="0" class="input w-11/12 no-arrows flex-grow pl-1">
                     </div>
+                    <p id="mileageError" class="text-red-500"></p>
                 </div>
                 <div class="flex flex-col m-4">
                     <label for="yearFrom">Godina proizvodnje</label>
                     <div class="flex items-center">
                         <div class="relative inline-block w-[9.35rem]">
-                            <select id="yearFrom" class="input flex-grow w-[9.35rem]">
+                            <select id="yearFrom" name="yearFrom" class="input flex-grow w-[9.35rem]">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
                             </select>
@@ -116,7 +118,7 @@
                         </div>
                         <p class="text-center mr-4 ml-4">do</p>
                         <div class="relative inline-block w-[9.35rem]">
-                            <select id="yearTo" class="input flex-grow w-[9.35rem]">
+                            <select id="yearTo" name="yearTo" class="input flex-grow w-[9.35rem]">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
                             </select>
@@ -131,9 +133,9 @@
                 <div class="flex flex-col m-4">
                     <label for="priceFrom">Cijena vozila</label>
                     <div class="flex items-center">
-                        <input type="number" id="priceFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" id="priceFrom" name="priceFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="priceTo" min="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" id="priceTo" name="priceTo" min="0" class="input w-11/12 no-arrows flex-grow pl-1">
                     </div>
                     <p id="priceError" class="text-red-500"></p>
                 </div>
@@ -145,10 +147,11 @@
                         <button type="button" id="userTypePrivate" class="button bg-neutral-400 flex-grow rounded-none">Privatni</button>
                         <button type="button" id="userTypeBusiness" class="button bg-neutral-400 flex-grow rounded-bl-none rounded-tl-none">Poslovni</button>
                     </div>
+                    <input type="hidden" id="selectedUserType" name="userType" value="" />
                 </div>
                 <div class="flex justify-end m-4">
                     <input type="reset" value="Poništi" class="button mr-4">
-                    <input type="submit" value="Filtriraj" class="button">
+                    <input type="submit" id="submitBtn" value="Filtriraj" class="button">
                 </div>
             </form>
         </div>
@@ -212,7 +215,7 @@
             </ul>
 
             <div th:if="${#lists.isEmpty(newListings)}" class="text-center">
-                <p class="text-gray-700 font-semibold mt-8">Nije pronađen nijedan oglas s odabranim filterima.</p>
+                <p class="text-gray-700 font-semibold mt-8" th:text="${noListingsFoundMessage}"></p>
                 <h2 class="text-xl font-semibold text-gray-700 mb-4 mt-8">Slični oglasi</h2>
                 <ul>
                     <!-- Add Thymeleaf code to iterate over and display similar listings -->

@@ -53,9 +53,9 @@ public class JdbcLocationRepository implements LocationRepository{
     }
 
     @Override
-    public List<String> getAllCounties() {
-        String sql = "SELECT county_name FROM counties";
-        return jdbcTemplate.queryForList(sql, String.class);
+    public List<County> getAllCounties() {
+        String sql = "SELECT * FROM counties";
+        return jdbcTemplate.query(sql, new CountyRowMapper());
     }
 
     @Override

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.AutoSpotter.classes.listing.Listing;
 import com.example.AutoSpotter.classes.listing.ListingRepository;
+import com.example.AutoSpotter.classes.location.County;
 import com.example.AutoSpotter.classes.location.LocationRepository;
 import com.example.AutoSpotter.classes.vehicle.Vehicle;
 import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
@@ -53,7 +54,7 @@ public class AddListingController {
             years.add(i);
         }
         List<String> states = vehicleRepository.getAllStates();
-        List<String> counties = locationRepository.getAllCounties();
+        List<County> counties = locationRepository.getAllCounties();
         Map<String, List<String>> citiesByCounty = locationRepository.getCitiesByCounty();
         List<String> engineTypes = vehicleRepository.getAllEngineTypes();
         List<String> transmissionTypes = vehicleRepository.getAllTransmissionTypes();
