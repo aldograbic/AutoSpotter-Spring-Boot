@@ -4,7 +4,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.user.UserRepository;
+import com.example.AutoSpotter.classes.vehicle.SafetyFeature;
 import com.example.AutoSpotter.classes.vehicle.Vehicle;
+import com.example.AutoSpotter.classes.vehicle.VehicleExtra;
 import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
 
 import java.sql.ResultSet;
@@ -40,10 +42,10 @@ public class ListingRowMapper implements RowMapper<Listing> {
         User user = userRepository.getUserById(userId);
         listing.setUser(user);
 
-        List<String> safetyFeatures = vehicleRepository.getVehicleSafetyFeatures(vehicle.getVehicleSafetyFeaturesId());
+        List<SafetyFeature> safetyFeatures = vehicleRepository.getVehicleSafetyFeatures(vehicle.getVehicleSafetyFeaturesId());
         listing.getVehicle().setSafetyFeatures(safetyFeatures);
 
-        List<String> extras = vehicleRepository.getVehicleExtras(vehicle.getVehicleExtrasId());
+        List<VehicleExtra> extras = vehicleRepository.getVehicleExtras(vehicle.getVehicleExtrasId());
         listing.getVehicle().setExtras(extras);
 
         return listing;

@@ -32,7 +32,7 @@ public interface VehicleRepository {
 
     int saveVehicleExtras(List<String> extras);
 
-    List<String> getVehicleSafetyFeatures(int safetyFeaturesId);
+    List<SafetyFeature> getVehicleSafetyFeatures(int safetyFeaturesId);
 
-    List<String> getVehicleExtras(int extrasId);
+    List<VehicleExtra> getVehicleExtras(int extrasId);
 }

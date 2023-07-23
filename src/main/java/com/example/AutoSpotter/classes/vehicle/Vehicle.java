@@ -34,8 +34,8 @@ public class Vehicle {
 
     private City city;
     private County county;
-    private List<String> safetyFeatures;
-    private List<String> extras;
+    private List<SafetyFeature> safetyFeatures;
+    private List<VehicleExtra> extras;
 
     public Vehicle(String manufacturer, String model, String bodyType, String color, Date registered, int mileage,
                    String state, int year, int numberOfWheels, double maximumAllowableWeight, String engineType, double engineDisplacement,
@@ -274,19 +274,19 @@ public class Vehicle {
         this.county = county;
     }
 
-    public List<String> getSafetyFeatures() {
+    public List<SafetyFeature> getSafetyFeatures() {
         return safetyFeatures;
     }
 
-    public void setSafetyFeatures(List<String> safetyFeatures) {
+    public void setSafetyFeatures(List<SafetyFeature> safetyFeatures) {
         this.safetyFeatures = safetyFeatures;
     }
 
-    public List<String> getExtras() {
+    public List<VehicleExtra> getExtras() {
         return extras;
     }
 
-    public void setExtras(List<String> extras) {
+    public void setExtras(List<VehicleExtra> extras) {
         this.extras = extras;
     }
 }

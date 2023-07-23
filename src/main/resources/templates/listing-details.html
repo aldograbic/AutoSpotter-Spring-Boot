@@ -168,25 +168,41 @@
 
             <div class="px-4 sm:px-0 mt-8">
               <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Sigurnost i oprema</h2>
-              <div class="mt-6 border-t border-gray-100">
-                  <ul>
-                      <li th:each="feature : ${listing.vehicle.safetyFeatures}" th:text="${feature}"></li>
-                      <li th:each="extra : ${listing.vehicle.extras}" th:text="${extra}"></li>
-                  </ul>
+              <div class="mt-6 py-6 border-t border-gray-100 grid grid-cols-2 gap-4">
+                  <div>
+                      <ul>
+                          <li th:each="feature : ${listing.vehicle.safetyFeatures}" th:if="${feature.value}">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 inline-block align-middle" viewBox="0 0 24 24">
+                                  <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z" fill="rgba(8,145,178,1)"></path>
+                              </svg>
+                              <span class="inline-block align-middle" th:text="${feature}"></span>
+                          </li>
+                      </ul>
+                  </div>
+                  <div>
+                      <ul>
+                          <li th:each="extra : ${listing.vehicle.extras}" th:if="${extra.value}">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 inline-block align-middle" viewBox="0 0 24 24">
+                                  <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z" fill="rgba(8,145,178,1)"></path>
+                              </svg>
+                              <span class="inline-block align-middle" th:text="${extra}"></span>
+                          </li>
+                      </ul>
+                  </div>
               </div>
             </div>
-          
+
             <div class="px-4 sm:px-0 mt-8">
                 <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Opis oglasa</h2>
-                <div class="mt-6 border-t border-gray-100">
-                  <p class="text-gray-700 py-6" th:text="${listing.listingDescription}"></p>
+                <div class="mt-6 py-6 border-t border-gray-100">
+                  <p class="text-gray-700" th:text="${listing.listingDescription}"></p>
                 </div>
             </div>
             
-            <div class="px-4 sm:px-0 mb-8">
+            <div class="px-4 sm:px-0 mt-8 mb-8">
               <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Podaci o prodavatelju</h2>
-              <div class="mt-6 border-t border-gray-100">
-                  <a class="flex py-6 items-center text-cyan-700 hover:text-cyan-900 mt-3" th:href="@{/korisnicki-profil/{userId}(userId=${listing.user.id})}">
+              <div class="mt-6 py-6 border-t border-gray-100">
+                  <a class="flex items-center text-cyan-700 hover:text-cyan-900 mt-3" th:href="@{/korisnicki-profil/{userId}(userId=${listing.user.id})}">
                       <span class="mr-2"><img class="w-6" src="/img/user-icon.png" alt="Prodavač"></span>
                       <span class="font-semibold text-lg" th:text="${listing.user.username}"></span>
                   </a>

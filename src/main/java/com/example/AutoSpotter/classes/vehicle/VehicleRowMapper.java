@@ -57,11 +57,11 @@ public class VehicleRowMapper implements RowMapper<Vehicle> {
         vehicle.setCounty(county);
 
         int safetyFeaturesId = rs.getInt("vehicle_safety_features_id");
-        List<String> safetyFeatures = vehicleRepository.getVehicleSafetyFeatures(safetyFeaturesId);
+        List<SafetyFeature> safetyFeatures = vehicleRepository.getVehicleSafetyFeatures(safetyFeaturesId);
         vehicle.setSafetyFeatures(safetyFeatures);
 
         int extrasId = rs.getInt("vehicle_extras_id");
-        List<String> extras = vehicleRepository.getVehicleExtras(extrasId);
+        List<VehicleExtra> extras = vehicleRepository.getVehicleExtras(extrasId);
         vehicle.setExtras(extras);
 
         return vehicle;
