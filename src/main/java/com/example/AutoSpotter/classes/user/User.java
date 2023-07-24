@@ -1,5 +1,8 @@
 package com.example.AutoSpotter.classes.user;
 
+import com.example.AutoSpotter.classes.location.City;
+import com.example.AutoSpotter.classes.location.County;
+
 public class User {
     private int id;
     private String username;
@@ -13,6 +16,8 @@ public class User {
     private String email;
     private int cityId;
     
+    private City city;
+    private County county;
 
     public int getId() {
         return id;
@@ -100,6 +105,22 @@ public class User {
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public County getCounty() {
+        return county;
+    }
+
+    public void setCounty(County county) {
+        this.county = county;
     }
 
     public User(int id, String username, String password, String firstName, String lastName, String companyName, String companyOIB, String address, String phoneNumber, String email, int cityId) {

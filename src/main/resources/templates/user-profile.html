@@ -12,11 +12,28 @@
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
-        <div class="flex-1 mt-8">
-            <p><strong>Korisničko ime:</strong> <span th:text="${user.username}"></span></p>
-            <p><strong>Ime i prezime:</strong> <span th:text="${user.firstName + ' ' + user.lastName}"></span></p>
-            <p><strong>Broj telefona:</strong> <span th:text="${user.phoneNumber}"></span></p>
-            <p><strong>E-mail adresa:</strong> <span th:text="${user.email}"></span></p>
+        <div class="flex flex-col flex-1 w-50">
+            <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-8">Korisnički račun</h1>
+
+            <div class="h-full mb-4 flex flex-col items-center border rounded-md">
+                <div class="w-48 h-48 bg-cyan-100 mx-auto mt-8 rounded-full shadow-2xl inset-x-0 top-0 flex items-center justify-center text-cyan-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <h1 class="text-4xl font-medium text-gray-700" th:text="${user.username}"></h1>
+                    <p class="mt-2 text-gray-500" th:text="${user.firstName + ' ' + user.lastName}"></p>
+                    <p class="font-light text-gray-600 mt-2" th:text="${user.city.cityName + ', ' + user.county}"></p>
+                    <div class="mt-8">
+                        <p class="text-gray-400">Oglasi</p>
+                        <p class="font-bold text-gray-700">0</p>
+                    </div>
+                    <p class="mt-8 text-gray-500">Broj telefona: <span th:text="${user.phoneNumber}"></span></p>
+                    <p class="mt-2 text-gray-500">E-mail adresa: <span th:text="${user.email}"></span></p>
+                </div>
+            </div>       
         </div>
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>

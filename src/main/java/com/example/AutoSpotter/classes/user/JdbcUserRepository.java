@@ -3,19 +3,23 @@ package com.example.AutoSpotter.classes.user;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.example.AutoSpotter.classes.location.LocationRepository;
+
 @Repository
 public class JdbcUserRepository implements UserRepository{
 
     private final JdbcTemplate jdbcTemplate;
+    private final LocationRepository locationRepository;
 
-    public JdbcUserRepository(JdbcTemplate jdbcTemplate) {
+    public JdbcUserRepository(JdbcTemplate jdbcTemplate, LocationRepository locationRepository) {
         this.jdbcTemplate = jdbcTemplate;
+        this.locationRepository = locationRepository;
     }
 
     @Override
     public User getUserById(int id) {
         String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, city_id FROM user WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
+        return jdbcTemplate.queryForObject(sql, new UserRowMapper(locationRepository), id);
     }
 
     @Override
@@ -28,7 +32,7 @@ public class JdbcUserRepository implements UserRepository{
     @Override
     public User findByUsername(String username) {
         String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, city_id FROM user WHERE username = ?";
-        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
+        return jdbcTemplate.queryForObject(sql, new UserRowMapper(locationRepository), username);
     }
 
     @Override
@@ -42,12 +46,12 @@ public class JdbcUserRepository implements UserRepository{
     @Override
     public User findByEmail(String email) {
         String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, city_id FROM user WHERE email = ?";
-        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), email);
+        return jdbcTemplate.queryForObject(sql, new UserRowMapper(locationRepository), email);
     }
 
     @Override
     public User findByUsernameAndPassword(String username, String password) {
         String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, city_id FROM user WHERE username = ? AND password = ?";
-        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username, password);
+        return jdbcTemplate.queryForObject(sql, new UserRowMapper(locationRepository), username, password);
     }
 }

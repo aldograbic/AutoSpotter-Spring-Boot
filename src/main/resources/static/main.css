@@ -699,6 +699,11 @@ input[type="checkbox"]:checked + label {
   position: relative;
 }
 
+.inset-x-0 {
+  left: 0px;
+  right: 0px;
+}
+
 .bottom-0 {
   bottom: 0px;
 }
@@ -733,6 +738,11 @@ input[type="checkbox"]:checked + label {
 
 .m-4 {
   margin: 1rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mb-2 {
@@ -851,6 +861,10 @@ input[type="checkbox"]:checked + label {
   height: 4rem;
 }
 
+.h-24 {
+  height: 6rem;
+}
+
 .h-4 {
   height: 1rem;
 }
@@ -903,6 +917,10 @@ input[type="checkbox"]:checked + label {
   width: 66.666667%;
 }
 
+.w-24 {
+  width: 6rem;
+}
+
 .w-28 {
   width: 7rem;
 }
@@ -913,6 +931,10 @@ input[type="checkbox"]:checked + label {
 
 .w-44 {
   width: 11rem;
+}
+
+.w-48 {
+  width: 12rem;
 }
 
 .w-56 {
@@ -1179,6 +1201,11 @@ input[type="checkbox"]:checked + label {
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
+.bg-cyan-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(207 250 254 / var(--tw-bg-opacity));
+}
+
 .bg-cyan-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(14 116 144 / var(--tw-bg-opacity));
@@ -1304,6 +1331,11 @@ input[type="checkbox"]:checked + label {
   line-height: 2.25rem;
 }
 
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -1333,6 +1365,10 @@ input[type="checkbox"]:checked + label {
   font-weight: 700;
 }
 
+.font-light {
+  font-weight: 300;
+}
+
 .font-medium {
   font-weight: 500;
 }
@@ -1354,9 +1390,19 @@ input[type="checkbox"]:checked + label {
   color: rgb(14 116 144 / var(--tw-text-opacity));
 }
 
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .text-gray-700 {
@@ -1374,11 +1420,6 @@ input[type="checkbox"]:checked + label {
   color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
-.text-red-700 {
-  --tw-text-opacity: 1;
-  color: rgb(185 28 28 / var(--tw-text-opacity));
-}
-
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -1390,6 +1431,12 @@ input[type="checkbox"]:checked + label {
 
 .opacity-100 {
   opacity: 1;
+}
+
+.shadow-2xl {
+  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .shadow-lg {
