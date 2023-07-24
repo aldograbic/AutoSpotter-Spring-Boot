@@ -33,8 +33,8 @@ public class ContactController {
         contactRepository.saveContact(contact);
         
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("aldo.grabic99@gmail.com");
-        message.setTo("aldo.grabic99@gmail.com");
+        message.setFrom("autospotter.contact@gmail.com");
+        message.setTo("autospotter.contact@gmail.com");
         message.setSubject("Nova kontakt poruka!");
         message.setText("Detalji poruke:\n\n" +
                 "Ime: " + contact.getName() + "\n" +
