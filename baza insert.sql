@@ -1232,7 +1232,7 @@ INSERT INTO models VALUES
        (1019, 'Priora', 36),
        (1020, 'Revolution', 36),
        (1021, 'Vesta', 36),
-       (1022, 'XRAY', 36),
+       (1022, 'XRAY', 36);
 
        
 INSERT INTO countries VALUES (1, "Hrvatska");
