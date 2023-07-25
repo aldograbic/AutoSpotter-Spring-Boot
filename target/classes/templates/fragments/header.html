@@ -1,6 +1,6 @@
 <header th:fragment="header">
-    <nav class="p-3 flex items-center justify-between border-b-2 shadow-[0_5px_7px_-5px_rgba(0,0,0,0.2)]">
-            <a href="/"><img class="mr-3 w-36" src="img/logo.png" alt="logo"></a>
+    <nav class="p-3 hidden md:flex items-center justify-between border-b-2 shadow-[0_5px_7px_-5px_rgba(0,0,0,0.2)]">
+            <a href="/"><img class="mr-3 w-36" src="img/logo-svg.svg" alt="logo"></a>
         <ul class="flex space-x-4 flex-grow justify-center">
             <li><a class="text-gray-700 font-medium hover:text-cyan-700 header-link" href="/pretraga">Pretraga</a></li>
             <li><a class="text-gray-700 font-medium hover:text-cyan-700 header-link" href="/oglasi">Oglasi</a></li>
@@ -35,6 +35,47 @@
             </div>
         </div>
     </nav>
+    <!--za mobitel hamburger bar (treba podesit)-->
+    <div class="md:hidden flex justify-between">
+        <a href="/"><img class="mr-3 w-36" src="img/logo-svg.svg" alt="logo"></a>
+
+        <button data-collapse-toggle="navbar-hamburger" type="button" class="inline-flex items-center justify-center p-2 w-10 h-10 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
+          <span class="sr-only">Navigacijska traka</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          </svg>
+        </button>
+
+        <div class="hidden w-full" id="navbar-hamburger">
+          <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+            <li>
+              <a href="/pretraga" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded dark:bg-blue-600" aria-current="page">Pretraga</a>
+            </li>
+            <li>
+              <a href="/oglasi" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Oglasi</a>
+            </li>
+            <li>
+              <a href="/postavi-oglas" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">Postavi oglas</a>
+            </li>
+            <li>
+              <a href="/kontakt" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Kontakt</a>
+            </li>
+            <li>
+                <a th:unless="${session.user != null}" href="/prijava" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Prijava</a>
+            </li>
+            <li>  
+                <a th:unless="${session.user != null}" href="/registracija" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Registracija</a>
+            </li>
+            <li>  
+                <a th:if="${session.user != null}" href="/korisnicki-racun" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" th:text="${session.user.username}"></a>
+            </li>
+            <li> 
+                <a th:if="${session.user != null}" href="/odjava" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Odjava</a>
+            </li>
+          </ul>
+        </div>
+    </div>
+      
 </header>
 
 <!--KADA SE NAPRAVI ULOGIRAVANJE ONDA DODATI OVO (REDIRECT S POSTAVI OGLAS NA LOGIN)-->
