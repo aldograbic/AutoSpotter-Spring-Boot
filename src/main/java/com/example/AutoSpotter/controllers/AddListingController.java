@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.AutoSpotter.classes.listing.Listing;
 import com.example.AutoSpotter.classes.listing.ListingRepository;
@@ -167,7 +168,7 @@ public class AddListingController {
         return "redirect:/postavi-oglas";
     }
 
-    @PostMapping("/oglas-3") //tehnicki detalji
+    @PostMapping("/oglas-3")
     public String handleStep3FormSubmission(@RequestParam("engineType") String engineType,
                                             @RequestParam("engineDisplacement") double engineDisplacement,
                                             @RequestParam("enginePower") int enginePower,
@@ -187,7 +188,7 @@ public class AddListingController {
         return "redirect:/postavi-oglas";
     }
 
-    @PostMapping("/oglas-4") //detaljni detalji
+    @PostMapping("/oglas-4")
     public String handleStep4FormSubmission(@RequestParam(value = "batteryCapacity", required = false) Double batteryCapacity,
                                             @RequestParam(value = "vehicleRange", required = false) Double vehicleRange,
                                             @RequestParam(value = "chargingTime", required = false) Double chargingTime,
@@ -254,7 +255,7 @@ public class AddListingController {
     @PostMapping("/oglas-6")
     public String handleStep6FormSubmission(@RequestParam("description") String description,
                                             @RequestParam("price") BigDecimal price,
-                                            HttpSession session) {
+                                            HttpSession session, RedirectAttributes redirectAttributes) {
 
         int vehicleId = (int) session.getAttribute("vehicleId");
 
@@ -269,7 +270,8 @@ public class AddListingController {
         listingRepository.createListing(listing);
 
         session.invalidate();
-        // ispisat poruku da je uspjesno dodan oglas
-        return "redirect:/";
+        redirectAttributes.addFlashAttribute("successMessage", "Oglas je uspješno dodan!");
+        
+        return "redirect:/oglasi";
     }
 }

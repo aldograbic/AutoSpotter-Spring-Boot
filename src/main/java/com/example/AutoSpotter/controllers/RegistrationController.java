@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.user.UserRepository;
@@ -27,7 +28,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registracija")
-    public String processRegistration(@ModelAttribute("user") User user) {
+    public String processRegistration(@ModelAttribute("user") User user, RedirectAttributes redirectAttributes) {
         if (userRepository.existsByUsername(user.getUsername())) {
             return "redirect:/registracija?error=usernameExists";
         }
@@ -35,6 +36,8 @@ public class RegistrationController {
         // Save the user to the database
         userRepository.save(user);
 
-        return "redirect:/prijava";
+        redirectAttributes.addFlashAttribute("successMessage", "Poslali smo vam e-mail s uputama za potvrdu e-mail adrese!");
+
+        return "redirect:/";
     }
 }

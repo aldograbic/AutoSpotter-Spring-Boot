@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.user.UserRepository;
@@ -37,7 +38,7 @@ public class ForgottenPasswordController {
     }
 
     @PostMapping("/zaboravljena-lozinka")
-    public String processForgottenPassword(@RequestParam("email") String email) {
+    public String processForgottenPassword(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
         String token = UUID.randomUUID().toString();
 
         passwordResetTokens.put(token, email);
@@ -49,6 +50,8 @@ public class ForgottenPasswordController {
         message.setSubject("Zaboravljena lozinka");
         message.setText("Kliknite na link ispod kako biste resetirali svoju lozinku:\n" + resetLink);
         mailSender.send(message);
+
+        redirectAttributes.addFlashAttribute("successMessage", "Poslali smo vam e-mail s uputama za obnovu lozinke!");
 
         return "redirect:/";
     }
@@ -64,7 +67,7 @@ public class ForgottenPasswordController {
     }
 
     @PostMapping("/reset-lozinke")
-    public String resetPassword(@RequestParam("token") String token, @RequestParam("password") String password) {
+    public String resetPassword(@RequestParam("token") String token, @RequestParam("password") String password, RedirectAttributes redirectAttributes) {
         // Validate the token
         String email = passwordResetTokens.get(token);
         if (email != null) {
@@ -76,7 +79,9 @@ public class ForgottenPasswordController {
 
                 passwordResetTokens.remove(token);
 
-                return "redirect:/";
+                redirectAttributes.addFlashAttribute("successMessage", "Lozinka uspješno promijenjena! Sada se možete prijaviti s novom lozinkom.");
+
+                return "redirect:/login";
             }
         }
         return "reset-password-error";

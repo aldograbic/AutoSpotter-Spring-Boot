@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.AutoSpotter.classes.contact.Contact;
 import com.example.AutoSpotter.classes.contact.ContactRepository;
@@ -28,7 +29,7 @@ public class ContactController {
     }
 
     @PostMapping("/kontakt")
-    public String processContactForm(@ModelAttribute Contact contact) {
+    public String processContactForm(@ModelAttribute Contact contact, RedirectAttributes redirectAttributes) {
 
         contactRepository.saveContact(contact);
         
@@ -42,6 +43,7 @@ public class ContactController {
                 "Poruka: " + contact.getMessage());
 
         javaMailSender.send(message);
+        redirectAttributes.addFlashAttribute("successMessage", "Hvala vam što ste nas kontaktirali! Vaša poruka je uspješno poslana.");
         
         return "redirect:/";
     }

@@ -3,8 +3,7 @@
 <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <script th:src="@{/step2.js}" defer="defer"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/datepicker.min.js"></script>
     <title>AutoSpotter | Postavi oglas</title>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -140,9 +139,26 @@
                         </div>
                     </div>
                     
-                    <div id="registeredDateInput" class="flex flex-col mb-4 hidden">
+                    <div class="hidden">
+                        <div class="days">
+                            <div class="days-of-week grid grid-cols-7 mb-1 dow block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm"></div>
+                            <div class="datepicker-grid w-64 grid grid-cols-7 block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm h-6 leading-6 text-sm font-medium text-gray-500"></div>
+                        </div>
+                        <div class="calendar-weeks">
+                            <div class="days-of-week flex"><span class="dow h-6 leading-6 text-sm font-medium text-gray-500"></span></div>
+                            <div class="weeks week block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm"></div>
+                        </div>
+                    </div>
+                    <div id="registeredDateInput" class="flex relative flex-col mb-4 hidden">    
                         <label for="registeredDate">Datum sljedeće registracije</label>
-                        <input type="date" id="registeredDate" name="registeredDate" th:value="${session['registeredDate']}" required class="input">
+                        <div class="flex items-center">
+                            <input datepicker datepicker-format="yyyy-mm-dd" datepicker-autohide readonly type="text" id="registeredDate" name="registeredDate" class="input w-96" th:value="${session['registeredDate']}" required placeholder="Odaberite datum">
+                            <span class="absolute right-0 pr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6" viewBox="0 0 24 24">
+                                    <path d="M9 1V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9ZM20 11H4V19H20V11ZM7 5H4V9H20V5H17V7H15V5H9V7H7V5Z"></path>
+                                </svg>
+                            </span>
+                        </div>
                     </div>
                     
                     <div class="grid grid-cols-2 gap-8">
