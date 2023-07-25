@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
@@ -193,7 +192,16 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public List<Listing> getListingsByUserId(int userId) {
-        String sql = "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at FROM listing WHERE user_id = ?";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Listing.class), userId);
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+                "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
+                "FROM listing l " +
+                "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
+                "INNER JOIN user u ON l.user_id = u.id " +
+                "INNER JOIN cities c ON v.city_id = c.id " +
+                "WHERE l.user_id = ? " +
+                "ORDER BY l.created_at DESC";
+    
+        return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository, userRepository), userId);
     }
+    
 }
