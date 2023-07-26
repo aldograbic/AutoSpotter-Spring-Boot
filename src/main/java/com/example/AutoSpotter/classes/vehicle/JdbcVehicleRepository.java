@@ -61,6 +61,12 @@ public class JdbcVehicleRepository implements VehicleRepository {
         String sql = "SELECT id FROM vehicle_type WHERE name = ?";
         return jdbcTemplate.queryForObject(sql, Integer.class, vehicleType);
     }
+    
+    @Override
+    public String getVehicleTypeNameById(int vehicleTypeId) {
+        String sql = "SELECT name FROM vehicle_type WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, String.class, vehicleTypeId);
+    }
 
     @Override
     public List<String> getAllVehicleTypes() {

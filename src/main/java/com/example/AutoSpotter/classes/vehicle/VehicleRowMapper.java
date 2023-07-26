@@ -52,6 +52,10 @@ public class VehicleRowMapper implements RowMapper<Vehicle> {
         City city = locationRepository.getCityById(cityId);
         vehicle.setCity(city);
 
+        int vehicleTypeId = rs.getInt("vehicle_type_id");
+        String vehicleType = vehicleRepository.getVehicleTypeNameById(vehicleTypeId);
+        vehicle.setVehicleType(vehicleType);
+
         int countyId = city.getCountyId();
         County county = locationRepository.getCountyById(countyId);
         vehicle.setCounty(county);

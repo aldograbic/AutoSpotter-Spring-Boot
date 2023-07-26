@@ -32,6 +32,7 @@ public class Vehicle {
     private int vehicleSafetyFeaturesId;
     private int vehicleExtrasId;
 
+    private String vehicleType;
     private City city;
     private County county;
     private List<SafetyFeature> safetyFeatures;
@@ -256,6 +257,14 @@ public class Vehicle {
 
     public void setVehicleExtrasId(int vehicleExtrasId) {
         this.vehicleExtrasId = vehicleExtrasId;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     public City getCity() {

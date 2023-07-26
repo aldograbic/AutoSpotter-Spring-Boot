@@ -18,6 +18,8 @@ public interface VehicleRepository {
 
     Vehicle getVehicleById(int id);
 
+    String getVehicleTypeNameById(int vehicleTypeId);
+
     List<String> getAllBodyTypes();
 
     List<String> getAllEngineTypes();

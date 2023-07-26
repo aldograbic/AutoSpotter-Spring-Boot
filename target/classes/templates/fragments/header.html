@@ -1,5 +1,5 @@
 <header th:fragment="header">
-    <nav class="p-3 hidden md:flex items-center justify-between border-b-2 shadow-[0_5px_7px_-5px_rgba(0,0,0,0.2)] dark:bg-gray-600">
+    <nav class="p-3 hidden md:flex items-center justify-between border-b-2 shadow-[0_5px_7px_-5px_rgba(0,0,0,0.2)] dark:bg-gray-600 dark:border-gray-700">
         <a href="/"><img class="mr-3 w-36" src="img/logo-svg.svg" alt="logo"></a>
         <ul class="flex space-x-4 flex-grow justify-center">
             <li><a class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-400 dark:hover:text-cyan-600" href="/pretraga">Pretraga</a></li>
@@ -24,12 +24,12 @@
                         </svg>
                     </button>
                 </div>
-                <div x-show="open" @click.away="open = false" id="dropdown-menu" class="origin-top-right absolute right-0 mt-2 w-[8.5rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div x-show="open" @click.away="open = false" id="dropdown-menu" class="origin-top-right absolute right-0 mt-2 w-[8.5rem] rounded-md shadow-lg bg-white dark:bg-gray-600 ring-1 ring-black ring-opacity-5">
                   <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                    <a th:unless="${session.user != null}" href="/prijava" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600" role="menuitem">Prijava</a>
-                    <a th:unless="${session.user != null}" href="/registracija" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600" role="menuitem">Registracija</a>
+                    <a th:unless="${session.user != null}" href="/prijava" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Prijava</a>
+                    <a th:unless="${session.user != null}" href="/registracija" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Registracija</a>
                     <a th:if="${session.user != null}" href="/korisnicki-racun" class="block px-4 py-2 text-gray-700 dark:text-gray-400 dark:hover:text-cyan-600" th:text="${session.user.username}"></a>
-                    <a th:if="${session.user != null}" href="/odjava" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600" role="menuitem">Odjava</a>
+                    <a th:if="${session.user != null}" href="/odjava" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Odjava</a>
                   </div>
                 </div>
             </div>
