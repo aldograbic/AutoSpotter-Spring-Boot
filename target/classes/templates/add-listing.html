@@ -152,7 +152,7 @@
                     <div id="registeredDateInput" class="flex relative flex-col mb-4 hidden">    
                         <label for="registeredDate">Datum sljedeće registracije</label>
                         <div class="flex items-center">
-                            <input datepicker datepicker-format="yyyy-mm-dd" datepicker-autohide readonly type="text" id="registeredDate" name="registeredDate" class="input w-96" th:value="${session['registeredDate']}" required placeholder="Odaberite datum">
+                            <input datepicker datepicker-format="yyyy-mm-dd" datepicker-autohide readonly type="text" id="registeredDate" name="registeredDate" class="input w-96 dark" th:value="${session['registeredDate']}" required placeholder="Odaberite datum">
                             <span class="absolute right-0 pr-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6" viewBox="0 0 24 24">
                                     <path d="M9 1V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9ZM20 11H4V19H20V11ZM7 5H4V9H20V5H17V7H15V5H9V7H7V5Z"></path>
@@ -981,9 +981,7 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-8">Slike vozila</h2>
                 <form th:action="@{/oglas-5}" method="post" enctype="multipart/form-data">
                     <div class="flex flex-col mb-4 w-96">
-                        <input type="file" id="images" name="images" accept="image/*" multiple class="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:font-semibold
-                        file:bg-gray-200
-                        hover:file:bg-gray-300">
+                        <input type="file" id="images" name="images" accept="image/*" multiple class="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:font-semibold file:bg-gray-200 hover:file:bg-gray-300">
                     </div>
                     <div class="flex justify-between mb-4">
                         <div class="mt-2">
