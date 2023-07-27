@@ -82,6 +82,10 @@ public class NewListingsController {
 
         List<Listing> displayedNewListings = newListings.subList(Math.max(startIndex, 0), Math.max(endIndex, 0));
 
+        int totalListingsCount = newListings.size();
+
+        model.addAttribute("totalListingsCount", totalListingsCount);
+
 
         List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
         List<String> bodyTypes = vehicleRepository.getAllBodyTypes();

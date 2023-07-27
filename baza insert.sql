@@ -34,6 +34,8 @@ INSERT INTO drive_train VALUES (1, "Prednji");
 INSERT INTO drive_train VALUES (2, "Zadnji");
 INSERT INTO drive_train VALUES (3, "4 X 4");
 
+INSERT INTO roles VALUES (1, "USER"), (2, "ADMIN");
+
 INSERT INTO manufacturers VALUES
        (1, 'Abarth', 1),
        (2, 'Acura', 1),
@@ -1819,4 +1821,5 @@ INSERT INTO cities VALUES
        (555, 'Žumberak', 20),
        (556, 'Zagreb', 21);
        
-INSERT INTO user VALUES(1, "agrabic", "$2a$12$N86VahTqVHFFchpiMvJ0g...4PuWtcL9oSq/dN/0ZXd9DlHo6BRPa", "Aldo", "Grabić", null, null, "Nikole Tesle 33", "+385 91 26222 17", "aldo.grabic99@gmail.com", 1);
+INSERT INTO user VALUES(1, "agrabic", "$2a$12$N86VahTqVHFFchpiMvJ0g...4PuWtcL9oSq/dN/0ZXd9DlHo6BRPa", "Aldo", "Grabić", null, null, "Nikole Tesle 33", "+385 91 26222 17", "aldo.grabic99@gmail.com", 1, 1);
+

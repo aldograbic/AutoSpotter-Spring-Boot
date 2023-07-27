@@ -29,7 +29,6 @@ public class LoginController {
     public String processLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session, RedirectAttributes redirectAttributes) {
         User user = userRepository.findByUsernameAndPassword(username, password);
         if (user != null) {
-            // fali passwordencoder za hashiranje (treba spring security dependency)
             session.setAttribute("user", user);
 
             if (user.getCompanyName() == null) {

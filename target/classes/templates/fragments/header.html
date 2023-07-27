@@ -4,15 +4,15 @@
         <ul class="flex space-x-4 flex-grow justify-center">
             <li><a class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-400 dark:hover:text-cyan-600" href="/pretraga">Pretraga</a></li>
             <li><a class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-400 dark:hover:text-cyan-600" href="/oglasi">Oglasi</a></li>
-            <li><a class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-400 dark:hover:text-cyan-600" href="/postavi-oglas">Postavi oglas</a></li>
-            <!-- <li>
+            
+            <li>
                 <span th:if="${session.user != null}">
                     <a class="text-gray-700 font-medium hover:text-cyan-700" href="/postavi-oglas">Postavi oglas</a>
                 </span>
                 <span th:unless="${session.user != null}">
                     <a class="text-gray-700 font-medium hover:text-cyan-700" href="/prijava">Postavi oglas</a>
                 </span>
-            </li> -->
+            </li>
         </ul>
         <div class="flex space-x-4">
             <a class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-400 dark:hover:text-cyan-600" href="/kontakt">Kontakt</a>
