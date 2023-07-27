@@ -17,4 +17,10 @@ public class JdbcRoleRepository implements RoleRepository {
         String sql = "SELECT id, name FROM roles WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new RoleRowMapper(), roleId);
     }
+
+    @Override
+    public Role findByName(String name) {
+        String sql = "SELECT * FROM roles where name = ?";
+        return jdbcTemplate.queryForObject(sql, new RoleRowMapper(), name);
+    }
 }

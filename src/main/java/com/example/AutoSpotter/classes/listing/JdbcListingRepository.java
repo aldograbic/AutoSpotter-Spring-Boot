@@ -203,5 +203,23 @@ public class JdbcListingRepository implements ListingRepository {
     
         return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository, userRepository), userId);
     }
-    
+
+    @Override
+    public void likeListing(int userId, int listingId) {
+        String sql = "INSERT INTO user_likes (user_id, listing_id) VALUES (?, ?)";
+        jdbcTemplate.update(sql, userId, listingId);
+    }
+
+    @Override
+    public void dislikeListing(int userId, int listingId) {
+        String sql = "DELETE FROM user_likes WHERE user_id = ? AND listing_id = ?";
+        jdbcTemplate.update(sql, userId, listingId);
+    }
+
+    @Override
+    public boolean hasUserLikedListing(int userId, int listingId) {
+        String sql = "SELECT COUNT(*) FROM user_likes WHERE user_id = ? AND listing_id = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, userId, listingId);
+        return count != null && count > 0;
+    }
 }

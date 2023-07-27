@@ -12,4 +12,8 @@ public interface ListingRepository {
                                     Integer mileageFrom, Integer mileageTo, Integer yearFrom, Integer yearTo, Integer priceFrom, Integer priceTo, String userType);
     int getListingsCountByUserId(int userId);
     List<Listing> getListingsByUserId(int userId);
+
+    void likeListing(int userId, int listingId);
+    void dislikeListing(int userId, int listingId);
+    boolean hasUserLikedListing(int userId, int listingId);
 }

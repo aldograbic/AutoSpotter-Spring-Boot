@@ -23,8 +23,6 @@ public class JdbcUserRepository implements UserRepository{
         String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, city_id, role_id FROM user WHERE id = ?";
         User user = jdbcTemplate.queryForObject(sql, new UserRowMapper(locationRepository, roleRepository), id);
 
-        
-
         return user;
     }
 
@@ -32,6 +30,13 @@ public class JdbcUserRepository implements UserRepository{
     public boolean existsByUsername(String username) {
         String sql = "SELECT COUNT(*) FROM user WHERE username = ?";
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, username);
+        return count != null && count > 0;
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        String sql = "SELECT COUNT(*) FROM user WHERE email = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, email);
         return count != null && count > 0;
     }
 
