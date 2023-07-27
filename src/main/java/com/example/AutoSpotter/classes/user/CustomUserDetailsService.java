@@ -3,6 +3,7 @@ package com.example.AutoSpotter.classes.user;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private UserRepository userRepository;
 
+    @Autowired
     public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
