@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
-    <script th:src="@{/showRegistrationForm.js}" defer="defer"></script>
+    <script th:src="@{/js/showRegistrationForm.js}" defer="defer"></script>
     <title>AutoSpotter | Registracija</title>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -36,7 +36,21 @@
                     </div>
                     <div class="flex flex-col mb-4">
                         <label for="city">Grad</label>
-                        <input type="text" id="city" name="city" required class="input"/>
+                        <div class="relative inline-block w-96">
+                          <select id="city" name="city" required class="input w-96">
+                            <option value="" disabled selected>Odabir</option>
+                            <th:block th:each="entry : ${citiesByCounty}">
+                              <optgroup th:label="${entry.key}">
+                                <th:block th:each="city : ${entry.value}">
+                                  <option th:value="${city}" th:text="${city}" th:selected="${city eq session['city']}"></option>
+                                </th:block>
+                              </optgroup>
+                            </th:block>
+                          </select>
+                          <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                          </svg>
+                        </div>
                     </div>
                     <div class="flex flex-col mb-4">
                         <label for="phoneNumber">Broj telefona</label>
@@ -46,10 +60,12 @@
                         <label for="email">E-mail adresa</label>
                         <input type="email" id="email" name="email" required class="input"/>
                     </div>
+                    
                     <div class="flex flex-col mb-4">
                         <label for="username">Korisničko ime</label>
-                        <input type="text" id="username" name="username" required class="input"/>
+                        <input type="text" id="username" name="username" required  class="input"/>
                     </div>
+                    
                     <div class="flex flex-col mb-4">
                         <label for="password">Lozinka</label>
                         <input type="password" id="password" name="password" required class="input"/>
@@ -77,7 +93,21 @@
                     </div>
                     <div class="flex flex-col mb-4">
                         <label for="city">Grad</label>
-                        <input type="text" id="city" name="city" required class="input"/>
+                        <div class="relative inline-block w-96">
+                          <select id="city" name="city" required class="input w-96">
+                            <option value="" disabled selected>Odabir</option>
+                            <th:block th:each="entry : ${citiesByCounty}">
+                              <optgroup th:label="${entry.key}">
+                                <th:block th:each="city : ${entry.value}">
+                                  <option th:value="${city}" th:text="${city}" th:selected="${city eq session['city']}"></option>
+                                </th:block>
+                              </optgroup>
+                            </th:block>
+                          </select>
+                          <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                          </svg>
+                        </div>
                     </div>
                     <div class="flex flex-col mb-4">
                         <label for="phoneNumber">Broj telefona</label>

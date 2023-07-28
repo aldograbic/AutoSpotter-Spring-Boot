@@ -15,13 +15,10 @@ public class User {
     private String phoneNumber;
     private String email;
     private int cityId;
-    private int roleId;
     
     private City city;
     private County county;
-    private Role role;
 
-    
     public int getId() {
         return id;
     }
@@ -126,23 +123,7 @@ public class User {
         this.county = county;
     }
 
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public User(int id, String username, String password, String firstName, String lastName, String companyName, String companyOIB, String address, String phoneNumber, String email, int cityId, int roleId) {
+    public User(int id, String username, String password, String firstName, String lastName, String companyName, String companyOIB, String address, String phoneNumber, String email, int cityId) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -154,7 +135,6 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.cityId = cityId;
-        this.roleId = roleId;
     }
 
     public User() {}

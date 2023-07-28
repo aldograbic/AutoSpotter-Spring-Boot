@@ -1,6 +1,8 @@
 package com.example.AutoSpotter.controllers;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,24 +27,34 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/prijava")
-    public String processLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session, RedirectAttributes redirectAttributes) {
-        User user = userRepository.findByUsernameAndPassword(username, password);
-        if (user != null) {
-            session.setAttribute("user", user);
+   @PostMapping("/prijava")
+    public String processLogin(@RequestParam("username") String username,
+                            @RequestParam("password") String password,
+                            Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
-            if (user.getCompanyName() == null) {
-                redirectAttributes.addFlashAttribute("successMessage", "Pozdrav " + user.getFirstName() + "!");
-            } else {
-                redirectAttributes.addFlashAttribute("successMessage", "Dobrodošli, " + user.getCompanyName() + "!");
-            }
+        User user = userRepository.findByUsername(username);
 
-            return "redirect:/";
+        if (user == null) {
 
-        } else {
-            redirectAttributes.addFlashAttribute("errorMessage", "Došlo je do greške prilikom prijave! Provjerite da ste unijeli ispravno korisničko ime i lozinku.");
-            
+            model.addAttribute("errorMessage", "Korisnik s tim korisničkim imenom ne postoji.");
             return "login";
         }
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (!encoder.matches(password, user.getPassword())) {
+
+            model.addAttribute("errorMessage", "Lozinka je netočna. Pokušajte ponovno!");
+            return "login";
+        }
+
+        session.setAttribute("loggedInUser", user);
+
+        if (user.getCompanyName() == null) {
+            redirectAttributes.addFlashAttribute("successMessage", "Pozdrav " + user.getFirstName() + "!");
+        } else {
+            redirectAttributes.addFlashAttribute("successMessage", "Dobrodošli, " + user.getCompanyName() + "!");
+        }
+
+        return "redirect:/";
     }
 }

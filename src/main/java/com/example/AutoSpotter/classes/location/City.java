@@ -37,4 +37,13 @@ public class City {
     public void setCountyId(int countyId) {
         this.countyId = countyId;
     }
+
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return cityName;
+    }
 }

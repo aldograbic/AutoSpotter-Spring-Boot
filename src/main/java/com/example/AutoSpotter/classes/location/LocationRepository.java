@@ -7,11 +7,11 @@ public interface LocationRepository {
 
     City getCityById(int cityId);
     
-    County getCountyById(int id);
+    County getCountyById(int countyId);
 
     int getCityIdByName(String cityName);
 
-    List<String> getAllCities();
+    List<City> getAllCities();
 
     List<County> getAllCounties();
 

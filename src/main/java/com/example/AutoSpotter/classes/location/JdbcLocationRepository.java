@@ -47,9 +47,9 @@ public class JdbcLocationRepository implements LocationRepository{
     }
 
     @Override
-    public List<String> getAllCities() {
-        String sql = "SELECT city_name FROM cities";
-        return jdbcTemplate.queryForList(sql, String.class);
+    public List<City> getAllCities() {
+        String sql = "SELECT * FROM cities";
+        return jdbcTemplate.query(sql, new CityRowMapper());
     }
 
     @Override
