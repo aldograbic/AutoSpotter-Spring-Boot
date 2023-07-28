@@ -20,7 +20,7 @@
                 <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                   <a th:unless="${session.loggedInUser != null}" href="/prijava" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Prijava</a>
                   <a th:unless="${session.loggedInUser != null}" href="/registracija" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Registracija</a>
-                  <a th:if="${session.loggedInUser != null}" href="/korisnicki-racun" class="block px-4 py-2 text-gray-700 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" th:text="${session.loggedInUser.username}"></a>
+                  <a th:if="${session.loggedInUser != null}" href="/korisnicki-profil" class="block px-4 py-2 text-gray-700 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" th:text="${session.loggedInUser.username}"></a>
                   <a th:if="${session.loggedInUser != null}" href="/odjava" class="block px-4 py-2 text-gray-700 hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Odjava</a>
                 </div>
               </div>
