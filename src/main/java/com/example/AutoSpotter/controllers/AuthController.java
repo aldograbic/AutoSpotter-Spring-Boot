@@ -42,7 +42,7 @@ public class AuthController {
     }
 
     @PostMapping("prijava")
-    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<AuthResponseDto> login(LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
@@ -67,7 +67,4 @@ public class AuthController {
 
         return new ResponseEntity<String>("Uspješna registracija!", HttpStatus.OK);
     }
-
-
-    
 }
