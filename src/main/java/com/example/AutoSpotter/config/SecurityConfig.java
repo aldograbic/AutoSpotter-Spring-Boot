@@ -1,68 +1,54 @@
 package com.example.AutoSpotter.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.example.AutoSpotter.classes.user.CustomUserDetailsService;
 
 @Configuration
 public class SecurityConfig {
 
-    // private JwtAuthEntryPoint authEntryPoint;
-    // private CustomUserDetailsService userDetailsService;
+    private final CustomUserDetailsService customUserDetailsService;
 
-    // @Autowired
-    // public SecurityConfig(CustomUserDetailsService userDetailsService, JwtAuthEntryPoint authEntryPoint) {
-    //     this.userDetailsService = userDetailsService;
-    //     this.authEntryPoint = authEntryPoint;
-    // }
+    @Autowired
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
+        this.customUserDetailsService = customUserDetailsService;
+    }
+
+    @Autowired
+	private PasswordEncoder passwordEncoder;
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+            http
+                .authorizeHttpRequests((auth) -> auth
+                    .anyRequest().authenticated()
+                )
+                .httpBasic(Customizer.withDefaults());
+            return http.build();
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf().disable()
-            .authorizeHttpRequests()
-            .requestMatchers("/prijava", "/registracija", "/zaboravljena-lozinka", "/", "/pretraga", "/oglasi", "/oglasi/{listingId}", "/kontakt", "/img/**", "/css/**", "/js/**").permitAll()
-            .and()
-            .formLogin(form -> form
-                                .loginPage("/prijava")
-                                .defaultSuccessUrl("/")
-                                .loginProcessingUrl("/prijava")
-                                .failureUrl("/prijava")
-                                .permitAll()
-            )
-            .logout(logout -> logout
-                            .logoutRequestMatcher(new AntPathRequestMatcher("/odjava")).permitAll()
-
-            );
-        return http.build();
-        //         .csrf().disable()
-        //         .exceptionHandling()
-        //         .authenticationEntryPoint(authEntryPoint)
-        //         .and()
-        //         .sessionManagement()
-        //         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        //         .and()
-        //         .authorizeHttpRequests()
-        //         .requestMatchers("/**").permitAll() // ("api/auth/**/") bi trebalo ici
-        //         .anyRequest().authenticated()
-        //         .and()
-        //         .httpBasic();
-        // http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-        // return http.build();
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/*");
     }
 
-    
-    // @Bean
-    // public JwtAuthenticationFilter jwtAuthenticationFilter() {
-    //     return new JwtAuthenticationFilter();
-    // }
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder);
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
+    }
 }
