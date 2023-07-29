@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.AutoSpotter.classes.user.CustomUserDetailsService;
+import com.example.AutoSpotter.classes.user.User;
+import com.example.AutoSpotter.classes.user.UserRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,10 +26,12 @@ public class LoginController {
 
     private final CustomUserDetailsService customUserDetailsService;
     private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
 
-    public LoginController(CustomUserDetailsService customUserDetailsService, AuthenticationManager authenticationManager) {
+    public LoginController(CustomUserDetailsService customUserDetailsService, AuthenticationManager authenticationManager, UserRepository userRepository) {
         this.customUserDetailsService = customUserDetailsService;
         this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/prijava")
@@ -51,8 +55,14 @@ public class LoginController {
                             Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+        User user = userRepository.findByUsername(username);
 
         if (userDetails != null) {
+
+            if (!user.isEmailVerified()) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Prije prijave morate potvrditi svoju e-mail adresu!");
+                return "redirect:/prijava";
+            }
 
             String rawPassword = password;
 

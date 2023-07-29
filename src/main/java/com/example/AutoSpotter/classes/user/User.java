@@ -14,8 +14,9 @@ public class User {
     private String address;
     private String phoneNumber;
     private String email;
+    private boolean emailVerified;
+    private String confirmationToken;
     private int cityId;
-    
     private City city;
     private County county;
 
@@ -121,6 +122,22 @@ public class User {
 
     public void setCounty(County county) {
         this.county = county;
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
+
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
     }
 
     public User(int id, String username, String password, String firstName, String lastName, String companyName, String companyOIB, String address, String phoneNumber, String email, int cityId) {

@@ -15,4 +15,8 @@ public interface UserRepository {
     User findByEmail(String email);
 
     User findByUsernameAndPassword(String username, String password);
+
+    User findByConfirmationToken(String token);
+
+    void updateEmailVerification(User user);
 }

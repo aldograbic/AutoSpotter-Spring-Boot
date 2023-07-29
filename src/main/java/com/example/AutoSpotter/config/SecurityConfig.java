@@ -31,7 +31,7 @@ public class SecurityConfig {
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http
                 .authorizeHttpRequests((auth) -> auth
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
                 )
                 .logout((logout) -> logout.logoutUrl("/odjava")
                                         .logoutSuccessUrl("/")
@@ -43,10 +43,10 @@ public class SecurityConfig {
             return http.build();
     }
 
-    // @Bean
-    // public WebSecurityCustomizer webSecurityCustomizer() {
-    //     return (web) -> web.ignoring().requestMatchers("/*");
-    // }
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/*");
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
