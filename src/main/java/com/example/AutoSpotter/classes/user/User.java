@@ -17,8 +17,10 @@ public class User {
     private boolean emailVerified;
     private String confirmationToken;
     private int cityId;
+
     private City city;
     private County county;
+    private boolean acceptedTermsOfService;
 
     public int getId() {
         return id;

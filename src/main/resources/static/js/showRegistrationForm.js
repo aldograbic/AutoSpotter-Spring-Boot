@@ -18,3 +18,11 @@ function showOptionForm(option) {
         btnBusinessUser.classList.add("disabled:opacity-25");
     }
 }
+
+function validateForm() {
+    if (!document.getElementById('acceptTermsCheckbox').checked) {
+        document.getElementById('termsError').style.display = 'inline';
+        return false;
+     }
+     return true;
+ }

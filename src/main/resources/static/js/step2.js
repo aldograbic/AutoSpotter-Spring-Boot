@@ -70,7 +70,6 @@ $(document).ready(function() {
       previousRegisteredOption = "Ne";
   });
   
-  // Check the appropriate radio button based on the session value
   if (previousRegisteredOption === "Da") {
       registeredYesRadio.checked = true;
   } else if (previousRegisteredOption === "Ne") {

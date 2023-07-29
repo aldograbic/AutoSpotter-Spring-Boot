@@ -68,7 +68,7 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public User findByEmail(String email) {
-        String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, city_id FROM user WHERE email = ?";
+        String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, email_verified, confirmation_token, city_id FROM user WHERE email = ?";
         try {
             return jdbcTemplate.queryForObject(sql, new UserRowMapper(locationRepository), email);
         } catch (EmptyResultDataAccessException ex) {
@@ -97,5 +97,11 @@ public class JdbcUserRepository implements UserRepository{
     public void updateEmailVerification(User user) {
         String sql = "UPDATE user SET email_verified = ? WHERE id = ?";
         jdbcTemplate.update(sql, user.isEmailVerified(), user.getId());
+    }
+
+    @Override
+    public void updatePassword(User user) {
+        String sql = "UPDATE user SET password = ? WHERE id = ?";
+        jdbcTemplate.update(sql, user.getPassword(), user.getId());
     }
 }

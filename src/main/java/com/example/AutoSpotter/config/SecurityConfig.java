@@ -31,12 +31,14 @@ public class SecurityConfig {
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http
                 .authorizeHttpRequests((auth) -> auth
-                    .anyRequest().permitAll()
+                    .anyRequest().authenticated()
                 )
+                
                 .logout((logout) -> logout.logoutUrl("/odjava")
                                         .logoutSuccessUrl("/")
                                         .invalidateHttpSession(true)
                                         .clearAuthentication(true)
+                                        .deleteCookies("JSESSIONID")
                                         .permitAll())
                                         
                 .httpBasic(Customizer.withDefaults());

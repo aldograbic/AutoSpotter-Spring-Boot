@@ -223,14 +223,15 @@ CREATE TABLE `user` (
   `phone_number` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `city_id` int DEFAULT NULL,
-  `role_id` INT DEFAULT NULL,
+  `role_id` int DEFAULT NULL,
+  `email_verified` tinyint(1) NOT NULL DEFAULT '0',
+  `confirmation_token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `city_id` (`city_id`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
-  
   KEY `role_id` (`role_id`),
-  CONSTRAINT `user_ibfk2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `user_ibfk2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `listing` (
   `id` int NOT NULL AUTO_INCREMENT,

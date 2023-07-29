@@ -19,4 +19,6 @@ public interface UserRepository {
     User findByConfirmationToken(String token);
 
     void updateEmailVerification(User user);
+
+    void updatePassword(User user);
 }

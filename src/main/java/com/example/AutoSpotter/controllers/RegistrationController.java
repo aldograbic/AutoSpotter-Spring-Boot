@@ -48,7 +48,12 @@ public class RegistrationController {
     }
 
     @PostMapping("/registracija")
-    public String processRegistration(@ModelAttribute("user") User user, @RequestParam("city") String cityName, Model model, RedirectAttributes redirectAttributes) {
+    public String processRegistration(@ModelAttribute("user") User user,
+                                    @RequestParam("city") String cityName,
+                                    @RequestParam(value = "acceptedTermsOfService", required = false, defaultValue = "false") boolean acceptedTermsOfService,
+                                    @RequestParam("confirmPassword") String confirmPassword,
+                                    Model model,
+                                    RedirectAttributes redirectAttributes) {
 
         User existingUserEmail = userRepository.findByEmail(user.getEmail());
         if (existingUserEmail != null) {
@@ -63,6 +68,20 @@ public class RegistrationController {
         if (existingUserUsername != null) {
 
             model.addAttribute("errorMessage", "Već postoji korisnik s istim korisničkim imenom!");
+            Map<String, List<String>> citiesByCounty = locationRepository.getCitiesByCounty();
+            model.addAttribute("citiesByCounty", citiesByCounty);
+            return "registration";
+        }
+
+        if (!acceptedTermsOfService) {
+            model.addAttribute("errorMessage", "Morate prihvatiti uvjete korištenja usluge da bi se registrirali!");
+            Map<String, List<String>> citiesByCounty = locationRepository.getCitiesByCounty();
+            model.addAttribute("citiesByCounty", citiesByCounty);
+            return "registration";
+        }
+
+        if (!user.getPassword().equals(confirmPassword)) {
+            model.addAttribute("errorMessage", "Potvrda lozinke se ne podudara s unesenom lozinkom!");
             Map<String, List<String>> citiesByCounty = locationRepository.getCitiesByCounty();
             model.addAttribute("citiesByCounty", citiesByCounty);
             return "registration";
@@ -104,7 +123,7 @@ public class RegistrationController {
         }
 
         user.setEmailVerified(true);
-        userRepository.save(user);
+        userRepository.updateEmailVerification(user);
 
         redirectAttributes.addFlashAttribute("successMessage", "Uspješno ste potvrdili e-mail adresu!");
 
