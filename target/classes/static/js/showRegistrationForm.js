@@ -1,22 +1,21 @@
-function showOptionForm(option) {
-    var formPrivateUser = document.getElementById("formPrivateUser");
-    var formBusinessUser = document.getElementById("formBusinessUser");
-    var btnPrivateUser = document.getElementById("btnPrivateUser");
-    var btnBusinessUser = document.getElementById("btnBusinessUser");
+function selectUserType(userType) {
+    document.getElementById('selectedUserType').value = userType;
 
-    if (option === 1) {
-        formPrivateUser.style.display = "block";
-        formBusinessUser.style.display = "none";
-        btnPrivateUser.disabled = true;
-        btnBusinessUser.disabled = false;
-        btnPrivateUser.classList.add("disabled:opacity-25");
-    } else if (option === 2) {
-        formPrivateUser.style.display = "none";
-        formBusinessUser.style.display = "block";
-        btnPrivateUser.disabled = false;
-        btnBusinessUser.disabled = true;
-        btnBusinessUser.classList.add("disabled:opacity-25");
+    const buttons = document.querySelectorAll('.buttonUser');
+    buttons.forEach(button => {
+        button.classList.remove('selected');
+    });
+    const selectedButton = document.querySelector(`[onclick="selectUserType('${userType}')]`);
+    selectedButton.classList.add('selected');
+}
+
+function checkUserTypeSelection() {
+    const selectedUserType = document.getElementById('selectedUserType').value;
+    if (!selectedUserType) {
+        alert('Molimo odaberite vrstu korisnika.');
+        return false;
     }
+    return true;
 }
 
 function validateForm() {

@@ -142,8 +142,8 @@ public class User {
         this.confirmationToken = confirmationToken;
     }
 
-    public User(int id, String username, String password, String firstName, String lastName, String companyName, String companyOIB, String address, String phoneNumber, String email, int cityId) {
-        this.id = id;
+    public User(String username, String password, String firstName, String lastName, String companyName, String companyOIB, String address, String phoneNumber, String email, int cityId) {
+        
         this.username = username;
         this.password = password;
         this.firstName = firstName;

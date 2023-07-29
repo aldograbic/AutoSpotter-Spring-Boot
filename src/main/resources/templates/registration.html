@@ -19,95 +19,51 @@
         </div>
     </div>
 
-    <main class="flex flex-1 dark:bg-gray-600">
+    <main class="flex flex-1 space-x-4 dark:bg-gray-600">
+
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
-        <div class="flex flex-col flex-1 w-50 items-center justify-center">
-            <h1 class="text-3xl font-bold text-gray-700 mb-8">Registracija</h1>
-            <div>
-                <button id="btnPrivateUser" onclick="showOptionForm(1)" class="button">Privatni korisnik</button>
-                <button id="btnBusinessUser" onclick="showOptionForm(2)" class="button">Poslovni korisnik</button>
-            </div>
-        
-            <div class="hidden" id="formPrivateUser">
-                <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6">Registracija - privatni korisnik</h2>
-                <form th:action="@{/registracija}" method="post">
-                    <div class="flex flex-col mb-4">
-                        <label for="firstName">Ime</label>
-                        <input type="text" id="firstName" name="firstName" required class="input"/>
-                    </div>
-                    <div class="flex flex-col mb-4">
-                        <label for="lastName">Prezime</label>
-                        <input type="text" id="lastName" name="lastName" required class="input"/>
-                    </div>
-                    <div class="flex flex-col mb-4">
-                        <label for="address">Adresa</label>
-                        <input type="text" id="address" name="address" required class="input"/>
-                    </div>
-                    <div class="flex flex-col mb-4">
-                        <label for="city">Grad</label>
-                        <div class="relative inline-block w-96">
-                          <select id="city" name="city" required class="input w-96">
-                            <option value="" disabled selected>Odabir</option>
-                            <th:block th:each="entry : ${citiesByCounty}">
-                              <optgroup th:label="${entry.key}">
-                                <th:block th:each="city : ${entry.value}">
-                                  <option th:value="${city}" th:text="${city}" th:selected="${city eq session['city']}"></option>
-                                </th:block>
-                              </optgroup>
-                            </th:block>
-                          </select>
-                          <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                          </svg>
+        <div class="flex flex-col flex-1 w-50">
+            <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-8">Registracija</h1>
+
+            <div th:if="${step eq 1}" class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
+                <th:block th:insert="~{fragments/progress-bar-registration :: progress-bar-registration}"></th:block>
+                <h2 class="text-xl font-bold text-gray-700 mb-8">Vrsta korisnika</h2>
+                <form th:action="@{/registracija-1}" method="post">
+                    <div class="flex gap-8 justify-center mb-4">
+                        <div class="border relative w-36 aspect-square flex flex-col items-center justify-center rounded-lg">
+                            <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 font-semibold">Privatni korisnik</p>
+                            <button type="button" class="buttonUser" onclick="selectUserType('Privatni')"><svg xmlns="http://www.w3.org/2000/svg" class="w-24" viewBox="0 0 448 512"><path fill="#0891b2" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"/></svg></a>
                         </div>
+                        <div class="border relative w-36 aspect-square flex flex-col items-center justify-center rounded-lg">
+                            <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 font-semibold">Poslovni korisnik</p>
+                            <button type="button" class="buttonUser" onclick="selectUserType('Poslovni')"><svg xmlns="http://www.w3.org/2000/svg" class="w-24" viewBox="0 0 448 512"><path fill="#0891b2" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm95.8 32.6L272 480l-32-136l32-56h-96l32 56l-32 136l-47.8-191.4C56.9 292 0 350.3 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-72.1-56.9-130.4-128.2-133.8z"/></svg></a>
+                        </div>
+                        <input type="hidden" id="selectedUserType" name="userType" value="" />
                     </div>
+                      
                     <div class="flex flex-col mb-4">
-                        <label for="phoneNumber">Broj telefona</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" required class="input"/>
-                    </div>
-                    <div class="flex flex-col mb-4">
-                        <label for="email">E-mail adresa</label>
-                        <input type="email" id="email" name="email" required class="input"/>
-                    </div>
-                    
-                    <div class="flex flex-col mb-4">
-                        <label for="username">Korisničko ime</label>
-                        <input type="text" id="username" name="username" required  class="input"/>
-                    </div>
-                    
-                    <div class="flex flex-col mb-4">
-                        <label for="password">Lozinka</label>
-                        <input type="password" id="password" name="password" required class="input"/>
-                    </div>
-                    <div class="flex flex-col mb-4">
-                        <label for="confirmPassword">Potvrdi lozinku</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" required class="input">
-                    </div>
-                    <div class="flex items-center mb-4">
-                        <input type="checkbox" class="w-4 h-4 inline-block mr-1" id="acceptTermsCheckbox" name="acceptedTermsOfService" required>
-                        <label class="form-check-label" for="acceptTermsCheckbox">Prihvaćam <a href="#" class="text-cyan-700 hover:text-cyan-900">uvjete i pravila korištenja</a></label>
-                    </div>
-                    <div class="flex flex-col mb-4">
-                        <input type="submit" value="Potvrdi" class="button"/>
+                        <input type="submit" value="Dalje" onclick="return checkUserTypeSelection()" class="button">
                     </div>
                 </form>
             </div>
-        
-            <div class="hidden" id="formBusinessUser">
-                <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6">Registracija - poslovni korisnik</h2>
-                <form th:action="@{/registracija}" method="post">
+
+            <div th:if="${step eq 2}" class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
+                <th:block th:insert="~{fragments/progress-bar-registration :: progress-bar-registration}"></th:block>
+                <h2 class="text-xl font-bold text-gray-700 mb-8">Osobni podaci</h2>
+                
+                <form th:if="${userType eq 'Privatni'}" th:action="@{/registracija-2}" method="post">
                     <div class="flex flex-col mb-4">
-                        <label for="companyName">Naziv tvrtke</label>
-                        <input type="text" id="companyName" name="companyName" required class="input"/>
+                        <label for="firstName">Ime</label>
+                        <input type="text" id="firstName" name="firstName" th:value="${session['firstName']}" required class="input"/>
                     </div>
                     <div class="flex flex-col mb-4">
-                        <label for="companyOIB">Osobni identifikacijski broj tvrtke</label>
-                        <input type="text" id="companyOIB" name="companyOIB" required class="input"/>
+                        <label for="lastName">Prezime</label>
+                        <input type="text" id="lastName" name="lastName" required th:value="${session['lastName']}" class="input"/>
                     </div>
                     <div class="flex flex-col mb-4">
-                        <label for="address">Adresa tvrtke</label>
-                        <input type="text" id="address" name="address" required class="input"/>
+                        <label for="address">Adresa</label>
+                        <input type="text" id="address" name="address" required th:value="${session['address']}" class="input"/>
                     </div>
                     <div class="flex flex-col mb-4">
                         <label for="city">Grad</label>
@@ -127,18 +83,83 @@
                           </svg>
                         </div>
                     </div>
-                    <div class="flex flex-col mb-4">
-                        <label for="phoneNumber">Broj telefona</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" required class="input"/>
+
+                    <div class="flex justify-between mb-4">
+                        <div class="mt-2">
+                            <div th:if="${step > 1}">
+                                <a th:href="@{/backRegistration(step=${step - 1})}" class="button ">Nazad</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="Dalje" class="button">
+                        </div>
                     </div>
+                    
+                </form>
+
+                <form th:if="${userType eq 'Poslovni'}" th:action="@{/registracija-2}" method="post">
+                    <div class="flex flex-col mb-4">
+                        <label for="companyName">Naziv tvrtke</label>
+                        <input type="text" id="companyName" name="companyName" th:value="${session['companyName']}" required class="input"/>
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <label for="companyOIB">Osobni identifikacijski broj tvrtke</label>
+                        <input type="text" id="companyOIB" name="companyOIB" th:value="${session['companyOIB']}" required class="input"/>
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <label for="address">Adresa tvrtke</label>
+                        <input type="text" id="address" name="address" th:value="${session['address']}" required class="input"/>
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <label for="city">Grad</label>
+                        <div class="relative inline-block w-96">
+                          <select id="city" name="city" required class="input w-96">
+                            <option value="" disabled selected>Odabir</option>
+                            <th:block th:each="entry : ${citiesByCounty}">
+                              <optgroup th:label="${entry.key}">
+                                <th:block th:each="city : ${entry.value}">
+                                  <option th:value="${city}" th:text="${city}" th:selected="${city eq session['city']}"></option>
+                                </th:block>
+                              </optgroup>
+                            </th:block>
+                          </select>
+                          <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                          </svg>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mb-4">
+                        <div class="mt-2">
+                            <div th:if="${step > 1}">
+                                <a th:href="@{/backRegistration(step=${step - 1})}" class="button ">Nazad</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="Dalje" class="button">
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+
+            <div th:if="${step eq 3}" class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
+                <th:block th:insert="~{fragments/progress-bar-registration :: progress-bar-registration}"></th:block>
+                <h2 class="text-xl font-bold text-gray-700 mb-8">Kontakt podaci</h2>
+                <form th:action="@{/registracija-3}" method="post">
                     <div class="flex flex-col mb-4">
                         <label for="email">E-mail adresa</label>
                         <input type="email" id="email" name="email" required class="input"/>
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <label for="phoneNumber">Broj telefona</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" required class="input"/>
                     </div>
                     <div class="flex flex-col mb-4">
                         <label for="username">Korisničko ime</label>
                         <input type="text" id="username" name="username" required class="input"/>
                     </div>
+                    
                     <div class="flex flex-col mb-4">
                         <label for="password">Lozinka</label>
                         <input type="password" id="password" name="password" required class="input"/>
@@ -151,11 +172,20 @@
                         <input type="checkbox" class="w-4 h-4 inline-block mr-1" id="acceptTermsCheckbox" name="acceptedTermsOfService" required>
                         <label class="form-check-label" for="acceptTermsCheckbox">Prihvaćam <a href="#" class="text-cyan-700 hover:text-cyan-900">uvjete i pravila korištenja</a></label>
                     </div>
-                    <div class="flex flex-col mb-4">
-                        <input type="submit" value="Potvrdi" class="button"/>
+                    
+                    <div class="flex justify-between mb-4">
+                        <div class="mt-2">
+                            <div th:if="${step > 1}">
+                                <a th:href="@{/backRegistration(step=${step - 1})}" class="button ">Nazad</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="Potvrdi" class="button">
+                        </div>
                     </div>
+                    
                 </form>
-            </div>
+            </div>       
         </div>
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
