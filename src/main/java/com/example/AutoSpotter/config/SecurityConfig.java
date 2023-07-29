@@ -33,6 +33,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                     .anyRequest().authenticated()
                 )
+                .logout((logout) -> logout.logoutUrl("/odjava")
+                                        .logoutSuccessUrl("/")
+                                        .invalidateHttpSession(true)
+                                        .clearAuthentication(true)
+                                        .permitAll())
+                                        
                 .httpBasic(Customizer.withDefaults());
             return http.build();
     }

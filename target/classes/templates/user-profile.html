@@ -81,7 +81,7 @@
                 <div class="text-center">
                     <h2 class="text-xl font-bold text-gray-700 mb-6 mt-8 ml-4 dark:text-gray-400">Oglasi korisnika <span th:text="${'(' + listingCount + ')'}"></span></h2>
 
-                    <div class="mt-8 flex overflow-x-auto dark:text-gray-200">
+                    <div class="mt-8 flex justify-center overflow-x-auto dark:text-gray-200">
                         <div th:if="${#lists.isEmpty(userListing)}">
                             <p class="text-gray-500">Korisnik nema oglasa.</p>
                         </div>
