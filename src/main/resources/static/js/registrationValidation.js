@@ -1,15 +1,26 @@
 let passwordCriteriaMet = {};
 
-function selectUserType(userType) {
-    document.getElementById('selectedUserType').value = userType;
-
+document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll('.buttonUser');
     buttons.forEach(button => {
-        button.classList.remove('selected');
+      button.addEventListener("click", function() {
+        selectUserType(this.getAttribute("data-user-type"));
+      });
     });
-    const selectedButton = document.querySelector(`[onclick="selectUserType('${userType}')]`);
-    selectedButton.classList.add('selected');
-}
+  });
+  
+  function selectUserType(userType) {
+    document.getElementById('selectedUserType').value = userType;
+  
+    const buttons = document.querySelectorAll('.buttonUser');
+    buttons.forEach(button => {
+      button.classList.remove('selectedRegistration');
+    });
+  
+    const selectedButton = document.querySelector(`[data-user-type="${userType}"]`);
+    selectedButton.classList.add('selectedRegistration');
+  }
+
 
 function checkUserTypeSelection() {
     const selectedUserType = document.getElementById('selectedUserType').value;

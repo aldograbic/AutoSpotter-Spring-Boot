@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.AutoSpotter.classes.listing.Listing;
 import com.example.AutoSpotter.classes.listing.ListingRepository;
@@ -24,7 +25,6 @@ public class ListingController {
         model.addAttribute("listing", listing);
 
         int currentUserId = 1;
-        // int currentUserId = userService.getCurrentlyLoggedInUserId();
         model.addAttribute("currentUserId", currentUserId);
 
         boolean userHasLikedListing = listingRepository.hasUserLikedListing(currentUserId, listingId);
@@ -33,23 +33,24 @@ public class ListingController {
         return "listing-details";
     }
 
-    @PostMapping("/oglasi/{listingId}/like")
-    public String likeListing(@PathVariable("listingId") int listingId) {
+    @PostMapping("/like/{listingId}")
+    public String likeListing(@PathVariable("listingId") int listingId, RedirectAttributes redirectAttributes) {
 
         int currentUserId = 1;
-        // int currentUserId = userService.getCurrentlyLoggedInUserId();
 
         listingRepository.likeListing(currentUserId, listingId);
+        redirectAttributes.addFlashAttribute("successMessage", "Oglas uspješno spremljen!");
 
         return "redirect:/oglasi/{listingId}";
     }
 
-    @PostMapping("/oglasi/{listingId}/dislike")
-    public String dislikeListing(@PathVariable("listingId") int listingId) {
+    @PostMapping("/dislike/{listingId}")
+    public String dislikeListing(@PathVariable("listingId") int listingId, RedirectAttributes redirectAttributes) {
+
         int currentUserId = 1;
-        // int currentUserId = userService.getCurrentlyLoggedInUserId();
 
         listingRepository.dislikeListing(currentUserId, listingId);
+        redirectAttributes.addFlashAttribute("successMessage", "Oglas obrisan iz vaših spremljenih oglasa!");
 
         return "redirect:/oglasi/{listingId}";
     }

@@ -70,7 +70,13 @@ public class LoginController {
 
             Authentication authenticatedUser = authenticationManager.authenticate(authentication);
             SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-            session.setAttribute("loggedInUser", authenticatedUser.getPrincipal());
+
+            UserDetails authenticatedUserDetails = (UserDetails) authenticatedUser.getPrincipal();
+
+
+            session.setAttribute("loggedInUser", authenticatedUserDetails.getUsername());
+            session.setAttribute("userFirstName", user.getFirstName());
+            session.setAttribute("userLastName", user.getLastName()); //koji kurac vise (ima na chatgpt alternativa)
 
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "Invalid username or password.");

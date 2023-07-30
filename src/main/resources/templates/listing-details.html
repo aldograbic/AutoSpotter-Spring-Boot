@@ -9,6 +9,16 @@
 
     <th:block th:insert="~{fragments/header-dynamic :: header-dynamic}"></th:block>
 
+    <div th:if="${successMessage}" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 10000)"  class="absolute top-0 flex items-center w-full z-10 p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 mt-[4.8rem]" role="alert">
+      <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <span class="sr-only">Uspješno</span>
+      <div>
+        <span class="font-medium" th:text="${successMessage}"></span>
+      </div>
+    </div>
+
     <main class="flex flex-1 space-x-4 dark:bg-gray-600">
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
@@ -78,15 +88,18 @@
                       </div>
                     </div>
                   </div>
-
-                  <a th:if="${!userHasLikedListing}" th:href="@{/oglasi/{listing.id}/like}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24">
-                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z"></path>
-                    </svg>
-                  </a>
-                  <a th:if="${userHasLikedListing}" th:href="@{/oglasi/{listing.id}/dislike}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24"><path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z" fill="rgba(8,145,178,1)"></path></svg>
-                  </a>
+                  <form th:if="${!userHasLikedListing}" th:action="@{/like/{listingId}(listingId=${listing.id})}" method="post">
+                    <button type="submit">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24"><path fill="currentColor" d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z"/></svg>
+                    </button>
+                </form>
+                
+                <form th:if="${userHasLikedListing}" th:action="@{/dislike/{listingId}(listingId=${listing.id})}" method="post">
+                    <button type="submit">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24"><path fill="#0891b2" d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z"/></svg>
+                    </button>
+                </form>
+                
                 </div>
               </div>
             <div class="px-4 sm:px-0 flex justify-center gap-4 mt-12">

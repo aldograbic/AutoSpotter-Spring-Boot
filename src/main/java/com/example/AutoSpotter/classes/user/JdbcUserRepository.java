@@ -46,16 +46,7 @@ public class JdbcUserRepository implements UserRepository{
         String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, email_verified, confirmation_token, city_id FROM user WHERE username = ?";
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(locationRepository), username);
 
-        if (users.isEmpty()) {
-            return null; // Return null when no matching user is found
-        } else if (users.size() == 1) {
-            return users.get(0); // Return the single user when found
-        } else {
-            // Handle the unexpected case of multiple users with the same username (optional)
-            // You can log an error or take appropriate action based on your application's logic.
-            // For example, you might throw an exception here or return the first user found.
-            return users.get(0);
-        }
+        return users.isEmpty() ? null : users.get(0);
     }
 
     @Override
