@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "tailwindcss -i ./src/input.css -o ./src/main/resources/static/main.css",
+    "build": "tailwindcss -i ./src/input.css -o ./src/main/resources/static/css/main.css",
     "watch": "tailwindcss -i ./src/input.css --watch"
   },
   "devDependencies": {

@@ -116,6 +116,11 @@ public class RegistrationController {
                                             RedirectAttributes redirectAttributes,
                                             Model model) {
 
+        session.setAttribute("email", email);
+        session.setAttribute("phoneNumber", phoneNumber);
+        session.setAttribute("username", username);
+        
+
         String firstName = (String) session.getAttribute("firstName");
         String lastName = (String) session.getAttribute("lastName");
         String companyName = (String) session.getAttribute("companyName");
@@ -123,31 +128,31 @@ public class RegistrationController {
         String address = (String) session.getAttribute("address");
         int cityId = (int) session.getAttribute("cityId");
 
-
         User user = new User(username, password, firstName, lastName, companyName, companyOIB, address, phoneNumber, email, cityId);
 
         User existingUserEmail = userRepository.findByEmail(user.getEmail());
         if (existingUserEmail != null) {
+            session.removeAttribute("email");
+            redirectAttributes.addFlashAttribute("errorMessage", "Već postoji korisnik s istom e-mail adresom!");
 
-            model.addAttribute("errorMessage", "Već postoji korisnik s istom e-mail adresom!");
-            
             return "redirect:/registracija";
+            
         }
         User existingUserUsername = userRepository.findByUsername(user.getUsername());
         if (existingUserUsername != null) {
-
-            model.addAttribute("errorMessage", "Već postoji korisnik s istim korisničkim imenom!");
+            session.removeAttribute("username");
+            redirectAttributes.addFlashAttribute("errorMessage", "Već postoji korisnik s istim korisničkim imenom!");
             
             return "redirect:/registracija";
         }
         if (!acceptedTermsOfService) {
-            model.addAttribute("errorMessage", "Morate prihvatiti uvjete korištenja usluge da bi se registrirali!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Morate prihvatiti uvjete korištenja usluge da bi se registrirali!");
             
             return "redirect:/registracija";
         }
 
         if (!user.getPassword().equals(confirmPassword)) {
-            model.addAttribute("errorMessage", "Potvrda lozinke se ne podudara s unesenom lozinkom!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Potvrda lozinke se ne podudara s unesenom lozinkom!");
             
             return "redirect:/registracija";
         }

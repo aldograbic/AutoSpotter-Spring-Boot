@@ -58,7 +58,7 @@ public class ForgottenPasswordController {
             return "reset-password";
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "Dogodila se greška pri dohvaćanju tokena!");
-            return "reset-password";
+            return "redirect:/reset-lozinke?token=" + token;
         }
     }
 
@@ -66,6 +66,7 @@ public class ForgottenPasswordController {
     @PostMapping("/reset-lozinke")
     public String resetPassword(@RequestParam("token") String token,
                                 @RequestParam("password") String password,
+                                @RequestParam("confirmPassword") String confirmPassword,
                                 RedirectAttributes redirectAttributes) {
 
         String email = passwordResetTokens.get(token);
@@ -74,6 +75,12 @@ public class ForgottenPasswordController {
             User user = userRepository.findByEmail(email);
 
             if (user != null) {
+                if (!password.equals(confirmPassword)) {
+                    redirectAttributes.addFlashAttribute("errorMessage", "Potvrda lozinke se ne podudara s unesenom lozinkom!");
+                    
+                    return "redirect:/reset-lozinke?token=" + token;
+                }
+
                 user.setPassword(passwordEncoder.encode(password));
                 userRepository.updatePassword(user);
 
@@ -86,6 +93,6 @@ public class ForgottenPasswordController {
         }
 
         redirectAttributes.addFlashAttribute("errorMessage", "Dogodila se greška pri resetiranju lozinke!");
-        return "reset-password";
+        return "redirect:/reset-lozinke?token=" + token;
     }
 }
