@@ -1821,5 +1821,3 @@ INSERT INTO cities VALUES
        (555, 'Žumberak', 20),
        (556, 'Zagreb', 21);
        
-INSERT INTO user VALUES(1, "agrabic", "$2a$12$N86VahTqVHFFchpiMvJ0g...4PuWtcL9oSq/dN/0ZXd9DlHo6BRPa", "Aldo", "Grabić", null, null, "Nikole Tesle 33", "+385 91 26222 17", "aldo.grabic99@gmail.com", 1, 1);
-

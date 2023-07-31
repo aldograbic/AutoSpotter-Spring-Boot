@@ -213,16 +213,17 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `company_name` varchar(255) DEFAULT NULL,
   `company_oib` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `phone_number` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `city_id` int DEFAULT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `profile_image` varchar(255) DEFAULT NULL,
+  `city_id` int NOT NULL,
   `role_id` int DEFAULT NULL,
   `email_verified` tinyint(1) NOT NULL DEFAULT '0',
   `confirmation_token` varchar(255) DEFAULT NULL,
@@ -235,7 +236,7 @@ CREATE TABLE `user` (
 
 CREATE TABLE `listing` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `listing_description` text,
+  `listing_description` text NOT NULL,
   `listing_price` double NOT NULL,
   `vehicle_id` int NOT NULL,
   `user_id` int NOT NULL,
@@ -250,8 +251,8 @@ CREATE TABLE `listing` (
 
 CREATE TABLE `user_likes` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `listing_id` int DEFAULT NULL,
+  `user_id` int NOT NULL,
+  `listing_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `listing_id` (`listing_id`),
