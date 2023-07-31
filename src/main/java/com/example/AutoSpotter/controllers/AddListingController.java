@@ -259,7 +259,7 @@ public class AddListingController {
 
         int vehicleId = (int) session.getAttribute("vehicleId");
 
-        int userId = 1; // Retrieve the userId from the logged-in user
+        int userId = 12; // Retrieve the userId from the logged-in user
 
         Listing listing = new Listing();
         listing.setListingDescription(description);

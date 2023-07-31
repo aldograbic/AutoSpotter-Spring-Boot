@@ -38,6 +38,13 @@ public class ForgottenPasswordController {
 
     @PostMapping("/zaboravljena-lozinka")
     public String processForgottenPassword(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
+        User user = userRepository.findByEmail(email);
+        if(user == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Ne postoji korisnički račun s upisanom e-mail adresom!");
+
+            return "redirect:/zaboravljena-lozinka";
+
+        }
         String token = UUID.randomUUID().toString();
         passwordResetTokens.put(token, email);
         String resetLink = "http://localhost:8080/reset-lozinke?token=" + token;

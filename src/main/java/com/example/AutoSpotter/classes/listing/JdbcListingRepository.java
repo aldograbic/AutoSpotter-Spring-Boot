@@ -85,7 +85,6 @@ public class JdbcListingRepository implements ListingRepository {
                                             String location, Integer mileageFrom, Integer mileageTo,
                                             Integer yearFrom, Integer yearTo, Integer priceFrom,
                                             Integer priceTo, String userType) {
-        // Build the SQL query with filtering conditions
         String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
                 "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
                 "FROM listing l " +
@@ -221,5 +220,11 @@ public class JdbcListingRepository implements ListingRepository {
         String sql = "SELECT COUNT(*) FROM user_likes WHERE user_id = ? AND listing_id = ?";
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, userId, listingId);
         return count != null && count > 0;
+    }
+
+    public List<Listing> getSimilarListings(String vehicleType, String manufacturer, String model) {
+        List<Listing> similarListings = new ArrayList<>();
+        //tu treba napisat kriterije sve
+        return similarListings;
     }
 }

@@ -107,6 +107,10 @@ public class NewListingsController {
 
         if (newListings.isEmpty()) {
             model.addAttribute("noListingsFoundMessage", "Nije pronađen nijedan oglas s odabranim filterima.");
+
+            List<Listing> similarListings = listingRepository.getSimilarListings(vehicleType, manufacturer, vehicleModel);
+            model.addAttribute("similarListings", similarListings);
+
             return "new-listings";
         }
 

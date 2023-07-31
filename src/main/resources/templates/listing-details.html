@@ -274,7 +274,11 @@
             <div class="px-4 sm:px-0 mt-8 mb-8">
               <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Slični oglasi</h2>
               <div class="mt-6 border-t border-gray-100">
-                
+                <ul>
+                  <li th:each="similarListing : ${similarListings}"> 
+                      <p th:text="${similarListing.title}"></p>
+                  </li>
+              </ul>
               </div>
           </div>
           
