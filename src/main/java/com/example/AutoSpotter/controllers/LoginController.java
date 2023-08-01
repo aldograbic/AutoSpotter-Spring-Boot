@@ -72,13 +72,13 @@ public class LoginController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             UserDetails authenticatedUserDetails = (UserDetails) authentication.getPrincipal();
-
+            
             session.setAttribute("loggedInUser", authenticatedUserDetails.getUsername());
             session.setAttribute("userFirstName", user.getFirstName());
             session.setAttribute("userLastName", user.getLastName());
 
         } else {
-            redirectAttributes.addFlashAttribute("errorMessage", "Invalid username or password.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Pogrešno korisničko ime ili lozinka. Pokušajte ponovno!");
             return "redirect:/prijava";
         }
 

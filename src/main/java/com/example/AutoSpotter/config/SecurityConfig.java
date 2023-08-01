@@ -30,11 +30,16 @@ public class SecurityConfig {
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http
                 .authorizeHttpRequests((auth) -> auth
-                    .anyRequest().permitAll()
+                    .requestMatchers("/prijava", "/registracija", "/", "/kontakt", "/oglasi", "/pretraga", "/zaboravljena-lozinka", "/reset-lozinke",
+                                    "/korisnicki-profil/**", "/css/**", "/img/**", "/js/**").permitAll()
+                    .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) -> formLogin
                     .loginPage("/prijava")
                     .loginProcessingUrl("/prijava")
+                    .defaultSuccessUrl("/", true)
+                    .failureUrl("/")
+                    .permitAll()
                     
                 )
                 .logout((logout) -> logout
