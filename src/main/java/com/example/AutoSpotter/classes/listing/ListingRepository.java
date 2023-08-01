@@ -11,9 +11,11 @@ public interface ListingRepository {
     List<Listing> getFilteredListings(String vehicleType, String manufacturer, String model, String bodyType, String engineType, String transmission, String location,
                                     Integer mileageFrom, Integer mileageTo, Integer yearFrom, Integer yearTo, Integer priceFrom, Integer priceTo, String userType);
     int getListingsCountByUserId(int userId);
+    int getLikedListingsCountByUserId(int userId);
     List<Listing> getListingsByUserId(int userId);
 
     void likeListing(int userId, int listingId);
     void dislikeListing(int userId, int listingId);
+    List<Listing> getListingsLikedByUser(int userId);
     boolean hasUserLikedListing(int userId, int listingId);
 }

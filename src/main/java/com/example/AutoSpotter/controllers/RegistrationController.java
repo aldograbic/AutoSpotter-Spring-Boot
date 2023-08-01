@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +44,14 @@ public class RegistrationController {
     }
 
     @GetMapping("/registracija")
-    public String showRegistrationForm(HttpSession session, Model model) {
+    public String showRegistrationForm(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        if (authentication != null && authentication.isAuthenticated()) {
+            redirectAttributes.addFlashAttribute("infoMessage", "Već ste prijavljeni! Ako želite pristupiti stranici prvo se odjavite.");
+            return "redirect:/";
+        }
 
         Integer step = (Integer) session.getAttribute("step");
         if (step == null) {

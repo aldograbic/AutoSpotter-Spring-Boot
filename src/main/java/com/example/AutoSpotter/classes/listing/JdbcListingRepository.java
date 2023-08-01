@@ -190,6 +190,12 @@ public class JdbcListingRepository implements ListingRepository {
     }
 
     @Override
+    public int getLikedListingsCountByUserId(int userId) {
+        String sql = "SELECT COUNT(*) FROM user_likes WHERE user_id = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, userId);
+    }
+
+    @Override
     public List<Listing> getListingsByUserId(int userId) {
         String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
                 "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
@@ -221,6 +227,22 @@ public class JdbcListingRepository implements ListingRepository {
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, userId, listingId);
         return count != null && count > 0;
     }
+
+    @Override
+    public List<Listing> getListingsLikedByUser(int userId) {
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+                    "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
+                    "FROM listing l " +
+                    "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
+                    "INNER JOIN user u ON l.user_id = u.id " +
+                    "INNER JOIN cities c ON v.city_id = c.id " +
+                    "INNER JOIN user_likes ul ON l.id = ul.listing_id " +
+                    "WHERE ul.user_id = ? " +
+                    "ORDER BY l.created_at DESC";
+
+        return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository, userRepository), userId);
+    }
+
 
     public List<Listing> getSimilarListings(String vehicleType, String manufacturer, String model) {
         List<Listing> similarListings = new ArrayList<>();

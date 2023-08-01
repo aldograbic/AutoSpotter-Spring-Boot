@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,8 @@ import com.example.AutoSpotter.classes.listing.Listing;
 import com.example.AutoSpotter.classes.listing.ListingRepository;
 import com.example.AutoSpotter.classes.location.County;
 import com.example.AutoSpotter.classes.location.LocationRepository;
+import com.example.AutoSpotter.classes.user.User;
+import com.example.AutoSpotter.classes.user.UserRepository;
 import com.example.AutoSpotter.classes.vehicle.Vehicle;
 import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
 
@@ -29,11 +33,13 @@ public class AddListingController {
     private final ListingRepository listingRepository;
     private final VehicleRepository vehicleRepository;
     private final LocationRepository locationRepository;
+    private final UserRepository userRepository;
 
-    public AddListingController(ListingRepository listingRepository, VehicleRepository vehicleRepository, LocationRepository locationRepository) {
+    public AddListingController(ListingRepository listingRepository, VehicleRepository vehicleRepository, LocationRepository locationRepository, UserRepository userRepository) {
         this.listingRepository = listingRepository;
         this.vehicleRepository = vehicleRepository;
         this.locationRepository = locationRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/postavi-oglas")
@@ -97,7 +103,12 @@ public class AddListingController {
             model.addAttribute("showNumberOfWheelsInput", false);
             model.addAttribute("showMaximumAllowableWeightInput", false);
         }
-        
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username);
+
+        model.addAttribute("user", user);
         model.addAttribute("step", step);
         model.addAttribute("completedSteps", completedSteps);
         model.addAttribute("vehicleTypes", vehicleTypes);  
@@ -259,17 +270,18 @@ public class AddListingController {
 
         int vehicleId = (int) session.getAttribute("vehicleId");
 
-        int userId = 12; // Retrieve the userId from the logged-in user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username);
 
         Listing listing = new Listing();
         listing.setListingDescription(description);
         listing.setListingPrice(price);
         listing.setVehicleId(vehicleId);
-        listing.setUserId(userId);
+        listing.setUserId(user.getId());
 
         listingRepository.createListing(listing);
-
-        session.invalidate();
         redirectAttributes.addFlashAttribute("successMessage", "Oglas je uspješno dodan!");
         
         return "redirect:/oglasi";

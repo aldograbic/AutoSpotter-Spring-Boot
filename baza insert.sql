@@ -1820,4 +1820,3 @@ INSERT INTO cities VALUES
        (554, 'Zaprešić', 20),
        (555, 'Žumberak', 20),
        (556, 'Zagreb', 21);
-       

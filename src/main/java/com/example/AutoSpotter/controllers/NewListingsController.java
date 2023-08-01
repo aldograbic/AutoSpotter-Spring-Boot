@@ -3,6 +3,8 @@ package com.example.AutoSpotter.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,8 @@ import com.example.AutoSpotter.classes.listing.JdbcListingRepository;
 import com.example.AutoSpotter.classes.listing.Listing;
 import com.example.AutoSpotter.classes.location.County;
 import com.example.AutoSpotter.classes.location.JdbcLocationRepository;
+import com.example.AutoSpotter.classes.user.JdbcUserRepository;
+import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.vehicle.JdbcVehicleRepository;
 
 @Controller
@@ -23,11 +27,13 @@ public class NewListingsController {
     private final JdbcListingRepository listingRepository;
     private final JdbcVehicleRepository vehicleRepository;
     private final JdbcLocationRepository locationRepository;
+    private final JdbcUserRepository userRepository;
 
-    public NewListingsController(JdbcListingRepository listingRepository, JdbcVehicleRepository vehicleRepository, JdbcLocationRepository locationRepository) {
+    public NewListingsController(JdbcListingRepository listingRepository, JdbcVehicleRepository vehicleRepository, JdbcLocationRepository locationRepository, JdbcUserRepository userRepository) {
         this.listingRepository = listingRepository;
         this.vehicleRepository = vehicleRepository;
         this.locationRepository = locationRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/oglasi")
@@ -96,6 +102,11 @@ public class NewListingsController {
             years.add(i);
         }
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username);
+
+        model.addAttribute("user", user);
         model.addAttribute("years", years);
         model.addAttribute("newListings", displayedNewListings);
         model.addAttribute("vehicleTypes", vehicleTypes);

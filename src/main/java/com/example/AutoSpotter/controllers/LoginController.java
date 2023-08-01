@@ -35,7 +35,14 @@ public class LoginController {
     }
 
     @GetMapping("/prijava")
-    public String showLoginForm() {
+    public String showLoginForm(RedirectAttributes redirectAttributes) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        if (authentication != null && authentication.isAuthenticated()) {
+            redirectAttributes.addFlashAttribute("infoMessage", "Već ste prijavljeni! Ako želite pristupiti stranici prvo se odjavite.");
+            return "redirect:/";
+        }
+
         return "login";
     }
 
@@ -74,8 +81,6 @@ public class LoginController {
             UserDetails authenticatedUserDetails = (UserDetails) authentication.getPrincipal();
             
             session.setAttribute("loggedInUser", authenticatedUserDetails.getUsername());
-            session.setAttribute("userFirstName", user.getFirstName());
-            session.setAttribute("userLastName", user.getLastName());
 
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "Pogrešno korisničko ime ili lozinka. Pokušajte ponovno!");

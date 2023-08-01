@@ -245,8 +245,8 @@ CREATE TABLE `listing` (
   PRIMARY KEY (`id`),
   KEY `vehicle_id` (`vehicle_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `listing_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`),
-  CONSTRAINT `listing_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  CONSTRAINT `listing_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `listing_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `user_likes` (
@@ -257,5 +257,5 @@ CREATE TABLE `user_likes` (
   KEY `user_id` (`user_id`),
   KEY `listing_id` (`listing_id`),
   CONSTRAINT `user_likes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `user_likes_ibfk_2` FOREIGN KEY (`listing_id`) REFERENCES `listing` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `user_likes_ibfk_2` FOREIGN KEY (`listing_id`) REFERENCES `listing` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

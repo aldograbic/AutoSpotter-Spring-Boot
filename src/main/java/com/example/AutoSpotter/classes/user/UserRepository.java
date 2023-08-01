@@ -5,6 +5,8 @@ public interface UserRepository {
     User getUserById(int id);
 
     void save(User user);
+
+    void deleteUser (int userId);
     
     boolean existsByUsername(String username);
 

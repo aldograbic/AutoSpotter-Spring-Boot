@@ -2,6 +2,7 @@ package com.example.AutoSpotter.controllers;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,22 +10,33 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.AutoSpotter.classes.contact.Contact;
 import com.example.AutoSpotter.classes.contact.ContactRepository;
+import com.example.AutoSpotter.classes.user.User;
+import com.example.AutoSpotter.classes.user.UserRepository;
 
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 public class ContactController {
 
     private final ContactRepository contactRepository;
     private final JavaMailSender javaMailSender;
+    private final UserRepository userRepository;
 
-    public ContactController(ContactRepository contactRepository, JavaMailSender javaMailSender) {
+    public ContactController(ContactRepository contactRepository, JavaMailSender javaMailSender, UserRepository userRepository) {
         this.contactRepository = contactRepository;
         this.javaMailSender = javaMailSender;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/kontakt")
-    public String showContactForm() {
+    public String showContactForm(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username);
+
+        model.addAttribute("user", user);
         return "contact";
     }
 

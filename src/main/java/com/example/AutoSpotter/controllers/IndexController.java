@@ -10,21 +10,22 @@ import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.user.UserRepository;
 
 @Controller
-public class VehicleSearch {
+public class IndexController {
 
     private final UserRepository userRepository;
 
-    public VehicleSearch(UserRepository userRepository) {
+    public IndexController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/pretraga")
-    public String showLoginForm(Model model) {
+    @GetMapping("/")
+    public String showIndex(Model model) {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
 
         model.addAttribute("user", user);
-        return "vehicle-search";
-    } 
+        return "index";
+    }
 }

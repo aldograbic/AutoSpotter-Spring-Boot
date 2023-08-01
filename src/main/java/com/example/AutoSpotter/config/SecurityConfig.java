@@ -27,28 +27,30 @@ public class SecurityConfig {
 	private PasswordEncoder passwordEncoder;
 
     @Bean
-        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-            http
-                .authorizeHttpRequests((auth) -> auth
-                    .requestMatchers("/prijava", "/registracija", "/", "/kontakt", "/oglasi", "/pretraga", "/zaboravljena-lozinka", "/reset-lozinke",
-                                    "/korisnicki-profil/**", "/css/**", "/img/**", "/js/**").permitAll()
-                    
-                    .anyRequest().authenticated()
-                )
-                .formLogin((formLogin) -> formLogin
-                    .loginPage("/prijava")
-                    .loginProcessingUrl("/prijava")
-                    .defaultSuccessUrl("/", true)
-                    .failureUrl("/")
-                    .permitAll()
-                    
-                )
-                .logout((logout) -> logout
-                    .logoutUrl("/odjava")
-                    .invalidateHttpSession(true)
-                    .permitAll())
-                .httpBasic(Customizer.withDefaults());
-            return http.build();
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+        .csrf().disable()
+            .authorizeHttpRequests((auth) -> auth
+                .requestMatchers("/prijava", "/registracija", "/registracija-1", "/registracija-2", "/registracija-3", "/potvrdi",
+                "/", "/kontakt", "/oglasi/**", "/pretraga", "/zaboravljena-lozinka", "/reset-lozinke", "/models",
+                "/korisnicki-profil/**", "/css/**", "/img/**", "/js/**").permitAll()
+                
+                .anyRequest().authenticated()
+            )
+            .formLogin((formLogin) -> formLogin
+                .loginPage("/prijava")
+                .loginProcessingUrl("/prijava")
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/")
+                .permitAll()
+                
+            )
+            .logout((logout) -> logout
+                .logoutUrl("/odjava")
+                .invalidateHttpSession(true)
+                .permitAll())
+            .httpBasic(Customizer.withDefaults());
+        return http.build();
     }
 
     @Autowired

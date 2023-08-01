@@ -9,7 +9,7 @@
         <div class="flex items-center space-x-4">
             <a class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-400 dark:hover:text-cyan-600" href="/kontakt">Kontakt</a>
             
-            <div th:unless="${session.loggedInUser != null}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start">
+            <div th:unless="${user != null}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start">
               <button type="button" class="text-gray-700 font-medium hover:text-cyan-700 inline-flex items-center header-link dark:text-gray-400 dark:hover:text-cyan-600">Korisnički račun
                   <svg class="w-4 h-4 ml-1" viewBox="0 0 20 14" fill="currentColor">
                     <path fill-rule="evenodd" d="M6 6l4 4 4-4H6z" />
@@ -17,28 +17,28 @@
               </button>
             </div>
 
-            <svg th:if="${session.loggedInUser != null}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 text-cyan-700 cursor-pointer">
+            <svg th:if="${user != null}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 text-cyan-700 cursor-pointer">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
 
             <!-- Dropdown menu -->
             <div id="userDropdown" class="z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                <div th:if="${session.loggedInUser != null}" class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                  <!-- <div>Bonnie Green</div> -->
-                  <div class="font-medium truncate" th:text="${session.loggedInUser.username}"></div>
+                <div th:if="${user != null}" class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                  <div th:text="${user.firstName + ' ' + user.lastName}"></div>
+                  <div class="font-medium truncate" th:text="${user.username}"></div>
                 </div>
                 <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
                   <li>
-                    <a th:unless="${session.loggedInUser != null}" href="/prijava" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Prijava</a>
+                    <a th:unless="${user != null}" href="/prijava" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Prijava</a>
                   </li>
                   <li>
-                    <a th:unless="${session.loggedInUser != null}" href="/registracija" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Registracija</a>
+                    <a th:unless="${user != null}" href="/registracija" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Registracija</a>
                   </li>
                   <li>
-                    <a th:if="${session.loggedInUser != null}" href="/korisnicki-profil" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600" role="menuitem">Korisnički profil</a>
+                    <a th:if="${user != null}" href="/korisnicki-profil" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600" role="menuitem">Korisnički profil</a>
                   </li>
                 </ul>
-                <div th:if="${session.loggedInUser != null}" class="py-1">
+                <div th:if="${user != null}" class="py-1">
                   <a href="/odjava" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700 dark:hover:text-cyan-600" role="menuitem">Odjava</a>
                 </div>
             </div>
@@ -70,16 +70,16 @@
             <a href="/kontakt" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Kontakt</a>
           </li>
           <li>
-              <a th:unless="${session.loggedInUser != null}" href="/prijava" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Prijava</a>
+              <a th:unless="${user != null}" href="/prijava" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Prijava</a>
           </li>
           <li>  
-              <a th:unless="${session.loggedInUser != null}" href="/registracija" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Registracija</a>
+              <a th:unless="${user != null}" href="/registracija" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Registracija</a>
           </li>
           <li>  
-              <a th:if="${session.loggedInUser != null}" href="/korisnicki-racun" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" th:text="${session.loggedInUser.username}"></a>
+              <a th:if="${user != null}" href="/korisnicki-racun" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" th:text="${user.username}"></a>
           </li>
           <li> 
-              <a th:if="${session.loggedInUser != null}" href="/odjava" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Odjava</a>
+              <a th:if="${user != null}" href="/odjava" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Odjava</a>
           </li>
         </ul>
       </div>

@@ -1,5 +1,7 @@
 package com.example.AutoSpotter.controllers;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +34,13 @@ public class ForgottenPasswordController {
     }
 
     @GetMapping("/zaboravljena-lozinka")
-    public String showForgottenPasswordForm() {
+    public String showForgottenPasswordForm(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username);
+
+        model.addAttribute("user", user);
+
         return "forgotten-password";
     }
 
@@ -58,6 +66,13 @@ public class ForgottenPasswordController {
 
     @GetMapping("/reset-lozinke")
     public String showResetPasswordForm(@RequestParam("token") String token, Model model, RedirectAttributes redirectAttributes) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username);
+
+        model.addAttribute("user", user);
+
         String email = passwordResetTokens.get(token);
 
         if (email != null) {

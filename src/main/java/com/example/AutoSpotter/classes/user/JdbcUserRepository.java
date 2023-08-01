@@ -58,6 +58,12 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
+    public void deleteUser(int userId) {
+        String sql = "DELETE FROM user WHERE id = ?";
+        jdbcTemplate.update(sql, userId);
+    }
+
+    @Override
     public User findByEmail(String email) {
         String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, email_verified, confirmation_token, city_id FROM user WHERE email = ?";
         try {
