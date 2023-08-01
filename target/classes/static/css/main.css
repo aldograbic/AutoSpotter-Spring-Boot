@@ -1022,6 +1022,10 @@ input[type="checkbox"]:checked + label {
   height: 2rem;
 }
 
+.h-96 {
+  height: 24rem;
+}
+
 .h-\[calc\(100\%-1rem\)\] {
   height: calc(100% - 1rem);
 }
@@ -1124,6 +1128,10 @@ input[type="checkbox"]:checked + label {
 
 .w-\[21\.8rem\] {
   width: 21.8rem;
+}
+
+.w-\[48rem\] {
+  width: 48rem;
 }
 
 .w-\[64rem\] {

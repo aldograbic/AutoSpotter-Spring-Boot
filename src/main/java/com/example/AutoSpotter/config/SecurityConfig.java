@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                     .requestMatchers("/prijava", "/registracija", "/", "/kontakt", "/oglasi", "/pretraga", "/zaboravljena-lozinka", "/reset-lozinke",
                                     "/korisnicki-profil/**", "/css/**", "/img/**", "/js/**").permitAll()
+                    
                     .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) -> formLogin
