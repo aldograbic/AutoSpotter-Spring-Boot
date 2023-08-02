@@ -25,12 +25,9 @@
                     <div class="flex flex-col mb-4">
                         <label for="vehicleType">Prodajem</label>
                         <div class="relative inline-block w-96">
-                          <select id="vehicleType" name="vehicleType" class="input appearance-none w-full pr-8">
+                          <select id="vehicleType" name="vehicleType" class="input w-full pr-8">
                             <option th:each="type : ${vehicleTypes}" th:value="${type}" th:text="${type}" th:selected="${type eq session['vehicleType']}"></option>
                           </select>
-                          <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                          </svg>
                         </div>
                     </div>
                       
@@ -52,9 +49,6 @@
                                 <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer}" th:text="${manufacturer}"
                                  th:selected="${manufacturer eq session['manufacturer']}"></option>
                             </select>
-                            <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
                         </div>
                         
                     </div>
@@ -65,9 +59,6 @@
                             <select id="model" name="model" required class="input w-96">
                                 <option value="" disabled selected>Odabir</option>
                             </select>
-                            <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
                         </div>
                         
                     </div>
@@ -80,9 +71,6 @@
                                 <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"
                                  th:selected="${bodyType eq session['bodyType']}"></option>
                             </select>
-                            <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
                         </div>
 
                     </div>
@@ -115,9 +103,6 @@
                                     <option value="" disabled selected>Odabir</option>
                                     <option th:each="year : ${years}" th:value="${year}" th:text="${year}" th:selected="${year eq session['year']}"></option>
                                 </select>
-                                <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                </svg>
                             </div>
                             
                         </div>
@@ -180,9 +165,6 @@
                                   </optgroup>
                                 </th:block>
                               </select>
-                              <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                              </svg>
                             </div>
                         </div>
                     </div>
@@ -200,9 +182,6 @@
                                     <option value="" disabled selected>Odabir</option>
                                     <option th:each="state : ${states}" th:value="${state}" th:text="${state}" th:selected="${state eq session['state']}"></option>
                                 </select>
-                                <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                </svg>
                             </div>
                         </div>
                     </div>
@@ -233,9 +212,6 @@
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}" th:selected="${engineType eq session['engineType']}"></option>
                             </select>
-                            <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
                         </div>
                     </div>
                     
@@ -274,9 +250,6 @@
                                     <option th:each="transmissionType : ${transmissionTypes}" th:value="${transmissionType}" th:text="${transmissionType}"
                                      th:selected="${transmissionType eq session['transmission']}"></option>
                                 </select>
-                                <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                </svg>
                             </div>
                         </div>
                         <div class="flex flex-col mb-4">
@@ -287,9 +260,6 @@
                                     <option th:each="driveTrainType : ${driveTrainTypes}" th:value="${driveTrainType}" th:text="${driveTrainType}"
                                      th:selected="${driveTrainType eq session['driveTrain']}"></option>
                                 </select>
-                                <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                </svg>
                             </div>
                         </div>
                     </div>

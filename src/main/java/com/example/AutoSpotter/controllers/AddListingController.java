@@ -283,6 +283,7 @@ public class AddListingController {
 
         listingRepository.createListing(listing);
         redirectAttributes.addFlashAttribute("successMessage", "Oglas je uspješno dodan!");
+        // session.invalidate(); odlogira korisnika - treba da makne sve ove sessione iz addlistinga, ali ne i korisnika iz autha
         
         return "redirect:/oglasi";
     }
