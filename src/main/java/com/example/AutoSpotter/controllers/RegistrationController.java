@@ -48,10 +48,10 @@ public class RegistrationController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         
-        if (authentication != null && authentication.isAuthenticated()) {
-            redirectAttributes.addFlashAttribute("infoMessage", "Već ste prijavljeni! Ako želite pristupiti stranici prvo se odjavite.");
-            return "redirect:/";
-        }
+        // if (authentication != null && authentication.isAuthenticated()) {
+        //     redirectAttributes.addFlashAttribute("infoMessage", "Već ste prijavljeni! Ako želite pristupiti stranici prvo se odjavite.");
+        //     return "redirect:/";
+        // }
 
         Integer step = (Integer) session.getAttribute("step");
         if (step == null) {

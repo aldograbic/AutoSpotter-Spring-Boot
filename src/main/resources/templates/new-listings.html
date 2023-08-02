@@ -27,7 +27,7 @@
                 <div class="flex flex-col m-4" x-data="{ open: false }">
                     <label for="vehicleType">Tip vozila</label>
                     <div class="relative inline-block w-auto">
-                        <select id="vehicleType" name="vehicleType" class="input w-[21.8rem]">
+                        <select id="vehicleType" name="vehicleType" class="input w-[21.8rem] dark:bg-gray-500">
                             <option value="" selected>Sva vozila</option>
                             <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}" th:text="${vehicleType}"></option>
                         </select>
@@ -39,7 +39,7 @@
                 <div class="flex flex-col m-4">
                     <label for="manufacturer">Proizvođač</label>
                     <div class="relative inline-block w-auto">
-                        <select id="manufacturer" name="manufacturer" class="input w-[21.8rem]">
+                        <select id="manufacturer" name="manufacturer" class="input w-[21.8rem] dark:bg-gray-500">
                             <option value="" disabled selected>Odabir</option>
                         </select>
                         <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
@@ -51,7 +51,7 @@
                 <div class="flex flex-col m-4">
                     <label for="model">Model</label>
                     <div class="relative inline-block w-auto">
-                        <select id="model" name="model" class="input w-[21.8rem]">
+                        <select id="model" name="vehicleModel" class="input w-[21.8rem] dark:bg-gray-500">
                             <option value="" disabled selected>Odabir</option>
                         </select>
                         <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
@@ -62,7 +62,7 @@
                 <div class="flex flex-col m-4" id="bodyTypeSection">
                     <label for="bodyType">Oblik karoserije</label>
                     <div class="relative inline-block w-auto">
-                        <select id="bodyType" name="bodyType" class="input w-[21.8rem]">
+                        <select id="bodyType" name="bodyType" class="input w-[21.8rem] dark:bg-gray-500">
                             <option value="" selected>Svi oblici</option>
                             <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
                         </select>
@@ -74,7 +74,7 @@
                 <div class="flex flex-col m-4">
                     <label for="engineType">Motor</label>
                     <div class="relative inline-block w-auto">
-                        <select id="engineType" name="engineType" class="input w-[21.8rem]">
+                        <select id="engineType" name="engineType" class="input w-[21.8rem] dark:bg-gray-500">
                             <option value="" selected>Sve vrste</option>
                             <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                         </select>
@@ -96,7 +96,7 @@
                 <div class="flex flex-col m-4">
                     <label for="location">Lokacija vozila</label>
                     <div class="relative inline-block w-auto">
-                        <select id="location" name="location" class="input w-[21.8rem]">
+                        <select id="location" name="location" class="input w-[21.8rem] dark:bg-gray-500">
                             <option value="" disabled selected>Odabir</option>
                             <option th:each="county : ${counties}" th:value="${county}" th:text="${county}"></option>
                         </select>
@@ -108,9 +108,9 @@
                 <div class="flex flex-col m-4">
                     <label for="mileageFrom">Kilometraža vozila</label>
                     <div class="flex items-center">
-                        <input type="number" name="mileageFrom" id="mileageFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" name="mileageFrom" id="mileageFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" name="mileageTo" id="mileageTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" name="mileageTo" id="mileageTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
                     </div>
                     <p id="mileageError" class="text-red-500"></p>
                 </div>
@@ -118,7 +118,7 @@
                     <label for="yearFrom">Godina proizvodnje</label>
                     <div class="flex items-center">
                         <div class="relative inline-block w-[9.35rem]">
-                            <select id="yearFrom" name="yearFrom" class="input flex-grow w-[9.35rem]">
+                            <select id="yearFrom" name="yearFrom" class="input flex-grow w-[9.35rem] dark:bg-gray-500">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
                             </select>
@@ -128,7 +128,7 @@
                         </div>
                         <p class="text-center mr-4 ml-4">do</p>
                         <div class="relative inline-block w-[9.35rem]">
-                            <select id="yearTo" name="yearTo" class="input flex-grow w-[9.35rem]">
+                            <select id="yearTo" name="yearTo" class="input flex-grow w-[9.35rem] dark:bg-gray-500">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
                             </select>
@@ -143,9 +143,9 @@
                 <div class="flex flex-col m-4">
                     <label for="priceFrom">Cijena vozila</label>
                     <div class="flex items-center">
-                        <input type="number" id="priceFrom" name="priceFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" id="priceFrom" name="priceFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="priceTo" name="priceTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" id="priceTo" name="priceTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
                     </div>
                     <p id="priceError" class="text-red-500"></p>
                 </div>

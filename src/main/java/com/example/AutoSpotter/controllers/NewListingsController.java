@@ -62,7 +62,8 @@ public class NewListingsController {
         if (vehicleType != null || manufacturer != null || vehicleModel != null || bodyType != null || engineType != null || transmission != null || location != null || 
             mileageFrom != null || mileageTo != null  || yearFrom != null || yearTo != null || priceFrom != null || priceTo != null || userType != null) {
 
-            newListings = listingRepository.getFilteredListings(vehicleType, manufacturer, vehicleModel, bodyType, engineType, transmission, location, mileageFrom, mileageTo, yearFrom, yearTo, priceFrom, priceTo, userType);
+            newListings = listingRepository.getFilteredListings(vehicleType, manufacturer, vehicleModel, bodyType, engineType, transmission, location, mileageFrom,
+                                                                mileageTo, yearFrom, yearTo, priceFrom, priceTo, userType);
 
         } else {
 

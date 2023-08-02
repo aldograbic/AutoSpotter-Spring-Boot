@@ -38,10 +38,10 @@ public class LoginController {
     public String showLoginForm(RedirectAttributes redirectAttributes) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         
-        if (authentication != null && authentication.isAuthenticated()) {
-            redirectAttributes.addFlashAttribute("infoMessage", "Već ste prijavljeni! Ako želite pristupiti stranici prvo se odjavite.");
-            return "redirect:/";
-        }
+        // if (authentication != null && authentication.isAuthenticated()) {
+        //     redirectAttributes.addFlashAttribute("infoMessage", "Već ste prijavljeni! Ako želite pristupiti stranici prvo se odjavite.");
+        //     return "redirect:/";
+        // }
 
         return "login";
     }
@@ -72,7 +72,7 @@ public class LoginController {
             }
 
             String rawPassword = password;
-
+            
             Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, rawPassword, userDetails.getAuthorities());
 
             authentication = authenticationManager.authenticate(authentication);

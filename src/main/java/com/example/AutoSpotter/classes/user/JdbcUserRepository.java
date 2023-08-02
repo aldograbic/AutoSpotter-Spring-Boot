@@ -64,6 +64,17 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
+    public void updateUser(User user) {
+        String sql = "UPDATE user SET username = ?, password = ?, first_name = ?, last_name = ?, " +
+                "company_name = ?, company_oib = ?, address = ?, phone_number = ?, email = ?, " +
+                "email_verified = ?, confirmation_token = ?, city_id = ? WHERE id = ?";
+        jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getFirstName(),
+                user.getLastName(), user.getCompanyName(), user.getCompanyOIB(), user.getAddress(),
+                user.getPhoneNumber(), user.getEmail(), user.isEmailVerified(), user.getConfirmationToken(),
+                user.getCityId(), user.getId());
+    }
+
+    @Override
     public User findByEmail(String email) {
         String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, email_verified, confirmation_token, city_id FROM user WHERE email = ?";
         try {

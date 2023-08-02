@@ -1945,6 +1945,10 @@ input[type="checkbox"]:checked + label {
   background-color: rgb(153 27 27 / var(--tw-bg-opacity));
 }
 
+.hover\:fill-gray-200:hover {
+  fill: #e5e7eb;
+}
+
 .hover\:text-cyan-700:hover {
   --tw-text-opacity: 1;
   color: rgb(14 116 144 / var(--tw-text-opacity));
@@ -2063,6 +2067,11 @@ input[type="checkbox"]:checked + label {
 :is(.dark .dark\:bg-blue-600) {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+}
+
+:is(.dark .dark\:bg-gray-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
 :is(.dark .dark\:bg-gray-600) {
