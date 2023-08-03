@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.AutoSpotter.classes.contact.EmailService;
 import com.example.AutoSpotter.classes.listing.Listing;
 import com.example.AutoSpotter.classes.listing.ListingRepository;
 import com.example.AutoSpotter.classes.user.User;
@@ -19,10 +21,12 @@ public class ListingController {
     
     private ListingRepository listingRepository;
     private UserRepository userRepository;
+    private EmailService emailService;
 
-    public ListingController(ListingRepository listingRepository, UserRepository userRepository) {
+    public ListingController(ListingRepository listingRepository, UserRepository userRepository, EmailService emailService) {
         this.listingRepository = listingRepository;
         this.userRepository = userRepository;
+        this.emailService = emailService;
     }
     
     @GetMapping("/oglasi/{listingId}")
@@ -68,6 +72,35 @@ public class ListingController {
 
         redirectAttributes.addFlashAttribute("successMessage", "Oglas obrisan iz vaših spremljenih oglasa!");
 
+        return "redirect:/oglasi/{listingId}";
+    }
+
+    @PostMapping("/oglasi/{listingId}/kontaktiraj")
+    public String contactListingUser(@PathVariable("listingId") int listingId,
+                                    @RequestParam(value = "firstName", required = false) String firstName,
+                                    @RequestParam(value = "lastName", required = false) String lastName,
+                                    @RequestParam(value = "companyName", required = false) String companyName,
+                                    @RequestParam("email") String email,
+                                    @RequestParam("message") String message,
+                                    RedirectAttributes redirectAttributes) {
+
+        User listingUser = listingRepository.getListingById(listingId).getUser();
+
+        if(firstName == null) {
+            emailService.sendContactListingEmail(email ,listingUser.getEmail(), "Nova poruka od " + companyName + "! - AutoSpotter", "Poštovani/a " + listingUser.getFirstName() + 
+                                                ",\n\nDobili ste novu poruku putem AutoSpotter platforme!" +
+                                                "\n\nDetalji poruke:\nNaziv tvrtke: " + companyName + "\nE-mail adresa: " + email +
+                                                "\nPoruka: " + message + "\n\nMolimo Vas da odgovorite na ovaj e-mail kako biste nastavili s potencijalnim kupcem/prodavateljem oglasa." +
+                                                "\n\nHvala što koristite AutoSpotter.\n\nSrdačan pozdrav,\nVaš AutoSpotter tim");
+        } else {
+            emailService.sendContactListingEmail(email ,listingUser.getEmail(), "Nova poruka od " + firstName + ' ' + lastName + "! - AutoSpotter", 
+                                                "Poštovani/a " + listingUser.getCompanyName() + ",\n\nDobili ste novu poruku putem AutoSpotter platforme!" +
+                                                "\n\nDetalji poruke:\nIme i prezime: " + firstName + ' ' + lastName + "\nE-mail adresa: " + email +
+                                                "\nPoruka: " + message + "\n\nMolimo Vas da odgovorite na ovaj e-mail kako biste nastavili s potencijalnim kupcem/prodavateljem oglasa." +
+                                                "\n\nHvala što koristite AutoSpotter.\n\nSrdačan pozdrav,\nVaš AutoSpotter tim");
+        }
+
+        redirectAttributes.addFlashAttribute("successMessage", "Poruka uspješno poslana korisniku " + listingUser.getUsername() + "!");
         return "redirect:/oglasi/{listingId}";
     }
 }

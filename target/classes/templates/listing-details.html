@@ -287,7 +287,7 @@
                               <div class="px-6 py-6 lg:px-8">
                                   <h3 class="mb-4 text-xl font-medium flex justify-center text-gray-900 dark:text-white">Kontaktiraj prodavatelja za</h3>
                                   <span class="mb-4 text-xl font-bold flex justify-center text-gray-900 dark:text-white" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></span>
-                                  <form class="space-y-6" action="#">
+                                  <form class="space-y-6" th:action="@{/oglasi/{listingId}/kontaktiraj(listingId = ${listing.id})}" method="post">
                                       <div th:if="${user.firstName != null}">
                                           <label for="firstName" class="block text-sm font-medium dark:text-white">Ime</label>
                                           <input type="text" name="firstName" id="firstName" class="input text-sm block w-full" th:value="${user.firstName}" required>
@@ -310,7 +310,6 @@
                                       </div>
                                       
                                       <button type="submit" class="w-full text-sm button py-2.5">Pošalji</button>
-                                      
                                   </form>
                               </div>
                           </div>

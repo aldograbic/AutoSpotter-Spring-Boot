@@ -30,4 +30,13 @@ public class EmailService {
         message.setText("Odaberite poveznicu ispod kako biste poništili svoju lozinku:\n" + resetLink);
         mailSender.send(message);
     }
+
+    public void sendContactListingEmail(String from, String to, String subject, String messageBody) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(from);
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(messageBody);
+        mailSender.send(message);
+    }
 }
