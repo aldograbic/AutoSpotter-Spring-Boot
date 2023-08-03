@@ -118,7 +118,8 @@
                 
                 <div class="mt-8 text-center">
                     <h1 class="text-4xl font-medium text-gray-700 dark:text-gray-400" th:text="${user.username}"></h1>
-                    <p class="mt-2 text-gray-500 dark:text-gray-200" th:text="${user.firstName + ' ' + user.lastName}"></p>
+                    <p th:if="${user.firstName != null}" th:text="${user.firstName + ' ' + user.lastName}" class="mt-2 text-gray-500 dark:text-gray-200"></p>
+                    <p th:unless="${user.firstName != null}" th:text="${user.companyName}" class="mt-2 text-gray-500 dark:text-gray-200"></p>
                     <p class="font-light text-gray-500 mt-2 dark:text-gray-200" th:text="${user.city.cityName + ', ' + user.county}"></p>
                     
                     <p class="mt-8 text-gray-500 dark:text-gray-200">Broj telefona: <span th:text="${user.phoneNumber}"></span></p>

@@ -265,7 +265,7 @@
                       </svg></span>
                       <span class="font-semibold text-lg" th:text="${listing.user.username}"></span>
                   </a>
-                  <p th:if="${listing.user.companyName != null}">Naziv: <span class="font-semibold" th:text="${listing.user.companyName}"></span></p>
+                  <p th:if="${listing.user.companyName != null}">Naziv tvrtke: <span class="font-semibold" th:text="${listing.user.companyName}"></span></p>
                   <p th:unless="${listing.user.companyName != null}">Ime i prezime: <span class="font-semibold" th:text="${listing.user.firstName + ' ' + listing.user.lastName}"></span></p>
                   <p>Kontakt: <span class="font-semibold" th:text="${listing.user.email + ', ' + listing.user.phoneNumber}"></span></p>
                   <button data-modal-target="contact-modal" data-modal-toggle="contact-modal" type="button" class="button text-white font-medium rounded-lg mt-4 py-2.5 text-center inline-flex items-center">
@@ -288,17 +288,21 @@
                                   <h3 class="mb-4 text-xl font-medium flex justify-center text-gray-900 dark:text-white">Kontaktiraj prodavatelja za</h3>
                                   <span class="mb-4 text-xl font-bold flex justify-center text-gray-900 dark:text-white" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></span>
                                   <form class="space-y-6" action="#">
-                                      <div>
+                                      <div th:if="${user.firstName != null}">
                                           <label for="firstName" class="block text-sm font-medium dark:text-white">Ime</label>
-                                          <input type="firstName" name="firstName" id="firstName" class="input text-sm block w-full" required>
+                                          <input type="text" name="firstName" id="firstName" class="input text-sm block w-full" th:value="${user.firstName}" required>
                                       </div>
-                                      <div>
+                                      <div th:unless="${user.firstName != null}">
+                                        <label for="companyName" class="block text-sm font-medium dark:text-white">Naziv tvrtke</label>
+                                        <input type="text" name="companyName" id="companyName" class="input text-sm block w-full" th:value="${user.companyName}" required>
+                                      </div>
+                                      <div th:if="${user.lastName != null}">
                                           <label for="lastName" class="block text-sm font-medium dark:text-white">Prezime</label>
-                                          <input type="lastName" name="lastName" id="lastName" class="input text-sm block w-full" required>
+                                          <input type="text" name="lastName" id="lastName" class="input text-sm block w-full" th:value="${user.lastName}" required>
                                       </div>
                                       <div>
                                           <label for="email" class="block text-sm font-medium dark:text-white">E-mail adresa</label>
-                                          <input type="email" name="email" id="email" class="input text-sm block w-full" required>
+                                          <input type="email" name="email" id="email" class="input text-sm block w-full" th:value="${user.email}" required>
                                       </div>
                                       <div class="flex flex-col mb-4 dark:text-gray-200">
                                         <label for="message" class="block text-sm font-medium dark:text-white">Poruka</label>

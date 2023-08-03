@@ -24,7 +24,8 @@
             <!-- Dropdown menu -->
             <div id="userDropdown" class="z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
                 <div th:if="${user != null}" class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                  <div th:text="${user.firstName + ' ' + user.lastName}"></div>
+                  <div th:if="${user.firstName != null}" th:text="${user.firstName + ' ' + user.lastName}"></div>
+                  <div th:unless="${user.firstName != null}" th:text="${user.companyName}"></div>
                   <div class="font-medium truncate" th:text="${user.username}"></div>
                 </div>
                 <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
