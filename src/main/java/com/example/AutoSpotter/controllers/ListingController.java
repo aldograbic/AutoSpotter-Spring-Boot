@@ -85,17 +85,18 @@ public class ListingController {
                                     RedirectAttributes redirectAttributes) {
 
         User listingUser = listingRepository.getListingById(listingId).getUser();
+        String listingLink = "http://localhost:8080/oglasi/" + listingId;
 
         if(firstName == null) {
-            emailService.sendContactListingEmail(email ,listingUser.getEmail(), "Nova poruka od " + companyName + "! - AutoSpotter", "Poštovani/a " + listingUser.getFirstName() + 
+            emailService.sendContactListingEmail(email, listingUser.getEmail(), "Nova poruka od " + companyName + "! - AutoSpotter", "Poštovani/a " + listingUser.getFirstName() + 
                                                 ",\n\nDobili ste novu poruku putem AutoSpotter platforme!" +
-                                                "\n\nDetalji poruke:\nNaziv tvrtke: " + companyName + "\nE-mail adresa: " + email +
+                                                "\n\nDetalji poruke:\nNaziv tvrtke: " + companyName + "\nE-mail adresa: " + email + "\nOglas: " + listingLink +
                                                 "\nPoruka: " + message + "\n\nMolimo Vas da odgovorite na ovaj e-mail kako biste nastavili s potencijalnim kupcem/prodavateljem oglasa." +
                                                 "\n\nHvala što koristite AutoSpotter.\n\nSrdačan pozdrav,\nVaš AutoSpotter tim");
         } else {
-            emailService.sendContactListingEmail(email ,listingUser.getEmail(), "Nova poruka od " + firstName + ' ' + lastName + "! - AutoSpotter", 
+            emailService.sendContactListingEmail(email, listingUser.getEmail(), "Nova poruka od " + firstName + ' ' + lastName + "! - AutoSpotter", 
                                                 "Poštovani/a " + listingUser.getCompanyName() + ",\n\nDobili ste novu poruku putem AutoSpotter platforme!" +
-                                                "\n\nDetalji poruke:\nIme i prezime: " + firstName + ' ' + lastName + "\nE-mail adresa: " + email +
+                                                "\n\nDetalji poruke:\nIme i prezime: " + firstName + ' ' + lastName + "\nE-mail adresa: " + email + "\nOglas: " + listingLink +
                                                 "\nPoruka: " + message + "\n\nMolimo Vas da odgovorite na ovaj e-mail kako biste nastavili s potencijalnim kupcem/prodavateljem oglasa." +
                                                 "\n\nHvala što koristite AutoSpotter.\n\nSrdačan pozdrav,\nVaš AutoSpotter tim");
         }

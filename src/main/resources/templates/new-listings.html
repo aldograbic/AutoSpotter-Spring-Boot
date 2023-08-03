@@ -1,8 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="hr">
 <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <script th:src="@{/js/filtering.js}" defer="defer"></script>
+    <style>
+        .select2-container--default .select2-selection--single {
+            height: 2.6rem;
+            border-width: 1px;
+            --tw-border-opacity: 1;
+            border-color: rgb(209 213 219 / var(--tw-border-opacity));
+            background-color: rgb(249 250 251);
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .select2-container--default .select2-selection--single:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(8, 145, 178, 0.5);
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 100%;
+            top: 50%;
+            padding-right: 1.5rem;
+            transform: translateY(-50%);
+        }
+
+        .select2-container--default .select2-dropdown .select2-results__option {
+            font-size: 0.875rem;
+        }
+        .select2-container--default .select2-dropdown .select2-results__option[aria-selected="true"] {
+            background-color: rgb(8, 145, 178, 0.5);
+            color: #fff;
+        }
+        .select2-container--default .select2-search__field:focus {
+            outline: none;
+        }
+        
+    </style>
     <title>AutoSpotter | Oglasi</title>
 </head>
 <body class="flex flex-col relative min-h-screen">
@@ -27,7 +64,7 @@
                 <div class="flex flex-col m-4" x-data="{ open: false }">
                     <label for="vehicleType">Tip vozila</label>
                     <div class="relative inline-block w-auto">
-                        <select id="vehicleType" name="vehicleType" class="input w-full dark:bg-gray-500">
+                        <select id="vehicleType" name="vehicleType" class="w-full dark:bg-gray-500 select2-basic">
                             <option value="" selected>Sva vozila</option>
                             <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}" th:text="${vehicleType}"></option>
                         </select>
@@ -36,7 +73,7 @@
                 <div class="flex flex-col m-4">
                     <label for="manufacturer">Proizvođač</label>
                     <div class="relative inline-block w-auto">
-                        <select id="manufacturer" name="manufacturer" class="input w-full dark:bg-gray-500">
+                        <select id="manufacturer" name="manufacturer" class="w-full dark:bg-gray-500 select2-withSearch">
                             <option value="" disabled selected>Odabir</option>
                         </select>
                     </div>
@@ -45,7 +82,7 @@
                 <div class="flex flex-col m-4">
                     <label for="model">Model</label>
                     <div class="relative inline-block w-auto">
-                        <select id="model" name="vehicleModel" class="input w-full dark:bg-gray-500">
+                        <select id="model" name="vehicleModel" class="w-full dark:bg-gray-500 select2-withSearch">
                             <option value="" disabled selected>Odabir</option>
                         </select>
                     </div>
@@ -53,7 +90,7 @@
                 <div class="flex flex-col m-4" id="bodyTypeSection">
                     <label for="bodyType">Oblik karoserije</label>
                     <div class="relative inline-block w-auto">
-                        <select id="bodyType" name="bodyType" class="input w-full dark:bg-gray-500">
+                        <select id="bodyType" name="bodyType" class="w-full dark:bg-gray-500 select2-basic">
                             <option value="" selected>Svi oblici</option>
                             <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
                         </select>
@@ -62,7 +99,7 @@
                 <div class="flex flex-col m-4">
                     <label for="engineType">Motor</label>
                     <div class="relative inline-block w-auto">
-                        <select id="engineType" name="engineType" class="input w-full dark:bg-gray-500">
+                        <select id="engineType" name="engineType" class="w-full dark:bg-gray-500 select2-basic">
                             <option value="" selected>Sve vrste</option>
                             <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                         </select>
@@ -81,7 +118,7 @@
                 <div class="flex flex-col m-4">
                     <label for="location">Lokacija vozila</label>
                     <div class="relative inline-block w-auto">
-                        <select id="location" name="location" class="input w-full dark:bg-gray-500">
+                        <select id="location" name="location" class="w-full dark:bg-gray-500 select2-withSearch">
                             <option value="" disabled selected>Odabir</option>
                             <option th:each="county : ${counties}" th:value="${county}" th:text="${county}"></option>
                         </select>
@@ -100,14 +137,14 @@
                     <label for="yearFrom">Godina proizvodnje</label>
                     <div class="flex items-center">
                         <div class="relative inline-block w-full">
-                            <select id="yearFrom" name="yearFrom" class="input flex-grow w-full dark:bg-gray-500">
+                            <select id="yearFrom" name="yearFrom" class="flex-grow w-full dark:bg-gray-500 select2-basic">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
                             </select>
                         </div>
                         <p class="text-center mr-4 ml-4">do</p>
                         <div class="relative inline-block w-full">
-                            <select id="yearTo" name="yearTo" class="input flex-grow w-full dark:bg-gray-500">
+                            <select id="yearTo" name="yearTo" class="flex-grow w-full dark:bg-gray-500 select2-basic">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
                             </select>
@@ -228,5 +265,6 @@
     <footer>
         <th:block th:insert="~{fragments/footer :: footer}"></th:block>
     </footer>
+    
 </body>
 </html>

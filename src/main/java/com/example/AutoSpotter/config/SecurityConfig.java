@@ -32,21 +32,21 @@ public class SecurityConfig {
         .csrf().disable()
             .authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/prijava", "/registracija", "/registracija-1", "/registracija-2", "/registracija-3", "/potvrdi",
-                "/", "/kontakt", "/oglasi/**", "/pretraga", "/zaboravljena-lozinka", "/reset-lozinke", "/models",
-                "/korisnicki-profil/**", "/css/**", "/img/**", "/js/**").permitAll()
-                
+                "/", "/kontakt", "/oglasi", "/pretraga", "/zaboravljena-lozinka", "/reset-lozinke", "/manufacturers", "/models",
+                "/css/**", "/img/**", "/js/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin((formLogin) -> formLogin
                 .loginPage("/prijava")
                 .loginProcessingUrl("/prijava")
                 .defaultSuccessUrl("/", true)
-                .failureUrl("/")
+                .failureUrl("/prijava")
                 .permitAll()
                 
             )
             .logout((logout) -> logout
                 .logoutUrl("/odjava")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .permitAll())
             .httpBasic(Customizer.withDefaults());

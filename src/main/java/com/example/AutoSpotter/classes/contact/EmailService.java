@@ -33,7 +33,7 @@ public class EmailService {
 
     public void sendContactListingEmail(String from, String to, String subject, String messageBody) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from);
+        message.setReplyTo(from);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(messageBody);
