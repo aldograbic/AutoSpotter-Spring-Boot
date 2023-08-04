@@ -30,9 +30,9 @@
             <div class="h-full mb-4 flex flex-col border rounded-md relative dark:border-gray-700">
                 <div class="w-48 h-48 mx-auto mt-8 relative ring-2 ring-cyan-600 dark:ring-cyan-700 rounded-full shadow-2xl inset-x-0 top-0 flex items-center justify-center">
                     <img th:if="${user.profileImage == null}" src="img/icons8-user-50.png" alt="">
-                    <img th:unless="${user.profileImage == null}" th:src="${user.profileImage}" alt="" class="">
+                    <img th:unless="${user.profileImage == null}" th:src="${user.profileImage}" alt="" class="rounded-full w-40">
                     <form th:action="@{'/korisnik/' + ${user.id} + '/promijeni-sliku'}" method="post" enctype="multipart/form-data">
-                        <input type="file" name="profileImage" accept=".png, .jpg, .jpeg" class="hidden">
+                        <input type="file" name="profileImage" accept=".png, .jpg, .jpeg" class="hidden" onchange="javascript:this.form.submit();">
                         <button type="button" onclick="document.querySelector('input[type=file]').click()" th:if="${user.id == authenticatedUserId}" class="absolute bg-cyan-600 w-10 h-10 flex items-center justify-center bottom-1.5 right-3.5 hover:bg-cyan-700 rounded-full">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
