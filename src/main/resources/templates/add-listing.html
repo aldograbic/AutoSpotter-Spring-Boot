@@ -25,7 +25,7 @@
                     <div class="flex flex-col mb-4">
                         <label for="vehicleType">Prodajem</label>
                         <div class="relative inline-block w-96">
-                          <select id="vehicleType" name="vehicleType" class="input w-full pr-8">
+                          <select id="vehicleType" name="vehicleType" class="input w-full pr-8 select2-basic">
                             <option th:each="type : ${vehicleTypes}" th:value="${type}" th:text="${type}" th:selected="${type eq session['vehicleType']}"></option>
                           </select>
                         </div>
@@ -44,7 +44,7 @@
                     <div class="flex flex-col mb-4">
                         <label for="manufacturer">Proizvođač</label>
                         <div class="relative inline-block w-96">
-                            <select id="manufacturer" name="manufacturer" required class="input w-96">
+                            <select id="manufacturer" name="manufacturer" required class="input w-96 select2-withSearch">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer}" th:text="${manufacturer}"
                                  th:selected="${manufacturer eq session['manufacturer']}"></option>
@@ -56,7 +56,7 @@
                     <div class="flex flex-col">
                         <label for="model">Model</label>
                         <div class="relative inline-block w-96">
-                            <select id="model" name="model" required class="input w-96">
+                            <select id="model" name="model" required class="input w-96 select2-withSearch">
                                 <option value="" disabled selected>Odabir</option>
                             </select>
                         </div>
@@ -66,7 +66,7 @@
                     <div th:if="${showBodyTypeInput}" class="flex flex-col mt-4">
                         <label for="bodyType">Oblik karoserije</label>
                         <div class="relative inline-block w-96">
-                            <select id="bodyType" name="bodyType" required class="input w-96">
+                            <select id="bodyType" name="bodyType" required class="input w-96 select2-basic">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"
                                  th:selected="${bodyType eq session['bodyType']}"></option>
@@ -99,7 +99,7 @@
                         <div class="flex flex-col mb-4">
                             <label for="year">Godina proizvodnje</label>
                             <div class="relative inline-block w-44">
-                                <select id="year" name="year" required class="input w-44">
+                                <select id="year" name="year" required class="input w-44 select2-basic">
                                     <option value="" disabled selected>Odabir</option>
                                     <option th:each="year : ${years}" th:value="${year}" th:text="${year}" th:selected="${year eq session['year']}"></option>
                                 </select>
@@ -155,7 +155,7 @@
                         <div class="flex flex-col mb-4">
                             <label for="city">Lokacija vozila</label>
                             <div class="relative inline-block w-44">
-                              <select id="city" name="city" required class="input w-44">
+                              <select id="city" name="city" required class="input w-44 select2-withSearch">
                                 <option value="" disabled selected>Odabir</option>
                                 <th:block th:each="entry : ${citiesByCounty}">
                                   <optgroup th:label="${entry.key}">
@@ -178,7 +178,7 @@
                         <div class="flex flex-col mb-4">
                             <label for="state">Stanje</label>
                             <div class="relative inline-block w-44">
-                                <select id="state" name="state" required class="input w-44">
+                                <select id="state" name="state" required class="input w-44 select2-basic">
                                     <option value="" disabled selected>Odabir</option>
                                     <option th:each="state : ${states}" th:value="${state}" th:text="${state}" th:selected="${state eq session['state']}"></option>
                                 </select>
@@ -208,7 +208,7 @@
                     <div class="flex flex-col mb-4">
                         <label for="engineType">Motor</label>
                         <div class="relative inline-block w-96">
-                            <select id="engineType" name="engineType" required class="input w-96">
+                            <select id="engineType" name="engineType" required class="input w-96 select2-basic">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}" th:selected="${engineType eq session['engineType']}"></option>
                             </select>
@@ -245,7 +245,7 @@
                         <div class="flex flex-col mb-4">
                             <label for="transmission">Mjenjač</label>
                             <div class="relative inline-block w-44">
-                                <select id="transmission" name="transmission" required class="input w-44">
+                                <select id="transmission" name="transmission" required class="input w-44 select2-basic">
                                     <option value="" disabled selected>Odabir</option>
                                     <option th:each="transmissionType : ${transmissionTypes}" th:value="${transmissionType}" th:text="${transmissionType}"
                                      th:selected="${transmissionType eq session['transmission']}"></option>
@@ -255,7 +255,7 @@
                         <div class="flex flex-col mb-4">
                             <label for="driveTrain">Pogon kotača</label>
                             <div class="relative inline-block w-44">
-                                <select id="driveTrain" name="driveTrain" required class="input w-44">
+                                <select id="driveTrain" name="driveTrain" required class="input w-44 select2-basic">
                                     <option value="" disabled selected>Odabir</option>
                                     <option th:each="driveTrainType : ${driveTrainTypes}" th:value="${driveTrainType}" th:text="${driveTrainType}"
                                      th:selected="${driveTrainType eq session['driveTrain']}"></option>
