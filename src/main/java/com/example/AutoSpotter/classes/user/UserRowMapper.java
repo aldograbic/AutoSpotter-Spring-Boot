@@ -30,6 +30,7 @@ public class UserRowMapper implements RowMapper<User> {
         user.setAddress(rs.getString("address"));
         user.setPhoneNumber(rs.getString("phone_number"));
         user.setEmail(rs.getString("email"));
+        user.setProfileImage(rs.getString("profile_image"));
         user.setEmailVerified(rs.getBoolean("email_verified"));
         user.setConfirmationToken(rs.getString("confirmation_token"));
         user.setCityId(rs.getInt("city_id"));

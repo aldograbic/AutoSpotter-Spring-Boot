@@ -17,9 +17,10 @@
               </button>
             </div>
 
-            <svg th:if="${user != null}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 rounded-full text-cyan-700 cursor-pointer hover:fill-gray-200">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
+            <div th:if="${user != null}">
+              <img th:if="${user.profileImage == null}" src="img/icons8-user-50.png" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" alt="Default slika profila" class="w-10 rounded-full ring-2 ring-cyan-600 dark:ring-cyan-700 text-cyan-700 cursor-pointer hover:fill-gray-200">
+              <img th:unless="${user.profileImage == null}" th:src="${user.profileImage}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" alt="Slika profila" class="w-10 h-10 rounded-full ring-2 ring-cyan-600 dark:ring-cyan-700 text-cyan-700 cursor-pointer hover:fill-gray-200">
+            </div>
 
             <!-- Dropdown menu -->
             <div id="userDropdown" class="z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
