@@ -243,7 +243,6 @@ public class JdbcListingRepository implements ListingRepository {
         return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository, userRepository), userId);
     }
 
-
     public List<Listing> getSimilarListings(String vehicleType, String manufacturer, String model) {
         List<Listing> similarListings = new ArrayList<>();
         //tu treba napisat kriterije sve
@@ -251,16 +250,24 @@ public class JdbcListingRepository implements ListingRepository {
     }
 
     @Override
-    public void saveImageUrlsForVehicle(int vehicleId, List<String> imageUrls) {
+    public void saveImageUrlsForVehicle(ListingImage listingImage) {
         String sql = "INSERT INTO images (vehicle_id, image_url) VALUES (?, ?)";
-        for (String imageUrl : imageUrls) {
-            jdbcTemplate.update(sql, vehicleId, imageUrl);
-        }
+        jdbcTemplate.update(sql, listingImage.getVehicle().getId(), listingImage.getImageUrl());
     }
 
     @Override
     public List<String> getImageUrlsForVehicle(int vehicleId) {
         String sql = "SELECT image_url FROM images WHERE vehicle_id = ?";
         return jdbcTemplate.queryForList(sql, String.class, vehicleId);
+    }
+
+    @Override
+    public String getFirstImageUrlForVehicle(int vehicleId) {
+        String sql = "SELECT image_url FROM images WHERE vehicle_id = ? LIMIT 1";
+        List<String> imageUrls = jdbcTemplate.queryForList(sql, String.class, vehicleId);
+        if (!imageUrls.isEmpty()) {
+            return imageUrls.get(0);
+        }
+        return null;
     }
 }

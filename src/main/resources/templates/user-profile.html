@@ -29,8 +29,8 @@
 
             <div class="h-full mb-4 flex flex-col border rounded-md relative dark:border-gray-700">
                 <div class="w-48 h-48 mx-auto mt-8 relative ring-2 ring-cyan-600 dark:ring-cyan-700 rounded-full shadow-2xl inset-x-0 top-0 flex items-center justify-center">
-                    <img th:if="${user.profileImage == null}" src="img/icons8-user-50.png" alt="">
-                    <img th:unless="${user.profileImage == null}" th:src="${user.profileImage}" alt="" class="rounded-full ring-2 w-48 h-48">
+                    <img th:if="${user.profileImage == null}" src="/img/icons8-user-50.png" alt="" class="rounded-full w-48 h-48">
+                    <img th:unless="${user.profileImage == null}" th:src="${user.profileImage}" alt="" class="rounded-full object-contain w-48 h-48">
                     <form th:action="@{'/korisnik/' + ${user.id} + '/promijeni-sliku'}" method="post" enctype="multipart/form-data">
                         <input type="file" name="profileImage" accept=".png, .jpg, .jpeg" class="hidden" onchange="javascript:this.form.submit();">
                         <button type="button" onclick="document.querySelector('input[type=file]').click()" th:if="${user.id == authenticatedUserId}" class="absolute bg-cyan-600 w-10 h-10 flex items-center justify-center bottom-1.5 right-3.5 hover:bg-cyan-700 rounded-full">

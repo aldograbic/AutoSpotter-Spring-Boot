@@ -107,6 +107,13 @@ public class NewListingsController {
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
 
+        List<String> firstImageUrls = new ArrayList<>();
+    for (Listing listing : displayedNewListings) {
+        String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(listing.getVehicleId());
+        firstImageUrls.add(firstImageUrl);
+    }
+    model.addAttribute("firstImageUrls", firstImageUrls);
+
         model.addAttribute("user", user);
         model.addAttribute("years", years);
         model.addAttribute("newListings", displayedNewListings);
@@ -116,6 +123,21 @@ public class NewListingsController {
         model.addAttribute("counties", counties);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
+
+        model.addAttribute("selectedVehicleType", vehicleType);
+    model.addAttribute("selectedManufacturer", manufacturer);
+    model.addAttribute("selectedVehicleModel", vehicleModel);
+    model.addAttribute("selectedBodyType", bodyType);
+    model.addAttribute("selectedEngineType", engineType);
+    model.addAttribute("selectedTransmission", transmission);
+    model.addAttribute("selectedLocation", location);
+    model.addAttribute("selectedMileageFrom", mileageFrom);
+    model.addAttribute("selectedMileageTo", mileageTo);
+    model.addAttribute("selectedYearFrom", yearFrom);
+    model.addAttribute("selectedYearTo", yearTo);
+    model.addAttribute("selectedPriceFrom", priceFrom);
+    model.addAttribute("selectedPriceTo", priceTo);
+    model.addAttribute("selectedUserType", userType);
 
         if (newListings.isEmpty()) {
             model.addAttribute("noListingsFoundMessage", "Nije pronađen nijedan oglas s odabranim filterima.");

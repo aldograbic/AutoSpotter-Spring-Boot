@@ -29,8 +29,8 @@
                     <label for="vehicleType">Tip vozila</label>
                     <div class="relative inline-block w-auto">
                         <select id="vehicleType" name="vehicleType" class="w-full dark:bg-gray-500 select2-basic">
-                            <option value="" selected>Sva vozila</option>
-                            <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}" th:text="${vehicleType}"></option>
+                            <option value="" th:selected="${selectedVehicleType == null}" selected>Sva vozila</option>
+                            <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}" th:selected="${vehicleType == selectedVehicleType}" th:text="${vehicleType}"></option>
                         </select>
                     </div>
                 </div>
@@ -91,9 +91,9 @@
                 <div class="flex flex-col m-4">
                     <label for="mileageFrom">Kilometraža vozila</label>
                     <div class="flex items-center">
-                        <input type="number" name="mileageFrom" id="mileageFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
+                        <input type="number" name="mileageFrom" id="mileageFrom" min="0" placeholder="0" th:value="${selectedMileageFrom}" class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" name="mileageTo" id="mileageTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
+                        <input type="number" name="mileageTo" id="mileageTo" min="0" placeholder="..." th:value="${selectedMileageTo}" class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
                     </div>
                     <p id="mileageError" class="text-red-500"></p>
                 </div>
@@ -120,9 +120,9 @@
                 <div class="flex flex-col m-4">
                     <label for="priceFrom">Cijena vozila</label>
                     <div class="flex items-center">
-                        <input type="number" id="priceFrom" name="priceFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
+                        <input type="number" id="priceFrom" name="priceFrom" min="0" th:value="${selectedPriceFrom}" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="priceTo" name="priceTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
+                        <input type="number" id="priceTo" name="priceTo" min="0" th:value="${selectedPriceTo}" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
                     </div>
                     <p id="priceError" class="text-red-500"></p>
                 </div>
@@ -168,8 +168,8 @@
             </div>
             
             <ul>
-                <li th:each="listing : ${newListings}" class="relative flex items-center space-x-4 mb-4 border rounded-md shadow-md dark:border-gray-700">
-                    <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="w-56 h-56 object-cover rounded" th:src="@{img/car-example.jpg}" alt="Slika vozila"></a>
+                <li th:each="listing, url : ${newListings}" class="relative flex items-center space-x-4 mb-4 border rounded-md shadow-md dark:border-gray-700">
+                    <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="w-56 h-56 object-cover rounded-tl-md rounded-bl-md" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila"></a>
                     <div>
                         <a th:href="@{'/oglasi/' + ${listing.id}}" class="text-cyan-700 text-xl hover:text-cyan-900">
                             <h2 class="mb-4 inline-block dark:text-cyan-600 dark:hover:text-cyan-700" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></h2>

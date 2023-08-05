@@ -6,7 +6,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.security.core.Authentication;
@@ -313,16 +312,14 @@ public class AddListingController {
         Vehicle vehicle = vehicleRepository.getVehicleById(vehicleId);
     
         if (vehicle != null) {
-            // Save the image URLs to the database for the corresponding vehicle
             for (String imageUrl : imageUrls) {
                 ListingImage listingImage = new ListingImage();
-                listingImage.setVehicle(vehicle); // Assuming you have a relationship between ListingImage and Vehicle
+                listingImage.setVehicle(vehicle);
                 listingImage.setImageUrl(imageUrl);
-                listingRepository.saveImageUrlsForVehicle(vehicleId, imageUrls);
+                listingRepository.saveImageUrlsForVehicle(listingImage);
             }
         } else {
-            // Handle the case when the vehicle is not found in the database.
-            // You can log an error, show a message to the user, or take appropriate action.
+            //prikazat nekak gresku da se kontaktira podrška
         }
     }
     
