@@ -106,16 +106,12 @@ public class UserProfileController {
     }
 
     public void uploadImageToGoogleCloudStorage(String bucketName, String objectName, byte[] imageBytes) {
-    BlobId blobId = BlobId.of(bucketName, objectName);
-    BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("image/jpeg").build();
-
-    // Upload the image
-    Blob blob = storage.create(blobInfo, imageBytes);
-
-    // Set the object ACL to public read access
-    Acl acl = Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER);
-    storage.createAcl(blobId, acl);
-}
+        BlobId blobId = BlobId.of(bucketName, objectName);
+        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("image/jpeg").build();
+        Blob blob = storage.create(blobInfo, imageBytes);
+        Acl acl = Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER);
+        storage.createAcl(blobId, acl);
+    }
 
     @PostMapping("/korisnik/{userId}/promijeni-podatke")
     public String updateUserDetails(@PathVariable("userId") int userId, User updatedUser, RedirectAttributes redirectAttributes, HttpSession session) {

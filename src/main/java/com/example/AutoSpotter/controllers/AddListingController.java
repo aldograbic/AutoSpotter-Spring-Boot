@@ -1,10 +1,13 @@
 package com.example.AutoSpotter.controllers;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.AutoSpotter.classes.listing.Listing;
+import com.example.AutoSpotter.classes.listing.ListingImage;
 import com.example.AutoSpotter.classes.listing.ListingRepository;
 import com.example.AutoSpotter.classes.location.County;
 import com.example.AutoSpotter.classes.location.LocationRepository;
@@ -24,6 +28,11 @@ import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.user.UserRepository;
 import com.example.AutoSpotter.classes.vehicle.Vehicle;
 import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
+import com.google.cloud.storage.Acl;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -34,12 +43,14 @@ public class AddListingController {
     private final VehicleRepository vehicleRepository;
     private final LocationRepository locationRepository;
     private final UserRepository userRepository;
+    private Storage storage;
 
-    public AddListingController(ListingRepository listingRepository, VehicleRepository vehicleRepository, LocationRepository locationRepository, UserRepository userRepository) {
+    public AddListingController(ListingRepository listingRepository, VehicleRepository vehicleRepository, LocationRepository locationRepository, UserRepository userRepository, Storage storage) {
         this.listingRepository = listingRepository;
         this.vehicleRepository = vehicleRepository;
         this.locationRepository = locationRepository;
         this.userRepository = userRepository;
+        this.storage = storage;
     }
 
     @GetMapping("/postavi-oglas")
@@ -258,10 +269,63 @@ public class AddListingController {
 
     @PostMapping("/oglas-5")
     public String handleStep5FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session) {
+
+        int vehicleId = (int) session.getAttribute("vehicleId");
+
+        List<String> imageUrls = saveVehicleImagesToGoogleCloudStorage(images);
+        saveVehicleImagesToDatabase(vehicleId, imageUrls);
+
         session.setAttribute("images", images);
         session.setAttribute("step", 6);
         return "redirect:/postavi-oglas";
     }
+
+    public void uploadImageToGoogleCloudStorage(String bucketName, String objectName, byte[] imageBytes) {
+        BlobId blobId = BlobId.of(bucketName, objectName);
+        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("image/jpeg").build();
+        Blob blob = storage.create(blobInfo, imageBytes);
+        Acl acl = Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER);
+        storage.createAcl(blobId, acl);
+    }
+
+    private List<String> saveVehicleImagesToGoogleCloudStorage(MultipartFile[] images) {
+        List<String> imageUrls = new ArrayList<>();
+
+        for (MultipartFile image : images) {
+            String bucketName = "autospotterimages";
+            String imageName = UUID.randomUUID().toString() + "-" + image.getOriginalFilename();
+            byte[] imageBytes;
+
+            try {
+                imageBytes = image.getBytes();
+                uploadImageToGoogleCloudStorage(bucketName, imageName, imageBytes);
+                String imageUrl = "https://storage.googleapis.com/" + bucketName + "/" + imageName;
+                imageUrls.add(imageUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return imageUrls;
+    }
+
+    private void saveVehicleImagesToDatabase(int vehicleId, List<String> imageUrls) {
+        Vehicle vehicle = vehicleRepository.getVehicleById(vehicleId);
+    
+        if (vehicle != null) {
+            // Save the image URLs to the database for the corresponding vehicle
+            for (String imageUrl : imageUrls) {
+                ListingImage listingImage = new ListingImage();
+                listingImage.setVehicle(vehicle); // Assuming you have a relationship between ListingImage and Vehicle
+                listingImage.setImageUrl(imageUrl);
+                listingRepository.saveImageUrlsForVehicle(vehicleId, imageUrls);
+            }
+        } else {
+            // Handle the case when the vehicle is not found in the database.
+            // You can log an error, show a message to the user, or take appropriate action.
+        }
+    }
+    
 
     @PostMapping("/oglas-6")
     public String handleStep6FormSubmission(@RequestParam("description") String description,

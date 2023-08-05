@@ -249,4 +249,18 @@ public class JdbcListingRepository implements ListingRepository {
         //tu treba napisat kriterije sve
         return similarListings;
     }
+
+    @Override
+    public void saveImageUrlsForVehicle(int vehicleId, List<String> imageUrls) {
+        String sql = "INSERT INTO images (vehicle_id, image_url) VALUES (?, ?)";
+        for (String imageUrl : imageUrls) {
+            jdbcTemplate.update(sql, vehicleId, imageUrl);
+        }
+    }
+
+    @Override
+    public List<String> getImageUrlsForVehicle(int vehicleId) {
+        String sql = "SELECT image_url FROM images WHERE vehicle_id = ?";
+        return jdbcTemplate.queryForList(sql, String.class, vehicleId);
+    }
 }

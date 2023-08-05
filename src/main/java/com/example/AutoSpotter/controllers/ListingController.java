@@ -1,5 +1,7 @@
 package com.example.AutoSpotter.controllers;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,10 @@ public class ListingController {
     @GetMapping("/oglasi/{listingId}")
     public String getListingDetails(@PathVariable("listingId") int listingId, Model model) {
         Listing listing = listingRepository.getListingById(listingId);
+        int vehicleId = listing.getVehicleId();
+        List<String> imageUrls = listingRepository.getImageUrlsForVehicle(vehicleId);
+
+        model.addAttribute("imageUrls", imageUrls);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();

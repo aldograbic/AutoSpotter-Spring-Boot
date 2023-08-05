@@ -18,4 +18,6 @@ public interface ListingRepository {
     void dislikeListing(int userId, int listingId);
     List<Listing> getListingsLikedByUser(int userId);
     boolean hasUserLikedListing(int userId, int listingId);
+    void saveImageUrlsForVehicle(int vehicleId, List<String> imageUrls);
+    List<String> getImageUrlsForVehicle(int vehicleId);
 }
