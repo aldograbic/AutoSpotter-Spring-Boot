@@ -108,11 +108,11 @@ public class NewListingsController {
         User user = userRepository.findByUsername(username);
 
         List<String> firstImageUrls = new ArrayList<>();
-    for (Listing listing : displayedNewListings) {
-        String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(listing.getVehicleId());
-        firstImageUrls.add(firstImageUrl);
-    }
-    model.addAttribute("firstImageUrls", firstImageUrls);
+        for (Listing listing : displayedNewListings) {
+            String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(listing.getVehicleId());
+            firstImageUrls.add(firstImageUrl);
+        }
+        model.addAttribute("firstImageUrls", firstImageUrls);
 
         model.addAttribute("user", user);
         model.addAttribute("years", years);

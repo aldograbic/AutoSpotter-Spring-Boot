@@ -92,17 +92,25 @@
                       </div>
                     </div>
                   </div>
-                  <form th:if="${!userHasLikedListing}" th:action="@{/like/{listingId}(listingId=${listing.id})}" method="post">
-                    <button type="submit">
+                  <div th:if="${user != null}">
+                    <form th:if="${!userHasLikedListing}" th:action="@{/like/{listingId}(listingId=${listing.id})}" method="post">
+                      <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24"><path fill="currentColor" d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z"/></svg>
+                      </button>
+                    </form>
+                  
+                    <form th:if="${userHasLikedListing}" th:action="@{/dislike/{listingId}(listingId=${listing.id})}" method="post">
+                        <button type="submit">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24"><path fill="#0891b2" d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z"/></svg>
+                        </button>
+                    </form>
+                  </div>
+                  <div th:unless="${user != null}">
+                    <a href="/prijava">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24"><path fill="currentColor" d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z"/></svg>
-                    </button>
-                </form>
-                
-                <form th:if="${userHasLikedListing}" th:action="@{/dislike/{listingId}(listingId=${listing.id})}" method="post">
-                    <button type="submit">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24"><path fill="#0891b2" d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z"/></svg>
-                    </button>
-                </form>
+                    </a>
+                  </div>
+                  
                 
                 </div>
               </div>
@@ -288,7 +296,7 @@
                                   </svg>
                                   <span class="sr-only">Zatvori prozor</span>
                               </button>
-                              <div class="px-6 py-6 lg:px-8">
+                              <div th:if="${user != null}" class="px-6 py-6 lg:px-8">
                                   <h3 class="mb-4 text-xl font-medium flex justify-center text-gray-900 dark:text-white">Kontaktiraj prodavatelja za</h3>
                                   <span class="mb-4 text-xl font-bold flex justify-center text-gray-900 dark:text-white" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></span>
                                   <form class="space-y-6" th:action="@{/oglasi/{listingId}/kontaktiraj(listingId = ${listing.id})}" method="post">
@@ -316,6 +324,30 @@
                                       <button type="submit" class="w-full text-sm button py-2.5">Pošalji</button>
                                   </form>
                               </div>
+                              <div th:unless="${user != null}" class="px-6 py-6 lg:px-8">
+                                <h3 class="mb-4 text-xl font-medium flex justify-center text-gray-900 dark:text-white">Kontaktiraj prodavatelja za</h3>
+                                <span class="mb-4 text-xl font-bold flex justify-center text-gray-900 dark:text-white" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></span>
+                                <form class="space-y-6" th:action="@{/oglasi/{listingId}/kontaktiraj(listingId = ${listing.id})}" method="post">
+                                    <div>
+                                        <label for="firstName" class="block text-sm font-medium dark:text-white">Ime</label>
+                                        <input type="text" name="firstName" id="firstName" class="input text-sm block w-full" required>
+                                    </div>
+                                    <div>
+                                      <label for="lastName" class="block text-sm font-medium dark:text-white">Prezime</label>
+                                      <input type="text" name="lastName" id="lastName" class="input text-sm block w-full" required>
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium dark:text-white">E-mail adresa</label>
+                                        <input type="email" name="email" id="email" class="input text-sm block w-full" required>
+                                    </div>
+                                    <div class="flex flex-col mb-4 dark:text-gray-200">
+                                      <label for="message" class="block text-sm font-medium dark:text-white">Poruka</label>
+                                      <textarea id="message" name="message" placeholder="..." rows="4" required class="input w-96 h-48 resize-none"></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" class="w-full text-sm button py-2.5">Pošalji</button>
+                                </form>
+                            </div>
                           </div>
                       </div>
                   </div> 

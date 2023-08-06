@@ -42,13 +42,20 @@ public class ListingController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
-        int currentUserId = userRepository.findByUsername(username).getId();
-        boolean userHasLikedListing = listingRepository.hasUserLikedListing(currentUserId, listingId);
+        
+        
+        if (user != null) {
+            
+            int currentUserId = user.getId();
+            boolean userHasLikedListing = listingRepository.hasUserLikedListing(currentUserId, listingId);
+            model.addAttribute("currentUserId", currentUserId);
+            model.addAttribute("userHasLikedListing", userHasLikedListing);
+        }
 
         model.addAttribute("user", user);
-        model.addAttribute("currentUserId", currentUserId);
+        
         model.addAttribute("listing", listing);
-        model.addAttribute("userHasLikedListing", userHasLikedListing);
+        
 
         return "listing-details";
     }

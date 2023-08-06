@@ -1,5 +1,6 @@
 package com.example.AutoSpotter.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;
@@ -33,6 +34,13 @@ public class IndexController {
 
         List<Listing> newestListings = listingRepository.getNewestListings();
 
+        List<String> firstImageUrls = new ArrayList<>();
+        for (Listing listing : newestListings) {
+            String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(listing.getVehicleId());
+            firstImageUrls.add(firstImageUrl);
+        }
+
+        model.addAttribute("firstImageUrls", firstImageUrls);
         model.addAttribute("user", user);
         model.addAttribute("newestListings", newestListings);
         return "index";

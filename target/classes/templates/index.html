@@ -90,14 +90,14 @@
 
             <div class="flex flex-col justify-center">
                 <p class="text-gray-700 font-semibold text-2xl">Najnoviji oglasi</p>
-                <div class="py-4 flex grid px-4 gap-4 grid-cols-2 border-gray-200 dark:border-gray-700">
+                <div class="py-4 flex grid  gap-4 grid-cols-2 border-gray-200 dark:border-gray-700">
                     <div th:if="${#lists.isEmpty(newestListings)}">
                         <p class="text-gray-500">Nema novih oglasa.</p>
                     </div>
 
-                    <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-200" th:each="listing : ${newestListings}">
+                    <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-200" th:each="listing, url : ${newestListings}">
 
-                        <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="@{/img/car-example.jpg}" alt="Slika vozila"></a>
+                        <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila"></a>
                     
                         <div class="grid gap-4">
                             <a th:href="@{'/oglasi/' + ${listing.id}}" class="text-cyan-700 hover:text-cyan-900">

@@ -71,30 +71,31 @@ function loadModels() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const yearFromSelect = document.getElementById("yearFrom");
-  const yearToSelect = document.getElementById("yearTo");
-  const yearError = document.getElementById("yearError");
+  const yearFromSelect = $("#yearFrom");
+  const yearToSelect = $("#yearTo");
+  const yearError = $("#yearError");
 
-  yearFromSelect.addEventListener("change", validateYearRange);
-  yearToSelect.addEventListener("change", validateYearRange);
+  // Add event listeners for the 'select2:select' event
+  yearFromSelect.on("select2:select", validateYearRange);
+  yearToSelect.on("select2:select", validateYearRange);
 
-  const submitBtn = document.getElementById("submitBtn");
+  const submitBtn = $("#submitBtn");
 
   function validateYearRange() {
-    const yearFrom = parseInt(yearFromSelect.value);
-    const yearTo = parseInt(yearToSelect.value);
+    const yearFrom = parseInt(yearFromSelect.val());
+    const yearTo = parseInt(yearToSelect.val());
 
     if (yearTo < yearFrom) {
-      yearError.textContent = "Druga odabrana godina mora biti veća od prve.";
-      yearToSelect.classList.add("border", "border-red-500");
+      yearError.text("Druga odabrana godina mora biti veća od prve.");
+      yearToSelect.addClass("border", "border-red-500");
 
-      submitBtn.disabled = true;
-      submitBtn.classList.add("disabled:opacity-25");
+      submitBtn.prop("disabled", true);
+      submitBtn.addClass("disabled:opacity-25");
     } else {
-      yearError.textContent = "";
-      yearToSelect.classList.remove("border", "border-red-500");
-      submitBtn.disabled = false;
-      submitBtn.classList.remove("disabled:opacity-25");
+      yearError.text("");
+      yearToSelect.removeClass("border", "border-red-500");
+      submitBtn.prop("disabled", false);
+      submitBtn.removeClass("disabled:opacity-25");
     }
   }
 

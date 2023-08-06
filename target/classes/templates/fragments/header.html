@@ -36,11 +36,11 @@
                     <a th:unless="${user != null}" href="/registracija" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Registracija</a>
                   </li>
                   <li>
-                    <a th:if="${user != null}" href="/korisnicki-profil" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600" role="menuitem">Korisnički profil</a>
+                    <a th:if="${user != null}" href="/korisnicki-profil" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Korisnički profil</a>
                   </li>
                 </ul>
-                <div th:if="${user != null}" class="py-1">
-                  <a href="/odjava" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700 dark:hover:text-cyan-600" role="menuitem">Odjava</a>
+                <div th:if="${user != null}" class="py-2">
+                  <a href="/odjava" class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700" role="menuitem">Odjava</a>
                 </div>
             </div>
 

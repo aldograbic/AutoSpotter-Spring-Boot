@@ -1,6 +1,7 @@
 package com.example.AutoSpotter.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -57,6 +58,13 @@ public class UserProfileController {
         int likedListingsCount = listingRepository.getLikedListingsCountByUserId(user.getId());
         List<Listing> userListing = listingRepository.getListingsByUserId(user.getId());
         List<Listing> likedListings = listingRepository.getListingsLikedByUser(user.getId());
+
+        List<String> firstImageUrls = new ArrayList<>();
+        for (Listing listing : userListing) {
+            String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(listing.getVehicleId());
+            firstImageUrls.add(firstImageUrl);
+        }
+        model.addAttribute("firstImageUrls", firstImageUrls);
 
         model.addAttribute("authenticatedUserId", user.getId());
         model.addAttribute("user", user);
@@ -187,6 +195,13 @@ public class UserProfileController {
         User user = userRepository.getUserById(userId);
         int listingCount = listingRepository.getListingsCountByUserId(userId);
         List<Listing> userListing = listingRepository.getListingsByUserId(userId);
+
+        List<String> firstImageUrls = new ArrayList<>();
+        for (Listing listing : userListing) {
+            String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(listing.getVehicleId());
+            firstImageUrls.add(firstImageUrl);
+        }
+        model.addAttribute("firstImageUrls", firstImageUrls);
 
         model.addAttribute("user", user);
         model.addAttribute("listingCount", listingCount);

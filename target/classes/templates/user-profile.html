@@ -144,7 +144,7 @@
                                 <p class="text-gray-500">Korisnik nema oglasa.</p>
                             </div>
 
-                            <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-200" th:each="listing : ${userListing}">
+                            <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-200" th:each="listing, url : ${userListing}">
                                 <a th:if="${user.id == authenticatedUserId}" href="#" class="absolute bg-cyan-600 w-8 h-8 flex items-center justify-center top-1.5 right-11 hover:bg-cyan-700 rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6 ">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
@@ -187,7 +187,7 @@
                                     </div>
                                 </div>
 
-                                <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="@{/img/car-example.jpg}" alt="Slika vozila"></a>
+                                <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila"></a>
                             
                                 <div class="grid gap-4">
                                     <a th:href="@{'/oglasi/' + ${listing.id}}" class="text-cyan-700 hover:text-cyan-900">
@@ -261,9 +261,9 @@
                                 <p class="text-gray-500">Korisnik nema oglasa.</p>
                             </div>
 
-                            <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-200" th:each="listing : ${likedListings}">
+                            <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-200" th:each="listing, url : ${likedListings}">
 
-                                <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="@{/img/car-example.jpg}" alt="Slika vozila"></a>
+                                <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila"></a>
                             
                                 <div class="grid gap-4">
                                     <a th:href="@{'/oglasi/' + ${listing.id}}" class="text-cyan-700 hover:text-cyan-900">
