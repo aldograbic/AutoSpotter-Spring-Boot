@@ -45,7 +45,8 @@ public class VehicleSearchController {
         }
         Map<String, List<String>> citiesByCounty = locationRepository.getCitiesByCounty();
         List<String> engineTypes = vehicleRepository.getAllEngineTypes();
-
+        List<String> transmissionTypes = vehicleRepository.getAllTransmissionTypes();
+        List<String> driveTrainTypes = vehicleRepository.getAllDriveTrainTypes();
 
 
         model.addAttribute("vehicleTypes", vehicleTypes);
@@ -56,8 +57,10 @@ public class VehicleSearchController {
         model.addAttribute("years", years);
         model.addAttribute("citiesByCounty", citiesByCounty);
         model.addAttribute("engineTypes", engineTypes);
+        model.addAttribute("transmissionTypes", transmissionTypes);
+        model.addAttribute("driveTrainTypes", driveTrainTypes);
 
         model.addAttribute("user", user);
         return "vehicle-search";
-    } 
+    }
 }
