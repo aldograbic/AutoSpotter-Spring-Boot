@@ -1,5 +1,6 @@
 package com.example.AutoSpotter.controllers;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -38,22 +39,21 @@ public class LoginController {
     public String showLoginForm(RedirectAttributes redirectAttributes) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // if (authentication != null && authentication.isAuthenticated()) {
-        //     redirectAttributes.addFlashAttribute("infoMessage", "Već ste prijavljeni! Ako želite pristupiti stranici prvo se odjavite.");
-        //     return "redirect:/";
-        // }
+        if (authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
+        redirectAttributes.addFlashAttribute("infoMessage", "Već ste prijavljeni! Ako želite pristupiti stranici prvo se odjavite.");
+        return "redirect:/";
+    }
 
         return "login";
     }
 
-    @GetMapping("/odjava")
-    public String logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication, RedirectAttributes redirectAttributes) {
+    @PostMapping("/odjava")
+    public String logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
 
-        redirectAttributes.addFlashAttribute("successMessage", "Uspješna odjava. Vidimo se uskoro!");
-        return "redirect:/";
+        return "redirect:/?uspjesnaOdjava";
     }
 
     @PostMapping("/prijava")
@@ -83,11 +83,10 @@ public class LoginController {
             session.setAttribute("loggedInUser", authenticatedUserDetails.getUsername());
 
         } else {
-            redirectAttributes.addFlashAttribute("errorMessage", "Pogrešno korisničko ime ili lozinka. Pokušajte ponovno!");
-            return "redirect:/prijava";
+
+            return "redirect:/prijava?greska";
         }
 
-        redirectAttributes.addFlashAttribute("successMessage", "Pozdrav " + username + "!");
-        return "redirect:/";
+        return "redirect:/?uspjesnaPrijava";
     }
 }

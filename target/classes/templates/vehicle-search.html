@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <title>AutoSpotter | Pretraga</title>
 </head>
+
 <body class="flex flex-col min-h-screen">
-    
+
     <th:block th:insert="~{fragments/header :: header}"></th:block>
 
     <main class="flex flex-1 space-x-4 dark:bg-gray-600">
@@ -23,7 +25,8 @@
                     <label for="vehicleType">Tip vozila</label>
                     <select id="vehicleType" class="input select2-basic">
                         <option value="" selected>Sva vozila</option>
-                        <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}" th:text="${vehicleType}"></option>
+                        <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}"
+                            th:text="${vehicleType}"></option>
                     </select>
                 </div>
                 <div class="grid grid-cols-2 gap-12 m-4">
@@ -41,33 +44,39 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="flex flex-col m-4">
                     <label for="bodyType">Oblik karoserije</label>
                     <select id="bodyType" class="input select2-basic">
                         <option value="" disabled selected>Odabir</option>
+                        <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
                     </select>
                 </div>
                 <div class="flex flex-col m-4">
                     <label for="mileageFrom">Kilometraža vozila</label>
                     <div class="flex items-center">
-                        <input type="number" id="mileageFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" id="mileageFrom" min="0" placeholder="0"
+                            class="input w-11/12 no-arrows flex-grow pl-1">
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="mileageTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" id="mileageTo" min="0" placeholder="..."
+                            class="input w-11/12 no-arrows flex-grow pl-1">
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
                     <label for="priceFrom">Cijena vozila</label>
                     <div class="flex items-center">
-                        <input type="number" id="priceFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" id="priceFrom" min="0" placeholder="0"
+                            class="input w-11/12 no-arrows flex-grow pl-1">
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="priceTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" id="priceTo" min="0" placeholder="..."
+                            class="input w-11/12 no-arrows flex-grow pl-1">
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
                     <label for="state">Stanje vozila</label>
                     <select id="state" class="input select2-basic">
                         <option value="" disabled selected>Odabir</option>
+                        <option th:each="state : ${states}" th:value="${state}" th:text="${state}"></option>
                     </select>
                 </div>
                 <div class="flex flex-col m-4">
@@ -75,17 +84,27 @@
                     <div class="flex items-center">
                         <select id="yearFrom" class="input flex-grow select2-basic">
                             <option value="" disabled selected>Odabir</option>
+                            <option th:each="yearFrom : ${years}" th:value="${yearFrom}" th:text="${yearFrom}"></option>
                         </select>
                         <p class="text-center mr-4 ml-4">do</p>
                         <select id="yearTo" class="input flex-grow select2-basic">
                             <option value="" disabled selected>Odabir</option>
+                            <option th:each="yearTo : ${years}" th:value="${yearTo}" th:text="${yearTo}"></option>
                         </select>
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="location">Lokacija vozila</label>
-                    <select id="location" class="input select2-withSearch">
+                    <label for="city">Lokacija vozila</label>
+                    <select id="city" name="city" required class="input select2-withSearch">
                         <option value="" disabled selected>Odabir</option>
+                        <th:block th:each="entry : ${citiesByCounty}">
+                            <optgroup th:label="${entry.key}">
+                                <th:block th:each="city : ${entry.value}">
+                                    <option th:value="${city}" th:text="${city}"
+                                        th:selected="${city eq session['city']}"></option>
+                                </th:block>
+                            </optgroup>
+                        </th:block>
                     </select>
                 </div>
             </div>
@@ -97,22 +116,28 @@
                     <label for="engineType">Motor</label>
                     <select id="engineType" class="input select2-basic">
                         <option value="" disabled selected>Odabir</option>
+                        <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                     </select>
                 </div>
                 <div class="flex flex-col m-4">
                     <label for="transmissionButtons">Mjenjač</label>
                     <div class="flex" id="transmissionButtons">
-                        <button type="button" id="transmissionAll" class="button bg-neutral-400 flex-grow rounded-br-none rounded-tr-none">Sve vrste</button>
-                        <button type="button" id="transmissionManual" class="button bg-neutral-400 flex-grow rounded-none">Ručni</button>
-                        <button type="button" id="transmissionAutomatic" class="button bg-neutral-400 flex-grow rounded-bl-none rounded-tl-none">Automatski</button>
+                        <button type="button" id="transmissionAll"
+                            class="button bg-neutral-400 flex-grow rounded-br-none rounded-tr-none">Sve vrste</button>
+                        <button type="button" id="transmissionManual"
+                            class="button bg-neutral-400 flex-grow rounded-none">Ručni</button>
+                        <button type="button" id="transmissionAutomatic"
+                            class="button bg-neutral-400 flex-grow rounded-bl-none rounded-tl-none">Automatski</button>
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
                     <label for="enginePowerFrom">Snaga motora (kW)</label>
                     <div class="flex items-center">
-                        <input type="number" id="enginePowerFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" id="enginePowerFrom" min="0" placeholder="0"
+                            class="input w-11/12 no-arrows flex-grow pl-1">
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="enginePowerTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1">
+                        <input type="number" id="enginePowerTo" min="0" placeholder="..."
+                            class="input w-11/12 no-arrows flex-grow pl-1">
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
@@ -129,9 +154,13 @@
                 <div class="flex flex-col m-4">
                     <label for="userTypeButtons">Tip prodavača</label>
                     <div class="flex" id="userTypeButtons">
-                        <button type="button" id="userTypeAll" class="button bg-neutral-400 flex-grow rounded-br-none rounded-tr-none">Svi prodavači</button>
-                        <button type="button" id="userTypePrivate" class="button bg-neutral-400 flex-grow rounded-none">Privatni</button>
-                        <button type="button" id="userTypeBusiness" class="button bg-neutral-400 flex-grow rounded-bl-none rounded-tl-none">Poslovni</button>
+                        <button type="button" id="userTypeAll"
+                            class="button bg-neutral-400 flex-grow rounded-br-none rounded-tr-none">Svi
+                            prodavači</button>
+                        <button type="button" id="userTypePrivate"
+                            class="button bg-neutral-400 flex-grow rounded-none">Privatni</button>
+                        <button type="button" id="userTypeBusiness"
+                            class="button bg-neutral-400 flex-grow rounded-bl-none rounded-tl-none">Poslovni</button>
                     </div>
                 </div>
             </div>
@@ -149,4 +178,5 @@
         <th:block th:insert="~{fragments/footer :: footer}"></th:block>
     </footer>
 </body>
+
 </html>

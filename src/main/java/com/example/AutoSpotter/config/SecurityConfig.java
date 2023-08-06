@@ -33,20 +33,20 @@ public class SecurityConfig {
             .authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/prijava", "/registracija", "/registracija-1", "/registracija-2", "/registracija-3", "/potvrdi",
                 "/", "/kontakt", "/oglasi", "/pretraga", "/zaboravljena-lozinka", "/reset-lozinke", "/manufacturers", "/models",
-                "/css/**", "/img/**", "/js/**").permitAll()
+                "/css/**", "/img/**", "/js/**", "/oglasi/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin((formLogin) -> formLogin
                 .loginPage("/prijava")
                 .loginProcessingUrl("/prijava")
-                .defaultSuccessUrl("/", true)
-                .failureUrl("/prijava")
+                .defaultSuccessUrl("/?uspjesnaPrijava", true)
+                .failureUrl("/prijava?greska")
                 .permitAll()
                 
             )
             .logout((logout) -> logout
                 .logoutUrl("/odjava")
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/?uspjesnaOdjava")
                 .invalidateHttpSession(true)
                 .permitAll())
             .httpBasic(Customizer.withDefaults());
