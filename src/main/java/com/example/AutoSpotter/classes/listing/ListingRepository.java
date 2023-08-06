@@ -21,4 +21,5 @@ public interface ListingRepository {
     void saveImageUrlsForVehicle(ListingImage listingImage);
     List<String> getImageUrlsForVehicle(int vehicleId);
     String getFirstImageUrlForVehicle(int vehicleId);
+    List<Listing> getNewestListings();
 }

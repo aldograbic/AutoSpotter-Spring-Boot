@@ -270,4 +270,18 @@ public class JdbcListingRepository implements ListingRepository {
         }
         return null;
     }
+
+    @Override
+    public List<Listing> getNewestListings() {
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+                    "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
+                    "FROM listing l " +
+                    "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
+                    "INNER JOIN user u ON l.user_id = u.id " +
+                    "INNER JOIN cities c ON v.city_id = c.id " +
+                    "WHERE l.status = 1 " +
+                    "ORDER BY l.created_at DESC LIMIT 4";
+
+        return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository, userRepository));
+    }
 }
