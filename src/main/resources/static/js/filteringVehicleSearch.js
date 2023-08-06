@@ -1,16 +1,3 @@
-var priceFrom = document.getElementById("priceFrom");
-var priceTo = document.getElementById("priceTo");
-
-document.getElementById("transmissionButtons").addEventListener("click", function (event) {
-  var buttonId = event.target.id;
-  selectTransmissionButton(buttonId);
-});
-
-document.getElementById("userTypeButtons").addEventListener("click", function (event) {
-  var buttonId = event.target.id;
-  selectUserTypeButton(buttonId);
-});
-
 $(document).ready(function () {
   $('#vehicleType').change(function () {
     var selectedVehicleType = $('#vehicleType').val();
@@ -28,15 +15,6 @@ $(document).ready(function () {
   });
 });
 
-priceFrom.addEventListener("input", validateInput);
-priceTo.addEventListener("input", validateInput);
-
-function validateInput(event) {
-  var input = event.target;
-  var value = input.value;
-  var sanitizedValue = value.replace(/[^0-9]/g, "");
-  input.value = sanitizedValue;
-}
 
 function loadManufacturers() {
   var selectedVehicleType = $('#vehicleType').val();
@@ -47,7 +25,7 @@ function loadManufacturers() {
     $('#model').append('<option value="" disabled selected>Odabir</option>');
   } else {
     $.ajax({
-      url: '/manufacturers',
+      url: '/manufacturersSearch',
       type: 'POST',
       data: selectedVehicleType,
       contentType: 'text/plain',
@@ -74,7 +52,7 @@ function loadModels() {
     $('#model').append('<option value="" disabled selected>Odabir</option>');
   } else {
     $.ajax({
-      url: '/models',
+      url: '/modelsSearch',
       type: 'POST',
       data: selectedManufacturer,
       contentType: 'text/plain',
@@ -91,72 +69,6 @@ function loadModels() {
     });
   }
 }
-
-function selectTransmissionButton(buttonId) {
-  var buttons = document.querySelectorAll('#transmissionButtons button');
-  buttons.forEach(function (button) {
-    button.classList.remove('selected');
-  });
-
-  var selectedButton = document.getElementById(buttonId);
-  selectedButton.classList.add('selected');
-
-  var selectedTransmissionValue = "";
-
-  switch (buttonId) {
-    case "transmissionAll":
-      selectedTransmissionValue = "";
-      break;
-    case "transmissionManual":
-      selectedTransmissionValue = "Ručni";
-      break;
-    case "transmissionAutomatic":
-      selectedTransmissionValue = "Automatski";
-      break;
-    case "transmissionSemiAutomatic":
-      selectedTransmissionValue = "Poluautomatski";
-      break;
-  }
-
-  document.getElementById("selectedTransmission").value = selectedTransmissionValue;
-}
-
-document.getElementById("transmissionButtons").addEventListener("click", function (event) {
-  var buttonId = event.target.id;
-  selectTransmissionButton(buttonId);
-});
-
-
-function selectUserTypeButton(buttonId) {
-  var buttons = document.querySelectorAll('#userTypeButtons button');
-  buttons.forEach(function (button) {
-    button.classList.remove('selected');
-  });
-
-  var selectedButton = document.getElementById(buttonId);
-  selectedButton.classList.add('selected');
-
-  var selectedUserTypeValue = "";
-
-  switch (buttonId) {
-    case "userTypePrivate":
-      selectedUserTypeValue = "Privatni";
-      break;
-    case "userTypeBusiness":
-      selectedUserTypeValue = "Poslovni";
-      break;
-    case "userTypeAll":
-      selectedUserTypeValue = "";
-      break;
-  }
-
-  document.getElementById("selectedUserType").value = selectedUserTypeValue;
-}
-
-document.getElementById("userTypeButtons").addEventListener("click", function (event) {
-  var buttonId = event.target.id;
-  selectUserTypeButton(buttonId);
-});
 
 document.addEventListener("DOMContentLoaded", function () {
   const yearFromSelect = document.getElementById("yearFrom");

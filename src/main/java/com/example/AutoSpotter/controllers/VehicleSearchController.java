@@ -9,6 +9,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.AutoSpotter.classes.location.LocationRepository;
 import com.example.AutoSpotter.classes.user.User;
@@ -62,5 +65,17 @@ public class VehicleSearchController {
 
         model.addAttribute("user", user);
         return "vehicle-search";
+    }
+
+    @PostMapping("/manufacturersSearch")
+    @ResponseBody
+    public List<String> getManufacturersByVehicleType(@RequestBody String vehicleType) {
+        return vehicleRepository.getManufacturersByVehicleTypeName(vehicleType);
+    }
+
+    @PostMapping("/modelsSearch")
+    @ResponseBody
+    public List<String> getModelsByManufacturer(@RequestBody String manufacturer) {
+        return vehicleRepository.getModelsByManufacturer(manufacturer);
     }
 }

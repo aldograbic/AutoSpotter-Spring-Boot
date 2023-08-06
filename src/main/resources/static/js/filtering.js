@@ -1,17 +1,17 @@
 var priceFrom = document.getElementById("priceFrom");
 var priceTo = document.getElementById("priceTo");
 
-document.getElementById("transmissionButtons").addEventListener("click", function(event) {
+document.getElementById("transmissionButtons").addEventListener("click", function (event) {
   var buttonId = event.target.id;
   selectTransmissionButton(buttonId);
 });
 
-document.getElementById("userTypeButtons").addEventListener("click", function(event) {
+document.getElementById("userTypeButtons").addEventListener("click", function (event) {
   var buttonId = event.target.id;
   selectUserTypeButton(buttonId);
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
   $('#vehicleType').change(function () {
     var selectedVehicleType = $('#vehicleType').val();
     if (selectedVehicleType === "Automobil") {
@@ -23,7 +23,7 @@ $(document).ready(function() {
     loadManufacturers();
   });
 
-  $('#manufacturer').change(function() {
+  $('#manufacturer').change(function () {
     loadModels();
   });
 });
@@ -51,16 +51,16 @@ function loadManufacturers() {
       type: 'POST',
       data: selectedVehicleType,
       contentType: 'text/plain',
-      success: function(response) {
+      success: function (response) {
         $('#manufacturer').empty();
         $('#manufacturer').append('<option value="" selected>Svi proizvođači</option>');
-        response.forEach(function(manufacturer) {
+        response.forEach(function (manufacturer) {
           $('#manufacturer').append('<option value="' + manufacturer + '">' + manufacturer + '</option>');
         });
         $('#model').empty();
         $('#model').append('<option value="" disabled selected>Odabir</option>');
       },
-      error: function(xhr, status, error) {
+      error: function (xhr, status, error) {
         // Handle error, if any
       }
     });
@@ -78,14 +78,14 @@ function loadModels() {
       type: 'POST',
       data: selectedManufacturer,
       contentType: 'text/plain',
-      success: function(response) {
+      success: function (response) {
         $('#model').empty();
         $('#model').append('<option value="" selected>Svi modeli</option>');
-        response.forEach(function(model) {
+        response.forEach(function (model) {
           $('#model').append('<option value="' + model + '">' + model + '</option>');
         });
       },
-      error: function(xhr, status, error) {
+      error: function (xhr, status, error) {
         // Handle error, if any
       }
     });
@@ -94,14 +94,14 @@ function loadModels() {
 
 function selectTransmissionButton(buttonId) {
   var buttons = document.querySelectorAll('#transmissionButtons button');
-  buttons.forEach(function(button) {
+  buttons.forEach(function (button) {
     button.classList.remove('selected');
   });
 
   var selectedButton = document.getElementById(buttonId);
   selectedButton.classList.add('selected');
 
-  var selectedTransmissionValue = ""; // Default value when none of the buttons is selected
+  var selectedTransmissionValue = "";
 
   switch (buttonId) {
     case "transmissionAll":
@@ -116,18 +116,17 @@ function selectTransmissionButton(buttonId) {
     case "transmissionSemiAutomatic":
       selectedTransmissionValue = "Poluautomatski";
       break;
-    // Add more cases for other buttons if needed
   }
 
   document.getElementById("selectedTransmission").value = selectedTransmissionValue;
 }
 
-document.getElementById("transmissionButtons").addEventListener("click", function(event) {
+document.getElementById("transmissionButtons").addEventListener("click", function (event) {
   var buttonId = event.target.id;
   selectTransmissionButton(buttonId);
 });
 
-  
+
 function selectUserTypeButton(buttonId) {
   var buttons = document.querySelectorAll('#userTypeButtons button');
   buttons.forEach(function (button) {
@@ -170,21 +169,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitBtn = document.getElementById("submitBtn");
 
   function validateYearRange() {
-      const yearFrom = parseInt(yearFromSelect.value);
-      const yearTo = parseInt(yearToSelect.value);
+    const yearFrom = parseInt(yearFromSelect.value);
+    const yearTo = parseInt(yearToSelect.value);
 
-      if (yearTo < yearFrom) {
-          yearError.textContent = "Druga odabrana godina mora biti veća od prve.";
-          yearToSelect.classList.add("border", "border-red-500");
-          
-          submitBtn.disabled = true;
-          submitBtn.classList.add("disabled:opacity-25");
-      } else {
-          yearError.textContent = "";
-          yearToSelect.classList.remove("border", "border-red-500");
-          submitBtn.disabled = false;
-          submitBtn.classList.remove("disabled:opacity-25");
-      }
+    if (yearTo < yearFrom) {
+      yearError.textContent = "Druga odabrana godina mora biti veća od prve.";
+      yearToSelect.classList.add("border", "border-red-500");
+
+      submitBtn.disabled = true;
+      submitBtn.classList.add("disabled:opacity-25");
+    } else {
+      yearError.textContent = "";
+      yearToSelect.classList.remove("border", "border-red-500");
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("disabled:opacity-25");
+    }
   }
 
   const priceFromSelect = document.getElementById("priceFrom");
@@ -202,21 +201,21 @@ document.addEventListener("DOMContentLoaded", function () {
   mileageToSelect.addEventListener("input", validateMileageRange);
 
   function validatePriceRange() {
-      const priceFrom = parseInt(priceFromSelect.value);
-      const priceTo = parseInt(priceToSelect.value);
+    const priceFrom = parseInt(priceFromSelect.value);
+    const priceTo = parseInt(priceToSelect.value);
 
-      if (priceTo < priceFrom) {
-          priceError.textContent = "Druga odabrana cijena mora biti veća od prve.";
-          priceToSelect.classList.add("border", "border-red-500");
-          submitBtn.disabled = true;
-          submitBtn.classList.add("disabled:opacity-25");
+    if (priceTo < priceFrom) {
+      priceError.textContent = "Druga odabrana cijena mora biti veća od prve.";
+      priceToSelect.classList.add("border", "border-red-500");
+      submitBtn.disabled = true;
+      submitBtn.classList.add("disabled:opacity-25");
 
-      } else {
-          priceError.textContent = "";
-          priceToSelect.classList.remove("border", "border-red-500");
-          submitBtn.disabled = false;
-          submitBtn.classList.remove("disabled:opacity-25");
-      }
+    } else {
+      priceError.textContent = "";
+      priceToSelect.classList.remove("border", "border-red-500");
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("disabled:opacity-25");
+    }
   }
 
   function validateMileageRange() {
@@ -224,15 +223,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const mileageTo = parseInt(mileageToSelect.value);
 
     if (mileageTo < mileageFrom) {
-        mileageError.textContent = "Druga odabrana kilometraža mora biti veća od prve.";
-        mileageToSelect.classList.add("border", "border-red-500");
-        submitBtn.disabled = true;
-        submitBtn.classList.add("disabled:opacity-25");
+      mileageError.textContent = "Druga odabrana kilometraža mora biti veća od prve.";
+      mileageToSelect.classList.add("border", "border-red-500");
+      submitBtn.disabled = true;
+      submitBtn.classList.add("disabled:opacity-25");
     } else {
-        mileageError.textContent = "";
-        mileageToSelect.classList.remove("border", "border-red-500");
-        submitBtn.disabled = false;
-        submitBtn.classList.remove("disabled:opacity-25");
+      mileageError.textContent = "";
+      mileageToSelect.classList.remove("border", "border-red-500");
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("disabled:opacity-25");
     }
-}
+  }
 });

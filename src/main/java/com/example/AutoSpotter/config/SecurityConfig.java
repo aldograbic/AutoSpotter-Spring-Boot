@@ -32,7 +32,7 @@ public class SecurityConfig {
         .csrf().disable()
             .authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/prijava", "/registracija", "/registracija-1", "/registracija-2", "/registracija-3", "/potvrdi",
-                "/", "/kontakt", "/oglasi", "/pretraga", "/zaboravljena-lozinka", "/reset-lozinke", "/manufacturers", "/models",
+                "/", "/kontakt", "/oglasi", "/pretraga", "/zaboravljena-lozinka", "/reset-lozinke", "/manufacturers", "/manufacturersSearch", "/models", "/modelsSearch",
                 "/css/**", "/img/**", "/js/**", "/oglasi/**").permitAll()
                 .anyRequest().authenticated()
             )
