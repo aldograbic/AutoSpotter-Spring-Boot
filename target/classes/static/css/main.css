@@ -845,6 +845,10 @@ input[type="checkbox"]:checked + label {
   left: 50%;
 }
 
+.left-\[35px\] {
+  left: 35px;
+}
+
 .right-0 {
   right: 0px;
 }
@@ -895,6 +899,10 @@ input[type="checkbox"]:checked + label {
 
 .top-3 {
   top: 0.75rem;
+}
+
+.top-\[13px\] {
+  top: 13px;
 }
 
 .top-full {
@@ -2092,6 +2100,11 @@ input[type="checkbox"]:checked + label {
 
 .disabled\:opacity-25:disabled {
   opacity: 0.25;
+}
+
+.group:hover .group-hover\:rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .group:hover .group-hover\:bg-white\/50 {
