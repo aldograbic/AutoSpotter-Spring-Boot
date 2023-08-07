@@ -45,13 +45,17 @@
                             <label for="username">Korisničko ime</label>
                             <input type="text" id="username" name="username" required th:value="${user.username}" class="input w-96"/>
                         </div>
-                        <div class="flex flex-col mb-4">
+                        <div class="flex flex-col mb-4" th:if="${user.firstName != null}">
                             <label for="firstName">Ime</label>
                             <input type="text" id="firstName" name="firstName" required th:value="${user.firstName}" class="input w-96"/>
                         </div>
-                        <div class="flex flex-col mb-4">
+                        <div class="flex flex-col mb-4" th:if="${user.firstName != null}">
                             <label for="lastName">Prezime</label>
                             <input type="text" id="lastName" name="lastName" required th:value="${user.lastName}" class="input w-96"/>
+                        </div>
+                        <div class="flex flex-col mb-4" th:unless="${user.firstName != null}">
+                            <label for="companyName">Naziv tvrtke</label>
+                            <input type="text" id="companyName" name="companyName" required th:value="${user.companyName}" class="input w-96"/>
                         </div>
                         <div class="flex flex-col mb-4">
                             <label for="address">Adresa</label>

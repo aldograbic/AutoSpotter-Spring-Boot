@@ -1232,6 +1232,7 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-8">Slike vozila</h2>
                 <form th:action="@{/oglas-5}" method="post" enctype="multipart/form-data">
                     <div class="flex flex-col mb-4 w-96">
+                        <p>Prva unesena slika je naslovna</p>
                         <input type="file" id="images" name="images" accept="image/*" multiple
                             class="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:font-semibold file:bg-gray-200 hover:file:bg-gray-300"
                             onchange="previewImages(event)">

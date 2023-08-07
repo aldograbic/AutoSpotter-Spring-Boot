@@ -9,17 +9,45 @@
         <div class="flex items-center space-x-4">
             <a class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-400 dark:hover:text-cyan-600" href="/kontakt">Kontakt</a>
             
-            <div th:unless="${user != null}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start">
-              <button type="button" class="text-gray-700 font-medium hover:text-cyan-700 inline-flex items-center header-link dark:text-gray-400 dark:hover:text-cyan-600">Korisnički račun
-                  <svg class="w-4 h-4 ml-1" viewBox="0 0 20 14" fill="currentColor">
+            <div x-data="{ isOpen: false }" x-cloak>
+              <div th:unless="${user != null}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start">
+                <button type="button" @click="isOpen = !isOpen"
+                  class="text-gray-700 font-medium hover:text-cyan-700 inline-flex items-center header-link dark:text-gray-400 dark:hover:text-cyan-600">
+                  Korisnički račun
+                  <svg x-bind:class="{ 'transform rotate-180': isOpen }" class="w-6 h-6 ml-1" viewBox="0 0 20 14"
+                    fill="currentColor">
                     <path fill-rule="evenodd" d="M6 6l4 4 4-4H6z" />
                   </svg>
-              </button>
+                </button>
+              </div>
             </div>
-
             <div th:if="${user != null}">
-              <img th:if="${user.profileImage == null}" src="/img/icons8-user-50.png" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" alt="Default slika profila" class="w-10 rounded-full ring-2 ring-cyan-600 dark:ring-cyan-700 text-cyan-700 cursor-pointer hover:fill-gray-200">
-              <img th:unless="${user.profileImage == null}" th:src="${user.profileImage}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" alt="Slika profila" class="w-10 h-10 rounded-full object-contain ring-2 ring-cyan-600 dark:ring-cyan-700 text-cyan-700 cursor-pointer hover:fill-gray-200">
+      
+              <div th:if="${user.profileImage == null}" x-data="{ isOpen: false }" x-cloak>
+                <img src="img/icons8-user-50.png" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
+                  alt="Default slika profila"
+                  class="w-10 rounded-full ring-2 ring-cyan-600 dark:ring-cyan-700 text-cyan-700 cursor-pointer hover:fill-gray-200"
+                  @click="isOpen = !isOpen">
+              
+                <div x-bind:class="{ 'rotate-180': isOpen }" @click="isOpen = !isOpen" class="ml-1">
+                  <svg viewBox="0 0 20 14" fill="currentColor" class="w-6 h-6">
+                    <path fill-rule="evenodd" d="M6 6l4 4 4-4H6z" />
+                  </svg>
+                </div>
+              </div>        
+      
+              <div th:unless="${user.profileImage == null}" x-data="{ isOpen: false }" x-cloak class="relative flex items-center">
+                <img th:src="${user.profileImage}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
+                  alt="Slika profila"
+                  class="w-10 h-10 rounded-full object-contain ring-2 ring-cyan-600 dark:ring-cyan-700 text-cyan-700 cursor-pointer hover:fill-gray-200"
+                  @click="isOpen = !isOpen">
+                <div x-bind:class="{ 'rotate-180': isOpen }" @click="isOpen = !isOpen">
+                  <svg viewBox="0 0 20 14" class="w-6 h-6" fill="currentColor">
+                    <path fill-rule="evenodd" d="M6 6l4 4 4-4H6z" />
+                  </svg>
+                </div>
+              </div>
+                   
             </div>
 
             <!-- Dropdown menu -->
