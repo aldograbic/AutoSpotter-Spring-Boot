@@ -32,33 +32,39 @@ public class ListingController {
     }
     
     @GetMapping("/oglasi/{listingId}")
-    public String getListingDetails(@PathVariable("listingId") int listingId, Model model) {
-        Listing listing = listingRepository.getListingById(listingId);
-        int vehicleId = listing.getVehicleId();
-        List<String> imageUrls = listingRepository.getImageUrlsForVehicle(vehicleId);
+public String getListingDetails(@PathVariable("listingId") int listingId, Model model) {
+    // Fetch the details of the current listing
+    Listing listing = listingRepository.getListingById(listingId);
+    int vehicleId = listing.getVehicleId();
+    List<String> imageUrls = listingRepository.getImageUrlsForVehicle(vehicleId);
 
-        model.addAttribute("imageUrls", imageUrls);
+    model.addAttribute("imageUrls", imageUrls);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        User user = userRepository.findByUsername(username);
-        
-        
-        if (user != null) {
-            
-            int currentUserId = user.getId();
-            boolean userHasLikedListing = listingRepository.hasUserLikedListing(currentUserId, listingId);
-            model.addAttribute("currentUserId", currentUserId);
-            model.addAttribute("userHasLikedListing", userHasLikedListing);
-        }
+    // Fetch the authenticated user (if any)
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String username = authentication.getName();
+    User user = userRepository.findByUsername(username);
 
-        model.addAttribute("user", user);
-        
-        model.addAttribute("listing", listing);
-        
-
-        return "listing-details";
+    if (user != null) {
+        int currentUserId = user.getId();
+        boolean userHasLikedListing = listingRepository.hasUserLikedListing(currentUserId, listingId);
+        model.addAttribute("currentUserId", currentUserId);
+        model.addAttribute("userHasLikedListing", userHasLikedListing);
     }
+
+    // Add the user and listing details to the model
+    model.addAttribute("user", user);
+    model.addAttribute("listing", listing);
+
+    // Fetch and add the similar listings to the model
+    List<Listing> similarListings = listingRepository.getSimilarListings(
+        listing.getVehicle().getVehicleType(), listing.getVehicle().getManufacturer(), listing.getVehicle().getModel()
+    );
+    model.addAttribute("similarListings", similarListings);
+
+    return "listing-details";
+}
+
 
     @PostMapping("/like/{listingId}")
     public String likeListing(@PathVariable("listingId") int listingId, RedirectAttributes redirectAttributes) {

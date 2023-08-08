@@ -243,11 +243,45 @@ public class JdbcListingRepository implements ListingRepository {
         return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository, userRepository), userId);
     }
 
+    @Override
     public List<Listing> getSimilarListings(String vehicleType, String manufacturer, String model) {
-        List<Listing> similarListings = new ArrayList<>();
-        //tu treba napisat kriterije sve
-        return similarListings;
+        String sql = "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at " +
+                    "FROM listing " +
+                    "WHERE vehicle_id IN (" +
+                        "SELECT id FROM vehicle " +
+                        "WHERE manufacturer = ? AND model = ? " +
+                    ") " +
+                    "UNION " +
+                    "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at " +
+                    "FROM listing " +
+                    "WHERE vehicle_id IN (" +
+                        "SELECT id FROM vehicle " +
+                        "WHERE manufacturer = ? " +
+                    ") " +
+                    "AND id NOT IN (?, ?) " +
+                    "UNION " +
+                    "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at " +
+                    "FROM listing " +
+                    "WHERE vehicle_id IN (" +
+                        "SELECT id FROM vehicle " +
+                        "WHERE vehicle_type_id = ? " +
+                    ") " +
+                    "AND id NOT IN (?, ?, ?) " +
+                    "ORDER BY created_at DESC " +
+                    "LIMIT 5";
+
+        return jdbcTemplate.query(
+            sql,
+            new ListingRowMapper(vehicleRepository, userRepository),
+            manufacturer, model,
+            manufacturer,
+            model, manufacturer,
+            vehicleType,
+            model, manufacturer, vehicleType
+        );
     }
+
+    
 
     @Override
     public void saveImageUrlsForVehicle(ListingImage listingImage) {

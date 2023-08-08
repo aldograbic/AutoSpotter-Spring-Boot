@@ -1,378 +1,457 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
-    <th:block th:insert="~{fragments/head-dynamic :: head-dynamic}"></th:block>
-    <title th:text="'AutoSpotter | ' + ${listing.vehicle.manufacturer} + ' ' + ${listing.vehicle.model} "></title>
+  <th:block th:insert="~{fragments/head-dynamic :: head-dynamic}"></th:block>
+  <title th:text="'AutoSpotter | ' + ${listing.vehicle.manufacturer} + ' ' + ${listing.vehicle.model} "></title>
+  <script th:src="@{/js/carousel.js}" defer="defer"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.css" rel="stylesheet" />
 </head>
 
 <body class="flex flex-col min-h-screen">
 
-    <th:block th:insert="~{fragments/header-dynamic :: header-dynamic}"></th:block>
+  <th:block th:insert="~{fragments/header-dynamic :: header-dynamic}"></th:block>
 
-    <div th:if="${successMessage}" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 10000)" x-transition:leave="transition ease-out duration-1000" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute top-0 flex items-center w-full z-10 p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 mt-[4.8rem]" role="alert">
-      <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-      </svg>
-      <span class="sr-only">Uspješno</span>
-      <div>
-        <span class="font-medium" th:text="${successMessage}"></span>
-      </div>
+  <div th:if="${successMessage}" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 10000)"
+    x-transition:leave="transition ease-out duration-1000" x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    class="absolute top-0 flex items-center w-full z-10 p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 mt-[4.8rem]"
+    role="alert">
+    <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor" viewBox="0 0 20 20">
+      <path
+        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+    </svg>
+    <span class="sr-only">Uspješno</span>
+    <div>
+      <span class="font-medium" th:text="${successMessage}"></span>
     </div>
+  </div>
 
-    <main class="flex flex-1 space-x-4 dark:bg-gray-600">
+  <main class="flex flex-1 space-x-4 dark:bg-gray-600">
 
-        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+    <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
-        <div class="flex-1 mt-8">
-          <div class="text-sm text-gray-500">
-              <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType})}" class="hover:text-cyan-900 text-base" th:text="${listing.vehicle.vehicleType}"></a> &gt;
-              <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType}, manufacturer=${listing.vehicle.manufacturer})}" class="hover:text-cyan-900 text-base" th:text="${listing.vehicle.manufacturer}"></a> &gt;
-              <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType}, manufacturer=${listing.vehicle.manufacturer}, model=${listing.vehicle.model})}" class="hover:text-cyan-900 text-base" th:text="${listing.vehicle.model}"></a>
+    <div class="flex-1 mt-8">
+      <div class="text-sm text-gray-500">
+        <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType})}" class="hover:text-cyan-900 text-base"
+          th:text="${listing.vehicle.vehicleType}"></a> &gt;
+        <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType}, manufacturer=${listing.vehicle.manufacturer})}"
+          class="hover:text-cyan-900 text-base" th:text="${listing.vehicle.manufacturer}"></a> &gt;
+        <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType}, manufacturer=${listing.vehicle.manufacturer}, model=${listing.vehicle.model})}"
+          class="hover:text-cyan-900 text-base" th:text="${listing.vehicle.model}"></a>
+      </div>
+
+      <div class="flex justify-center">
+        <div id="indicators-carousel" class="relative w-full" data-carousel="static">
+          <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+            <div th:each="imageUrl, iterationStatus : ${imageUrls}"
+              class="carousel-item hidden duration-700 ease-in-out"
+              data-carousel-item="${iterationStatus.index == 0 ? 'active' : ''}">
+              <img th:src="${imageUrl}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                alt="Slika vozila">
+            </div>
           </div>
-
-            <div class="flex justify-center">
-                
-                <div id="indicators-carousel" class="relative w-full" data-carousel="static">
-                    <!-- Carousel wrapper -->
-                    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                        <!-- Item (bilo je hidden pored duration-700)-->
-                        <div th:each="imageUrl, iterationStatus : ${imageUrls}" 
-                            class=" duration-700 ease-in-out" 
-                            th:data-carousel-item="${iterationStatus.index == 0} ? 'active' : ''">
-                            <img th:src="${imageUrl}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Slika vozila">
-                        </div>
-                    </div>
-                    <!-- Slider indicators -->
-                    <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-                      <button th:each="imageUrl, iterationStatus : ${imageUrls}" 
-                      type="button" 
-                      th:classappend="${iterationStatus.index == 0} ? 'w-3 h-3 rounded-full active' : 'w-3 h-3 rounded-full'" 
-                      aria-current="true" 
-                      th:aria-label="'Slide ' + ${iterationStatus.index + 1}" 
-                      th:data-carousel-slide-to="${iterationStatus.index}"></button>
-              
-                    </div>
-                    <!-- Slider controls -->
-                    <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                            <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                            </svg>
-                            <span class="sr-only">Prethodna</span>
-                        </span>
-                    </button>
-                    <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                            <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                            </svg>
-                            <span class="sr-only">Sljedeća</span>
-                        </span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="text-2xl">
-                <h2 class="mb-4 ml mt-8 font-semibold" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></h2>
-                <p class="text-gray-700 mb-4 font-semibold" th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}"></p>
-                <div class="flex gap-2">
-                  <div x-data="{ tooltipVisible: false }">
-                    <div class="relative">
-                      <a @click="navigator.clipboard.writeText(window.location.href); tooltipVisible = true; setTimeout(() => { tooltipVisible = false; }, 1500);">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 cursor-pointer" viewBox="0 0 24 24">
-                          <path d="M7 4V2H17V4H20.0066C20.5552 4 21 4.44495 21 4.9934V21.0066C21 21.5552 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5551 3 21.0066V4.9934C3 4.44476 3.44495 4 3.9934 4H7ZM7 6H5V20H19V6H17V8H7V6ZM9 4V6H15V4H9Z"></path>
-                        </svg>
-                      </a>
-                  
-                      <div x-show="tooltipVisible" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95"
-                          x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200"
-                          x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95"
-                          class="bg-cyan-700 p-2 absolute top-full left-1/2 text-white text-base transform -translate-x-1/2 mt-1 rounded-md shadow-lg z-10">
-                          Kopirano!
-                      </div>
-                    </div>
-                  </div>
-                  <div th:if="${user != null}">
-                    <form th:if="${!userHasLikedListing}" th:action="@{/like/{listingId}(listingId=${listing.id})}" method="post">
-                      <button type="submit">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24"><path fill="currentColor" d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z"/></svg>
-                      </button>
-                    </form>
-                  
-                    <form th:if="${userHasLikedListing}" th:action="@{/dislike/{listingId}(listingId=${listing.id})}" method="post">
-                        <button type="submit">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24"><path fill="#0891b2" d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z"/></svg>
-                        </button>
-                    </form>
-                  </div>
-                  <div th:unless="${user != null}">
-                    <a href="/prijava">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24"><path fill="currentColor" d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z"/></svg>
-                    </a>
-                  </div>
-                  
-                
-                </div>
-              </div>
-            <div class="px-4 sm:px-0 flex justify-center gap-4 mt-12">
-                <div class="flex items-center mr-2">
-                  <div class="w-8 h-8 flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><g fill="currentColor">
-                      <path d="M3 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5v-5Z"/>
-                      <path d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1c.564 0 1.034.11 1.412.336c.383.228.634.551.794.907c.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V2Zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8V2Z"/></g>
-                    </svg>
-                  </div>
-                  <div class="ml-2">
-                    <p class="text-xs text-gray-500">Gorivo</p>
-                    <p class="font-medium" th:text="${listing.vehicle.engineType}"></p>
-                  </div>
-                </div>
-
-                <div class="flex items-center">
-                  <div class="w-8 h-8 flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" width="512" height="512" viewBox="0 0 512 512">
-                      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="m80 224l37.78-88.15C123.93 121.5 139.6 112 157.11 112h197.78c17.51 0 33.18 9.5 39.33 23.85L432 224m-352 0h352v144H80zm32 144v32H80v-32m352 0v32h-32v-32"/><circle cx="144" cy="288" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><circle cx="368" cy="288" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
-                    </svg>
-
-                  </div>
-                  <div class="ml-2">
-                    <p class="text-xs text-gray-500">Oblik karoserije</p>
-                    <p class="font-medium" th:text="${listing.vehicle.bodyType}"></p>
-                  </div>
-                </div>
-
-                <div class="flex items-center">
-                  <div class="w-8 h-8 flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20">
-                      <path fill="currentColor" d="M9.75 6.5a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5Zm3 1a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5Zm2.5 1.5a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Zm-.75 3.75a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5ZM13.25 14a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Zm.447-11.008c-2.754-1.415-5.554-1.28-7.927.174c-1.21.742-2.517 2.303-3.254 3.893c-.37.8-.617 1.646-.614 2.434c.004.801.268 1.566.938 2.112c.61.498 1.142.748 1.656.773c.518.026.922-.184 1.238-.37c.07-.041.135-.081.197-.119c.242-.147.441-.268.69-.346c.28-.09.637-.122 1.155.036c.19.058.306.144.386.244c.086.106.155.254.206.466c.052.213.08.464.1.76c.009.11.016.237.023.369c.012.192.023.397.039.586c.054.67.17 1.436.574 2.132c.414.713 1.1 1.303 2.203 1.68c1.602.548 3.066.103 4.206-.8c1.126-.891 1.956-2.24 2.371-3.589c1.315-4.273-.211-8.393-4.187-10.435ZM6.292 4.019c2.065-1.265 4.492-1.4 6.948-.138c3.507 1.802 4.873 5.4 3.688 9.252c-.366 1.19-1.094 2.354-2.036 3.1c-.929.735-2.043 1.053-3.261.637c-.904-.31-1.384-.757-1.663-1.236c-.288-.497-.39-1.078-.442-1.712c-.015-.189-.025-.36-.035-.534a28.417 28.417 0 0 0-.025-.41a5.674 5.674 0 0 0-.126-.925a2.171 2.171 0 0 0-.4-.86a1.748 1.748 0 0 0-.872-.57c-.702-.215-1.265-.187-1.75-.034c-.375.12-.698.317-.946.47l-.146.087c-.285.169-.472.244-.68.234c-.213-.01-.543-.118-1.074-.55c-.385-.314-.567-.763-.57-1.34c-.002-.591.186-1.288.521-2.01c.674-1.453 1.862-2.844 2.87-3.461Z"/>
-                    </svg>
-                  </div>
-                  <div class="ml-2">
-                    <p class="text-xs text-gray-500">Boja</p>
-                    <p class="font-medium" th:text="${listing.vehicle.color}"></p>
-                  </div>
-                </div>
-
-                <div class="flex items-center">
-                  <div class="w-8 h-8 flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 2048 2048">
-                      <path fill="currentColor" d="M2048 128v1792H0V128h384V0h128v128h1024V0h128v128h384zM128 256v256h1792V256h-256v128h-128V256H512v128H384V256H128zm1792 1536V640H128v1152h1792zm-512-896v640h-128v-486q-27 14-62 26t-66 12V960q12 0 31-6t39-15t36-21t22-21v-1h128zm-384 192q0 39-11 70t-31 58t-44 51t-51 46t-51 46t-47 49h235v128H640v-36q0-19-1-38t4-38t10-36q11-27 33-53t50-53t55-51t51-49t39-47t15-47q0-27-19-45t-45-19q-23 0-40 14t-23 37l-125-26q6-33 23-61t44-48t57-32t64-12q40 0 75 15t61 41t41 61t15 75z"/>
-                    </svg>
-                  </div>
-                  <div class="ml-2">
-                    <p class="text-xs text-gray-500">Godina proizvodnje</p>
-                    <p class="font-medium" th:text="${listing.vehicle.year}"></p>
-                  </div>
-                </div>
-
-                <div class="flex items-center">
-                  <div class="w-8 h-8 flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                      <path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m0 2v12h7V6H4m16 12V6h-1.24c.24.54.19 1.07.19 1.13c-.07.67-.54 1.37-.71 1.62l-2.33 2.55l3.32-.02l.01 1.22l-5.2-.03l-.04-1s3.05-3.23 3.2-3.52c.14-.28.71-1.95-.7-1.95c-1.23.05-1.09 1.3-1.09 1.3l-1.54.01s.01-.66.38-1.31H13v12h2.58l-.01-.86l.97-.01s.91-.16.92-1.05c.04-1-.81-1-.96-1c-.13 0-1.07.05-1.07.87h-1.52s.04-2.06 2.59-2.06c2.6 0 2.46 2.02 2.46 2.02s.04 1.25-1.11 1.72l.52.37H20M8.92 16h-1.5v-5.8l-1.8.56V9.53l3.14-1.12h.16V16Z"/>
-                    </svg>
-                  </div>
-                  <div class="ml-2">
-                    <p class="text-xs text-gray-500">Kilometraža</p>
-                    <p class="font-medium" th:text="${listing.vehicle.mileage + ' km'}"></p>
-                  </div>
-                </div>
-
-                <div class="flex items-center">
-                  <div class="w-8 h-8 flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                      <path fill="currentColor" d="M9.5 6c-1.32 0-2.496.86-2.875 2.125L5.25 12.719l-1.938-.656l-.624 1.874l1.968.657l-.625 2.125A.972.972 0 0 0 4 17v8c0 .55.45 1 1 1h3l.656-2h5.25l9.938 1.531L24 26h3.031c.242 0 .477-.09.657-.25l.03-.031c.012-.012.024-.02.032-.032a.998.998 0 0 0 .25-.625v-.093a.668.668 0 0 0 0-.125L27.156 19H29v-2h-2.375L24.5 12.656l.875-2.937a1.004 1.004 0 0 0-.344-1.094l-1.937-1.438a1.017 1.017 0 0 0-.5-.187L9.562 6H9.5zm0 2l12.625.969l1.125.844l-.781 2.624a.999.999 0 0 0 .062.75l1.5 3.063l-6.125-2.125l-.125-.063h-.125L7.22 13.095l1.31-4.376c.13-.43.524-.719.969-.719zm-2.875 7.063l10.781 1h.063l7.625 2.687l.718 5.031L14.22 22a1.043 1.043 0 0 0-.156 0h-1.157l.438-1l4.312.625L20.25 22L19 20l-7-1l-1.25 3H6v-4.813zM8.5 16a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3zm12.375 2.75a1.808 1.808 0 1 0 3.406 1.219z"/>
-                    </svg>
-                  </div>
-                  <div class="ml-2">
-                    <p class="text-xs text-gray-500">Stanje</p>
-                    <p class="font-medium" th:text="${listing.vehicle.state}"></p>
-                  </div>
-                </div>
-
-                <div class="flex items-center">
-                  <div class="w-8 h-8 flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mr-2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                    </svg>
-                  </div>
-                  <div class="ml-2">
-                    <p class="text-xs text-gray-500">Lokacija</p>
-                    <p class="font-medium" th:text="${listing.vehicle.city.cityName + ', ' + listing.vehicle.county.countyName}"></p>
-                  </div>
-                </div>
-            </div>
-
-            <div class="px-4 sm:px-0 mt-8">
-                <h2 class="text-xl font-semibold leading-7 text-gray-900">Tehnički podaci</h2>
-            </div>
-            <div class="mt-6 border-t border-gray-100">
-                <dl class="divide-y divide-gray-100">
-                  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                    <dt class="dt">Motor</dt>
-                    <dd th:text="${listing.vehicle.engineType}" class="dd sm:col-span-2 sm:mt-0"></dd>
-                  </div>
-                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                        <dt class="dt">Zapremnina motora</dt>
-                        <dd th:text="${listing.vehicle.engineDisplacement + ' L'}" class="dd sm:col-span-2 sm:mt-0"></dd>
-                    </div>
-                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                        <dt class="dt">Snaga motora</dt>
-                        <dd th:text="${listing.vehicle.enginePower + ' kW'}" class="dd sm:col-span-2 sm:mt-0"></dd>
-                    </div>
-                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                        <dt class="dt">Potrošnja goriva</dt>
-                        <dd th:text="${listing.vehicle.fuelConsumption + ' L/100km'}" class="dd sm:col-span-2 sm:mt-0"></dd>
-                    </div>
-                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                        <dt class="dt">Mjenjač</dt>
-                        <dd th:text="${listing.vehicle.transmission}" class="dd sm:col-span-2 sm:mt-0"></dd>
-                    </div>
-                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                        <dt class="dt">Pogon kotača</dt>
-                        <dd th:text="${listing.vehicle.driveTrain}" class="dd sm:col-span-2 sm:mt-0"></dd>
-                    </div>
-                </dl>
-            </div>
-
-            <div class="px-4 sm:px-0 mt-8">
-              <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Sigurnost i oprema</h2>
-              <div class="mt-6 py-6 border-t border-gray-100 grid grid-cols-2 gap-4">
-                  <div>
-                      <ul>
-                          <li th:each="feature : ${listing.vehicle.safetyFeatures}" th:if="${feature.value}">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 inline-block align-middle" viewBox="0 0 24 24">
-                                  <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z" fill="rgba(8,145,178,1)"></path>
-                              </svg>
-                              <span class="inline-block align-middle" th:text="${feature}"></span>
-                          </li>
-                      </ul>
-                  </div>
-                  <div>
-                      <ul>
-                          <li th:each="extra : ${listing.vehicle.extras}" th:if="${extra.value}">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 inline-block align-middle" viewBox="0 0 24 24">
-                                  <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z" fill="rgba(8,145,178,1)"></path>
-                              </svg>
-                              <span class="inline-block align-middle" th:text="${extra}"></span>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-            </div>
-
-            <div class="px-4 sm:px-0 mt-8">
-                <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Opis oglasa</h2>
-                <div class="mt-6 py-6 border-t border-gray-100">
-                  <p class="text-gray-700" th:text="${listing.listingDescription}"></p>
-                </div>
-            </div>
-            
-            <div class="px-4 sm:px-0 mt-8 mb-8">
-              <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Podaci o prodavatelju</h2>
-              <div class="mt-6 py-6 border-t border-gray-100">
-                  <a class="inline-flex items-center text-cyan-700 hover:text-cyan-900" th:href="@{/korisnicki-profil/{userId}(userId=${listing.user.id})}">
-                      <span class="mr-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg></span>
-                      <span class="font-semibold text-lg" th:text="${listing.user.username}"></span>
-                  </a>
-                  <p th:if="${listing.user.companyName != null}">Naziv tvrtke: <span class="font-semibold" th:text="${listing.user.companyName}"></span></p>
-                  <p th:unless="${listing.user.companyName != null}">Ime i prezime: <span class="font-semibold" th:text="${listing.user.firstName + ' ' + listing.user.lastName}"></span></p>
-                  <p>Kontakt: <span class="font-semibold" th:text="${listing.user.email + ', ' + listing.user.phoneNumber}"></span></p>
-                  <button data-modal-target="contact-modal" data-modal-toggle="contact-modal" type="button" class="button text-white font-medium rounded-lg mt-4 py-2.5 text-center inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                    </svg>
-                    Pošalji upit
-                  </button>
-
-                  <div id="contact-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                      <div class="relative w-full max-w-md max-h-full">
-                          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                              <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="contact-modal">
-                                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                  </svg>
-                                  <span class="sr-only">Zatvori prozor</span>
-                              </button>
-                              <div th:if="${user != null}" class="px-6 py-6 lg:px-8">
-                                  <h3 class="mb-4 text-xl font-medium flex justify-center text-gray-900 dark:text-white">Kontaktiraj prodavatelja za</h3>
-                                  <span class="mb-4 text-xl font-bold flex justify-center text-gray-900 dark:text-white" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></span>
-                                  <form class="space-y-6" th:action="@{/oglasi/{listingId}/kontaktiraj(listingId = ${listing.id})}" method="post">
-                                      <div th:if="${user.firstName != null}">
-                                          <label for="firstName" class="block text-sm font-medium dark:text-white">Ime</label>
-                                          <input type="text" name="firstName" id="firstName" class="input text-sm block w-full" th:value="${user.firstName}" required>
-                                      </div>
-                                      <div th:unless="${user.firstName != null}">
-                                        <label for="companyName" class="block text-sm font-medium dark:text-white">Naziv tvrtke</label>
-                                        <input type="text" name="companyName" id="companyName" class="input text-sm block w-full" th:value="${user.companyName}" required>
-                                      </div>
-                                      <div th:if="${user.lastName != null}">
-                                          <label for="lastName" class="block text-sm font-medium dark:text-white">Prezime</label>
-                                          <input type="text" name="lastName" id="lastName" class="input text-sm block w-full" th:value="${user.lastName}" required>
-                                      </div>
-                                      <div>
-                                          <label for="email" class="block text-sm font-medium dark:text-white">E-mail adresa</label>
-                                          <input type="email" name="email" id="email" class="input text-sm block w-full" th:value="${user.email}" required>
-                                      </div>
-                                      <div class="flex flex-col mb-4 dark:text-gray-200">
-                                        <label for="message" class="block text-sm font-medium dark:text-white">Poruka</label>
-                                        <textarea id="message" name="message" placeholder="..." rows="4" required class="input w-96 h-48 resize-none"></textarea>
-                                      </div>
-                                      
-                                      <button type="submit" class="w-full text-sm button py-2.5">Pošalji</button>
-                                  </form>
-                              </div>
-                              <div th:unless="${user != null}" class="px-6 py-6 lg:px-8">
-                                <h3 class="mb-4 text-xl font-medium flex justify-center text-gray-900 dark:text-white">Kontaktiraj prodavatelja za</h3>
-                                <span class="mb-4 text-xl font-bold flex justify-center text-gray-900 dark:text-white" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></span>
-                                <form class="space-y-6" th:action="@{/oglasi/{listingId}/kontaktiraj(listingId = ${listing.id})}" method="post">
-                                    <div>
-                                        <label for="firstName" class="block text-sm font-medium dark:text-white">Ime</label>
-                                        <input type="text" name="firstName" id="firstName" class="input text-sm block w-full" required>
-                                    </div>
-                                    <div>
-                                      <label for="lastName" class="block text-sm font-medium dark:text-white">Prezime</label>
-                                      <input type="text" name="lastName" id="lastName" class="input text-sm block w-full" required>
-                                    </div>
-                                    <div>
-                                        <label for="email" class="block text-sm font-medium dark:text-white">E-mail adresa</label>
-                                        <input type="email" name="email" id="email" class="input text-sm block w-full" required>
-                                    </div>
-                                    <div class="flex flex-col mb-4 dark:text-gray-200">
-                                      <label for="message" class="block text-sm font-medium dark:text-white">Poruka</label>
-                                      <textarea id="message" name="message" placeholder="..." rows="4" required class="input w-96 h-48 resize-none"></textarea>
-                                    </div>
-                                    
-                                    <button type="submit" class="w-full text-sm button py-2.5">Pošalji</button>
-                                </form>
-                            </div>
-                          </div>
-                      </div>
-                  </div> 
-
-              </div>
-            </div>
-
-            <div class="px-4 sm:px-0 mt-8 mb-8">
-              <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Slični oglasi</h2>
-              <div class="mt-6 border-t border-gray-100">
-                <ul>
-                  <li th:each="similarListing : ${similarListings}"> 
-                      <p th:text="${similarListing.title}"></p>
-                  </li>
-              </ul>
-              </div>
+          <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+            <button th:each="imageUrl, iterationStatus : ${imageUrls}" type="button"
+              th:classappend="${iterationStatus.index == 0} ? 'w-3 h-3 rounded-full active' : 'w-3 h-3 rounded-full'"
+              aria-current="true" th:aria-label="'Slide ' + ${iterationStatus.index + 1}"
+              th:data-carousel-slide-to="${iterationStatus.index}"></button>
           </div>
-          
+          <button type="button"
+            class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+            data-carousel-prev>
+            <span
+              class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M5 1 1 5l4 4" />
+              </svg>
+              <span class="sr-only">Prethodna</span>
+            </span>
+          </button>
+          <button type="button"
+            class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+            data-carousel-next>
+            <span
+              class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 9 4-4-4-4" />
+              </svg>
+              <span class="sr-only">Sljedeća</span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="text-2xl">
+        <h2 class="mb-4 ml mt-8 font-semibold"
+          th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}">
+        </h2>
+        <p class="text-gray-700 mb-4 font-semibold"
+          th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}">
+        </p>
+        <div class="flex gap-2">
+          <div x-data="{ tooltipVisible: false }">
+            <div class="relative">
+              <a
+                @click="navigator.clipboard.writeText(window.location.href); tooltipVisible = true; setTimeout(() => { tooltipVisible = false; }, 1500);">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 cursor-pointer" viewBox="0 0 24 24">
+                  <path
+                    d="M7 4V2H17V4H20.0066C20.5552 4 21 4.44495 21 4.9934V21.0066C21 21.5552 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5551 3 21.0066V4.9934C3 4.44476 3.44495 4 3.9934 4H7ZM7 6H5V20H19V6H17V8H7V6ZM9 4V6H15V4H9Z">
+                  </path>
+                </svg>
+              </a>
+
+              <div x-show="tooltipVisible" x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 transform scale-95"
+                x-transition:enter-end="opacity-100 transform scale-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform scale-100"
+                x-transition:leave-end="opacity-0 transform scale-95"
+                class="bg-cyan-700 p-2 absolute top-full left-1/2 text-white text-base transform -translate-x-1/2 mt-1 rounded-md shadow-lg z-10">
+                Kopirano!
+              </div>
+            </div>
+          </div>
+          <div th:if="${user != null}">
+            <form th:if="${!userHasLikedListing}" th:action="@{/like/{listingId}(listingId=${listing.id})}"
+              method="post">
+              <button type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24">
+                  <path fill="currentColor"
+                    d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z" />
+                </svg>
+              </button>
+            </form>
+
+            <form th:if="${userHasLikedListing}" th:action="@{/dislike/{listingId}(listingId=${listing.id})}"
+              method="post">
+              <button type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24">
+                  <path fill="#0891b2"
+                    d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z" />
+                </svg>
+              </button>
+            </form>
+          </div>
+          <div th:unless="${user != null}">
+            <a href="/prijava">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="px-4 sm:px-0 flex justify-center gap-4 mt-12">
+        <div class="flex items-center mr-2">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
+              <g fill="currentColor">
+                <path d="M3 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5v-5Z" />
+                <path
+                  d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1c.564 0 1.034.11 1.412.336c.383.228.634.551.794.907c.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V2Zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8V2Z" />
+              </g>
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500">Gorivo</p>
+            <p class="font-medium" th:text="${listing.vehicle.engineType}"></p>
+          </div>
         </div>
 
-        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
-    </main>
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" width="512" height="512" viewBox="0 0 512 512">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                d="m80 224l37.78-88.15C123.93 121.5 139.6 112 157.11 112h197.78c17.51 0 33.18 9.5 39.33 23.85L432 224m-352 0h352v144H80zm32 144v32H80v-32m352 0v32h-32v-32" />
+              <circle cx="144" cy="288" r="16" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="32" />
+              <circle cx="368" cy="288" r="16" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="32" />
+            </svg>
 
-    <footer>
-        <th:block th:insert="~{fragments/footer :: footer}"></th:block>
-    </footer>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500">Oblik karoserije</p>
+            <p class="font-medium" th:text="${listing.vehicle.bodyType}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20">
+              <path fill="currentColor"
+                d="M9.75 6.5a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5Zm3 1a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5Zm2.5 1.5a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Zm-.75 3.75a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5ZM13.25 14a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Zm.447-11.008c-2.754-1.415-5.554-1.28-7.927.174c-1.21.742-2.517 2.303-3.254 3.893c-.37.8-.617 1.646-.614 2.434c.004.801.268 1.566.938 2.112c.61.498 1.142.748 1.656.773c.518.026.922-.184 1.238-.37c.07-.041.135-.081.197-.119c.242-.147.441-.268.69-.346c.28-.09.637-.122 1.155.036c.19.058.306.144.386.244c.086.106.155.254.206.466c.052.213.08.464.1.76c.009.11.016.237.023.369c.012.192.023.397.039.586c.054.67.17 1.436.574 2.132c.414.713 1.1 1.303 2.203 1.68c1.602.548 3.066.103 4.206-.8c1.126-.891 1.956-2.24 2.371-3.589c1.315-4.273-.211-8.393-4.187-10.435ZM6.292 4.019c2.065-1.265 4.492-1.4 6.948-.138c3.507 1.802 4.873 5.4 3.688 9.252c-.366 1.19-1.094 2.354-2.036 3.1c-.929.735-2.043 1.053-3.261.637c-.904-.31-1.384-.757-1.663-1.236c-.288-.497-.39-1.078-.442-1.712c-.015-.189-.025-.36-.035-.534a28.417 28.417 0 0 0-.025-.41a5.674 5.674 0 0 0-.126-.925a2.171 2.171 0 0 0-.4-.86a1.748 1.748 0 0 0-.872-.57c-.702-.215-1.265-.187-1.75-.034c-.375.12-.698.317-.946.47l-.146.087c-.285.169-.472.244-.68.234c-.213-.01-.543-.118-1.074-.55c-.385-.314-.567-.763-.57-1.34c-.002-.591.186-1.288.521-2.01c.674-1.453 1.862-2.844 2.87-3.461Z" />
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500">Boja</p>
+            <p class="font-medium" th:text="${listing.vehicle.color}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 2048 2048">
+              <path fill="currentColor"
+                d="M2048 128v1792H0V128h384V0h128v128h1024V0h128v128h384zM128 256v256h1792V256h-256v128h-128V256H512v128H384V256H128zm1792 1536V640H128v1152h1792zm-512-896v640h-128v-486q-27 14-62 26t-66 12V960q12 0 31-6t39-15t36-21t22-21v-1h128zm-384 192q0 39-11 70t-31 58t-44 51t-51 46t-51 46t-47 49h235v128H640v-36q0-19-1-38t4-38t10-36q11-27 33-53t50-53t55-51t51-49t39-47t15-47q0-27-19-45t-45-19q-23 0-40 14t-23 37l-125-26q6-33 23-61t44-48t57-32t64-12q40 0 75 15t61 41t41 61t15 75z" />
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500">Godina proizvodnje</p>
+            <p class="font-medium" th:text="${listing.vehicle.year}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m0 2v12h7V6H4m16 12V6h-1.24c.24.54.19 1.07.19 1.13c-.07.67-.54 1.37-.71 1.62l-2.33 2.55l3.32-.02l.01 1.22l-5.2-.03l-.04-1s3.05-3.23 3.2-3.52c.14-.28.71-1.95-.7-1.95c-1.23.05-1.09 1.3-1.09 1.3l-1.54.01s.01-.66.38-1.31H13v12h2.58l-.01-.86l.97-.01s.91-.16.92-1.05c.04-1-.81-1-.96-1c-.13 0-1.07.05-1.07.87h-1.52s.04-2.06 2.59-2.06c2.6 0 2.46 2.02 2.46 2.02s.04 1.25-1.11 1.72l.52.37H20M8.92 16h-1.5v-5.8l-1.8.56V9.53l3.14-1.12h.16V16Z" />
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500">Kilometraža</p>
+            <p class="font-medium" th:text="${listing.vehicle.mileage + ' km'}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+              <path fill="currentColor"
+                d="M9.5 6c-1.32 0-2.496.86-2.875 2.125L5.25 12.719l-1.938-.656l-.624 1.874l1.968.657l-.625 2.125A.972.972 0 0 0 4 17v8c0 .55.45 1 1 1h3l.656-2h5.25l9.938 1.531L24 26h3.031c.242 0 .477-.09.657-.25l.03-.031c.012-.012.024-.02.032-.032a.998.998 0 0 0 .25-.625v-.093a.668.668 0 0 0 0-.125L27.156 19H29v-2h-2.375L24.5 12.656l.875-2.937a1.004 1.004 0 0 0-.344-1.094l-1.937-1.438a1.017 1.017 0 0 0-.5-.187L9.562 6H9.5zm0 2l12.625.969l1.125.844l-.781 2.624a.999.999 0 0 0 .062.75l1.5 3.063l-6.125-2.125l-.125-.063h-.125L7.22 13.095l1.31-4.376c.13-.43.524-.719.969-.719zm-2.875 7.063l10.781 1h.063l7.625 2.687l.718 5.031L14.22 22a1.043 1.043 0 0 0-.156 0h-1.157l.438-1l4.312.625L20.25 22L19 20l-7-1l-1.25 3H6v-4.813zM8.5 16a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3zm12.375 2.75a1.808 1.808 0 1 0 3.406 1.219z" />
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500">Stanje</p>
+            <p class="font-medium" th:text="${listing.vehicle.state}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-8 h-8 mr-2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500">Lokacija</p>
+            <p class="font-medium"
+              th:text="${listing.vehicle.city.cityName + ', ' + listing.vehicle.county.countyName}"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-4 sm:px-0 mt-8">
+        <h2 class="text-xl font-semibold leading-7 text-gray-900">Tehnički podaci</h2>
+      </div>
+      <div class="mt-6 border-t border-gray-100">
+        <dl class="divide-y divide-gray-100">
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt">Motor</dt>
+            <dd th:text="${listing.vehicle.engineType}" class="dd sm:col-span-2 sm:mt-0"></dd>
+          </div>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt">Zapremnina motora</dt>
+            <dd th:text="${listing.vehicle.engineDisplacement + ' L'}" class="dd sm:col-span-2 sm:mt-0"></dd>
+          </div>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt">Snaga motora</dt>
+            <dd th:text="${listing.vehicle.enginePower + ' kW'}" class="dd sm:col-span-2 sm:mt-0"></dd>
+          </div>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt">Potrošnja goriva</dt>
+            <dd th:text="${listing.vehicle.fuelConsumption + ' L/100km'}" class="dd sm:col-span-2 sm:mt-0"></dd>
+          </div>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt">Mjenjač</dt>
+            <dd th:text="${listing.vehicle.transmission}" class="dd sm:col-span-2 sm:mt-0"></dd>
+          </div>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt">Pogon kotača</dt>
+            <dd th:text="${listing.vehicle.driveTrain}" class="dd sm:col-span-2 sm:mt-0"></dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="px-4 sm:px-0 mt-8">
+        <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Sigurnost i oprema</h2>
+        <div class="mt-6 py-6 border-t border-gray-100 grid grid-cols-2 gap-4">
+          <div>
+            <ul>
+              <li th:each="feature : ${listing.vehicle.safetyFeatures}" th:if="${feature.value}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 inline-block align-middle" viewBox="0 0 24 24">
+                  <path
+                    d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z"
+                    fill="rgba(8,145,178,1)"></path>
+                </svg>
+                <span class="inline-block align-middle" th:text="${feature}"></span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li th:each="extra : ${listing.vehicle.extras}" th:if="${extra.value}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 inline-block align-middle" viewBox="0 0 24 24">
+                  <path
+                    d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z"
+                    fill="rgba(8,145,178,1)"></path>
+                </svg>
+                <span class="inline-block align-middle" th:text="${extra}"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-4 sm:px-0 mt-8">
+        <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Opis oglasa</h2>
+        <div class="mt-6 py-6 border-t border-gray-100">
+          <p class="text-gray-700" th:text="${listing.listingDescription}"></p>
+        </div>
+      </div>
+
+      <div class="px-4 sm:px-0 mt-8 mb-8">
+        <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Podaci o prodavatelju</h2>
+        <div class="mt-6 py-6 border-t border-gray-100">
+          <a class="inline-flex items-center text-cyan-700 hover:text-cyan-900"
+            th:href="@{/korisnicki-profil/{userId}(userId=${listing.user.id})}">
+            <span class="mr-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="currentColor" class="w-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg></span>
+            <span class="font-semibold text-lg" th:text="${listing.user.username}"></span>
+          </a>
+          <p th:if="${listing.user.companyName != null}">Naziv tvrtke: <span class="font-semibold"
+              th:text="${listing.user.companyName}"></span></p>
+          <p th:unless="${listing.user.companyName != null}">Ime i prezime: <span class="font-semibold"
+              th:text="${listing.user.firstName + ' ' + listing.user.lastName}"></span></p>
+          <p>Kontakt: <span class="font-semibold"
+              th:text="${listing.user.email + ', ' + listing.user.phoneNumber}"></span></p>
+          <button data-modal-target="contact-modal" data-modal-toggle="contact-modal" type="button"
+            class="button text-white font-medium rounded-lg mt-4 py-2.5 text-center inline-flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-6 h-6 mr-2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            </svg>
+            Pošalji upit
+          </button>
+
+          <div id="contact-modal" tabindex="-1" aria-hidden="true"
+            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-full max-w-md max-h-full">
+              <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button"
+                  class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  data-modal-hide="contact-modal">
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                  </svg>
+                  <span class="sr-only">Zatvori prozor</span>
+                </button>
+                <div th:if="${user != null}" class="px-6 py-6 lg:px-8">
+                  <h3 class="mb-4 text-xl font-medium flex justify-center text-gray-900 dark:text-white">Kontaktiraj
+                    prodavatelja za</h3>
+                  <span class="mb-4 text-xl font-bold flex justify-center text-gray-900 dark:text-white"
+                    th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></span>
+                  <form class="space-y-6" th:action="@{/oglasi/{listingId}/kontaktiraj(listingId = ${listing.id})}"
+                    method="post">
+                    <div th:if="${user.firstName != null}">
+                      <label for="firstName" class="block text-sm font-medium dark:text-white">Ime</label>
+                      <input type="text" name="firstName" id="firstName" class="input text-sm block w-full"
+                        th:value="${user.firstName}" required>
+                    </div>
+                    <div th:unless="${user.firstName != null}">
+                      <label for="companyName" class="block text-sm font-medium dark:text-white">Naziv tvrtke</label>
+                      <input type="text" name="companyName" id="companyName" class="input text-sm block w-full"
+                        th:value="${user.companyName}" required>
+                    </div>
+                    <div th:if="${user.lastName != null}">
+                      <label for="lastName" class="block text-sm font-medium dark:text-white">Prezime</label>
+                      <input type="text" name="lastName" id="lastName" class="input text-sm block w-full"
+                        th:value="${user.lastName}" required>
+                    </div>
+                    <div>
+                      <label for="email" class="block text-sm font-medium dark:text-white">E-mail adresa</label>
+                      <input type="email" name="email" id="email" class="input text-sm block w-full"
+                        th:value="${user.email}" required>
+                    </div>
+                    <div class="flex flex-col mb-4 dark:text-gray-200">
+                      <label for="message" class="block text-sm font-medium dark:text-white">Poruka</label>
+                      <textarea id="message" name="message" placeholder="..." rows="4" required
+                        class="input w-96 h-48 resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full text-sm button py-2.5">Pošalji</button>
+                  </form>
+                </div>
+                <div th:unless="${user != null}" class="px-6 py-6 lg:px-8">
+                  <h3 class="mb-4 text-xl font-medium flex justify-center text-gray-900 dark:text-white">Kontaktiraj
+                    prodavatelja za</h3>
+                  <span class="mb-4 text-xl font-bold flex justify-center text-gray-900 dark:text-white"
+                    th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></span>
+                  <form class="space-y-6" th:action="@{/oglasi/{listingId}/kontaktiraj(listingId = ${listing.id})}"
+                    method="post">
+                    <div>
+                      <label for="firstName" class="block text-sm font-medium dark:text-white">Ime</label>
+                      <input type="text" name="firstName" id="firstName" class="input text-sm block w-full" required>
+                    </div>
+                    <div>
+                      <label for="lastName" class="block text-sm font-medium dark:text-white">Prezime</label>
+                      <input type="text" name="lastName" id="lastName" class="input text-sm block w-full" required>
+                    </div>
+                    <div>
+                      <label for="email" class="block text-sm font-medium dark:text-white">E-mail adresa</label>
+                      <input type="email" name="email" id="email" class="input text-sm block w-full" required>
+                    </div>
+                    <div class="flex flex-col mb-4 dark:text-gray-200">
+                      <label for="message" class="block text-sm font-medium dark:text-white">Poruka</label>
+                      <textarea id="message" name="message" placeholder="..." rows="4" required
+                        class="input w-96 h-48 resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full text-sm button py-2.5">Pošalji</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="px-4 sm:px-0 mt-8 mb-8">
+        <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Slični oglasi</h2>
+        <div class="mt-6 border-t border-gray-100">
+          <ul>
+            <li th:each="similarListing : ${similarListings}">
+              <p th:text="${similarListing.listingDescription}"></p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+  </main>
+
+  <footer>
+    <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+  </footer>
 </body>
+
 </html>
