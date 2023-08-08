@@ -56,7 +56,7 @@
                     <div class="relative inline-block w-auto">
                         <select id="bodyType" name="bodyType" class="w-full dark:bg-gray-500 select2-basic">
                             <option value="" selected>Svi oblici</option>
-                            <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
+                            <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:selected="${bodyType == selectedBodyType}" th:text="${bodyType}"></option>
                         </select>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <div class="relative inline-block w-auto">
                         <select id="engineType" name="engineType" class="w-full dark:bg-gray-500 select2-basic">
                             <option value="" selected>Sve vrste</option>
-                            <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
+                            <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:selected="${engineType == selectedEngineType}" th:text="${engineType}"></option>
                         </select>
                     </div>
                 </div>
@@ -103,14 +103,14 @@
                         <div class="relative inline-block w-full">
                             <select id="yearFrom" name="yearFrom" class="flex-grow w-full dark:bg-gray-500 select2-basic">
                                 <option value="" disabled selected>Odabir</option>
-                                <option th:each="yearFrom: ${years}" th:value="${yearFrom}" th:text="${yearFrom}"></option>
+                                <option th:each="yearFrom: ${years}" th:value="${yearFrom}" th:selected="${yearFrom == selectedYearFrom}" th:text="${yearFrom}"></option>
                             </select>
                         </div>
                         <p class="text-center mr-4 ml-4">do</p>
                         <div class="relative inline-block w-full">
                             <select id="yearTo" name="yearTo" class="flex-grow w-full dark:bg-gray-500 select2-basic">
                                 <option value="" disabled selected>Odabir</option>
-                                <option th:each="yearTo: ${years}" th:value="${yearTo}" th:text="${yearTo}"></option>
+                                <option th:each="yearTo: ${years}" th:value="${yearTo}" th:selected="${yearTo == selectedYearTo}" th:text="${yearTo}"></option>
                             </select>
                         </div>
                     </div>
