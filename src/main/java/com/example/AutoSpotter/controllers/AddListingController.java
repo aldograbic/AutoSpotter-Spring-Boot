@@ -267,7 +267,14 @@ public class AddListingController {
     }
 
     @PostMapping("/oglas-5")
-    public String handleStep5FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session) {
+    public String handleStep5FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session, RedirectAttributes redirectAttributes) {
+        // Validate the uploaded images
+        for (MultipartFile image : images) {
+            if (!image.getContentType().startsWith("image/")) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Nepodržani format! Molimo odaberite samo slikovne formate.");
+                return "redirect:/postavi-oglas";
+            }
+        }
 
         int vehicleId = (int) session.getAttribute("vehicleId");
 
@@ -278,6 +285,7 @@ public class AddListingController {
         session.setAttribute("step", 6);
         return "redirect:/postavi-oglas";
     }
+
 
     public void uploadImageToGoogleCloudStorage(String bucketName, String objectName, byte[] imageBytes) {
         BlobId blobId = BlobId.of(bucketName, objectName);
@@ -344,7 +352,33 @@ public class AddListingController {
 
         listingRepository.createListing(listing);
         redirectAttributes.addFlashAttribute("successMessage", "Oglas je uspješno dodan!");
-        // session.invalidate(); odlogira korisnika - treba da makne sve ove sessione iz addlistinga, ali ne i korisnika iz autha
+        
+        session.removeAttribute("step");
+        session.removeAttribute("vehicleTypeId");
+        session.removeAttribute("vehicleType");
+        session.removeAttribute("manufacturer");
+        session.removeAttribute("model");
+        session.removeAttribute("bodyType");
+        session.removeAttribute("numberOfWheels");
+        session.removeAttribute("maximumAllowableWeight");
+        session.removeAttribute("year");
+        session.removeAttribute("registeredDate");
+        session.removeAttribute("color");
+        session.removeAttribute("cityId");
+        session.removeAttribute("city");
+        session.removeAttribute("mileage");
+        session.removeAttribute("state");
+        session.removeAttribute("engineType");
+        session.removeAttribute("engineDisplacement");
+        session.removeAttribute("enginePower");
+        session.removeAttribute("fuelConsumption");
+        session.removeAttribute("transmission");
+        session.removeAttribute("driveTrain");
+        session.removeAttribute("batteryCapacity");
+        session.removeAttribute("vehicleRange");
+        session.removeAttribute("chargingTime");
+        session.removeAttribute("safetyFeatures");
+        session.removeAttribute("vehicleId");
         
         return "redirect:/oglasi";
     }
