@@ -104,3 +104,66 @@ $(document).ready(function() {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const hideModalTriggers = document.querySelectorAll('[data-modal-hide]');
+
+  hideModalTriggers.forEach(function (trigger) {
+      const targetModalId = trigger.getAttribute('data-modal-hide');
+      const targetModal = document.getElementById(targetModalId);
+
+      if (targetModal) {
+          trigger.addEventListener('click', function () {
+              targetModal.classList.add('hidden');
+          });
+      }
+  });
+});
+
+let naslovnaAdded = false; // Track if Naslovna label has been added
+
+function previewImages(event) {
+  const imagePreviewsContainer = document.getElementById("imagePreviews");
+
+  const files = event.target.files;
+  for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+          const imgContainer = document.createElement("div");
+          imgContainer.classList.add("image-container");
+
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.classList.add("w-48", "h-48", "object-cover", "rounded-md", "border");
+
+          img.addEventListener("click", function () {
+              openEnlargedImg(e.target.result);
+          });
+
+          if (!naslovnaAdded && i === 0) {
+              // Add border and "Naslovna" label to the first image
+              imgContainer.classList.add("naslovna-image");
+              const label = document.createElement("div");
+              label.classList.add("naslovna-label");
+              label.textContent = "Naslovna slika";
+              imgContainer.appendChild(label);
+              naslovnaAdded = true;
+          }
+
+          imgContainer.appendChild(img);
+          imagePreviewsContainer.appendChild(imgContainer);
+      };
+
+      reader.readAsDataURL(file);
+  }
+}
+
+function openEnlargedImg(imgSrc) {
+  const modal = document.getElementById('defaultModal');
+  const enlargedImg = document.getElementById('enlargedImg');
+
+  enlargedImg.src = imgSrc;
+  modal.classList.remove('hidden');
+}

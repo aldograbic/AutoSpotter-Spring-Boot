@@ -105,7 +105,7 @@
                 </svg>
               </a>
 
-              <div x-show="tooltipVisible" x-transition:enter="transition ease-out duration-200"
+              <div x-show="tooltipVisible" x-transition:enter="transition ease-out duration-200" x-cloak
                 x-transition:enter-start="opacity-0 transform scale-95"
                 x-transition:enter-end="opacity-100 transform scale-100"
                 x-transition:leave="transition ease-in duration-200"
@@ -436,6 +436,9 @@
       <div class="px-4 sm:px-0 mt-8 mb-8">
         <h2 class="text-base font-semibold text-xl leading-7 text-gray-900">Slični oglasi</h2>
         <div class="mt-6 border-t border-gray-100">
+          <div class="py-4 flex border-b grid px-4 gap-4 grid-cols-2 border-gray-200 dark:border-gray-700">
+
+          
           <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-200" th:each="listing, url : ${similarListings}">
 
             <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full"  alt="Slika vozila"></a>
@@ -492,6 +495,7 @@
                         </div>
                     </div>
                 </div>
+              </div>
             </div>
         </div>
         </div>

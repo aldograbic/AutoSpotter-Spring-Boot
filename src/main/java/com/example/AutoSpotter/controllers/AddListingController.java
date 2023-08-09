@@ -268,7 +268,6 @@ public class AddListingController {
 
     @PostMapping("/oglas-5")
     public String handleStep5FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session, RedirectAttributes redirectAttributes) {
-        // Validate the uploaded images
         for (MultipartFile image : images) {
             if (!image.getContentType().startsWith("image/")) {
                 redirectAttributes.addFlashAttribute("errorMessage", "Nepodržani format! Molimo odaberite samo slikovne formate.");

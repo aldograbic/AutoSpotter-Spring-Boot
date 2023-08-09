@@ -379,7 +379,7 @@
                             <div class="flex flex-col flex-wrap gap-4">
                                 <h3 class="text-lg font-bold text-gray-700 mb-4">Sigurnosne karakteristike</h3>
 
-                                <div class="relative" x-data="{ open: false, selectedOptions: [] }">
+                                <div class="relative" x-data="{ open: false, selectedOptions: [] }" x-cloak>
                                     <div class="flex items-center w-96 justify-between border border-gray-400 rounded p-2 cursor-pointer"
                                         @click="open = !open">
                                         <span x-text="'Odabir (' + selectedOptions.length + ')'">Odabir (0)</span>
@@ -471,11 +471,11 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="flex flex-col flex-wrap gap-4">
                                 <h3 class="text-lg font-bold text-gray-700 mb-4 mt-8">Dodaci</h3>
 
-                                <div class="relative" x-data="{ open: false, selectedOptions: [] }">
+                                <div class="relative" x-data="{ open: false, selectedOptions: [] }" x-cloak>
                                     <div class="flex items-center w-96 justify-between border border-gray-400 rounded p-2 cursor-pointer"
                                         @click="open = !open">
                                         <span x-text="'Odabir (' + selectedOptions.length + ')'">Odabir (0)</span>
@@ -1234,12 +1234,21 @@
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
                 <h2 class="text-xl font-bold text-gray-700 mb-8">Slike vozila</h2>
                 <form th:action="@{/oglas-5}" method="post" enctype="multipart/form-data">
-                    <div class="flex flex-col mb-4 w-96">
+                    
+                <ul class="max-w-md font-semibold text-gray-500 mb-8 dark:text-gray-400">
+                    
+                    <li class="flex items-center">
+                        <svg class="flex-shrink-0 inline w-4 h-4 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="#0891b2" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        Prva odabrana slika će biti naslovna!
+                    </li>
+                </ul>
 
+                    <div class="flex flex-col mb-4 w-96">
                         <input type="file" id="images" name="images" accept="image/*" multiple
                             class="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:font-semibold file:bg-gray-200 hover:file:bg-gray-300"
                             onchange="previewImages(event)">
-
                     </div>
                     <div class="flex justify-between mb-4">
                         <div class="mt-2">
@@ -1252,83 +1261,13 @@
                         </div>
                     </div>
                 </form>
-                <div id="imagePreviews" class="mt-4 grid grid-cols-4 border"></div>
+                <div id="imagePreviews" class="mt-4 mb-4 grid grid-cols-4"></div>
             </div>
 
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    const hideModalTriggers = document.querySelectorAll('[data-modal-hide]');
-
-                    hideModalTriggers.forEach(function (trigger) {
-                        const targetModalId = trigger.getAttribute('data-modal-hide');
-                        const targetModal = document.getElementById(targetModalId);
-
-                        if (targetModal) {
-                            trigger.addEventListener('click', function () {
-                                targetModal.classList.add('hidden');
-                            });
-                        }
-                    });
-                });
-
-                function previewImages(event) {
-                    const imagePreviewsContainer = document.getElementById("imagePreviews");
-
-                    const files = event.target.files;
-                    for (let i = 0; i < files.length; i++) {
-                        const file = files[i];
-                        const reader = new FileReader();
-
-                        reader.onload = function (e) {
-                            const imgContainer = document.createElement("div");
-                            imgContainer.classList.add("image-container");
-
-                            const img = document.createElement("img");
-                            img.src = e.target.result;
-                            img.classList.add("w-48", "h-48", "object-cover", "rounded-md", "space-x-4");
-
-                            img.addEventListener("click", function () {
-                                openEnlargedImg(e.target.result);
-                            });
-
-                            const deleteIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                            deleteIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-                            deleteIcon.setAttribute("fill", "none");
-                            deleteIcon.setAttribute("viewBox", "0 0 24 24");
-                            deleteIcon.setAttribute("stroke-width", "1.5");
-                            deleteIcon.setAttribute("stroke", "white");
-                            deleteIcon.classList.add("w-6", "h-6", "delete-icon");
-                            deleteIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />`;
-
-                            deleteIcon.addEventListener("click", function () {
-                                imagePreviewsContainer.removeChild(imgContainer);
-                            });
-
-                            imgContainer.appendChild(img);
-                            imgContainer.appendChild(deleteIcon);
-                            imagePreviewsContainer.appendChild(imgContainer);
-                        };
-
-                        reader.readAsDataURL(file);
-                    }
-                }
-                function openEnlargedImg(imgSrc) {
-                    const modal = document.getElementById('defaultModal');
-                    const enlargedImg = document.getElementById('enlargedImg');
-
-                    enlargedImg.src = imgSrc;
-                    modal.classList.remove('hidden');
-                }
-            </script>
-
-
-            <!-- Main modal -->
             <div id="defaultModal" tabindex="-1" aria-hidden="true"
-                class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                class="flex justify-center items-center absolute z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative w-full max-w-2xl max-h-full">
-                    <!-- Modal content -->
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                        <!-- Modal header -->
                         <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                             <button type="button"
                                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -1341,33 +1280,12 @@
                                 <span class="sr-only">Close modal</span>
                             </button>
                         </div>
-                        <!-- Modal content -->
                         <div class="p-6 space-y-6">
                             <img id="enlargedImg" src="" alt="Enlarged Image" class="max-w-full h-auto">
                         </div>
                     </div>
                 </div>
             </div>
-
-
-            <style>
-                .image-container {
-                    position: relative;
-                }
-
-                .delete-icon {
-                    position: absolute;
-                    top: 8px;
-                    right: 8px;
-                    cursor: pointer;
-                    background-color: rgba(0, 0, 0, 0.5);
-                    border-radius: 50%;
-                }
-            </style>
-
-
-
-
 
             <div th:if="${step eq 6}"
                 class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
