@@ -10,16 +10,16 @@
 
     <th:block th:insert="~{fragments/header :: header}"></th:block>
 
-    <main class="flex flex-1 space-x-4 dark:bg-gray-600">
+    <main class="flex flex-1 space-x-4 dark:bg-gray-800">
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
         <div class="flex flex-col flex-1 w-50">
-            <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-8 dark:text-gray-400">Kontakt</h1>
+            <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-8 dark:text-gray-200">Kontakt</h1>
 
             <div class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
                 <div class="flex flex-col items-center mb-4 leading-loose">
-                    <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 dark:text-gray-400">Podaci za kontakt</h2>
+                    <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 dark:text-gray-200">Podaci za kontakt</h2>
                     <p class="flex self-start items-center dark:text-gray-200"><svg xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             class="w-6 h-6 mr-2">
@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="flex flex-col items-center">
-                    <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 dark:text-gray-400">Pošaljite nam poruku!</h2>
+                    <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 dark:text-gray-200">Pošaljite nam poruku!</h2>
                     <form th:action="@{/kontakt}" method="post">
                         <div class="flex flex-col mb-4 dark:text-gray-200">
                             <label for="name">Ime</label>

@@ -59,7 +59,7 @@
         </div>
     </div>
     
-    <main class="flex flex-1 dark:bg-gray-600 space-x-4">
+    <main class="flex flex-1 dark:bg-gray-800 space-x-4">
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
         <div class="flex flex-1 flex-col mt-8">
@@ -68,7 +68,7 @@
             </div>
 
             <div class="flex flex-col justify-center items-center">
-                <p class="mb-8 text-gray-700 font-semibold text-2xl text-center">Istražite našu bogatu ponudu vozila svih marki i modela. Kategorije vozila koje možete pronaći kod nas uključuju:</p>
+                <p class="mb-8 text-gray-700 dark:text-gray-300 font-semibold text-2xl text-center">Istražite našu bogatu ponudu vozila svih marki i modela. Kategorije vozila koje možete pronaći kod nas uključuju:</p>
                 <div class="flex gap-8">
                     <div class="border relative w-36 aspect-square flex flex-col items-center justify-center rounded-lg">
                         <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 font-semibold">Automobil</p>
@@ -96,13 +96,13 @@
             </div>
 
             <div class="flex flex-col justify-center">
-                <p class="text-gray-700 font-semibold text-2xl">Najnoviji oglasi</p>
+                <p class="text-gray-700 font-semibold text-2xl dark:text-gray-300">Najnoviji oglasi</p>
                 <div class="py-4 flex grid  gap-4 grid-cols-2 border-gray-200 dark:border-gray-700">
                     <div th:if="${#lists.isEmpty(newestListings)}">
                         <p class="text-gray-500">Nema novih oglasa.</p>
                     </div>
 
-                    <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-200" th:each="listing, url : ${newestListings}">
+                    <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-300" th:each="listing, url : ${newestListings}">
 
                         <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila"></a>
                     
@@ -110,7 +110,7 @@
                             <a th:href="@{'/oglasi/' + ${listing.id}}" class="text-cyan-700 hover:text-cyan-900">
                                 <h2 class="inline-block font-semibold text-lg" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model}"></h2>
                             </a>
-                            <p th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}" class="text-gray-700 font-semibold text-lg"></p>
+                            <p th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}" class="text-gray-700 font-semibold text-lg dark:text-gray-200"></p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16">
                             
                                 <div class="flex items-center">
@@ -121,7 +121,7 @@
                                         </svg>
                                     </div>
                                     <div class="ml-2">
-                                        <p class="font-medium text-gray-700 text-sm" th:text="${listing.vehicle.engineType}"></p>
+                                        <p class="font-medium text-gray-700 text-sm dark:text-gray-300" th:text="${listing.vehicle.engineType}"></p>
                                     </div>
                                 </div>
      
@@ -132,7 +132,7 @@
                                         </svg>
                                     </div>
                                     <div class="ml-2">
-                                        <p class="font-medium text-gray-700 text-sm" th:text="${listing.vehicle.year}"></p>
+                                        <p class="font-medium text-gray-700 text-sm dark:text-gray-300" th:text="${listing.vehicle.year}"></p>
                                     </div>
                                 </div>
                                 
@@ -143,7 +143,7 @@
                                         </svg>
                                     </div>
                                     <div class="ml-2">
-                                        <p class="font-medium text-gray-700 text-sm" th:text="${listing.vehicle.mileage + ' km'}"></p>
+                                        <p class="font-medium text-gray-700 text-sm dark:text-gray-300" th:text="${listing.vehicle.mileage + ' km'}"></p>
                                     </div>
                                 </div>
                                 
@@ -154,7 +154,7 @@
                                         </svg>
                                     </div>
                                     <div class="ml-2">
-                                        <p class="font-medium text-gray-700 text-sm" th:text="${listing.vehicle.state}"></p>
+                                        <p class="font-medium text-gray-700 text-sm dark:text-gray-300" th:text="${listing.vehicle.state}"></p>
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@
 
             <div class="flex flex-col justify-center text-center">
                 <div>
-                    <p class="text-gray-700 font-semibold text-2xl text-center">Da biste brzo pronašli željeno vozilo, iskoristite našu naprednu pretragu. Filtrirajte oglase po proizvođaču, modelu, godištu, cijeni, kilometraži i mnogim drugim kriterijima kako biste pronašli savršeno vozilo po vašem ukusu.</p>
+                    <p class="text-gray-700 font-semibold text-2xl text-center dark:text-gray-300">Da biste brzo pronašli željeno vozilo, iskoristite našu naprednu pretragu. Filtrirajte oglase po proizvođaču, modelu, godištu, cijeni, kilometraži i mnogim drugim kriterijima kako biste pronašli savršeno vozilo po vašem ukusu.</p>
 
                 </div>
                 <div class="flex justify-center">
@@ -175,7 +175,7 @@
 
             <div class="flex flex-col justify-center text-center">
                 <div>
-                    <p class="text-gray-700 font-semibold text-2xl text-center">Ako želite prodati svoje vozilo, ne gubite vrijeme! Postavljanje oglasa na našoj platformi je brzo i jednostavno. Samo pratite korake obrasca za postavljanje oglasa, dodajte nekoliko fotografija, napišite opis vozila i vaš oglas će biti vidljiv tisućama potencijalnih kupaca.</p>
+                    <p class="text-gray-700 font-semibold text-2xl text-center dark:text-gray-300">Ako želite prodati svoje vozilo, ne gubite vrijeme! Postavljanje oglasa na našoj platformi je brzo i jednostavno. Samo pratite korake obrasca za postavljanje oglasa, dodajte nekoliko fotografija, napišite opis vozila i vaš oglas će biti vidljiv tisućama potencijalnih kupaca.</p>
                 </div>
                 <div class="flex justify-center">
                     <a href="/postavi-oglas" class="button">Postavi oglas</a>
@@ -184,7 +184,7 @@
             
             <div class="flex flex-col justify-center text-center">
                 <div>
-                    <p class="text-gray-700 font-semibold text-2xl text-center">Imate pitanja ili nedoumice? Naš tim stručnjaka je tu da vam pomogne! Kontaktirajte nas putem e-maila ili telefonom, i rado ćemo vam pružiti neophodnu podršku.</p>
+                    <p class="text-gray-700 font-semibold text-2xl text-center dark:text-gray-300">Imate pitanja ili nedoumice? Naš tim stručnjaka je tu da vam pomogne! Kontaktirajte nas putem e-maila ili telefonom, i rado ćemo vam pružiti neophodnu podršku.</p>
                 </div>
                 <div class="flex justify-center">
                     <a href="/kontakt" class="button">Kontaktirajte nas</a>

@@ -1,26 +1,26 @@
 <header th:fragment="header">
   <nav
-    class="p-3 hidden md:flex items-center justify-between border-b-2 shadow-[0_5px_7px_-5px_rgba(0,0,0,0.2)] dark:bg-gray-600 dark:border-gray-700">
+    class="p-3 hidden md:flex items-center justify-between border-b-2 shadow-[0_5px_7px_-5px_rgba(0,0,0,0.2)] dark:bg-gray-800 dark:border-gray-700">
     <a href="/"><img class="mr-3 w-36" src="img/logo-svg.svg" alt="logo"></a>
     <ul class="flex space-x-4 flex-grow justify-center">
       <li><a
-          class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-400 dark:hover:text-cyan-600"
+          class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-200 dark:hover:text-cyan-600"
           href="/pretraga">Pretraga</a></li>
       <li><a
-          class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-400 dark:hover:text-cyan-600"
+          class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-200 dark:hover:text-cyan-600"
           href="/oglasi">Oglasi</a></li>
       <li><a
-          class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-400 dark:hover:text-cyan-600"
+          class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-200 dark:hover:text-cyan-600"
           href="/postavi-oglas">Postavi oglas</a></li>
     </ul>
     <div class="flex items-center space-x-4">
-      <a class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-400 dark:hover:text-cyan-600"
+      <a class="text-gray-700 font-medium hover:text-cyan-700 header-link dark:text-gray-200 dark:hover:text-cyan-600"
         href="/kontakt">Kontakt</a>
 
       <div x-data="{ isOpen: false }" x-cloak>
         <div th:unless="${user != null}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start">
           <button type="button" @click="isOpen = !isOpen"
-            class="text-gray-700 font-medium hover:text-cyan-700 inline-flex items-center header-link dark:text-gray-400 dark:hover:text-cyan-600">
+            class="text-gray-700 font-medium hover:text-cyan-700 inline-flex items-center header-link dark:text-gray-200 dark:hover:text-cyan-600">
             Korisnički račun
             <svg x-bind:class="{ 'transform rotate-180': isOpen }" class="w-4 h-4 ml-1" viewBox="0 0 20 14"
               fill="currentColor">
@@ -69,23 +69,23 @@
         <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
           <li>
             <a th:unless="${user != null}" href="/prijava"
-              class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
+              class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
               role="menuitem">Prijava</a>
           </li>
           <li>
             <a th:unless="${user != null}" href="/registracija"
-              class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
+              class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
               role="menuitem">Registracija</a>
           </li>
           <li>
             <a th:if="${user != null}" href="/korisnicki-profil"
-              class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
+              class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
               role="menuitem">Korisnički profil</a>
           </li>
         </ul>
         <div th:if="${user != null}" class="py-2">
           <a href="/odjava"
-            class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
+            class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
             role="menuitem">Odjava</a>
         </div>
       </div>

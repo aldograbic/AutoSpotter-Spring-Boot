@@ -1,6 +1,8 @@
 package com.example.AutoSpotter.controllers;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;
@@ -37,7 +39,8 @@ public class NewListingsController {
     }
 
     @GetMapping("/oglasi")
-    public String showNewListings(@RequestParam(required = false) String vehicleType,
+    public String showNewListings(@RequestParam(required = false) String sort,
+                                @RequestParam(required = false) String vehicleType,
                                 @RequestParam(required = false) String manufacturer,
                                 @RequestParam(required = false) String vehicleModel,
                                 @RequestParam(required = false) String bodyType,
@@ -92,6 +95,13 @@ public class NewListingsController {
         int totalListingsCount = newListings.size();
 
         model.addAttribute("totalListingsCount", totalListingsCount);
+
+        if ("min".equals(sort)) {
+            displayedNewListings.sort(Comparator.comparing(Listing::getListingPrice));
+        } else if ("max".equals(sort)) {
+            displayedNewListings.sort((l1, l2) -> l2.getListingPrice().compareTo(l1.getListingPrice()));
+        }
+        
 
 
         List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();

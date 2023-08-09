@@ -53,11 +53,9 @@ public class ListingController {
             model.addAttribute("userHasLikedListing", userHasLikedListing);
         }
 
-        // Add the user and listing details to the model
         model.addAttribute("user", user);
         model.addAttribute("listing", listing);
 
-        // Fetch and add the similar listings to the model
         List<Listing> similarListings = listingRepository.getSimilarListings(listingId,
             listing.getVehicle().getVehicleType(), listing.getVehicle().getManufacturer(), listing.getVehicle().getModel()
         );

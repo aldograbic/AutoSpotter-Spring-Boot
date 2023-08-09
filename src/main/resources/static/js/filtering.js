@@ -1,6 +1,14 @@
 var priceFrom = document.getElementById("priceFrom");
 var priceTo = document.getElementById("priceTo");
 
+function sortListings(sortType) {
+  const queryParams = new URLSearchParams(window.location.search);
+  queryParams.set('sort', sortType);
+  
+  const newUrl = window.location.pathname + '?' + queryParams.toString();
+  window.location.href = newUrl;
+}
+
 document.getElementById("transmissionButtons").addEventListener("click", function (event) {
   var buttonId = event.target.id;
   selectTransmissionButton(buttonId);

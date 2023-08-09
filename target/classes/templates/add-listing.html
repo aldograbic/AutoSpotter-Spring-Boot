@@ -26,18 +26,18 @@
         </div>
     </div>
 
-    <main class="flex flex-1 space-x-4 dark:bg-gray-600">
+    <main class="flex flex-1 space-x-4 dark:bg-gray-800">
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
         <div class="flex flex-col flex-1 w-50">
 
-            <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-8">Postavi oglas</h1>
+            <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-8 dark:text-gray-200">Postavi oglas</h1>
 
             <div th:if="${step eq 1}"
                 class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
-                <h2 class="text-xl font-bold text-gray-700 mb-8">Vrsta vozila</h2>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">Vrsta vozila</h2>
                 <form th:action="@{/oglas-1}" method="post">
                     <div class="flex flex-col mb-4">
                         <label for="vehicleType">Prodajem</label>
@@ -58,7 +58,7 @@
             <div th:if="${step eq 2}"
                 class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
-                <h2 class="text-xl font-bold text-gray-700 mb-8">Vozilo - osnovno</h2>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">Vozilo - osnovno</h2>
                 <form th:action="@{/oglas-2}" method="post">
                     <div class="flex flex-col mb-4">
                         <label for="manufacturer">Proizvođač</label>
@@ -245,7 +245,7 @@
             <div th:if="${step eq 3}"
                 class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
-                <h2 class="text-xl font-bold text-gray-700 mb-8">Vozilo - tehničko</h2>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">Vozilo - tehničko</h2>
                 <form th:action="@{/oglas-3}" method="post">
 
                     <div class="flex flex-col mb-4">
@@ -1232,7 +1232,7 @@
             <div th:if="${step eq 5}"
                 class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
-                <h2 class="text-xl font-bold text-gray-700 mb-8">Slike vozila</h2>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">Slike vozila</h2>
                 <form th:action="@{/oglas-5}" method="post" enctype="multipart/form-data">
                     
                 <ul class="max-w-md font-semibold text-gray-500 mb-8 dark:text-gray-400">
@@ -1290,7 +1290,7 @@
             <div th:if="${step eq 6}"
                 class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
                 <th:block th:insert="~{fragments/progress-bar :: progress-bar}"></th:block>
-                <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4">Detalji oglasa</h2>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 mt-4 dark:text-gray-200">Detalji oglasa</h2>
                 <form th:action="@{/oglas-6}" method="post">
                     <div class="flex flex-col mb-4">
                         <label for="description">Opis oglasa</label>
