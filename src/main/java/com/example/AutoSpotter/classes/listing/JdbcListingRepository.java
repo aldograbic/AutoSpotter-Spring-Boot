@@ -244,44 +244,43 @@ public class JdbcListingRepository implements ListingRepository {
     }
 
     @Override
-    public List<Listing> getSimilarListings(String vehicleType, String manufacturer, String model) {
+    public List<Listing> getSimilarListings(int currentListingId, String vehicleType, String manufacturer, String model) {
         String sql = "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at " +
-                    "FROM listing " +
-                    "WHERE vehicle_id IN (" +
-                        "SELECT id FROM vehicle " +
-                        "WHERE manufacturer = ? AND model = ? " +
-                    ") " +
-                    "UNION " +
-                    "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at " +
-                    "FROM listing " +
-                    "WHERE vehicle_id IN (" +
-                        "SELECT id FROM vehicle " +
-                        "WHERE manufacturer = ? " +
-                    ") " +
-                    "AND id NOT IN (?, ?) " +
-                    "UNION " +
-                    "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at " +
-                    "FROM listing " +
-                    "WHERE vehicle_id IN (" +
-                        "SELECT id FROM vehicle " +
-                        "WHERE vehicle_type_id = ? " +
-                    ") " +
-                    "AND id NOT IN (?, ?, ?) " +
-                    "ORDER BY created_at DESC " +
-                    "LIMIT 5";
+                        "FROM listing " +
+                        "WHERE vehicle_id IN (" +
+                            "SELECT id FROM vehicle " +
+                            "WHERE manufacturer = ? AND model = ? " +
+                        ") " +
+                        "AND id != ? " +
+                        "UNION " +
+                        "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at " +
+                        "FROM listing " +
+                        "WHERE vehicle_id IN (" +
+                            "SELECT id FROM vehicle " +
+                            "WHERE manufacturer = ? " +
+                        ") " +
+                        "AND id NOT IN (?, ?) " +
+                        "UNION " +
+                        "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at " +
+                        "FROM listing " +
+                        "WHERE vehicle_id IN (" +
+                            "SELECT id FROM vehicle " +
+                            "WHERE vehicle_type_id = ? " +
+                        ") " +
+                        "AND id NOT IN (?, ?, ?) " +
+                        "ORDER BY created_at DESC " +
+                        "LIMIT 5";
 
         return jdbcTemplate.query(
-            sql,
-            new ListingRowMapper(vehicleRepository, userRepository),
-            manufacturer, model,
-            manufacturer,
-            model, manufacturer,
-            vehicleType,
-            model, manufacturer, vehicleType
+                sql,
+                new ListingRowMapper(vehicleRepository, userRepository),
+                manufacturer, model, currentListingId,
+                manufacturer,
+                currentListingId, currentListingId,
+                vehicleType,
+                currentListingId, currentListingId, currentListingId
         );
     }
-
-    
 
     @Override
     public void saveImageUrlsForVehicle(ListingImage listingImage) {

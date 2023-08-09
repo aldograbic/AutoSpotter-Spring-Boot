@@ -57,7 +57,7 @@ public String getListingDetails(@PathVariable("listingId") int listingId, Model 
     model.addAttribute("listing", listing);
 
     // Fetch and add the similar listings to the model
-    List<Listing> similarListings = listingRepository.getSimilarListings(
+    List<Listing> similarListings = listingRepository.getSimilarListings(listingId,
         listing.getVehicle().getVehicleType(), listing.getVehicle().getManufacturer(), listing.getVehicle().getModel()
     );
     model.addAttribute("similarListings", similarListings);

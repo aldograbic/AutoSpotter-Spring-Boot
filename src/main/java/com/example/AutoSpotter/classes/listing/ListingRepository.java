@@ -22,5 +22,5 @@ public interface ListingRepository {
     List<String> getImageUrlsForVehicle(int vehicleId);
     String getFirstImageUrlForVehicle(int vehicleId);
     List<Listing> getNewestListings();
-    List<Listing> getSimilarListings(String vehicleType, String manufacturer, String model);
+    List<Listing> getSimilarListings(int currentListingId, String vehicleType, String manufacturer, String model);
 }
