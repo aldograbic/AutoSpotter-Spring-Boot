@@ -33,7 +33,7 @@
     <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
     <div class="flex-1 mt-8">
-      <div class="text-sm text-gray-500">
+      <div class="text-sm text-gray-500 dark:text-gray-200">
         <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType})}" class="hover:text-cyan-900 text-base"
           th:text="${listing.vehicle.vehicleType}"></a> &gt;
         <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType}, manufacturer=${listing.vehicle.manufacturer})}"
@@ -87,18 +87,18 @@
         </div>
       </div>
       <div class="text-2xl">
-        <h2 class="mb-4 ml mt-8 font-semibold dark:text-gray-300"
+        <h2 class="mb-4 ml mt-8 font-semibold dark:text-gray-200"
           th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}">
         </h2>
-        <p class="text-gray-700 mb-4 font-semibold dark:text-gray-300"
+        <p class="text-gray-700 mb-4 font-semibold dark:text-gray-200"
           th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}">
         </p>
-        <div class="flex gap-2 dark:text-gray-300">
+        <div class="flex gap-2 dark:text-gray-200">
           <div x-data="{ tooltipVisible: false }">
             <div class="relative">
               <a
                 @click="navigator.clipboard.writeText(window.location.href); tooltipVisible = true; setTimeout(() => { tooltipVisible = false; }, 1500);">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 cursor-pointer" viewBox="0 0 24 24">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 cursor-pointer dark:fill-gray-200" viewBox="0 0 24 24">
                   <path
                     d="M7 4V2H17V4H20.0066C20.5552 4 21 4.44495 21 4.9934V21.0066C21 21.5552 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5551 3 21.0066V4.9934C3 4.44476 3.44495 4 3.9934 4H7ZM7 6H5V20H19V6H17V8H7V6ZM9 4V6H15V4H9Z">
                   </path>
@@ -439,7 +439,7 @@
           <div class="py-4 flex border-b grid px-4 gap-4 grid-cols-2 border-gray-200 dark:border-gray-700">
 
           
-          <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-300" th:each="listing, url : ${similarListings}">
+          <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-300 dark:border-gray-700" th:each="listing, url : ${similarListings}">
 
             <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full"  alt="Slika vozila"></a>
         
