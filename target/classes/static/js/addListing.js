@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-let naslovnaAdded = false; // Track if Naslovna label has been added
+let naslovnaAdded = false;
 
 function previewImages(event) {
   const imagePreviewsContainer = document.getElementById("imagePreviews");
