@@ -26,51 +26,51 @@
             <h2 class="text-xl font-bold text-gray-700 mb-6 mt-8 ml-4 dark:text-gray-200">Filtriraj</h2>
             <form action="/oglasi" method="get">
                 <div class="flex flex-col m-4" x-data="{ open: false }">
-                    <label for="vehicleType">Tip vozila</label>
+                    <label class="dark:text-gray-300" for="vehicleType">Tip vozila</label>
                     <div class="relative inline-block w-auto">
-                        <select id="vehicleType" name="vehicleType" class="w-full dark:bg-gray-500 select2-basic">
+                        <select id="vehicleType" name="vehicleType" class="w-full select2-basic">
                             <option value="" th:selected="${selectedVehicleType == null}" selected>Sva vozila</option>
                             <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}" th:selected="${vehicleType == selectedVehicleType}" th:text="${vehicleType}"></option>
                         </select>
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="manufacturer">Proizvođač</label>
+                    <label class="dark:text-gray-300" for="manufacturer">Proizvođač</label>
                     <div class="relative inline-block w-auto">
-                        <select id="manufacturer" name="manufacturer" class="w-full dark:bg-gray-500 select2-withSearch">
+                        <select id="manufacturer" name="manufacturer" class="w-full select2-withSearch">
                             <option value="" disabled selected>Odabir</option>
                         </select>
                     </div>
                     
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="model">Model</label>
+                    <label class="dark:text-gray-300" for="model">Model</label>
                     <div class="relative inline-block w-auto">
-                        <select id="model" name="vehicleModel" class="w-full dark:bg-gray-500 select2-withSearch">
+                        <select id="model" name="vehicleModel" class="w-full select2-withSearch">
                             <option value="" disabled selected>Odabir</option>
                         </select>
                     </div>
                 </div>
                 <div class="flex flex-col m-4" id="bodyTypeSection">
-                    <label for="bodyType">Oblik karoserije</label>
+                    <label class="dark:text-gray-300" for="bodyType">Oblik karoserije</label>
                     <div class="relative inline-block w-auto">
-                        <select id="bodyType" name="bodyType" class="w-full dark:bg-gray-500 select2-basic">
+                        <select id="bodyType" name="bodyType" class="w-full select2-basic">
                             <option value="" selected>Svi oblici</option>
                             <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:selected="${bodyType == selectedBodyType}" th:text="${bodyType}"></option>
                         </select>
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="engineType">Motor</label>
+                    <label class="dark:text-gray-300" for="engineType">Motor</label>
                     <div class="relative inline-block w-auto">
-                        <select id="engineType" name="engineType" class="w-full dark:bg-gray-500 select2-basic">
+                        <select id="engineType" name="engineType" class="w-full select2-basic">
                             <option value="" selected>Sve vrste</option>
                             <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:selected="${engineType == selectedEngineType}" th:text="${engineType}"></option>
                         </select>
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="transmissionButtons">Mjenjač</label>
+                    <label class="dark:text-gray-300" for="transmissionButtons">Mjenjač</label>
                     <div class="flex shadow-md" id="transmissionButtons">
                         <button type="button" id="transmissionAll" class="button bg-neutral-400 flex-grow rounded-br-none rounded-tr-none selected">Sve vrste</button>
                         <button type="button" id="transmissionManual" class="button bg-neutral-400 flex-grow rounded-none">Ručni</button>
@@ -80,35 +80,35 @@
                     <input type="hidden" id="selectedTransmission" name="transmission" value="">
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="location">Lokacija vozila</label>
+                    <label class="dark:text-gray-300" for="location">Lokacija vozila</label>
                     <div class="relative inline-block w-auto">
-                        <select id="location" name="location" class="w-full dark:bg-gray-500 select2-withSearch">
+                        <select id="location" name="location" class="w-full select2-withSearch">
                             <option value="" disabled selected>Odabir</option>
                             <option th:each="county : ${counties}" th:value="${county}" th:text="${county}"></option>
                         </select>
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="mileageFrom">Kilometraža vozila</label>
+                    <label class="dark:text-gray-300" for="mileageFrom">Kilometraža vozila</label>
                     <div class="flex items-center">
-                        <input type="number" name="mileageFrom" id="mileageFrom" min="0" placeholder="0" th:value="${selectedMileageFrom}" class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-700">
+                        <input type="number" name="mileageFrom" id="mileageFrom" min="0" placeholder="0" th:value="${selectedMileageFrom}" class="input w-11/12 no-arrows flex-grow pl-1">
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" name="mileageTo" id="mileageTo" min="0" placeholder="..." th:value="${selectedMileageTo}" class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-700">
+                        <input type="number" name="mileageTo" id="mileageTo" min="0" placeholder="..." th:value="${selectedMileageTo}" class="input w-11/12 no-arrows flex-grow pl-1">
                     </div>
                     <p id="mileageError" class="text-red-500"></p>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="yearFrom">Godina proizvodnje</label>
+                    <label class="dark:text-gray-300" for="yearFrom">Godina proizvodnje</label>
                     <div class="flex items-center">
                         <div class="relative inline-block w-full">
-                            <select id="yearFrom" name="yearFrom" class="flex-grow w-full dark:bg-gray-500 select2-basic">
+                            <select id="yearFrom" name="yearFrom" class="flex-grow w-full select2-basic">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="yearFrom: ${years}" th:value="${yearFrom}" th:selected="${yearFrom == selectedYearFrom}" th:text="${yearFrom}"></option>
                             </select>
                         </div>
                         <p class="text-center mr-4 ml-4">do</p>
                         <div class="relative inline-block w-full">
-                            <select id="yearTo" name="yearTo" class="flex-grow w-full dark:bg-gray-500 select2-basic">
+                            <select id="yearTo" name="yearTo" class="flex-grow w-full select2-basic">
                                 <option value="" disabled selected>Odabir</option>
                                 <option th:each="yearTo: ${years}" th:value="${yearTo}" th:selected="${yearTo == selectedYearTo}" th:text="${yearTo}"></option>
                             </select>
@@ -118,17 +118,17 @@
                 </div>
                 
                 <div class="flex flex-col m-4">
-                    <label for="priceFrom">Cijena vozila</label>
+                    <label class="dark:text-gray-300" for="priceFrom">Cijena vozila</label>
                     <div class="flex items-center">
-                        <input type="number" id="priceFrom" name="priceFrom" min="0" th:value="${selectedPriceFrom}" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
+                        <input type="number" id="priceFrom" name="priceFrom" min="0" th:value="${selectedPriceFrom}" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="priceTo" name="priceTo" min="0" th:value="${selectedPriceTo}" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1 dark:bg-gray-500">
+                        <input type="number" id="priceTo" name="priceTo" min="0" th:value="${selectedPriceTo}" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1">
                     </div>
                     <p id="priceError" class="text-red-500"></p>
                 </div>
                 
                 <div class="flex flex-col m-4">
-                    <label for="userTypeButtons">Tip prodavača</label>
+                    <label class="dark:text-gray-300" for="userTypeButtons">Tip prodavača</label>
                     <div class="flex shadow-md" id="userTypeButtons">
                         <button type="button" id="userTypeAll" class="button bg-neutral-400 flex-grow rounded-br-none rounded-tr-none selected">Svi prodavači</button>
                         <button type="button" id="userTypePrivate" class="button bg-neutral-400 flex-grow rounded-none">Privatni</button>

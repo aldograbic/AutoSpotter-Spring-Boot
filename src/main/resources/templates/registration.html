@@ -54,19 +54,19 @@
                 
                 <form th:if="${userType eq 'Privatni'}" th:action="@{/registracija-2}" method="post">
                     <div class="flex flex-col mb-4">
-                        <label for="firstName">Ime</label>
+                        <label class="dark:text-gray-300" for="firstName">Ime</label>
                         <input type="text" id="firstName" name="firstName" th:value="${session['firstName']}" required class="input"/>
                     </div>
                     <div class="flex flex-col mb-4">
-                        <label for="lastName">Prezime</label>
+                        <label class="dark:text-gray-300" for="lastName">Prezime</label>
                         <input type="text" id="lastName" name="lastName" required th:value="${session['lastName']}" class="input"/>
                     </div>
                     <div class="flex flex-col mb-4">
-                        <label for="address">Adresa</label>
+                        <label class="dark:text-gray-300" for="address">Adresa</label>
                         <input type="text" id="address" name="address" required th:value="${session['address']}" class="input"/>
                     </div>
                     <div class="flex flex-col mb-4">
-                        <label for="city">Grad</label>
+                        <label class="dark:text-gray-300" for="city">Grad</label>
                         <div class="relative inline-block w-96">
                           <select id="city" name="city" required class="input w-96 select2-withSearch">
                             <option value="" disabled selected>Odabir</option>
@@ -78,9 +78,6 @@
                               </optgroup>
                             </th:block>
                           </select>
-                          <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                          </svg>
                         </div>
                     </div>
 
@@ -148,19 +145,19 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">Kontakt podaci</h2>
                 <form th:action="@{/registracija-3}" method="post" onsubmit="return validateForm()">
                     <div class="flex flex-col mb-4">
-                        <label for="email">E-mail adresa</label>
+                        <label class="dark:text-gray-300" for="email">E-mail adresa</label>
                         <input type="email" id="email" name="email" th:value="${session['email']}" required class="input w-96"/>
                     </div>
                     <div class="flex flex-col mb-4">
-                        <label for="phoneNumber">Broj telefona</label>
+                        <label class="dark:text-gray-300" for="phoneNumber">Broj telefona</label>
                         <input type="text" id="phoneNumber" name="phoneNumber" th:value="${session['phoneNumber']}" required class="input"/>
                     </div>
                     <div class="flex flex-col mb-4">
-                        <label for="username">Korisničko ime</label>
+                        <label class="dark:text-gray-300" for="username">Korisničko ime</label>
                         <input type="text" id="username" name="username" th:value="${session['username']}" required class="input"/>
                     </div>
                     <div class="flex flex-col mb-4">
-                        <label for="password">Lozinka</label>
+                        <label class="dark:text-gray-300" for="password">Lozinka</label>
                         <input type="password" id="password" name="password" required class="input" oninput="validatePassword()"/>
                         <ul id="passwordCriteria" class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-300">
                             <li id="lengthCriteria">Najmanje 6 znakova</li>
@@ -169,7 +166,7 @@
                         </ul>
                     </div>
                     <div class="flex flex-col mb-4">
-                        <label for="confirmPassword">Potvrdi lozinku <span id="passwordError" class="text-red-500"></span></label>
+                        <label class="dark:text-gray-300" for="confirmPassword">Potvrdi lozinku <span id="passwordError" class="text-red-500"></span></label>
                         <input type="password" id="confirmPassword" name="confirmPassword" required class="input" oninput="checkPasswordsMatch()">
                     </div>
                     <div class="flex items-center mb-4">

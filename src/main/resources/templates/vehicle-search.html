@@ -23,7 +23,7 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 ml-4 dark:text-gray-200">Osnovni podaci</h2>
                 <hr class="dark:border-gray-700">
                 <div class="flex flex-col m-4">
-                    <label for="vehicleType">Tip vozila</label>
+                    <label class="dark:text-gray-300" for="vehicleType">Tip vozila</label>
                     <select id="vehicleType" class="input select2-basic">
                         <option value="" selected>Sva vozila</option>
                         <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}"
@@ -32,14 +32,14 @@
                 </div>
                 <div class="grid grid-cols-2 gap-12 m-4">
                     <div class="flex flex-col">
-                        <label for="manufacturer">Proizvođač</label>
+                        <label class="dark:text-gray-300" for="manufacturer">Proizvođač</label>
                         <select id="manufacturer" name="manufacturer" class="input select2-withSearch">
                             <option value="" disabled selected>Odabir</option>
                         </select>
                     </div>
 
                     <div class="flex flex-col">
-                        <label for="model">Model</label>
+                        <label class="dark:text-gray-300" for="model">Model</label>
                         <select id="model" name="model" class="input select2-withSearch">
                             <option value="" disabled selected>Odabir</option>
                         </select>
@@ -47,14 +47,14 @@
                 </div>
 
                 <div class="flex flex-col m-4">
-                    <label for="bodyType">Oblik karoserije</label>
+                    <label class="dark:text-gray-300" for="bodyType">Oblik karoserije</label>
                     <select id="bodyType" class="input select2-basic">
                         <option value="" selected>Svi oblici</option>
                         <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
                     </select>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="mileageFrom">Kilometraža vozila</label>
+                    <label class="dark:text-gray-300" for="mileageFrom">Kilometraža vozila</label>
                     <div class="flex items-center">
                         <input type="number" id="mileageFrom" min="0" placeholder="0"
                             class="input w-11/12 no-arrows flex-grow pl-1">
@@ -65,7 +65,7 @@
                     <p id="mileageError" class="text-red-500"></p>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="priceFrom">Cijena vozila</label>
+                    <label class="dark:text-gray-300" for="priceFrom">Cijena vozila</label>
                     <div class="flex items-center">
                         <input type="number" id="priceFrom" min="0" placeholder="0"
                             class="input w-11/12 no-arrows flex-grow pl-1">
@@ -76,14 +76,14 @@
                     <p id="priceError" class="text-red-500"></p>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="state">Stanje vozila</label>
+                    <label class="dark:text-gray-300" for="state">Stanje vozila</label>
                     <select id="state" class="input select2-basic">
                         <option value="" disabled selected>Odabir</option>
                         <option th:each="state : ${states}" th:value="${state}" th:text="${state}"></option>
                     </select>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="yearFrom">Godina proizvodnje</label>
+                    <label class="dark:text-gray-300" for="yearFrom">Godina proizvodnje</label>
                     <div class="flex items-center">
                         <select id="yearFrom" class="input flex-grow select2-basic">
                             <option value="" disabled selected>Odabir</option>
@@ -98,7 +98,7 @@
                     <p id="yearError" class="text-red-500"></p>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="city">Lokacija vozila</label>
+                    <label class="dark:text-gray-300" for="city">Lokacija vozila</label>
                     <select id="city" name="city" required class="input select2-withSearch">
                         <option value="" disabled selected>Odabir</option>
                         <th:block th:each="entry : ${citiesByCounty}">
@@ -117,28 +117,28 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 ml-4 dark:text-gray-200">Tehnički podaci</h2>
                 <hr class="dark:border-gray-700">
                 <div class="flex flex-col m-4">
-                    <label for="engineType">Motor</label>
+                    <label class="dark:text-gray-300" for="engineType">Motor</label>
                     <select id="engineType" class="input select2-basic">
                         <option value="" selected>Sve vrste</option>
                         <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                     </select>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="transmissionType">Mjenjač</label>
+                    <label class="dark:text-gray-300" for="transmissionType">Mjenjač</label>
                     <select id="transmissionType" class="input select2-basic">
                         <option value="" selected>Sve vrste</option>
                         <option th:each="transmissionType : ${transmissionTypes}" th:value="${transmissionType}" th:text="${transmissionType}"></option>
                     </select>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="driveTrainType">Pogon kotača</label>
+                    <label class="dark:text-gray-300" for="driveTrainType">Pogon kotača</label>
                     <select id="driveTrainType" class="input select2-basic">
                         <option value="" selected>Sve vrste</option>
                         <option th:each="driveTrainType : ${driveTrainTypes}" th:value="${driveTrainType}" th:text="${driveTrainType}"></option>
                     </select>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="enginePowerFrom">Snaga motora</label>
+                    <label class="dark:text-gray-300" for="enginePowerFrom">Snaga motora</label>
                     <div class="flex items-center">
                         <input type="number" id="enginePowerFrom" min="0" placeholder="0"
                             class="input w-11/12 no-arrows flex-grow pl-1">
@@ -148,7 +148,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label for="fuelConsumption">Potrošnja goriva</label>
+                    <label class="dark:text-gray-300" for="fuelConsumption">Potrošnja goriva</label>
                     <div class="flex items-center">
                         <input type="number" id="fuelConsumptionFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
                         <p class="text-center mr-4 ml-4">do</p>
@@ -161,7 +161,7 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 ml-4 dark:text-gray-200">Detalji ponude</h2>
                 <hr class="dark:border-gray-700">
                 <div class="flex flex-col m-4">
-                    <label for="userTypes">Vrsta prodavača</label>
+                    <label class="dark:text-gray-300" for="userTypes">Vrsta prodavača</label>
                     <select id="userTypes" class="input select2-basic">
                         <option value="" selected>Svi prodavači</option>
                         <option value="Privatni">Privatni</option>
@@ -170,10 +170,10 @@
                 </div>
                 <div class="flex items-center m-4">
                     <input id="onlyRegistered" type="checkbox" value="" class="w-4 h-4 inline-block mr-1">
-                    <label for="onlyRegistered" class="font-medium text-gray-900 dark:text-gray-200 mr-4">Samo registrirana vozila</label>
+                    <label for="onlyRegistered" class="font-medium text-gray-900 dark:text-gray-300 mr-4">Samo registrirana vozila</label>
 
                     <input id="onlyWithImages" type="checkbox" value="" class="w-4 h-4 inline-block mr-1">
-                    <label for="onlyWithImages" class="font-medium text-gray-900 dark:text-gray-200">Samo oglasi sa slikama</label>
+                    <label for="onlyWithImages" class="font-medium text-gray-900 dark:text-gray-300">Samo oglasi sa slikama</label>
                 </div>
             </div>
             
