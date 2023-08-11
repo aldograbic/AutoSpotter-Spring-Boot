@@ -152,9 +152,16 @@ public class NewListingsController {
         if (newListings.isEmpty()) {
             model.addAttribute("noListingsFoundMessage", "Nije pronađen nijedan oglas s odabranim filterima.");
 
-            // List<Listing> similarListings = listingRepository.getSimilarListings(vehicleType, manufacturer, vehicleModel);
-            // model.addAttribute("similarListings", similarListings);
+            List<Listing> similarListings = listingRepository.getSimilarListingsOfFilteredListings(vehicleType, manufacturer, vehicleModel);
 
+            List<String> firstImageUrlsSimilar = new ArrayList<>();
+            for (Listing listing : similarListings) {
+                String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(listing.getVehicleId());
+                firstImageUrls.add(firstImageUrl);
+            }
+
+            model.addAttribute("firstImageUrlsSimilar", firstImageUrls);
+            model.addAttribute("similarListings", similarListings);
             return "new-listings";
         }
 

@@ -271,6 +271,37 @@ public class JdbcListingRepository implements ListingRepository {
     }
 
     @Override
+    public List<Listing> getSimilarListingsOfFilteredListings(String vehicleType, String manufacturer, String model) {
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+                "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
+                "FROM listing l " +
+                "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
+                "INNER JOIN user u ON l.user_id = u.id " +
+                "INNER JOIN cities c ON v.city_id = c.id " +
+                "WHERE l.status = 1 " +
+                "AND ( " +
+                    "(l.vehicle_id IN (SELECT v1.id FROM vehicle v1 WHERE v1.manufacturer = ? AND v1.model = ?)) " +
+                    "OR " +
+                    "(l.vehicle_id IN (SELECT v2.id FROM vehicle v2 WHERE v2.manufacturer = ?) AND l.id NOT IN (?, ?)) " +
+                    "OR " +
+                    "(l.vehicle_id IN (SELECT v3.id FROM vehicle v3 WHERE v3.vehicle_type_id = ?) AND l.id NOT IN (?, ?, ?)) " +
+                ") " +
+                "ORDER BY l.created_at DESC";
+
+        return jdbcTemplate.query(
+                sql,
+                new ListingRowMapper(vehicleRepository, userRepository),
+                manufacturer, model,
+                manufacturer,
+                manufacturer, manufacturer,
+                vehicleType,
+                manufacturer, manufacturer, manufacturer
+        );
+    }
+
+
+
+    @Override
     public void saveImageUrlsForVehicle(ListingImage listingImage) {
         String sql = "INSERT INTO images (vehicle_id, image_url) VALUES (?, ?)";
         jdbcTemplate.update(sql, listingImage.getVehicle().getId(), listingImage.getImageUrl());

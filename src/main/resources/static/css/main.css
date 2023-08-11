@@ -873,6 +873,10 @@ input[type="checkbox"]:checked + label {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .inset-x-0 {
   left: 0px;
   right: 0px;
@@ -948,6 +952,10 @@ input[type="checkbox"]:checked + label {
 
 .top-1\/2 {
   top: 50%;
+}
+
+.top-20 {
+  top: 5rem;
 }
 
 .top-3 {
@@ -2271,10 +2279,6 @@ input[type="checkbox"]:checked + label {
 
 :is(.dark .dark\:fill-gray-300) {
   fill: #d1d5db;
-}
-
-:is(.dark .dark\:stroke-red-300) {
-  stroke: #fca5a5;
 }
 
 :is(.dark .dark\:text-blue-400) {

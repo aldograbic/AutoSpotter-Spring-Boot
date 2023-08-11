@@ -1,6 +1,50 @@
 var priceFrom = document.getElementById("priceFrom");
 var priceTo = document.getElementById("priceTo");
 
+$(document).ready(function () {
+  const queryParams = new URLSearchParams(window.location.search);
+  const selectedVehicleType = queryParams.get('vehicleType');
+  const selectedManufacturer = queryParams.get('manufacturer');
+
+  if (selectedVehicleType) {
+    $('#vehicleType').val(selectedVehicleType);
+    if (selectedVehicleType === "Automobil") {
+      $('#bodyTypeSection').show();
+    }
+    loadManufacturers(selectedVehicleType);
+  }
+
+  if (selectedManufacturer) {
+    $('#manufacturer').val(selectedManufacturer);
+    loadModels(selectedManufacturer);
+  }
+
+  $('#vehicleType').change(function () {
+    var selectedVehicleType = $('#vehicleType').val();
+    if (selectedVehicleType === "Automobil") {
+      $('#bodyTypeSection').show();
+    } else {
+      $('#bodyTypeSection').hide();
+    }
+
+    loadManufacturers();
+
+    const manufacturerParam = queryParams.get('manufacturer');
+    if (manufacturerParam) {
+      $('#manufacturer').val(manufacturerParam);
+    }
+  });
+
+  $('#manufacturer').change(function () {
+    loadModels();
+
+    const modelParam = queryParams.get('model');
+    if (modelParam) {
+      $('#model').val(modelParam);
+    }
+  });
+});
+
 function sortListings(sortType) {
   const queryParams = new URLSearchParams(window.location.search);
   queryParams.set('sort', sortType);
@@ -17,23 +61,6 @@ document.getElementById("transmissionButtons").addEventListener("click", functio
 document.getElementById("userTypeButtons").addEventListener("click", function (event) {
   var buttonId = event.target.id;
   selectUserTypeButton(buttonId);
-});
-
-$(document).ready(function () {
-  $('#vehicleType').change(function () {
-    var selectedVehicleType = $('#vehicleType').val();
-    if (selectedVehicleType === "Automobil") {
-      $('#bodyTypeSection').show();
-    } else {
-      $('#bodyTypeSection').hide();
-    }
-
-    loadManufacturers();
-  });
-
-  $('#manufacturer').change(function () {
-    loadModels();
-  });
 });
 
 priceFrom.addEventListener("input", validateInput);
