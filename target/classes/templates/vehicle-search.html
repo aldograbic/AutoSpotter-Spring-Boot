@@ -53,6 +53,23 @@
                         <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
                     </select>
                 </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col m-4">
+                        <label class="dark:text-gray-300" for="numberOfWheels">Broj kotača</label>
+                        <input type="number" id="numberOfWheels" name="numberOfWheels" min="4" placeholder="6" class="input no-arrows">
+                    </div>
+
+                    <div class="flex flex-col m-4">
+                        <label class="dark:text-gray-300" for="maximumAllowableWeight">Najveća dopuštena masa</label>
+                        <div class="flex items-center">
+                            <input type="text" id="maximumAllowableWeight" name="maximumAllowableWeight"
+                                placeholder="1000" pattern="[0-9]*\.?[0-9]+" required class="input no-arrows"
+                                oninput="validateInput(this)">
+                        </div>
+                    </div>
+                </div>
+
                 <div class="flex flex-col m-4">
                     <label class="dark:text-gray-300" for="mileageFrom">Kilometraža vozila</label>
                     <div class="flex items-center">
@@ -123,6 +140,32 @@
                         <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                     </select>
                 </div>
+                <div class="flex justify-between">
+                    <div class="flex flex-col m-4">
+                        <label class="dark:text-gray-300" for="batteryCapacity">Kapacitet baterije</label>
+                        <div class="flex items-center">
+                            <input type="text" id="batteryCapacity" name="batteryCapacity" required
+                                pattern="[0-9]*\.?[0-9]+" class="input" placeholder="50"
+                                oninput="validateInput(this)">
+                        </div>
+                    </div>
+                    <div class="flex flex-col m-4">
+                        <label class="dark:text-gray-300" for="vehicleRange">Doseg vozila</label>
+                        <div class="flex items-center">
+                            <input type="text" id="vehicleRange" name="vehicleRange" required
+                                pattern="[0-9]*\.?[0-9]+" class="input" placeholder="100"
+                                oninput="validateInput(this)" th:value="${session['vehicleRange']}">
+                        </div>
+                    </div>
+                    <div class="flex flex-col m-4">
+                        <label class="dark:text-gray-300" for="chargingTime">Vrijeme punjenja</label>
+                        <div class="flex items-center">
+                            <input type="text" id="chargingTime" name="chargingTime" required
+                                pattern="[0-9]*\.?[0-9]+" class="input" placeholder="1"
+                                oninput="validateInput(this)" th:value="${session['chargingTime']}">
+                        </div>
+                    </div>
+                </div>
                 <div class="flex flex-col m-4">
                     <label class="dark:text-gray-300" for="transmissionType">Mjenjač</label>
                     <select id="transmissionType" class="input select2-basic">
@@ -160,7 +203,54 @@
             <div class="border rounded-md mb-4 shadow-md dark:border-gray-700">
                 <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 ml-4 dark:text-gray-200">Izgled i značajke</h2>
                 <hr class="dark:border-gray-700">
-                
+                <div class="flex flex-col m-4">
+                    <label class="dark:text-gray-300" for="color">Boja vozila</label>
+                    <div class="flex">
+                        
+                        <input type="checkbox" id="blackColorCheckbox" value="crna" class="hidden" name="colorCheckbox"/>
+                        <label for="blackColorCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
+                            Crna
+                        </label>
+                    
+                        <input type="checkbox" id="whiteColorCheckbox" value="bijela" class="hidden" name="colorCheckbox"/>
+                        <label for="whiteColorCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
+                            Bijela
+                        </label>
+
+                        <input type="checkbox" id="redColorCheckbox" value="crvena" class="hidden" name="colorCheckbox"/>
+                        <label for="redColorCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
+                            Crvena
+                        </label>
+
+                        <input type="checkbox" id="blueColorCheckbox" value="plava" class="hidden" name="colorCheckbox"/>
+                        <label for="blueColorCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
+                            Plava
+                        </label>
+
+                        <input type="checkbox" id="greenColorCheckbox" value="zelena" class="hidden" name="colorCheckbox"/>
+                        <label for="greenColorCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
+                            Zelena
+                        </label>
+
+                        <input type="checkbox" id="grayColorCheckbox" value="siva" class="hidden" name="colorCheckbox"/>
+                        <label for="grayColorCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
+                            Siva
+                        </label>
+
+                        <input type="checkbox" id="silverColorCheckbox" value="srebrna" class="hidden" name="colorCheckbox"/>
+                        <label for="silverColorCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
+                            Srebrna
+                        </label>
+                        
+                    </div>
+                </div>
             </div>
 
             <div class="border rounded-md mb-4 shadow-md dark:border-gray-700">
@@ -175,11 +265,17 @@
                     </select>
                 </div>
                 <div class="flex items-center m-4">
-                    <input id="onlyRegistered" type="checkbox" value="" class="w-4 h-4 inline-block mr-1">
-                    <label for="onlyRegistered" class="font-medium text-gray-900 dark:text-gray-300 mr-4">Samo registrirana vozila</label>
+                    <input id="onlyRegistered" type="checkbox" value="" class="hidden">
+                    <label for="onlyRegistered" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
+                        Samo registrirana vozila
+                    </label>
 
-                    <input id="onlyWithImages" type="checkbox" value="" class="w-4 h-4 inline-block mr-1">
-                    <label for="onlyWithImages" class="font-medium text-gray-900 dark:text-gray-300">Samo oglasi sa slikama</label>
+                    <input id="onlyWithImages" type="checkbox" value="" class="hidden">
+                    <label for="onlyWithImages" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
+                        Samo oglasi sa slikama
+                    </label>
                 </div>
             </div>
             
