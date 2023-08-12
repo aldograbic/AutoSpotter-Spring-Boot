@@ -104,10 +104,10 @@
 
                     <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-300 dark:border-gray-700" th:each="listing, url : ${newestListings}">
 
-                        <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila"></a>
+                        <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila"></a>
                     
                         <div class="grid gap-4">
-                            <a th:href="@{'/oglasi/' + ${listing.id}}" class="text-cyan-700 hover:text-cyan-900">
+                            <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}" class="text-cyan-700 hover:text-cyan-900">
                                 <h2 class="inline-block font-semibold text-lg" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model}"></h2>
                             </a>
                             <p th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}" class="text-gray-700 font-semibold text-lg dark:text-gray-200"></p>

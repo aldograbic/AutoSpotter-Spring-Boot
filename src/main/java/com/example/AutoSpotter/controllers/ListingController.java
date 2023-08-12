@@ -32,8 +32,11 @@ public class ListingController {
         this.emailService = emailService;
     }
     
-    @GetMapping("/oglasi/{listingId}")
-    public String getListingDetails(@PathVariable("listingId") int listingId, Model model) {
+    @GetMapping("/oglasi/{listingId}/{vehicleManufacturer}/{vehicleModel}")
+    public String getListingDetails(@PathVariable("listingId") int listingId,
+                                    @PathVariable("vehicleManufacturer") String vehicleManufacturer,
+                                    @PathVariable("vehicleModel") String vehicleModel,
+                                    Model model) {
         // Fetch the details of the current listing
         Listing listing = listingRepository.getListingById(listingId);
         int vehicleId = listing.getVehicleId();
@@ -57,7 +60,7 @@ public class ListingController {
         model.addAttribute("listing", listing);
 
         List<Listing> similarListings = listingRepository.getSimilarListings(listingId,
-            listing.getVehicle().getVehicleType(), listing.getVehicle().getManufacturer(), listing.getVehicle().getModel()
+            listing.getVehicle().getVehicleType(), vehicleManufacturer, vehicleModel
         );
         model.addAttribute("similarListings", similarListings);
 

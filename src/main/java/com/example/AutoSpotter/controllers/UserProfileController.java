@@ -190,8 +190,8 @@ public class UserProfileController {
         return "redirect:/korisnicki-profil";
     }
 
-    @GetMapping("/korisnicki-profil/{userId}")
-    public String showUserProfile(@PathVariable("userId") int userId, Model model) {
+    @GetMapping("/korisnicki-profil/{userId}/{userUsername}")
+    public String showUserProfile(@PathVariable("userId") int userId, @PathVariable("userUsername") String userUsername, Model model) {
         User user = userRepository.getUserById(userId);
         int listingCount = listingRepository.getListingsCountByUserId(userId);
         List<Listing> userListing = listingRepository.getListingsByUserId(userId);
