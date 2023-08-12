@@ -12,9 +12,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -261,19 +263,35 @@ public class AddListingController {
 
         int vehicleId = vehicleRepository.saveVehicle(vehicle);
         session.setAttribute("vehicleId", vehicleId);
+        session.setAttribute("selectedSafetyFeatures", safetyFeatures);
+
 
         session.setAttribute("step", 5);
         return "redirect:/postavi-oglas";
     }
 
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public String handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("errorMessage", "Veličina datoteka premašuje maksimalnu dopuštenu veličinu.");
+        return "redirect:/postavi-oglas";
+    }
+
+
     @PostMapping("/oglas-5")
     public String handleStep5FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session, RedirectAttributes redirectAttributes) {
-        for (MultipartFile image : images) {
-            if (!image.getContentType().startsWith("image/")) {
-                redirectAttributes.addFlashAttribute("errorMessage", "Nepodržani format! Molimo odaberite samo slikovne formate.");
-                return "redirect:/postavi-oglas";
-            }
+        try {
+            for (MultipartFile image : images) {
+                        if (!image.getContentType().startsWith("image/")) {
+                            redirectAttributes.addFlashAttribute("errorMessage", "Nepodržani format! Molimo odaberite samo slikovne formate.");
+                            return "redirect:/postavi-oglas";
+                        }
+                    }
+        } catch (MaxUploadSizeExceededException e) {
+            throw e;
+        } catch (Exception e) {
+            // Handle other exceptions
         }
+        
 
         int vehicleId = (int) session.getAttribute("vehicleId");
 

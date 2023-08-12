@@ -42,27 +42,27 @@
                 <div class="mt-8 flex flex-col items-center">
                     <form th:action="@{/korisnik/{userId}/promijeni-podatke(userId=${user.id})}" method="post">
                         <div class="flex flex-col mb-4">
-                            <label for="username">Korisničko ime</label>
+                            <label class="dark:text-gray-300" for="username">Korisničko ime</label>
                             <input type="text" id="username" name="username" required th:value="${user.username}" class="input w-96"/>
                         </div>
                         <div class="flex flex-col mb-4" th:if="${user.firstName != null}">
-                            <label for="firstName">Ime</label>
+                            <label class="dark:text-gray-300" for="firstName">Ime</label>
                             <input type="text" id="firstName" name="firstName" required th:value="${user.firstName}" class="input w-96"/>
                         </div>
                         <div class="flex flex-col mb-4" th:if="${user.firstName != null}">
-                            <label for="lastName">Prezime</label>
+                            <label class="dark:text-gray-300" for="lastName">Prezime</label>
                             <input type="text" id="lastName" name="lastName" required th:value="${user.lastName}" class="input w-96"/>
                         </div>
                         <div class="flex flex-col mb-4" th:unless="${user.firstName != null}">
-                            <label for="companyName">Naziv tvrtke</label>
+                            <label class="dark:text-gray-300" for="companyName">Naziv tvrtke</label>
                             <input type="text" id="companyName" name="companyName" required th:value="${user.companyName}" class="input w-96"/>
                         </div>
                         <div class="flex flex-col mb-4">
-                            <label for="address">Adresa</label>
+                            <label class="dark:text-gray-300" for="address">Adresa</label>
                             <input type="text" id="address" name="address" required th:value="${user.address}" class="input w-96"/>
                         </div>
                         <div class="flex flex-col mb-4">
-                            <label for="city">Grad</label>
+                            <label class="dark:text-gray-300" for="city">Grad</label>
                             <div class="relative inline-block w-96">
                               <select id="city" name="city" required class="input w-96 select2-withSearch">
                                 <option value="" selected><span th:if="user.city == null">Odabir</span><span th:unless="user.city == null" th:text="${user.city.cityName}" th:value="${user.city.cityName}"></span></option>
@@ -77,11 +77,11 @@
                             </div>
                         </div>
                         <div class="flex flex-col mb-4">
-                            <label for="phoneNumber">Broj telefona</label>
+                            <label class="dark:text-gray-300" for="phoneNumber">Broj telefona</label>
                             <input type="text" id="phoneNumber" name="phoneNumber" required th:value="${user.phoneNumber}" class="input w-96"/>
                         </div>
                         <div class="flex flex-col mb-4">
-                            <label for="email">E-mail adresa</label>
+                            <label class="dark:text-gray-300" for="email">E-mail adresa</label>
                             <input type="text" id="email" name="email" required th:value="${user.email}" class="input w-96"/>
                         </div>
                         <div class="flex flex-col mb-4">
