@@ -66,6 +66,12 @@ CREATE TABLE `drive_train` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `eco_category` (
+  `id` int NOT NULL,
+  `eco_category_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `manufacturers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `manufacturer_name` varchar(50) NOT NULL,
@@ -100,6 +106,7 @@ CREATE TABLE `vehicle_extras` (
   `adaptive_cruise_control` tinyint(1) DEFAULT NULL,
   `air_suspension` tinyint(1) DEFAULT NULL,
   `alarm_system` tinyint(1) DEFAULT NULL,
+  `aluminium_wheels` tinyint(1) DEFAULT NULL,
   `ambient_lighting` tinyint(1) DEFAULT NULL,
   `android_auto` tinyint(1) DEFAULT NULL,
   `apple_carplay` tinyint(1) DEFAULT NULL,
@@ -169,9 +176,11 @@ CREATE TABLE `vehicle` (
   `state` varchar(255) NOT NULL,
   `year` int NOT NULL,
   `number_of_wheels` int NOT NULL,
+  `number_of_doors` int NOT NULL,
   `maximum_allowable_weight` double NULL,
   `engine_type` varchar(255) NOT NULL,
   `engine_displacement` varchar(255) NOT NULL,
+  `engine_displacement_ccm3` varchar(255) NOT NULL,
   `engine_power` int NOT NULL,
   `fuel_consumption` varchar(255) NOT NULL,
   `transmission` varchar(255) NOT NULL,

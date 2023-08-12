@@ -34,6 +34,8 @@ INSERT INTO drive_train VALUES (1, "Prednji");
 INSERT INTO drive_train VALUES (2, "Zadnji");
 INSERT INTO drive_train VALUES (3, "4 X 4");
 
+insert into eco_category VALUES (1, "Euro 1"), (2, "Euro 2"), (3, "Euro 3"), (4, "Euro 4"), (5, "Euro 5"), (6, "Euro 6"), (7, "Euro 6d"), (8, "Euro 6d-TEMP") ;
+
 INSERT INTO roles VALUES (1, "USER"), (2, "ADMIN");
 
 INSERT INTO manufacturers VALUES
@@ -2274,7 +2276,7 @@ INSERT INTO models VALUES
        (2059, '10', 77),
        (2060, '101', 77),
        (2061, '128 Skala', 77),
-       (2062, 'Yugo', 77),
+       (2062, 'Yugo', 77);
 
 
 
