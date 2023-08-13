@@ -978,6 +978,10 @@ input[type="checkbox"]:checked + label {
   margin: 1rem;
 }
 
+.m-8 {
+  margin: 2rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1999,11 +2003,6 @@ input[type="checkbox"]:checked + label {
   --tw-ring-color: rgb(8 145 178 / var(--tw-ring-opacity));
 }
 
-.ring-gray-700 {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(55 65 81 / var(--tw-ring-opacity));
-}
-
 .transition {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -2129,11 +2128,6 @@ input[type="checkbox"]:checked + label {
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.hover\:ring-cyan-700:hover {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(14 116 144 / var(--tw-ring-opacity));
 }
 
 .hover\:file\:bg-gray-300::file-selector-button:hover {
