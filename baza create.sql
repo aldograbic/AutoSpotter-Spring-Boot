@@ -183,6 +183,7 @@ CREATE TABLE `vehicle` (
   `engine_displacement_ccm3` varchar(255) NOT NULL,
   `engine_power` int NOT NULL,
   `fuel_consumption` varchar(255) NOT NULL,
+  `eco_category` varchar(255) NOT NULL,
   `transmission` varchar(255) NOT NULL,
   `drive_train` varchar(255) NOT NULL,
   `battery_capacity` double NULL,

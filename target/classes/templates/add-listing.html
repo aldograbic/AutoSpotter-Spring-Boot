@@ -71,7 +71,6 @@
                                 </option>
                             </select>
                         </div>
-
                     </div>
 
                     <div class="flex flex-col">
@@ -81,7 +80,6 @@
                                 <option value="" disabled selected>Odabir</option>
                             </select>
                         </div>
-
                     </div>
                     
                     <div th:if="${showBodyTypeInput}" class="flex flex-col mt-4">
@@ -93,14 +91,19 @@
                                     th:selected="${bodyType eq session['bodyType']}"></option>
                             </select>
                         </div>
-
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col mt-4">
+                        <label class="dark:text-gray-300" for="numberOfDoors">Broj vrata</label>
+                        <input type="text" id="numberOfDoors" name="numberOfDoors" placeholder="4" required class="input w-96"
+                            th:value="${session['numberOfDoors']}">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-8">
                         <div th:if="${showNumberOfWheelsInput}" class="flex flex-col mb-4 mt-4">
                             <label class="dark:text-gray-300" for="numberOfWheels">Broj kotača</label>
                             <input type="number" id="numberOfWheels" name="numberOfWheels" min="4" placeholder="6"
-                                required th:value="${initialNumberOfWheels}" class="input no-arrows">
+                                required th:value="${initialNumberOfWheels}" class="input no-arrows w-44">
                         </div>
                         <div th:unless="${showNumberOfWheelsInput}" class="flex flex-col mb-4">
                             <input type="hidden" name="numberOfWheels" th:value="${initialNumberOfWheels}">
@@ -110,7 +113,7 @@
                             <label class="dark:text-gray-300" for="maximumAllowableWeight">Najveća dopuštena masa</label>
                             <div class="flex items-center">
                                 <input type="text" id="maximumAllowableWeight" name="maximumAllowableWeight"
-                                    placeholder="1000" pattern="[0-9]*\.?[0-9]+" required class="input no-arrows"
+                                    placeholder="1000" pattern="[0-9]*\.?[0-9]+" required class="input no-arrows w-44"
                                     oninput="validateInput(this)">
                                 <span class="absolute right-0 pr-2 text-gray-500 text-xl">kg</span>
                             </div>
@@ -544,6 +547,18 @@
                                                         class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
                                                         x-bind:class="{ 'bg-gray-400': selectedOptions.includes('alarm_system') }"></span>
                                                     Alarm sustav
+                                                </label>
+                                            </div>
+
+                                            <div class="w-full md:w-1/4">
+                                                <input type="checkbox" id="aluminiumWheelsCheckbox" name="extras"
+                                                    value="aluminium_wheels" class="hidden" x-model="selectedOptions">
+                                                <label for="aluminiumWheelsCheckbox"
+                                                    class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                                                    <span
+                                                        class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                                        x-bind:class="{ 'bg-gray-400': selectedOptions.includes('aluminium_wheels') }"></span>
+                                                    Aluminijske felge
                                                 </label>
                                             </div>
 

@@ -166,7 +166,7 @@
 
         <div class="flex items-center">
           <div class="w-8 h-8 flex-shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" width="512" height="512" viewBox="0 0 512 512">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 512 512">
               <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
                 d="m80 224l37.78-88.15C123.93 121.5 139.6 112 157.11 112h197.78c17.51 0 33.18 9.5 39.33 23.85L432 224m-352 0h352v144H80zm32 144v32H80v-32m352 0v32h-32v-32" />
               <circle cx="144" cy="288" r="16" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -179,6 +179,23 @@
           <div class="ml-2">
             <p class="text-xs text-gray-500 dark:text-gray-400">Oblik karoserije</p>
             <p class="font-medium dark:text-gray-200" th:text="${listing.vehicle.bodyType}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg fill="#000000" viewBox="0 0 24 24" id="car-door-left-1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path id="primary" d="M12.29,3.29,20,11v4.13a1,1,0,0,1-.86,1l-2.06.3A6.11,6.11,0,0,0,12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h6.59A1,1,0,0,1,12.29,3.29ZM20,11H4m4,4h2" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></path>
+              </g>
+            </svg>
+
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500 dark:text-gray-400">Broj vrata</p>
+            <p class="font-medium dark:text-gray-200" th:text="${listing.vehicle.numberOfDoors}"></p>
           </div>
         </div>
 
@@ -265,12 +282,12 @@
             <dd th:text="${listing.vehicle.engineDisplacement + ' L'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
           <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt class="dt dark:text-gray-400">Snaga motora</dt>
-            <dd th:text="${listing.vehicle.enginePower + ' kW'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+            <dt class="dt dark:text-gray-400">Obujam motora</dt>
+            <dd th:text="${listing.vehicle.engineDisplacementCcm3 + ' ccm&sup3;'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
           <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt class="dt dark:text-gray-400">Potrošnja goriva</dt>
-            <dd th:text="${listing.vehicle.fuelConsumption + ' L/100km'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+            <dt class="dt dark:text-gray-400">Snaga motora</dt>
+            <dd th:text="${listing.vehicle.enginePower + ' kW'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
           <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 dark:text-gray-300">
             <dt class="dt dark:text-gray-400">Mjenjač</dt>
@@ -279,6 +296,14 @@
           <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt class="dt dark:text-gray-400">Pogon kotača</dt>
             <dd th:text="${listing.vehicle.driveTrain}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+          </div>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt dark:text-gray-400">Potrošnja goriva</dt>
+            <dd th:text="${listing.vehicle.fuelConsumption + ' L/100km'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+          </div>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt dark:text-gray-400">Ekološka kategorija</dt>
+            <dd th:text="${listing.vehicle.ecoCategory}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
         </dl>
       </div>

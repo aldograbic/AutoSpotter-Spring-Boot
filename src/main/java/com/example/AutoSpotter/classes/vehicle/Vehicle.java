@@ -16,12 +16,15 @@ public class Vehicle {
     private int mileage;
     private String state;
     private int year;
+    private int numberOfDoors;
     private int numberOfWheels;
     private double maximumAllowableWeight;
     private String engineType;
     private double engineDisplacement;
+    private int engineDisplacementCcm3;
     private int enginePower;
     private double fuelConsumption;
+    private String ecoCategory;
     private String transmission;
     private String driveTrain;
     private double batteryCapacity;
@@ -39,8 +42,8 @@ public class Vehicle {
     private List<VehicleExtra> extras;
 
     public Vehicle(String manufacturer, String model, String bodyType, String color, Date registered, int mileage,
-                   String state, int year, int numberOfWheels, double maximumAllowableWeight, String engineType, double engineDisplacement,
-                   int enginePower, double fuelConsumption, String transmission, String driveTrain, double batteryCapacity, double chargingTime,
+                   String state, int year, int numberOfDoors, int numberOfWheels, double maximumAllowableWeight, String engineType, double engineDisplacement, int engineDisplacementCcm3,
+                   int enginePower, double fuelConsumption, String ecoCategory, String transmission, String driveTrain, double batteryCapacity, double chargingTime,
                    double vehicleRange, int cityId, int vehicleTypeId) {
         this.manufacturer = manufacturer;
         this.model = model;
@@ -50,12 +53,15 @@ public class Vehicle {
         this.mileage = mileage;
         this.state = state;
         this.year = year;
+        this.numberOfDoors = numberOfDoors;
         this.numberOfWheels = numberOfWheels;
         this.maximumAllowableWeight = maximumAllowableWeight;
         this.engineType = engineType;
         this.engineDisplacement = engineDisplacement;
+        this.engineDisplacementCcm3 = engineDisplacementCcm3;
         this.enginePower = enginePower;
         this.fuelConsumption = fuelConsumption;
+        this.ecoCategory = ecoCategory;
         this.transmission = transmission;
         this.driveTrain = driveTrain;
         this.batteryCapacity = batteryCapacity;
@@ -139,6 +145,14 @@ public class Vehicle {
         this.year = year;
     }
 
+    public int getNumberOfDoors() {
+        return numberOfDoors;
+    }
+
+    public void setNumberOfDoors(int numberOfDoors) {
+        this.numberOfDoors = numberOfDoors;
+    }
+
     public int getNumberOfWheels() {
         return numberOfWheels;
     }
@@ -171,6 +185,14 @@ public class Vehicle {
         this.engineDisplacement = engineDisplacement;
     }
 
+    public int getEngineDisplacementCcm3() {
+        return engineDisplacementCcm3;
+    }
+
+    public void setEngineDisplacementCcm3(int engineDisplacementCcm3) {
+        this.engineDisplacementCcm3 = engineDisplacementCcm3;
+    }
+
     public int getEnginePower() {
         return enginePower;
     }
@@ -185,6 +207,14 @@ public class Vehicle {
 
     public void setFuelConsumption(double fuelConsumption) {
         this.fuelConsumption = fuelConsumption;
+    }
+
+    public String getEcoCategory() {
+        return ecoCategory;
+    }
+
+    public void setEcoCategory(String ecoCategory) {
+        this.ecoCategory = ecoCategory;
     }
 
     public String getTransmission() {

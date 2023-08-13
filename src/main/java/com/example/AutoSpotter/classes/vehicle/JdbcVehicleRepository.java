@@ -22,10 +22,10 @@ public class JdbcVehicleRepository implements VehicleRepository {
 
     @Override
     public int saveVehicle(Vehicle vehicle) {
-        String sql = "INSERT INTO vehicle (manufacturer, model, body_type, color, registered, mileage, state, year, number_of_wheels, " +
-                    "maximum_allowable_weight, engine_type, engine_displacement, engine_power, fuel_consumption, transmission, drive_train, battery_capacity, " +
+        String sql = "INSERT INTO vehicle (manufacturer, model, body_type, color, registered, mileage, state, year, number_of_doors, number_of_wheels, " +
+                    "maximum_allowable_weight, engine_type, engine_displacement, engine_displacement_ccm3, engine_power, fuel_consumption, eco_category, transmission, drive_train, battery_capacity, " +
                     "charging_time, vehicle_range, city_id, vehicle_type_id, vehicle_safety_features_id, vehicle_extras_id) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql,
                 vehicle.getManufacturer(),
@@ -36,12 +36,15 @@ public class JdbcVehicleRepository implements VehicleRepository {
                 vehicle.getMileage(),
                 vehicle.getState(),
                 vehicle.getYear(),
+                vehicle.getNumberOfDoors(),
                 vehicle.getNumberOfWheels(),
                 vehicle.getMaximumAllowableWeight(),
                 vehicle.getEngineType(),
                 vehicle.getEngineDisplacement(),
+                vehicle.getEngineDisplacementCcm3(),
                 vehicle.getEnginePower(),
                 vehicle.getFuelConsumption(),
+                vehicle.getEcoCategory(),
                 vehicle.getTransmission(),
                 vehicle.getDriveTrain(),
                 vehicle.getBatteryCapacity(),
@@ -76,8 +79,8 @@ public class JdbcVehicleRepository implements VehicleRepository {
 
     @Override
     public Vehicle getVehicleById(int id) {
-        String sql = "SELECT id, manufacturer, model, body_type, color, registered, mileage, state, year, number_of_wheels, maximum_allowable_weight, " +
-                    "engine_type, engine_displacement, engine_power, fuel_consumption, transmission, drive_train, battery_capacity, charging_time, vehicle_range, " +
+        String sql = "SELECT id, manufacturer, model, body_type, color, registered, mileage, state, year, number_of_doors, number_of_wheels, maximum_allowable_weight, " +
+                    "engine_type, engine_displacement, engine_displacement_ccm3, engine_power, fuel_consumption, eco_category, transmission, drive_train, battery_capacity, charging_time, vehicle_range, " +
                     "city_id, vehicle_type_id, vehicle_safety_features_id, vehicle_extras_id FROM vehicle WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new VehicleRowMapper(locationRepository, this), id);
     }
@@ -125,6 +128,12 @@ public class JdbcVehicleRepository implements VehicleRepository {
     }
 
     @Override
+    public List<String> getAllEcoCategories() {
+        String sql = "SELECT eco_category_name FROM eco_category";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
+
+    @Override
     public List<String> getAllDriveTrainTypes() {
         String sql = "SELECT drive_train_name FROM drive_train";
         return jdbcTemplate.queryForList(sql, String.class);
@@ -156,7 +165,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
     @Override
     public int saveVehicleExtras(List<String> extras) {
         String sql = "INSERT INTO vehicle_extras (adaptive_cruise_control, " +
-                    "air_suspension, alarm_system, ambient_lighting, android_auto, " +
+                    "air_suspension, alarm_system, aluminium_wheels, ambient_lighting, android_auto, " +
                     "apple_carplay, arm_rest, automatic_air_conditioning, automatic_2_zone_climatisations, " +
                     "automatic_3_zones_climatisation, automatic_4_zones_climatisation, bi_xenon_headlights, " +
                     "bluetooth, blind_spot_assist, cd_player, cruise_control, dab_radio, " +
@@ -170,7 +179,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
                     "panoramic_roof, parking_sensors, power_assisted_steering, rain_sensor, " +
                     "roof_rack, spare_tyre, sport_seats, start_stop_system, " +
                     "sunroof, traffic_sign_recognition, tyre_pressure_monitoring, usb_port, voice_control) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " +
                     "?, ?, ?, ?, ?, ?, ?, ?, ?, " +
                     "?, ?, ?, ?, ?, ?, ?, ?, ?, " +
                     "?, ?, ?, ?, ?, ?, ?, ?, ?, " +
@@ -181,6 +190,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
             extras.contains("adaptive_cruise_control"),
             extras.contains("air_suspension"),
             extras.contains("alarm_system"),
+            extras.contains("aluminium_wheels"),
             extras.contains("ambient_lighting"),
             extras.contains("android_auto"),
             extras.contains("apple_carplay"),
@@ -261,7 +271,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
 
     @Override
     public List<VehicleExtra> getVehicleExtras(int extrasId) {
-        String sql = "SELECT adaptive_cruise_control, air_suspension, alarm_system, ambient_lighting, android_auto, " +
+        String sql = "SELECT adaptive_cruise_control, air_suspension, alarm_system, aluminium_wheels, ambient_lighting, android_auto, " +
                     "apple_carplay, arm_rest, automatic_air_conditioning, automatic_2_zone_climatisations, " +
                     "automatic_3_zones_climatisation, automatic_4_zones_climatisation, bi_xenon_headlights, " +
                     "bluetooth, blind_spot_assist, cd_player, cruise_control, dab_radio, " +
@@ -282,6 +292,7 @@ public class JdbcVehicleRepository implements VehicleRepository {
                 extras.add(new VehicleExtra("Prilagodljivi tempomat", rs.getBoolean("adaptive_cruise_control")));
                 extras.add(new VehicleExtra("Zračni ovjes", rs.getBoolean("air_suspension")));
                 extras.add(new VehicleExtra("Alarmni sustav", rs.getBoolean("alarm_system")));
+                extras.add(new VehicleExtra("Aluminijske felge", rs.getBoolean("aluminium_wheels")));
                 extras.add(new VehicleExtra("Ambijentalno osvjetljenje", rs.getBoolean("ambient_lighting")));
                 extras.add(new VehicleExtra("Android Auto", rs.getBoolean("android_auto")));
                 extras.add(new VehicleExtra("Apple CarPlay", rs.getBoolean("apple_carplay")));

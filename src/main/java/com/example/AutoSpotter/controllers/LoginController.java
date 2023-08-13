@@ -67,8 +67,7 @@ public class LoginController {
         if (userDetails != null) {
 
             if (!user.isEmailVerified()) {
-                redirectAttributes.addFlashAttribute("errorMessage", "Prije prijave morate potvrditi svoju e-mail adresu!");
-                return "redirect:/prijava";
+                return "redirect:/prijava?greskaPotvrda";
             }
 
             String rawPassword = password;

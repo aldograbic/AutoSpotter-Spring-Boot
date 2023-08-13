@@ -26,6 +26,8 @@ public interface VehicleRepository {
 
     List<String> getAllTransmissionTypes();
 
+    List<String>getAllEcoCategories();
+
     List<String> getAllDriveTrainTypes();
 
     List<String> getAllStates();

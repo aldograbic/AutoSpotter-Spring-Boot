@@ -54,13 +54,18 @@
                     </select>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="flex flex-col m-4">
+                <div class="flex flex-col m-4">
+                    <label class="dark:text-gray-300" for="numberOfDoors">Broj vrata</label>
+                    <input type="number" id="numberOfDoors" min="0" placeholder="4" class="input no-arrows flex-grow pl-1">
+                </div>
+
+                <div class="grid grid-cols-2 gap-8 m-4">
+                    <div class="flex flex-col">
                         <label class="dark:text-gray-300" for="numberOfWheels">Broj kotača</label>
                         <input type="number" id="numberOfWheels" name="numberOfWheels" min="4" placeholder="6" class="input no-arrows">
                     </div>
 
-                    <div class="flex flex-col m-4">
+                    <div class="flex flex-col">
                         <label class="dark:text-gray-300" for="maximumAllowableWeight">Najveća dopuštena masa</label>
                         <div class="flex items-center">
                             <input type="text" id="maximumAllowableWeight" name="maximumAllowableWeight"
@@ -197,6 +202,13 @@
                         <p class="text-center mr-4 ml-4">do</p>
                         <input type="number" id="fuelConsumptionTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1">
                     </div>
+                </div>
+                <div class="flex flex-col m-4">
+                    <label class="dark:text-gray-300" for="ecoCategory">Ekološka kategorija</label>
+                    <select id="ecoCategory" class="input select2-basic">
+                        <option value="" selected>Sve kategorije</option>
+                        <option th:each="ecoCategory : ${ecoCategories}" th:value="${ecoCategory}" th:text="${ecoCategory}"></option>
+                    </select>
                 </div>
             </div>
 

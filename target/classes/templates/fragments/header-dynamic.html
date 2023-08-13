@@ -32,7 +32,7 @@
 
       <div th:if="${user != null}">
         <div th:if="${user.profileImage == null}" x-data="{ isOpen: false }" x-cloak class="relative flex items-center">
-          <img src="img/icons8-user-50.png" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
+          <img src="/img/icons8-user-50.png" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
             alt="Default slika profila"
             class="w-10 rounded-full ring-2 ring-cyan-600 dark:ring-cyan-700 text-cyan-700 cursor-pointer hover:fill-gray-200"
             @click="isOpen = !isOpen">

@@ -50,11 +50,10 @@ public class VehicleSearchController {
         List<String> engineTypes = vehicleRepository.getAllEngineTypes();
         List<String> transmissionTypes = vehicleRepository.getAllTransmissionTypes();
         List<String> driveTrainTypes = vehicleRepository.getAllDriveTrainTypes();
+        List<String> ecoCategories = vehicleRepository.getAllEcoCategories();
 
 
         model.addAttribute("vehicleTypes", vehicleTypes);
-
-
         model.addAttribute("bodyTypes", bodyTypes);
         model.addAttribute("states", states);
         model.addAttribute("years", years);
@@ -62,6 +61,7 @@ public class VehicleSearchController {
         model.addAttribute("engineTypes", engineTypes);
         model.addAttribute("transmissionTypes", transmissionTypes);
         model.addAttribute("driveTrainTypes", driveTrainTypes);
+        model.addAttribute("ecoCategories", ecoCategories);
 
         model.addAttribute("user", user);
         return "vehicle-search";
