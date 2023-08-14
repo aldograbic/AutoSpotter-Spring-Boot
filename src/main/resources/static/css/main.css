@@ -978,10 +978,6 @@ input[type="checkbox"]:checked + label {
   margin: 1rem;
 }
 
-.m-8 {
-  margin: 2rem;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1195,8 +1191,8 @@ input[type="checkbox"]:checked + label {
   width: 33.333333%;
 }
 
-.w-1\/5 {
-  width: 20%;
+.w-1\/6 {
+  width: 16.666667%;
 }
 
 .w-10 {
@@ -1841,6 +1837,11 @@ input[type="checkbox"]:checked + label {
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
 }
 
 .text-base {
