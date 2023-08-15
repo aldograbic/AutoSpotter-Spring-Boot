@@ -354,8 +354,6 @@ public class AddListingController {
                 listingImage.setImageUrl(imageUrl);
                 listingRepository.saveImageUrlsForVehicle(listingImage);
             }
-        } else {
-            //prikazat nekak gresku da se kontaktira podrška
         }
     }
     

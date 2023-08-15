@@ -1,5 +1,8 @@
 package com.example.AutoSpotter.controllers;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +25,13 @@ public class ContactController {
 
     private final ContactRepository contactRepository;
     private final JavaMailSender javaMailSender;
+    private final ExecutorService executorService;
     private final UserRepository userRepository;
 
     public ContactController(ContactRepository contactRepository, JavaMailSender javaMailSender, UserRepository userRepository) {
         this.contactRepository = contactRepository;
         this.javaMailSender = javaMailSender;
+        this.executorService = Executors.newFixedThreadPool(10);
         this.userRepository = userRepository;
     }
 
@@ -42,21 +47,24 @@ public class ContactController {
 
     @PostMapping("/kontakt")
     public String processContactForm(@ModelAttribute Contact contact, RedirectAttributes redirectAttributes) {
-
         contactRepository.saveContact(contact);
-        
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("autospotter.contact@gmail.com");
-        message.setTo("autospotter.contact@gmail.com");
-        message.setSubject("Nova kontakt poruka!");
-        message.setText("Detalji poruke:\n\n" +
-                "Ime: " + contact.getName() + "\n" +
-                "Email: " + contact.getEmail() + "\n" +
-                "Poruka: " + contact.getMessage());
 
-        javaMailSender.send(message);
+        executorService.execute(() -> {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom("autospotter.contact@gmail.com");
+            message.setTo("autospotter.contact@gmail.com");
+            message.setSubject("Nova kontakt poruka!");
+            message.setText("Detalji poruke:\n\n" +
+                    "Ime: " + contact.getName() + "\n" +
+                    "Email: " + contact.getEmail() + "\n" +
+                    "Poruka: " + contact.getMessage());
+
+            javaMailSender.send(message);
+        });
+
         redirectAttributes.addFlashAttribute("successMessage", "Hvala vam što ste nas kontaktirali! Vaša poruka je uspješno poslana.");
-        
+
         return "redirect:/";
     }
+
 }

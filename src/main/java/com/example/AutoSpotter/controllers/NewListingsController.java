@@ -155,13 +155,13 @@ public class NewListingsController {
             List<String> firstImageUrlsSimilar = new ArrayList<>();
             for (Listing listing : similarListings) {
                 String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(listing.getVehicleId());
-                firstImageUrls.add(firstImageUrl);
+                firstImageUrlsSimilar.add(firstImageUrl);
             }
             int totalSimilarListingsCount = similarListings.size();
 
             model.addAttribute("totalListingsCount", totalSimilarListingsCount);
 
-            model.addAttribute("firstImageUrlsSimilar", firstImageUrls);
+            model.addAttribute("firstImageUrlsSimilar", firstImageUrlsSimilar);
             model.addAttribute("similarListings", similarListings);
             return "new-listings";
         }
