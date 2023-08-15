@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer components {
+
     .button {
         --tw-bg-opacity: 1;
         background-color: rgb(8 145 178 / var(--tw-bg-opacity));
@@ -257,5 +258,16 @@
         top: 0;
         left: 0;
         width: 100%;
+    }
+
+    .fade-in {
+        opacity: 0;
+        transform: translateY(30px); /* Start slightly below the viewport */
+        transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    
+    .fade-in.fade-in-visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <script th:src="@{/js/index.js}" defer="defer"></script>
     <title>AutoSpotter</title>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -62,29 +63,41 @@
     <main class="flex justify-center dark:bg-gray-800 space-x-4">
         
         <div class="flex w-2/3 flex-col mt-8">
-            <div class="flex justify-end h-96">
-                <p class="text-6xl">AUTO<br>SPOTTER</p>
-                <img class="object-cover aspect-square w-[48rem]" src="/img/map-and-navigation.png" alt="Naslovna slika">
+            <div class="flex justify-center fade-in">
+                <div class="group relative">
+                    <img class="w-[36rem] transition-opacity duration-300 ease-in-out" src="/img/logo-svg.svg" alt="Naslovna slika">
+                    <img class="w-[36rem] absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out" src="/img/logo-light-svg.svg" alt="Naslovna slika - Hover">
+                </div>
             </div>
-
-            <div class="flex flex-col justify-center items-center">
-                <p class="mb-8 text-gray-700 dark:text-gray-300 font-semibold text-2xl">Istražite našu bogatu ponudu vozila svih marki i modela. Kategorije vozila koje možete pronaći kod nas uključuju:</p>
+            <svg class="absolute bottom-0 left-0 z-0 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f3f4f6" fill-opacity="1" d="M0,128L120,106.7C240,85,480,43,720,53.3C960,64,1200,128,1320,160L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
+            <svg class="absolute top-full left-0 z-0 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f3f4f5" fill-opacity="1" d="M0,192L60,202.7C120,213,240,235,360,213.3C480,192,600,128,720,90.7C840,53,960,43,1080,37.3C1200,32,1320,32,1380,32L1440,32L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg>
+            <div class="flex flex-col justify-center items-center fade-in">
+                <p class="mb-8 text-gray-700 dark:text-gray-300 font-semibold text-3xl">Istražite našu bogatu ponudu vozila svih marki i modela.<br> Kategorije vozila koje možete pronaći kod nas uključuju:</p>
                 <div class="flex gap-8">
-                    <div class="border relative w-36 aspect-square flex flex-col items-center justify-center rounded-lg">
-                        <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 font-semibold">Automobil</p>
-                        <a href="/oglasi?vehicleType=Automobil"><svg xmlns="http://www.w3.org/2000/svg" class="w-24" viewBox="0 0 640 512"><path fill="#0891b2" d="M544 192h-16L419.22 56.02A64.025 64.025 0 0 0 369.24 32H155.33c-26.17 0-49.7 15.93-59.42 40.23L48 194.26C20.44 201.4 0 226.21 0 256v112c0 8.84 7.16 16 16 16h48c0 53.02 42.98 96 96 96s96-42.98 96-96h128c0 53.02 42.98 96 96 96s96-42.98 96-96h48c8.84 0 16-7.16 16-16v-80c0-53.02-42.98-96-96-96zM160 432c-26.47 0-48-21.53-48-48s21.53-48 48-48s48 21.53 48 48s-21.53 48-48 48zm72-240H116.93l38.4-96H232v96zm48 0V96h89.24l76.8 96H280zm200 240c-26.47 0-48-21.53-48-48s21.53-48 48-48s48 21.53 48 48s-21.53 48-48 48z"/></svg></a>
+                    
+                    <div class="relative flex flex-col items-center">
+                        <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 z-10 font-semibold text-xl cursor-default">Automobil</p>
+                        <button onclick="navigateTo('/oglasi?vehicleType=Automobil');" type="button" class="hover:bg-gray-100 border shadow-md bg-white relative w-40 aspect-square flex flex-col items-center justify-center rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-24" viewBox="0 0 640 512"><path fill="#0891b2" d="M544 192h-16L419.22 56.02A64.025 64.025 0 0 0 369.24 32H155.33c-26.17 0-49.7 15.93-59.42 40.23L48 194.26C20.44 201.4 0 226.21 0 256v112c0 8.84 7.16 16 16 16h48c0 53.02 42.98 96 96 96s96-42.98 96-96h128c0 53.02 42.98 96 96 96s96-42.98 96-96h48c8.84 0 16-7.16 16-16v-80c0-53.02-42.98-96-96-96zM160 432c-26.47 0-48-21.53-48-48s21.53-48 48-48s48 21.53 48 48s-21.53 48-48 48zm72-240H116.93l38.4-96H232v96zm48 0V96h89.24l76.8 96H280zm200 240c-26.47 0-48-21.53-48-48s21.53-48 48-48s48 21.53 48 48s-21.53 48-48 48z"/></svg>
+                        </button>
                     </div>
-                    <div class="border relative w-36 aspect-square flex flex-col items-center justify-center rounded-lg">
-                        <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 font-semibold">Motocikl</p>
-                        <a href="/oglasi?vehicleType=Motocikl"><svg xmlns="http://www.w3.org/2000/svg" class="w-24" viewBox="0 0 2304 1280"><path fill="#0891b2" d="M2301 780q12 103-22 198.5t-99 163.5t-158.5 106t-196.5 31q-161-11-279.5-125T1411 880q-12-111 27.5-210.5T1557 499l-71-107q-96 80-151 194t-55 244q0 27-18.5 46.5T1216 896H891q-23 164-149 274t-294 110q-185 0-316.5-131.5T0 832t131.5-316.5T448 384q76 0 152 27l24-45Q501 256 320 256h-64q-26 0-45-19t-19-45t19-45t45-19h128q78 0 145 13.5T645.5 180t71.5 39.5t51 36.5h627l-85-128h-222q-30 0-49-22.5T1025 53q4-23 23-38t43-15h253q33 0 53 28l70 105l114-114q19-19 46-19h101q26 0 45 19t19 45v128q0 26-19 45t-45 19h-179l115 172q131-63 275-36q143 26 244 134.5T2301 780zM448 1152q115 0 203-72.5T762 896H448q-35 0-55-31q-18-32-1-63l147-277q-47-13-91-13q-132 0-226 94t-94 226t94 226t226 94zm1408 0q132 0 226-94t94-226t-94-226t-226-94q-60 0-121 24l174 260q15 23 10 49t-27 40q-15 11-36 11q-35 0-53-29l-174-260q-93 95-93 225q0 132 94 226t226 94z"/></svg></a>
+                    <div class="relative flex flex-col items-center">
+                        <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 z-10 font-semibold text-xl cursor-default">Motocikl</p>
+                        <button onclick="navigateTo('/oglasi?vehicleType=Motocikl');" type="button" class="hover:bg-gray-100 shadow-md border bg-white relative w-40 aspect-square flex flex-col items-center justify-center rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-24" viewBox="0 0 2304 1280"><path fill="#0891b2" d="M2301 780q12 103-22 198.5t-99 163.5t-158.5 106t-196.5 31q-161-11-279.5-125T1411 880q-12-111 27.5-210.5T1557 499l-71-107q-96 80-151 194t-55 244q0 27-18.5 46.5T1216 896H891q-23 164-149 274t-294 110q-185 0-316.5-131.5T0 832t131.5-316.5T448 384q76 0 152 27l24-45Q501 256 320 256h-64q-26 0-45-19t-19-45t19-45t45-19h128q78 0 145 13.5T645.5 180t71.5 39.5t51 36.5h627l-85-128h-222q-30 0-49-22.5T1025 53q4-23 23-38t43-15h253q33 0 53 28l70 105l114-114q19-19 46-19h101q26 0 45 19t19 45v128q0 26-19 45t-45 19h-179l115 172q131-63 275-36q143 26 244 134.5T2301 780zM448 1152q115 0 203-72.5T762 896H448q-35 0-55-31q-18-32-1-63l147-277q-47-13-91-13q-132 0-226 94t-94 226t94 226t226 94zm1408 0q132 0 226-94t94-226t-94-226t-226-94q-60 0-121 24l174 260q15 23 10 49t-27 40q-15 11-36 11q-35 0-53-29l-174-260q-93 95-93 225q0 132 94 226t226 94z"/></svg>
+                        </button>
                     </div>
-                    <div class="border relative w-36 aspect-square flex flex-col items-center justify-center rounded-lg">
-                        <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 font-semibold">Kombi</p>
-                        <a href="/oglasi?vehicleType=Kombi"><svg xmlns="http://www.w3.org/2000/svg" class="w-24" viewBox="0 0 24 24"><path fill="#0891b2" d="M3 7c-1.11 0-2 .89-2 2v8h2a3 3 0 0 0 3 3a3 3 0 0 0 3-3h6a3 3 0 0 0 3 3a3 3 0 0 0 3-3h2v-4c0-1.11-.89-2-2-2l-3-4H3m12 1.5h2.5l1.96 2.5H15V8.5m-9 7A1.5 1.5 0 0 1 7.5 17A1.5 1.5 0 0 1 6 18.5A1.5 1.5 0 0 1 4.5 17A1.5 1.5 0 0 1 6 15.5m12 0a1.5 1.5 0 0 1 1.5 1.5a1.5 1.5 0 0 1-1.5 1.5a1.5 1.5 0 0 1-1.5-1.5a1.5 1.5 0 0 1 1.5-1.5Z"/></svg></a>
+                    <div class="relative flex flex-col items-center">
+                        <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 z-10 font-semibold text-xl cursor-default">Kombi</p>
+                        <button onclick="navigateTo('/oglasi?vehicleType=Kombi');" type="button" class="hover:bg-gray-100 shadow-md border bg-white relative w-40 aspect-square flex flex-col items-center justify-center rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-24" viewBox="0 0 24 24"><path fill="#0891b2" d="M3 7c-1.11 0-2 .89-2 2v8h2a3 3 0 0 0 3 3a3 3 0 0 0 3-3h6a3 3 0 0 0 3 3a3 3 0 0 0 3-3h2v-4c0-1.11-.89-2-2-2l-3-4H3m12 1.5h2.5l1.96 2.5H15V8.5m-9 7A1.5 1.5 0 0 1 7.5 17A1.5 1.5 0 0 1 6 18.5A1.5 1.5 0 0 1 4.5 17A1.5 1.5 0 0 1 6 15.5m12 0a1.5 1.5 0 0 1 1.5 1.5a1.5 1.5 0 0 1-1.5 1.5a1.5 1.5 0 0 1-1.5-1.5a1.5 1.5 0 0 1 1.5-1.5Z"/></svg>
+                        </button>
                     </div>
-                    <div class="border relative w-36 aspect-square flex flex-col items-center justify-center rounded-lg">
-                        <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 font-semibold">Kamion</p>
-                        <a href="/oglasi?vehicleType=Kamion"><svg xmlns="http://www.w3.org/2000/svg" class="w-24" viewBox="0 0 256 256"><path fill="#0891b2" d="m247.43 117l-14-35a15.93 15.93 0 0 0-14.85-10H184v-8a8 8 0 0 0-8-8H24A16 16 0 0 0 8 72v112a16 16 0 0 0 16 16h17a32 32 0 0 0 62 0h50a32 32 0 0 0 62 0h17a16 16 0 0 0 16-16v-64a8.13 8.13 0 0 0-.57-3ZM72 208a16 16 0 1 1 16-16a16 16 0 0 1-16 16Zm-48-72V72h144v64Zm160 72a16 16 0 1 1 16-16a16 16 0 0 1-16 16Zm0-96V88h34.58l9.6 24Z"/></svg></a>
+                    <div class="relative flex flex-col items-center">
+                        <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 z-10 font-semibold text-xl cursor-default">Kamion</p>
+                        <button onclick="navigateTo('/oglasi?vehicleType=Kamion');" type="button" class="hover:bg-gray-100 shadow-md border bg-white relative w-40 aspect-square flex flex-col items-center justify-center rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-24" viewBox="0 0 256 256"><path fill="#0891b2" d="m247.43 117l-14-35a15.93 15.93 0 0 0-14.85-10H184v-8a8 8 0 0 0-8-8H24A16 16 0 0 0 8 72v112a16 16 0 0 0 16 16h17a32 32 0 0 0 62 0h50a32 32 0 0 0 62 0h17a16 16 0 0 0 16-16v-64a8.13 8.13 0 0 0-.57-3ZM72 208a16 16 0 1 1 16-16a16 16 0 0 1-16 16Zm-48-72V72h144v64Zm160 72a16 16 0 1 1 16-16a16 16 0 0 1-16 16Zm0-96V88h34.58l9.6 24Z"/></svg>
+                        </button>
                     </div>
                     <!-- <div class="border relative w-36 aspect-square flex flex-col items-center justify-center rounded-lg">
                         <p class="absolute top-1.5 text-gray-700 dark:text-gray-200 font-semibold">Rezervni dijelovi</p>
@@ -95,14 +108,14 @@
                 </div>
             </div>
 
-            <div class="flex flex-col justify-center">
+            <div class="flex flex-col justify-center fade-in">
                 <p class="text-gray-700 font-semibold text-2xl dark:text-gray-300">Najnoviji oglasi</p>
                 <div class="py-4 flex grid  gap-4 grid-cols-2 border-gray-200 dark:border-gray-700">
                     <div th:if="${#lists.isEmpty(newestListings)}">
                         <p class="text-gray-500">Nema novih oglasa.</p>
                     </div>
 
-                    <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-300 dark:border-gray-700" th:each="listing, url : ${newestListings}">
+                    <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border bg-white rounded-md dark:text-gray-300 shadow-md dark:border-gray-700" th:each="listing, url : ${newestListings}">
 
                         <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila"></a>
                     
@@ -163,8 +176,8 @@
                 </div>
             </div>
 
-            <div class="flex flex-col min-h-screen">
-                <div class="flex items-center">
+            <div class="flex flex-col">
+                <div class="flex items-center fade-in">
                     <div class="flex flex-col">
                         <p class="text-gray-700 font-semibold text-2xl dark:text-gray-300 leading-loose">Da biste brzo pronašli željeno vozilo, iskoristite našu naprednu pretragu.<br> Filtrirajte oglase po proizvođaču, modelu, godištu, cijeni, kilometraži i mnogim drugim kriterijima kako biste pronašli savršeno vozilo po vašem ukusu.</p>
                         <a href="/pretraga" class="button w-48 h-16 flex justify-center items-center text-xl mt-8">Pretraži</a>
@@ -173,8 +186,8 @@
                 </div>
             </div>
 
-            <div class="flex flex-col min-h-screen">
-                <div class="flex items-center">
+            <div class="flex flex-col">
+                <div class="flex items-center fade-in">
                     <img class="object-cover w-[48rem]" src="/img/person-browsing-image-index.png" alt="Naslovna slika">
                     <div class="flex flex-col">
                         <p class="text-gray-700 font-semibold text-2xl dark:text-gray-300 leading-loose">Ako želite prodati svoje vozilo, ne gubite vrijeme! Postavljanje oglasa na našoj platformi je brzo i jednostavno. Samo pratite korake obrasca za postavljanje oglasa, dodajte nekoliko fotografija, napišite opis vozila i vaš oglas će biti vidljiv tisućama potencijalnih kupaca.</p>
@@ -183,8 +196,8 @@
                 </div>
             </div>
             
-            <div class="flex flex-col min-h-screen">
-                <div class="flex items-center">
+            <div class="flex flex-col">
+                <div class="flex items-center fade-in">
                     <div class="flex flex-col">
                         <p class="text-gray-700 font-semibold text-2xl dark:text-gray-300 leading-loose">Imate pitanja ili nedoumice? Naš tim stručnjaka je tu da vam pomogne! <br> Kontaktirajte nas putem e-maila ili telefonom, i rado ćemo vam pružiti neophodnu podršku.</p>
                         <a href="/kontakt" class="button w-48 h-16 flex justify-center items-center text-xl mt-8">Kontaktirajte nas</a>
@@ -200,5 +213,6 @@
     <footer>
         <th:block th:insert="~{fragments/footer :: footer}"></th:block>
     </footer>
+    
 </body>
 </html>
