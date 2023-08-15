@@ -1502,10 +1502,6 @@ input[type="checkbox"]:checked + label {
   align-self: flex-start;
 }
 
-.self-center {
-  align-self: center;
-}
-
 .overflow-hidden {
   overflow: hidden;
 }

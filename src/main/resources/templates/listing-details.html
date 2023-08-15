@@ -32,7 +32,7 @@
 
     <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
-    <div class="flex-1 mt-8">
+    <div class="flex-1 mt-4 font-semibold">
       <div class="text-sm text-gray-500 dark:text-gray-200">
         <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType})}" class="hover:text-cyan-900 text-base"
           th:text="${listing.vehicle.vehicleType}"></a> &gt;
@@ -42,7 +42,7 @@
           class="hover:text-cyan-900 text-base" th:text="${listing.vehicle.model}"></a>
       </div>
 
-      <div class="flex justify-center">
+      <div class="flex justify-center mt-4">
         <div id="indicators-carousel" class="relative w-full" data-carousel="static">
           <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
             <div th:each="imageUrl, iterationStatus : ${imageUrls}"

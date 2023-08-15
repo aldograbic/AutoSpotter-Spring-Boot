@@ -102,8 +102,6 @@ public class NewListingsController {
             displayedNewListings.sort((l1, l2) -> l2.getListingPrice().compareTo(l1.getListingPrice()));
         }
         
-
-
         List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
         List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
         List<String> engineTypes = vehicleRepository.getAllEngineTypes();
@@ -159,6 +157,9 @@ public class NewListingsController {
                 String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(listing.getVehicleId());
                 firstImageUrls.add(firstImageUrl);
             }
+            int totalSimilarListingsCount = similarListings.size();
+
+            model.addAttribute("totalListingsCount", totalSimilarListingsCount);
 
             model.addAttribute("firstImageUrlsSimilar", firstImageUrls);
             model.addAttribute("similarListings", similarListings);
