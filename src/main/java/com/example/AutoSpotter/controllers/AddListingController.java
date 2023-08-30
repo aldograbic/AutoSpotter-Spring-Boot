@@ -292,18 +292,17 @@ public class AddListingController {
     public String handleStep5FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session, RedirectAttributes redirectAttributes) {
         try {
             for (MultipartFile image : images) {
-                        if (!image.getContentType().startsWith("image/")) {
-                            redirectAttributes.addFlashAttribute("errorMessage", "Nepodržani format! Molimo odaberite samo slikovne formate.");
-                            return "redirect:/postavi-oglas";
-                        }
-                    }
+                if (!image.getContentType().startsWith("image/")) {
+                    redirectAttributes.addFlashAttribute("errorMessage", "Nepodržani format! Molimo odaberite samo slikovne formate.");
+                    return "redirect:/postavi-oglas";
+                }
+            }
         } catch (MaxUploadSizeExceededException e) {
             throw e;
         } catch (Exception e) {
             // Handle other exceptions
         }
         
-
         int vehicleId = (int) session.getAttribute("vehicleId");
 
         List<String> imageUrls = saveVehicleImagesToGoogleCloudStorage(images);
@@ -313,7 +312,6 @@ public class AddListingController {
         session.setAttribute("step", 6);
         return "redirect:/postavi-oglas";
     }
-
 
     public void uploadImageToGoogleCloudStorage(String bucketName, String objectName, byte[] imageBytes) {
         BlobId blobId = BlobId.of(bucketName, objectName);
@@ -357,7 +355,6 @@ public class AddListingController {
         }
     }
     
-
     @PostMapping("/oglas-6")
     public String handleStep6FormSubmission(@RequestParam("description") String description,
                                             @RequestParam("price") BigDecimal price,

@@ -363,7 +363,7 @@
           <p class="dark:text-gray-400">Kontakt: <span class="font-semibold dark:text-gray-300"
               th:text="${listing.user.email + ', ' + listing.user.phoneNumber}"></span></p>
           <button data-modal-target="contact-modal" data-modal-toggle="contact-modal" type="button"
-            class="button text-white font-medium rounded-lg mt-4 py-2.5 text-center inline-flex items-center">
+            class="button-2 text-white font-medium rounded-lg mt-4 py-2.5 text-center inline-flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="w-6 h-6 mr-2">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -419,7 +419,7 @@
                         class="input w-96 h-48 resize-none"></textarea>
                     </div>
 
-                    <button type="submit" class="w-full text-sm button py-2.5">Pošalji</button>
+                    <button type="submit" class="w-full text-sm button-2 py-2.5">Pošalji</button>
                   </form>
                 </div>
                 <div th:unless="${user != null}" class="px-6 py-6 lg:px-8">
@@ -447,7 +447,7 @@
                         class="input w-96 h-48 resize-none"></textarea>
                     </div>
 
-                    <button type="submit" class="w-full text-sm button py-2.5">Pošalji</button>
+                    <button type="submit" class="w-full text-sm button-2 py-2.5">Pošalji</button>
                   </form>
                 </div>
               </div>
@@ -465,7 +465,7 @@
           
           <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-300 dark:border-gray-700" th:each="listing, url : ${similarListings}">
 
-            <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full"  alt="Slika vozila"></a>
+            <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila"></a>
         
             <div class="grid gap-4">
                 <a th:href="@{'/oglasi/' + ${listing.id}}" class="text-cyan-700 hover:text-cyan-900">

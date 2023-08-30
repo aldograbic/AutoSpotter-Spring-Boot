@@ -299,8 +299,6 @@ public class JdbcListingRepository implements ListingRepository {
         );
     }
 
-
-
     @Override
     public void saveImageUrlsForVehicle(ListingImage listingImage) {
         String sql = "INSERT INTO images (vehicle_id, image_url) VALUES (?, ?)";

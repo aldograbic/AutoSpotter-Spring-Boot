@@ -37,11 +37,10 @@ public class ListingController {
                                     @PathVariable("vehicleManufacturer") String vehicleManufacturer,
                                     @PathVariable("vehicleModel") String vehicleModel,
                                     Model model) {
-        // Fetch the details of the current listing
+
         Listing listing = listingRepository.getListingById(listingId);
         int vehicleId = listing.getVehicleId();
         List<String> imageUrls = listingRepository.getImageUrlsForVehicle(vehicleId);
-
 
         model.addAttribute("imageUrls", imageUrls);
 
@@ -62,6 +61,12 @@ public class ListingController {
         List<Listing> similarListings = listingRepository.getSimilarListings(listingId,
             listing.getVehicle().getVehicleType(), vehicleManufacturer, vehicleModel
         );
+        List<String> firstImageUrls = new ArrayList<>();
+        for (Listing similarListing : similarListings) {
+            String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(similarListing.getVehicleId());
+            firstImageUrls.add(firstImageUrl);
+        }
+        model.addAttribute("firstImageUrls", firstImageUrls);
         model.addAttribute("similarListings", similarListings);
 
         return "listing-details";
