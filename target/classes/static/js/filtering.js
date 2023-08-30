@@ -6,6 +6,14 @@ $(document).ready(function () {
   const selectedVehicleType = queryParams.get('vehicleType');
   const selectedManufacturer = queryParams.get('manufacturer');
 
+  $('input[type="reset"]').click(function () {
+    $('.select2-basic').val('').trigger('change');
+    $('.select2-withSearch').val('').trigger('change');
+
+    selectTransmissionButton("transmissionAll");
+    selectUserTypeButton("userTypeAll");
+  });
+
   if (selectedVehicleType) {
     $('#vehicleType').val(selectedVehicleType);
     if (selectedVehicleType === "Automobil") {
@@ -147,9 +155,6 @@ function selectTransmissionButton(buttonId) {
       break;
     case "transmissionAutomatic":
       selectedTransmissionValue = "Automatski";
-      break;
-    case "transmissionSemiAutomatic":
-      selectedTransmissionValue = "Poluautomatski";
       break;
   }
 
