@@ -32,7 +32,7 @@
 
     <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
-    <div class="flex-1 mt-4 font-semibold">
+    <div class="flex-1 mt-4 font-semibold px-4 sm:px-0">
       <div class="text-sm text-gray-500 dark:text-gray-200">
         <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType})}" class="hover:text-cyan-900 text-base"
           th:text="${listing.vehicle.vehicleType}"></a> &gt;
@@ -86,7 +86,7 @@
           </button>
         </div>
       </div>
-      <div class="text-2xl">
+      <div class="text-2xl px-4 sm:px-0">
         <h2 class="mb-4 ml mt-8 font-semibold dark:text-gray-200"
           th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}">
         </h2>

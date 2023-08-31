@@ -1,6 +1,5 @@
 package com.example.AutoSpotter.controllers;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -149,26 +148,31 @@ public class NewListingsController {
 
         if (newListings.isEmpty()) {
             model.addAttribute("noListingsFoundMessage", "Nije pronađen nijedan oglas s odabranim filterima.");
-
+            
             List<Listing> similarListings = listingRepository.getSimilarListingsOfFilteredListings(vehicleType, manufacturer, vehicleModel);
-
+            
             List<String> firstImageUrlsSimilar = new ArrayList<>();
             for (Listing listing : similarListings) {
                 String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(listing.getVehicleId());
                 firstImageUrlsSimilar.add(firstImageUrl);
             }
-            int totalSimilarListingsCount = similarListings.size();
-
-            model.addAttribute("totalListingsCount", totalSimilarListingsCount);
-
+            
+            int totalItemsSimilar = similarListings.size();
+            int totalPagesSimilar = (int) Math.ceil((double) totalItemsSimilar / itemsPerPage);
+            totalPagesSimilar = Math.max(totalPagesSimilar, 1);
+            int currentPageSimilar = (totalItemsSimilar > 0) ? 1 : 0;
+        
+            model.addAttribute("totalListingsCount", totalItemsSimilar);
             model.addAttribute("firstImageUrlsSimilar", firstImageUrlsSimilar);
             model.addAttribute("similarListings", similarListings);
+            model.addAttribute("currentPage", currentPageSimilar);
+            model.addAttribute("totalPages", totalPagesSimilar);
+        
             return "new-listings";
         }
-
+        
         return "new-listings";
     }
-
 
     @PostMapping("/manufacturers")
     @ResponseBody
