@@ -1,6 +1,7 @@
-<footer th:fragment="footer-main" class="dark:bg-gray-900">
-    
-    <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+<footer th:fragment="footer-main" class="dark:bg-gray-900 relative">
+    <svg class="absolute bottom-0 left-0 z-0 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 290"><path class="dark:fill-gray-900" fill="#f3f4f6" fill-opacity="1" d="M0,128L120,106.7C240,85,480,43,720,53.3C960,64,1200,128,1320,160L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
+
+    <div class="mx-auto relative w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-end">
           <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
@@ -15,24 +16,33 @@
                   </ul>
               </div>
               <div>
-                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
+                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Pravne informacije</h2>
                   <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                      <li class="mb-4">
-                          <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
-                      </li>
-                      <li>
-                          <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
-                      </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Pravila privatnosti</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Uvjeti korištenja</a>
+                    </li>
                   </ul>
               </div>
               <div>
-                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
+                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Kontakt</h2>
                   <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                      <li class="mb-4">
-                          <a href="#" class="hover:underline">Privacy Policy</a>
+                      
+                      <li class="mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            class="w-6 h-6 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                        </svg>
+                        +385 91 2622 217
                       </li>
-                      <li>
-                          <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                      <li class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                      autospotter.contact@gmail.com
                       </li>
                   </ul>
               </div>
@@ -40,7 +50,7 @@
       </div>
       <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
       <div class="sm:flex sm:items-center sm:justify-between">
-          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">AutoSpotter</a>. Sva prava pridržana.
+          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="/" class="hover:underline">AutoSpotter</a>. Sva prava pridržana.
           </span>
           <div class="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
               <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
