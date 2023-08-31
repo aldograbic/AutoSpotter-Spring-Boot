@@ -292,8 +292,18 @@ public class AddListingController {
     public String handleStep5FormSubmission(@RequestParam("images") MultipartFile[] images, HttpSession session, RedirectAttributes redirectAttributes) {
         try {
             for (MultipartFile image : images) {
+                if(image.isEmpty()){
+                    redirectAttributes.addFlashAttribute("infoMessage", "Odabir slika povećava šansu za bržu prodaju Vaše pokretnine.");
+                    session.setAttribute("step", 6);
+                    return "redirect:/postavi-oglas";
+                }
                 if (!image.getContentType().startsWith("image/")) {
                     redirectAttributes.addFlashAttribute("errorMessage", "Nepodržani format! Molimo odaberite samo slikovne formate.");
+                    return "redirect:/postavi-oglas";
+                }
+
+                if (image.getSize() > 5 * 1024 * 1024) { 
+                    redirectAttributes.addFlashAttribute("errorMessage", "Molim Vas, odaberite sliku maksimalne veličine manje od 5MB!");
                     return "redirect:/postavi-oglas";
                 }
             }
