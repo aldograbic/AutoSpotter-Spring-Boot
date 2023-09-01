@@ -167,7 +167,10 @@
             
             <ul>
                 <li th:each="listing, url : ${newListings}" class="relative flex items-center space-x-4 mb-4 border rounded-md shadow-md dark:border-gray-700">
-                    <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}"><img class="w-56 h-56 object-cover rounded-tl-md rounded-bl-md" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila"></a>
+                    <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}">
+                        <img class="w-56 h-56 object-cover rounded-tl-md rounded-bl-md" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
+                        <img class="w-56 h-56 object-cover rounded-tl-md rounded-bl-md" th:if="${firstImageUrls[__${url.index}__] == null}" src="/img/no-image-svg.svg" alt="Nema slike">
+                    </a>
                     <div>
                         <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}" class="text-cyan-700 text-xl hover:text-cyan-900">
                             <h2 class="mb-4 inline-block dark:text-cyan-600 dark:hover:text-cyan-700" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></h2>

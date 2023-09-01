@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="hr">
+<head>
+    <th:block th:insert="~{fragments/head :: head}"></th:block>
+    
+    <title>AutoSpotter | Pravila privatnosti</title>
+</head>
+<body class="flex flex-col relative min-h-screen">
+    
+    <th:block th:insert="~{fragments/header :: header}"></th:block>
+
+    <main class="flex flex-1 dark:bg-gray-800">
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+
+        <div class="flex flex-col flex-1 w-50 ml-4 mr-4">
+            <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-8 dark:text-gray-200">Pravila privatnosti</h1>
+            <div class="h-full mb-4 flex flex-col border rounded-md dark:border-gray-700">
+                <p>Datum zadnjeg ažuriranja: [Datum]</p>
+                <p>AutoSpotter cijeni vašu privatnost i posvećen je zaštiti vaših osobnih podataka. Ova Pravila privatnosti objašnjavaju kako prikupljamo, koristimo, otkrivamo i štitimo vaše osobne podatke prilikom korištenja naše web stranice AutoSpotter.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">1. Prikupljanje osobnih podataka</h2>
+                <p>a. Registracija: Pri registraciji na AutoSpotter, tražit ćemo od vas određene osobne podatke, uključujući vaše ime, e-mail adresu i druge relevantne informacije.</p>
+                <p class="mb-4">b. Postavljanje oglasa: Prilikom postavljanja oglasa, možete pružiti dodatne informacije o sebi ili vozilu koje oglašavate.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">2. Upotreba osobnih podataka</h2>
+                <p>a. Vaše osobne podatke koristimo kako bismo omogućili pristup i upravljanje vašim korisničkim računom, postavljanje oglasa, obrada plaćanja (ako je primjenjivo), te pružanje korisničke podrške.</p>
+                <p class="mb-4">b. Vaši osobni podaci se mogu koristiti za komunikaciju s vama u vezi s vašim korisničkim računom, oglasima ili drugim relevantnim informacijama.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">3. Otkrivanje osobnih podataka</h2>
+                <p class="mb-4">a. Vaše osobne podatke nećemo dijeliti s trećim stranama bez vaše privole, osim ako je to potrebno radi pružanja usluga AutoSpottera ili kako to nalažu zakoni.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">4. Sigurnost podataka</h2>
+                <p class="mb-4">a. AutoSpotter poduzima odgovarajuće tehničke i organizacijske mjere kako bi zaštitio vaše osobne podatke od neovlaštenog pristupa, gubitka ili zloupotrebe.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">5. Pristup, ispravak i brisanje podataka</h2>
+                <p class="mb-4">a. Imate pravo zatražiti pristup, ispravak ili brisanje vaših osobnih podataka. Zahtjeve za pristup, ispravak ili brisanje podataka možete poslati na našu korisničku podršku.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">6. Kolačići i tehnologije praćenja</h2>
+                <p class="mb-4">a. AutoSpotter ne koristi kolačiće ili slične tehnologije praćenja za praćenje korisnika.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">7. Promjene u Pravilima privatnosti</h2>
+                <p class="mb-4">a. AutoSpotter zadržava pravo izmjene ovih Pravila privatnosti u bilo kojem trenutku. Obavijestit ćemo korisnike o svakoj značajnoj promjeni.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">8. Kontakt informacije</h2>
+                <p class="mb-4">a. Za sva pitanja ili komentare u vezi s ovim Pravilima privatnosti, obratite se našoj korisničkoj podršci putem e-pošte ili telefona.</p>
+                
+            </div>
+        </div>
+
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+    </main>
+
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+    </footer>
+    
+</body>
+</html>
