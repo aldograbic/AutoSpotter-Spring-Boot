@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <main class="flex flex-1 space-x-4 dark:bg-gray-800">
+    <main class="flex flex-1 space-x-4 dark:bg-gray-800 min-h-screen">
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
@@ -43,7 +43,7 @@
                     <form th:action="@{/korisnik/{userId}/promijeni-podatke(userId=${user.id})}" method="post">
                         <div class="flex flex-col mb-4">
                             <label class="dark:text-gray-300" for="username">Korisničko ime</label>
-                            <input type="text" id="username" name="username" required th:value="${user.username}" class="input w-96"/>
+                            <input type="text" id="username" name="username" required th:value="${user.username}" class="input w-96" autocomplete="username"/>
                         </div>
                         <div class="flex flex-col mb-4" th:if="${user.firstName != null}">
                             <label class="dark:text-gray-300" for="firstName">Ime</label>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="flex flex-col mb-4">
                             <label class="dark:text-gray-300" for="address">Adresa</label>
-                            <input type="text" id="address" name="address" required th:value="${user.address}" class="input w-96"/>
+                            <input type="text" id="address" name="address" required th:value="${user.address}" class="input w-96" autocomplete="street-address"/>
                         </div>
                         <div class="flex flex-col mb-4">
                             <label class="dark:text-gray-300" for="city">Grad</label>
@@ -82,7 +82,7 @@
                         </div>
                         <div class="flex flex-col mb-4">
                             <label class="dark:text-gray-300" for="email">E-mail adresa</label>
-                            <input type="text" id="email" name="email" required th:value="${user.email}" class="input w-96"/>
+                            <input type="text" id="email" name="email" required th:value="${user.email}" class="input w-96" autocomplete="email"/>
                         </div>
                         <div class="flex flex-col mb-4">
                             <input type="submit" value="Spremi" class="button"/>

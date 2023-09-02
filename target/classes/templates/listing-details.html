@@ -5,7 +5,7 @@
   <th:block th:insert="~{fragments/head-dynamic :: head-dynamic}"></th:block>
   <title th:text="'AutoSpotter | ' + ${listing.vehicle.manufacturer} + ' ' + ${listing.vehicle.model} "></title>
   <script th:src="@{/js/carousel.js}" defer="defer"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.css" rel="stylesheet" />
+  <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -42,50 +42,30 @@
           class="hover:text-cyan-900 text-base" th:text="${listing.vehicle.model}"></a>
       </div>
 
-      <div class="flex justify-center mt-4">
-        <div id="indicators-carousel" class="relative w-full" data-carousel="static">
-          <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-            <div th:each="imageUrl, iterationStatus : ${imageUrls}"
-              class="carousel-item hidden duration-700 ease-in-out"
-              data-carousel-item="${iterationStatus.index == 0 ? 'active' : ''}">
-              <img th:src="${imageUrl}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                alt="Slika vozila">
+      <div class="embla">
+        <div class="embla__viewport">
+          <div class="embla__container">
+            <div class="embla__slide">
+              <div th:if="${#lists.isEmpty(imageUrls)}" class="bg-gray-100 flex justify-center items-center">
+                <img  src="/img/no-image-svg.svg" alt="Nema slike"/>
+              </div>
+              <img th:unless="${#lists.isEmpty(imageUrls)}" th:each="imageUrl, iterationStatus : ${imageUrls}" th:src="${imageUrl}" alt="Slika vozila" />
             </div>
           </div>
-          <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-            <button th:each="imageUrl, iterationStatus : ${imageUrls}" type="button"
-              th:classappend="${iterationStatus.index == 0} ? 'w-3 h-3 rounded-full active' : 'w-3 h-3 rounded-full'"
-              aria-current="true" th:aria-label="'Slide ' + ${iterationStatus.index + 1}"
-              th:data-carousel-slide-to="${iterationStatus.index}"></button>
-          </div>
-          <button type="button"
-            class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-            data-carousel-prev>
-            <span
-              class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-              <svg class="w-4 h-4 text-white dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M5 1 1 5l4 4" />
-              </svg>
-              <span class="sr-only">Prethodna</span>
-            </span>
-          </button>
-          <button type="button"
-            class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-            data-carousel-next>
-            <span
-              class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-              <svg class="w-4 h-4 text-white dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m1 9 4-4-4-4" />
-              </svg>
-              <span class="sr-only">Sljedeća</span>
-            </span>
-          </button>
         </div>
+        <div class="embla__dots"></div>
+        <button class="embla__button embla__button--prev" aria-label="Prethodna">
+          <svg class="embla__button__svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+          </svg>
+        </button>
+        <button class="embla__button embla__button--next" aria-label="Sljedeća">
+          <svg class="embla__button__svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+          </svg>
+        </button>
       </div>
+      
       <div class="text-2xl px-4 sm:px-0">
         <h2 class="mb-4 ml mt-8 font-semibold dark:text-gray-200"
           th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}">
@@ -464,8 +444,12 @@
 
           
           <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-300 dark:border-gray-700" th:each="listing, url : ${similarListings}">
-
-            <a th:href="@{'/oglasi/' + ${listing.id}}"><img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila"></a>
+            <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}">
+              <img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
+              <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-square bg-gray-100 flex justify-center items-center">
+                  <img class="w-24 h-24 object-cover rounded-tl-md rounded-bl-md" src="/img/no-image-svg.svg" alt="Nema slike">
+              </div>
+            </a>
         
             <div class="grid gap-4">
                 <a th:href="@{'/oglasi/' + ${listing.id}}" class="text-cyan-700 hover:text-cyan-900">
@@ -533,6 +517,21 @@
   <footer>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
   </footer>
+  <script>
+    const emblaNode = document.querySelector('.embla'); // Replace with your carousel container selector
+    if (emblaNode) {
+      const embla = EmblaCarousel(emblaNode, {
+        loop: true,
+      });
+      const prevButton = document.querySelector('.embla__button--prev');
+      const nextButton = document.querySelector('.embla__button--next');
+
+      if (prevButton && nextButton) {
+        prevButton.addEventListener('click', embla.scrollPrev);
+        nextButton.addEventListener('click', embla.scrollNext);
+      }
+    }
+  </script>
 </body>
 
 </html>

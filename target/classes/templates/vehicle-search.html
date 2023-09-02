@@ -15,7 +15,7 @@
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
-        <div class="flex flex-col flex-1 w-50 mt-8 ml-4 mr-4 dark:text-gray-200">
+        <div class="flex flex-col flex-1 w-50 mt-8 ml-4 mr-4 dark:text-gray-200 min-h-screen">
 
             <h1 class="text-3xl font-bold text-gray-700 mb-8 dark:text-gray-200">Pretraga</h1>
 
@@ -196,7 +196,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="fuelConsumption">Potrošnja goriva</label>
+                    <label class="dark:text-gray-300" for="fuelConsumptionFrom">Potrošnja goriva</label>
                     <div class="flex items-center">
                         <input type="number" id="fuelConsumptionFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
                         <p class="text-center mr-4 ml-4">do</p>
@@ -216,7 +216,7 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 ml-4 dark:text-gray-200">Izgled i značajke</h2>
                 <hr class="dark:border-gray-700">
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="color">Boja vozila</label>
+                    <label class="dark:text-gray-300" for="blackColorCheckbox">Boja vozila</label>
                     <div class="flex">
                         
                         <input type="checkbox" id="blackColorCheckbox" value="crna" class="hidden" name="colorCheckbox"/>

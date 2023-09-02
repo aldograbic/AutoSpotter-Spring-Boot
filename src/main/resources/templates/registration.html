@@ -23,7 +23,7 @@
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
-        <div class="flex flex-col flex-1 ml-4 mr-4 w-50">
+        <div class="flex flex-col flex-1 ml-4 mr-4 w-50 min-h-screen">
             <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-8 dark:text-gray-200">Registracija</h1>
 
             <div th:if="${step eq 1}" class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
@@ -171,7 +171,7 @@
                     </div>
                     <div class="flex items-center mb-4">
                         <input type="checkbox" class="w-4 h-4 inline-block mr-1" id="acceptTermsCheckbox" name="acceptedTermsOfService" required>
-                        <label class="form-check-label dark:text-gray-300" for="acceptTermsCheckbox">Prihvaćam <a href="/pravila-koristenja" target=”_blank” class="text-cyan-700 hover:text-cyan-900">uvjete i pravila korištenja</a></label>
+                        <label class="form-check-label dark:text-gray-300" for="acceptTermsCheckbox">Prihvaćam <a href="/uvjeti-koristenja" target=”_blank” class="text-cyan-700 hover:text-cyan-900">uvjete i pravila korištenja</a></label>
                     </div>
                     
                     <div class="flex justify-between mb-4">
