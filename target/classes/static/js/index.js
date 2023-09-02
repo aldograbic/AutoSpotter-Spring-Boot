@@ -3,6 +3,23 @@ function navigateTo(url) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    const gifs = document.querySelectorAll(".loader");
+    let currentIndex = 0;
+
+    function showNextGif() {
+        gifs[currentIndex].style.display = "none";
+        currentIndex = (currentIndex + 1) % gifs.length;
+        gifs[currentIndex].style.display = "block";
+        setTimeout(showNextGif, 900);
+    }
+
+    showNextGif();
+
+    setTimeout(function () {
+        document.querySelector(".loader-wrapper").style.display = "none"; 
+    }, 2200);
+    
     const elements = document.querySelectorAll(".fade-in");
 
     const options = {
