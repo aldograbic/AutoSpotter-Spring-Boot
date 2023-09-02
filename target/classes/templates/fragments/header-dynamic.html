@@ -36,12 +36,6 @@
             alt="Default slika profila"
             class="w-10 rounded-full ring-2 ring-cyan-600 dark:ring-cyan-700 text-cyan-700 cursor-pointer hover:fill-gray-200"
             @click="isOpen = !isOpen">
-
-          <div x-bind:class="{ 'rotate-180': isOpen }" @click="isOpen = !isOpen" class="ml-1">
-            <svg viewBox="0 0 20 14" fill="currentColor" class="w-4 h-4">
-              <path fill-rule="evenodd" d="M6 6l4 4 4-4H6z" />
-            </svg>
-          </div>
         </div>
         <div th:unless="${user.profileImage == null}" x-data="{ isOpen: false }" x-cloak
           class="relative flex items-center">
