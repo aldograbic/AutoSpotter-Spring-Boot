@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="hr">
+<head>
+    <th:block th:insert="~{fragments/head :: head}"></th:block>
+    
+    <title>AutoSpotter | Uvjeti korištenja</title>
+</head>
+<body class="flex flex-col relative min-h-screen">
+    
+    <th:block th:insert="~{fragments/header :: header}"></th:block>
+
+    <main class="flex flex-1 dark:bg-gray-800">
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+
+        <div class="flex flex-col flex-1 w-50 ml-4 mr-4">
+            <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-8 dark:text-gray-200">Uvjeti korištenja</h1>
+            <div class="h-full mb-4 flex flex-col border rounded-md dark:border-gray-700">
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">1. Prihvaćanje uvjeta korištenja</h2>
+                <p class="mb-4">Molimo vas da pažljivo pročitate i razumijete ove uvjete korištenja prije nego što pristupite ili koristite AutoSpotter platformu. Pristupom i korištenjem naše web stranice, prihvaćate sve uvjete navedene u ovom dokumentu. Ako se ne slažete s bilo kojim dijelom ovih uvjeta, nemojte koristiti našu platformu.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">2. Registracija korisničkog računa</h2>
+                <p>a. Za postavljanje oglasa na AutoSpotteru, korisnici moraju se registrirati i stvoriti korisnički račun.</p>
+                <p class="mb-4">b. Vaši podaci za registraciju moraju biti točni i ažurirani. Registrirani korisnici odgovorni su za sigurnost svojih korisničkih podataka.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">3. Postavljanje oglasa</h2>
+                <p>a. Postavljanje oglasa je besplatno. Međutim, nudimo dodatne opcije, poput istaknutih oglasa ili produljenja trajanja oglasa, koje se mogu platiti.</p>
+                <p class="mb-4">b. Korisnici su odgovorni za točnost i potpunost informacija u svojim oglasima. AutoSpotter ne preuzima odgovornost za sadržaj ili točnost oglasa.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">4. Pregledavanje oglasa</h2>
+                <p class="mb-4">a. Svi korisnici mogu pregledavati oglase na AutoSpotteru bez registracije.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">5. Korisnička podrška</h2>
+                <p class="mb-4">a. Za sva pitanja, prigovore ili tehničke probleme, korisnici se mogu obratiti našoj korisničkoj podršci putem e-pošte ili telefona.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">6. Privatnost i obrada podataka</h2>
+                <p class="mb-4">a. Vaša privatnost nam je važna. Detalje o prikupljanju i obradi osobnih podataka možete pronaći u našoj politici privatnosti.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">7. Brisanje i uređivanje oglasa</h2>
+                <p class="mb-4">a. Registrirani korisnici imaju mogućnost brisanja i uređivanja svojih oglasa.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">8. Kolačići</h2>
+                <p class="mb-4">a. AutoSpotter ne koristi kolačiće za praćenje korisnika.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">9. Intelektualno vlasništvo</h2>
+                <p class="mb-4">a. AutoSpotter ne preuzima odgovornost za intelektualno vlasništvo u vezi s postavljenim oglasima.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">10. Promjene u uvjetima korištenja</h2>
+                <p class="mb-4">a. AutoSpotter zadržava pravo izmjene ovih uvjeta korištenja u bilo kojem trenutku. Obavijestit ćemo korisnike o svakoj značajnoj promjeni.</p>
+                <h2 class="text-xl font-bold text-gray-700 mb-8 dark:text-gray-200">11. Završne odredbe</h2>
+                <p>a. Ovi uvjeti korištenja reguliraju odnos između korisnika i AutoSpottera i primjenjuju se na sve korisnike.</p>
+                <p>b. Svaka nepridržavanje ovih uvjeta može rezultirati ograničenjem pristupa platformi ili drugim odgovarajućim mjerama.</p>
+            </div>
+        </div>
+
+        <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+    </main>
+
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+    </footer>
+    
+</body>
+</html>
