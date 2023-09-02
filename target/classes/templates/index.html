@@ -4,6 +4,7 @@
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <script th:src="@{/js/index.js}" defer="defer"></script>
     <title>AutoSpotter</title>
+
 </head>
 <body class="flex flex-col min-h-screen">
 
@@ -59,6 +60,7 @@
             <span class="font-medium" th:text="${infoMessage}"></span>
         </div>
     </div>
+
     
     <main class="flex justify-center dark:bg-gray-800 space-x-4">
         
@@ -213,6 +215,7 @@
     <footer>
         <th:block th:insert="~{fragments/footer-main :: footer-main}"></th:block>
     </footer>
+
     
 </body>
 </html>
