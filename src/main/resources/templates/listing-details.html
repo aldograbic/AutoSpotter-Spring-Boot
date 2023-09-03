@@ -28,11 +28,11 @@
     </div>
   </div>
 
-  <main class="flex flex-1 space-x-4 dark:bg-gray-800">
+  <main class="flex flex-1 dark:bg-gray-800 min-h-screen">
 
     <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
-    <div class="flex-1 mt-4 font-semibold px-4 sm:px-0">
+    <div class="flex-1 mt-4 ml-4 mr-4 font-semibold px-4 sm:px-0">
       <div class="text-sm text-gray-500 dark:text-gray-200">
         <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType})}" class="hover:text-cyan-700 text-base"
           th:text="${listing.vehicle.vehicleType}"></a> &gt;

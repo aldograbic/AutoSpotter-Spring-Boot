@@ -2590,6 +2590,14 @@ input[type="checkbox"]:checked + label {
     margin-bottom: 2rem;
   }
 
+  .lg\:w-96 {
+    width: 24rem;
+  }
+
+  .lg\:w-\[50ch\] {
+    width: 50ch;
+  }
+
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
