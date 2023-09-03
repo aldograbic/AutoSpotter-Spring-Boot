@@ -222,7 +222,7 @@
     }
     
     .select2-container--default .select2-dropdown .select2-results__option[aria-selected="true"] {
-        background-color: rgb(8, 145, 178, 0.5);
+        background-color: #0891b2;
         color: #fff;
     }
 

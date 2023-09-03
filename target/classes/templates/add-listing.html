@@ -13,7 +13,7 @@
     <th:block th:insert="~{fragments/header :: header}"></th:block>
 
     <div th:if="${errorMessage}" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 10000)"
-        class="absolute top-0 flex items-center w-full z-10 p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 mt-[4.8rem] dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+        class="absolute top-0 flex items-center w-full z-10 p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 mt-[4.8rem] dark:text-red-400 dark:border-red-800 dark:bg-gray-700"
         role="alert">
         <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             fill="currentColor" viewBox="0 0 20 20">
@@ -27,7 +27,7 @@
     </div>
 
     <div th:if="${infoMessage}" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 10000)"
-        class="absolute top-0 flex items-center w-full z-10 p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 mt-[4.8rem] dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
+        class="absolute top-0 flex items-center w-full z-10 p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 mt-[4.8rem] dark:bg-gray-700 dark:text-blue-400 dark:border-blue-800"
         role="alert">
         <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             fill="currentColor" viewBox="0 0 20 20">

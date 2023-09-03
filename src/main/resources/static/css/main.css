@@ -789,7 +789,7 @@ input[type="checkbox"]:checked + label {
 }
 
 .select2-container--default .select2-dropdown .select2-results__option[aria-selected="true"] {
-  background-color: rgb(8, 145, 178, 0.5);
+  background-color: #0891b2;
   color: #fff;
 }
 
@@ -1778,11 +1778,6 @@ input[type="checkbox"]:checked + label {
   background-color: rgb(8 145 178 / var(--tw-bg-opacity));
 }
 
-.bg-cyan-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(14 116 144 / var(--tw-bg-opacity));
-}
-
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -1905,11 +1900,6 @@ input[type="checkbox"]:checked + label {
 .py-2\.5 {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
-}
-
-.py-24 {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
 }
 
 .py-3 {
@@ -2052,9 +2042,9 @@ input[type="checkbox"]:checked + label {
   color: rgb(30 64 175 / var(--tw-text-opacity));
 }
 
-.text-cyan-700 {
+.text-cyan-600 {
   --tw-text-opacity: 1;
-  color: rgb(14 116 144 / var(--tw-text-opacity));
+  color: rgb(8 145 178 / var(--tw-text-opacity));
 }
 
 .text-gray-400 {
@@ -2264,11 +2254,6 @@ input[type="checkbox"]:checked + label {
   color: rgb(14 116 144 / var(--tw-text-opacity));
 }
 
-.hover\:text-cyan-900:hover {
-  --tw-text-opacity: 1;
-  color: rgb(22 78 99 / var(--tw-text-opacity));
-}
-
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
@@ -2409,9 +2394,9 @@ input[type="checkbox"]:checked + label {
   color: rgb(96 165 250 / var(--tw-text-opacity));
 }
 
-:is(.dark .dark\:text-cyan-600) {
+:is(.dark .dark\:text-cyan-700) {
   --tw-text-opacity: 1;
-  color: rgb(8 145 178 / var(--tw-text-opacity));
+  color: rgb(14 116 144 / var(--tw-text-opacity));
 }
 
 :is(.dark .dark\:text-gray-200) {
@@ -2442,11 +2427,6 @@ input[type="checkbox"]:checked + label {
 :is(.dark .dark\:text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-:is(.dark .dark\:ring-cyan-700) {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(14 116 144 / var(--tw-ring-opacity));
 }
 
 :is(.dark .dark\:file\:bg-gray-700)::file-selector-button {
@@ -2557,11 +2537,6 @@ input[type="checkbox"]:checked + label {
   .sm\:px-0 {
     padding-left: 0px;
     padding-right: 0px;
-  }
-
-  .sm\:py-16 {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
   }
 
   .sm\:text-center {
