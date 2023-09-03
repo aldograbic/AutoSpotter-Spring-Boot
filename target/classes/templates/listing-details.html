@@ -42,29 +42,46 @@
           class="hover:text-cyan-900 text-base" th:text="${listing.vehicle.model}"></a>
       </div>
 
-      <div class="embla">
-        <div class="embla__viewport">
+      <div x-data="{ embla: null, next: true, prev: true }" x-init="() => {
+        embla = EmblaCarousel($refs.viewport, { loop: false })
+        embla.on('select', () => {
+          next = embla.canScrollNext()
+          prev = embla.canScrollPrev()
+        })
+        embla.on('init', () => {
+          next = embla.canScrollNext()
+          prev = embla.canScrollPrev()
+        })
+      }" class="embla">
+      <div x-ref="viewport" class="embla__viewport">
           <div class="embla__container">
-            <div class="embla__slide">
-              <div th:if="${#lists.isEmpty(imageUrls)}" class="bg-gray-100 flex justify-center items-center">
-                <img  src="/img/no-image-svg.svg" alt="Nema slike"/>
+
+              <div class="embla__slide flex justify-center" th:if="${#lists.isEmpty(imageUrls)}">
+                  <div class="embla__slide__inner w-48">
+                      <img class="embla__slide__img" src="/img/no-image-svg.svg" alt="Oglas nema slike" />
+                  </div>
               </div>
-              <img th:unless="${#lists.isEmpty(imageUrls)}" th:each="imageUrl, iterationStatus : ${imageUrls}" th:src="${imageUrl}" alt="Slika vozila" />
-            </div>
+            
+              <div th:each="imageUrl, iterationStatus : ${imageUrls}" class="embla__slide">
+                  <div class="embla__slide__inner">
+                      <img class="embla__slide__img" th:src="${imageUrl}" alt="Slika vozila" />
+                  </div>
+              </div>
           </div>
-        </div>
-        <div class="embla__dots"></div>
-        <button class="embla__button embla__button--prev" aria-label="Prethodna">
-          <svg class="embla__button__svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
-          </svg>
-        </button>
-        <button class="embla__button embla__button--next" aria-label="Sljedeća">
-          <svg class="embla__button__svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
-          </svg>
-        </button>
       </div>
+    
+
+      <button :disabled="!prev" @click="embla.scrollPrev()" class="embla__button embla__button--prev" type="button">
+        <svg class="embla__button__svg" viewBox="137.718 -1.001 366.563 643.999">
+          <path d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"></path>
+        </svg>
+      </button>
+      <button :disabled="!next" @click="embla.scrollNext()" class="embla__button embla__button--next" type="button">
+        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+          <path d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"></path>
+        </svg>
+      </button>
+    </div>
       
       <div class="text-2xl px-4 sm:px-0">
         <h2 class="mb-4 ml mt-8 font-semibold dark:text-gray-200"
@@ -343,7 +360,7 @@
           <p class="dark:text-gray-400">Kontakt: <span class="font-semibold dark:text-gray-300"
               th:text="${listing.user.email + ', ' + listing.user.phoneNumber}"></span></p>
           <button data-modal-target="contact-modal" data-modal-toggle="contact-modal" type="button"
-            class="button-2 text-white font-medium rounded-lg mt-4 py-2.5 text-center inline-flex items-center">
+            class="button text-white font-medium rounded-lg mt-4 py-2.5 text-center inline-flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="w-6 h-6 mr-2">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -391,7 +408,7 @@
                     <div>
                       <label for="email" class="block text-sm font-medium dark:text-white">E-mail adresa</label>
                       <input type="email" name="email" id="email" class="input text-sm block w-full"
-                        th:value="${user.email}" required>
+                        th:value="${user.email}" required autocomplete="email">
                     </div>
                     <div class="flex flex-col mb-4 dark:text-gray-200">
                       <label for="message" class="block text-sm font-medium dark:text-white">Poruka</label>
@@ -399,16 +416,14 @@
                         class="input w-96 h-48 resize-none"></textarea>
                     </div>
 
-                    <button type="submit" class="w-full text-sm button-2 py-2.5">Pošalji</button>
+                    <button type="submit" class="w-full text-sm button py-2.5">Pošalji</button>
                   </form>
                 </div>
                 <div th:unless="${user != null}" class="px-6 py-6 lg:px-8">
-                  <h3 class="mb-4 text-xl font-medium flex justify-center text-gray-900 dark:text-white">Kontaktiraj
-                    prodavatelja za</h3>
+                  <h3 class="mb-4 text-xl font-medium flex justify-center text-gray-900 dark:text-white">Kontaktiraj prodavatelja za</h3>
                   <span class="mb-4 text-xl font-bold flex justify-center text-gray-900 dark:text-white"
                     th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></span>
-                  <form class="space-y-6" th:action="@{/oglasi/{listingId}/kontaktiraj(listingId = ${listing.id})}"
-                    method="post">
+                  <form class="space-y-6" th:action="@{/oglasi/{listingId}/kontaktiraj(listingId = ${listing.id})}" method="post">
                     <div>
                       <label for="firstName" class="block text-sm font-medium dark:text-white">Ime</label>
                       <input type="text" name="firstName" id="firstName" class="input text-sm block w-full" required>
@@ -419,7 +434,7 @@
                     </div>
                     <div>
                       <label for="email" class="block text-sm font-medium dark:text-white">E-mail adresa</label>
-                      <input type="email" name="email" id="email" class="input text-sm block w-full" required>
+                      <input type="email" name="email" id="email" class="input text-sm block w-full" required autocomplete="email">
                     </div>
                     <div class="flex flex-col mb-4 dark:text-gray-200">
                       <label for="message" class="block text-sm font-medium dark:text-white">Poruka</label>
@@ -427,7 +442,7 @@
                         class="input w-96 h-48 resize-none"></textarea>
                     </div>
 
-                    <button type="submit" class="w-full text-sm button-2 py-2.5">Pošalji</button>
+                    <button type="submit" class="w-full text-sm button py-2.5">Pošalji</button>
                   </form>
                 </div>
               </div>
@@ -517,21 +532,7 @@
   <footer>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
   </footer>
-  <script>
-    const emblaNode = document.querySelector('.embla'); // Replace with your carousel container selector
-    if (emblaNode) {
-      const embla = EmblaCarousel(emblaNode, {
-        loop: true,
-      });
-      const prevButton = document.querySelector('.embla__button--prev');
-      const nextButton = document.querySelector('.embla__button--next');
 
-      if (prevButton && nextButton) {
-        prevButton.addEventListener('click', embla.scrollPrev);
-        nextButton.addEventListener('click', embla.scrollNext);
-      }
-    }
-  </script>
 </body>
 
 </html>
