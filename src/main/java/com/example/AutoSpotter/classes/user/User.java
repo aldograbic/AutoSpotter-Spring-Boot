@@ -1,5 +1,7 @@
 package com.example.AutoSpotter.classes.user;
 
+import org.apache.tomcat.websocket.AuthenticationType;
+
 import com.example.AutoSpotter.classes.location.City;
 import com.example.AutoSpotter.classes.location.County;
 
@@ -149,6 +151,16 @@ public class User {
 
     public void setConfirmationToken(String confirmationToken) {
         this.confirmationToken = confirmationToken;
+    }
+
+    private AuthenticationType authType;
+ 
+    public AuthenticationType getAuthType() {
+        return authType;
+    }
+ 
+    public void setAuthType(AuthenticationType authType) {
+        this.authType = authType;
     }
 
     public User(String username, String password, String firstName, String lastName, String companyName, String companyOIB, String address, String phoneNumber, String email, int cityId) {

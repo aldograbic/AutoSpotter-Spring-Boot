@@ -1,5 +1,7 @@
 package com.example.AutoSpotter.classes.user;
 
+import com.example.AutoSpotter.config.AuthenticationType;
+
 public interface UserRepository {
 
     User getUserById(int id);
@@ -25,4 +27,6 @@ public interface UserRepository {
     void updateEmailVerification(User user);
 
     void updatePassword(User user);
+
+    public void updateAuthenticationType(String username, AuthenticationType authType);
 }

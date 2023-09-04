@@ -41,8 +41,16 @@ public class SecurityConfig {
                 .loginProcessingUrl("/prijava")
                 .defaultSuccessUrl("/?uspjesnaPrijava", true)
                 .failureUrl("/prijava?greska")
+                .successHandler(databaseLoginSuccessHandler)
                 .permitAll()
                 
+            )
+            .oauth2Login((formLogin)-> formLogin
+                .loginPage("/prijava")
+                .userInfoEndpoint()
+                    .userService(oauth2UserService)
+                .and()
+                .successHandler(oauthLoginSuccessHandler)
             )
             .logout((logout) -> logout
                 .logoutUrl("/odjava")
@@ -62,4 +70,15 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
+
+
+     
+    @Autowired
+    private CustomOAuth2UserService oauth2UserService;
+     
+    @Autowired
+    private OAuthLoginSuccessHandler oauthLoginSuccessHandler;
+     
+    @Autowired
+    private DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
 }

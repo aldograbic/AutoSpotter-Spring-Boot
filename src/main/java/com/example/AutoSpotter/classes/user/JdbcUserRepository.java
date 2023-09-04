@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.AutoSpotter.classes.location.LocationRepository;
+import com.example.AutoSpotter.config.AuthenticationType;
 
 @Repository
 public class JdbcUserRepository implements UserRepository{
@@ -111,5 +112,11 @@ public class JdbcUserRepository implements UserRepository{
     public void updatePassword(User user) {
         String sql = "UPDATE user SET password = ? WHERE id = ?";
         jdbcTemplate.update(sql, user.getPassword(), user.getId());
+    }
+
+    @Override
+    public void updateAuthenticationType(String username, AuthenticationType authType) {
+        String sql = "UPDATE user SET auth_type = ? WHERE username = ?";
+        jdbcTemplate.update(sql, authType.toString(), username);
     }
 }

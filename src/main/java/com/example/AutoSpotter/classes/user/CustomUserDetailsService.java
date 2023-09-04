@@ -9,10 +9,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Service;
 
+import com.example.AutoSpotter.config.AuthenticationType;
+
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService extends SavedRequestAwareAuthenticationSuccessHandler implements UserDetailsService  {
 
     private UserRepository userRepository;
 
@@ -20,6 +23,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    public void updateAuthenticationType(String username, String oauth2ClientName) {
+        AuthenticationType authType = AuthenticationType.valueOf(oauth2ClientName.toUpperCase());
+        userRepository.updateAuthenticationType(username, authType);
+    } 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

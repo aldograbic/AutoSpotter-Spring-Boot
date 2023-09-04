@@ -237,6 +237,7 @@ CREATE TABLE `user` (
   `role_id` int DEFAULT NULL,
   `email_verified` tinyint(1) NOT NULL DEFAULT '0',
   `confirmation_token` varchar(255) DEFAULT NULL,
+  `auth_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `city_id` (`city_id`),
   KEY `role_id` (`role_id`),
