@@ -16,12 +16,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+
     @Autowired CustomUserDetailsService userService;
     
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-            Authentication authentication) throws ServletException, IOException {
-                //nismo sigurni za ovu prvu liniju ispod
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
+        //nismo sigurni za ovu prvu liniju ispod
         UserDetails authenticatedUserDetails = (UserDetails) authentication.getPrincipal();
         userService.updateAuthenticationType(authenticatedUserDetails.getUsername(), "database");
         super.onAuthenticationSuccess(request, response, authentication);

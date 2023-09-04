@@ -13,17 +13,12 @@ public class GoogleCloudStorageConfig {
     
     @Bean
     public StorageOptions storageOptions() throws IOException {
-        // Load the Google Cloud Storage credentials from the JSON key file
         GoogleCredentials credentials = ServiceAccountCredentials.fromStream(getClass().getResourceAsStream("/peerless-tiger-394915-c4668df1d81d.json"));
-
-        // Set up the credentials for the StorageOptions
         return StorageOptions.newBuilder().setCredentials(credentials).build();
     }
 
     @Bean
     public Storage storage(StorageOptions storageOptions) {
-        // Create a Storage instance using the provided StorageOptions
         return storageOptions.getService();
     }
 }
-

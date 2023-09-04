@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .loginProcessingUrl("/prijava")
                 .defaultSuccessUrl("/?uspjesnaPrijava", true)
                 .failureUrl("/prijava?greska")
-                .successHandler(databaseLoginSuccessHandler)
+                // .successHandler(databaseLoginSuccessHandler)
                 .permitAll()
                 
             )
@@ -71,8 +71,6 @@ public class SecurityConfig {
         return authConfig.getAuthenticationManager();
     }
 
-
-     
     @Autowired
     private CustomOAuth2UserService oauth2UserService;
      
