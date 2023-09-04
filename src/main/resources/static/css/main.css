@@ -2586,6 +2586,10 @@ input[type="checkbox"]:checked + label {
     inset: 0px;
   }
 
+  .md\:mt-0 {
+    margin-top: 0px;
+  }
+
   .md\:flex {
     display: flex;
   }
@@ -2620,6 +2624,10 @@ input[type="checkbox"]:checked + label {
   .lg\:my-8 {
     margin-top: 2rem;
     margin-bottom: 2rem;
+  }
+
+  .lg\:w-44 {
+    width: 11rem;
   }
 
   .lg\:w-96 {
