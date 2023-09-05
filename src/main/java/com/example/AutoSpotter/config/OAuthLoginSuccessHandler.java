@@ -33,7 +33,6 @@ public class OAuthLoginSuccessHandler extends SavedRequestAwareAuthenticationSuc
         String phoneNumber = (String) attributes.get("phone_number");
         String address = (String) attributes.get("address");
     
-
         userService.processOAuthPostLogin(username, email, firstName, lastName, phoneNumber, address);
 
         userService.updateAuthenticationType(username, oauth2ClientName);

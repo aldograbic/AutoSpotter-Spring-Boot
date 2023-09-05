@@ -38,8 +38,8 @@
 
             <div class="h-full mb-4 flex flex-col justify-center border rounded-md relative dark:border-gray-700">
 
-                <div class="flex flex-col items-center">
-                    <form th:action="@{/korisnik/{userId}/promijeni-podatke(userId=${user.id})}" method="post">
+                <div class="flex flex-col md:items-center">
+                    <form th:action="@{/korisnik/{userId}/promijeni-podatke(userId=${user.id})}" method="post" class="mx-6 md:mx-0">
                         <div class="flex flex-col mb-4">
                             <label class="dark:text-gray-300" for="username">Korisničko ime</label>
                             <input type="text" id="username" name="username" required th:value="${user.username}" class="input lg:w-96" autocomplete="username"/>

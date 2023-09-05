@@ -23,7 +23,7 @@
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
-        <div class="flex flex-col flex-1 ml-4 mr-4 w-50 min-h-screen">
+        <div class="flex flex-col flex-1 ml-4 mr-4 min-h-screen">
             <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-8 dark:text-gray-200">Registracija</h1>
 
             <div th:if="${step eq 1}" class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
@@ -48,14 +48,14 @@
                 </form>
             </div>
 
-            <div th:if="${step eq 2}" class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
+            <div th:if="${step eq 2}" class="h-full mb-4 flex flex-col md:items-center border rounded-md dark:border-gray-700">
                 <th:block th:insert="~{fragments/progress-bar-registration :: progress-bar-registration}"></th:block>
-                <h2 class="text-xl font-bold text-gray-700 mt-4 md:mt-0 mb-8 dark:text-gray-200">Osobni podaci</h2>
+                <h2 class="text-xl font-bold text-gray-700 mx-auto mt-4 md:mt-0 mb-8 dark:text-gray-200">Osobni podaci</h2>
                 
-                <form th:if="${userType eq 'Privatni'}" th:action="@{/registracija-2}" method="post">
+                <form th:if="${userType eq 'Privatni'}" th:action="@{/registracija-2}" method="post" class="mx-6 md:mx-0">
                     <div class="flex flex-col mb-4">
                         <label class="dark:text-gray-300" for="firstName">Ime</label>
-                        <input type="text" id="firstName" name="firstName" th:value="${session['firstName']}" required class="input"/>
+                        <input type="text" id="firstName" name="firstName" th:value="${session['firstName']}" required class="input lg:w-96"/>
                     </div>
                     <div class="flex flex-col mb-4">
                         <label class="dark:text-gray-300" for="lastName">Prezime</label>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="flex flex-col mb-4">
                         <label class="dark:text-gray-300" for="city">Grad</label>
-                        <select id="city" name="city" required class="input lg:w-96 select2-withSearch">
+                        <select id="city" name="city" required class="input select2-withSearch">
                           <option value="" disabled selected>Odabir</option>
                           <th:block th:each="entry : ${citiesByCounty}">
                             <optgroup th:label="${entry.key}">
@@ -92,7 +92,7 @@
                     
                 </form>
 
-                <form th:if="${userType eq 'Poslovni'}" th:action="@{/registracija-2}" method="post">
+                <form th:if="${userType eq 'Poslovni'}" th:action="@{/registracija-2}" method="post" class="mx-6 md:mx-0">
                     <div class="flex flex-col mb-4">
                         <label for="companyName">Naziv tvrtke</label>
                         <input type="text" id="companyName" name="companyName" th:value="${session['companyName']}" required class="input"/>
@@ -107,21 +107,16 @@
                     </div>
                     <div class="flex flex-col mb-4">
                         <label for="city">Grad</label>
-                        <div class="relative inline-block w-96">
-                          <select id="city" name="city" required class="input w-96">
-                            <option value="" disabled selected>Odabir</option>
-                            <th:block th:each="entry : ${citiesByCounty}">
-                              <optgroup th:label="${entry.key}">
-                                <th:block th:each="city : ${entry.value}">
-                                  <option th:value="${city}" th:text="${city}" th:selected="${city eq session['city']}"></option>
-                                </th:block>
-                              </optgroup>
-                            </th:block>
-                          </select>
-                          <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="select-icon absolute top-1/2 right-2 transform -translate-y-1/2 w-4 h-4 transition-transform duration-300 ease-in-out pointer-events-none">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                          </svg>
-                        </div>
+                        <select id="city" name="city" required class="input select2-withSearch lg:w-96">
+                          <option value="" disabled selected>Odabir</option>
+                          <th:block th:each="entry : ${citiesByCounty}">
+                            <optgroup th:label="${entry.key}">
+                              <th:block th:each="city : ${entry.value}">
+                                <option th:value="${city}" th:text="${city}" th:selected="${city eq session['city']}"></option>
+                              </th:block>
+                            </optgroup>
+                          </th:block>
+                        </select>
                     </div>
 
                     <div class="flex justify-between mb-4">
@@ -138,10 +133,10 @@
                 </form>
             </div>
 
-            <div th:if="${step eq 3}" class="h-full mb-4 flex flex-col items-center border rounded-md dark:border-gray-700">
+            <div th:if="${step eq 3}" class="h-full mb-4 flex flex-col md:items-center border rounded-md dark:border-gray-700">
                 <th:block th:insert="~{fragments/progress-bar-registration :: progress-bar-registration}"></th:block>
-                <h2 class="text-xl font-bold text-gray-700 mt-4 md:mt-0 mb-8 dark:text-gray-200">Kontakt podaci</h2>
-                <form th:action="@{/registracija-3}" method="post" onsubmit="return validateForm()">
+                <h2 class="text-xl font-bold mx-auto text-gray-700 mt-4 md:mt-0 mb-8 dark:text-gray-200">Kontakt podaci</h2>
+                <form th:action="@{/registracija-3}" method="post" onsubmit="return validateForm()" class="mx-6 md:mx-0">
                     <div class="flex flex-col mb-4">
                         <label class="dark:text-gray-300" for="email">E-mail adresa</label>
                         <input type="email" id="email" name="email" th:value="${session['email']}" required class="input lg:w-96" autocomplete="email"/>

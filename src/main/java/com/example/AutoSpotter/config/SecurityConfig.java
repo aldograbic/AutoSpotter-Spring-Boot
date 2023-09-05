@@ -29,7 +29,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-        .csrf().disable()
+            .csrf((csrf -> csrf
+                .disable()))
             .authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/oauth/**","/prijava", "/registracija", "/registracija-1", "/registracija-2", "/registracija-3", "/potvrdi",
                 "/", "/kontakt", "/oglasi", "/pretraga", "/zaboravljena-lozinka", "/reset-lozinke", "/pravila-privatnosti", "/uvjeti-koristenja", "/manufacturers", "/manufacturersSearch", "/models", "/modelsSearch",
@@ -47,9 +48,8 @@ public class SecurityConfig {
             )
             .oauth2Login((formLogin)-> formLogin
                 .loginPage("/prijava")
-                .userInfoEndpoint()
-                    .userService(oauth2UserService)
-                .and()
+                .userInfoEndpoint( (userInfoEndpoint -> userInfoEndpoint
+                    .userService(oauth2UserService)))
                 .successHandler(oauthLoginSuccessHandler)
             )
             .logout((logout) -> logout
@@ -77,6 +77,6 @@ public class SecurityConfig {
     @Autowired
     private OAuthLoginSuccessHandler oauthLoginSuccessHandler;
      
-    @Autowired
-    private DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
+    // @Autowired
+    // private DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
 }
