@@ -11,7 +11,7 @@
 
     <th:block th:insert="~{fragments/header :: header}"></th:block>
 
-    <main class="flex flex-1 dark:bg-gray-800">
+    <main class="lg:flex flex-1 dark:bg-gray-800">
 
         <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
@@ -30,7 +30,7 @@
                             th:text="${vehicleType}"></option>
                     </select>
                 </div>
-                <div class="grid grid-cols-2 gap-12 m-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 gap-4 m-4">
                     <div class="flex flex-col">
                         <label class="dark:text-gray-300" for="manufacturer">Proizvođač</label>
                         <select id="manufacturer" name="manufacturer" class="input select2-withSearch">
@@ -59,7 +59,7 @@
                     <input type="number" id="numberOfDoors" min="0" placeholder="4" class="input no-arrows flex-grow pl-1">
                 </div>
 
-                <div class="grid grid-cols-2 gap-8 m-4">
+                <div class="grid lg:grid-cols-2 grid-cols-1 lg:gap-8 gap-4 m-4">
                     <div class="flex flex-col">
                         <label class="dark:text-gray-300" for="numberOfWheels">Broj kotača</label>
                         <input type="number" id="numberOfWheels" name="numberOfWheels" min="4" placeholder="6" class="input no-arrows">
@@ -69,7 +69,7 @@
                         <label class="dark:text-gray-300" for="maximumAllowableWeight">Najveća dopuštena masa</label>
                         <div class="flex items-center">
                             <input type="text" id="maximumAllowableWeight" name="maximumAllowableWeight"
-                                placeholder="1000" pattern="[0-9]*\.?[0-9]+" required class="input no-arrows"
+                                placeholder="1000" pattern="[0-9]*\.?[0-9]+" required class="input w-full no-arrows"
                                 oninput="validateInput(this)">
                         </div>
                     </div>
@@ -145,12 +145,12 @@
                         <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                     </select>
                 </div>
-                <div class="flex justify-between">
+                <div class="lg:flex justify-between">
                     <div class="flex flex-col m-4">
                         <label class="dark:text-gray-300" for="batteryCapacity">Kapacitet baterije</label>
                         <div class="flex items-center">
                             <input type="text" id="batteryCapacity" name="batteryCapacity" required
-                                pattern="[0-9]*\.?[0-9]+" class="input" placeholder="50"
+                                pattern="[0-9]*\.?[0-9]+" class="input w-full" placeholder="50"
                                 oninput="validateInput(this)">
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                         <label class="dark:text-gray-300" for="vehicleRange">Doseg vozila</label>
                         <div class="flex items-center">
                             <input type="text" id="vehicleRange" name="vehicleRange" required
-                                pattern="[0-9]*\.?[0-9]+" class="input" placeholder="100"
+                                pattern="[0-9]*\.?[0-9]+" class="input w-full" placeholder="100"
                                 oninput="validateInput(this)" th:value="${session['vehicleRange']}">
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                         <label class="dark:text-gray-300" for="chargingTime">Vrijeme punjenja</label>
                         <div class="flex items-center">
                             <input type="text" id="chargingTime" name="chargingTime" required
-                                pattern="[0-9]*\.?[0-9]+" class="input" placeholder="1"
+                                pattern="[0-9]*\.?[0-9]+" class="input w-full" placeholder="1"
                                 oninput="validateInput(this)" th:value="${session['chargingTime']}">
                         </div>
                     </div>
@@ -217,8 +217,7 @@
                 <hr class="dark:border-gray-700">
                 <div class="flex flex-col m-4">
                     <label class="dark:text-gray-300" for="blackColorCheckbox">Boja vozila</label>
-                    <div class="flex">
-                        
+                    <div class="lg:flex grid grid-cols-3">
                         <input type="checkbox" id="blackColorCheckbox" value="crna" class="hidden" name="colorCheckbox"/>
                         <label for="blackColorCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
                             <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
@@ -276,7 +275,7 @@
                         <option value="Poslovni">Poslovni</option>
                     </select>
                 </div>
-                <div class="flex items-center m-4">
+                <div class="lg:flex items-center m-4">
                     <input id="onlyRegistered" type="checkbox" value="" class="hidden">
                     <label for="onlyRegistered" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
                         <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>

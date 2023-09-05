@@ -21,8 +21,7 @@
     </div>
 
     <main class="flex flex-1 dark:bg-gray-800 min-h-screen">
-
-        <div class="flex-0 w-1/6 bg-gray-100 dark:bg-gray-900 dark:border-gray-700 text-sm dark:text-gray-200">
+        <div id="filterContainer" class="hidden lg:block flex-0 w-full lg:w-1/6 bg-gray-100 dark:bg-gray-900 dark:border-gray-700 text-sm dark:text-gray-200">
             <h2 class="text-xl font-bold text-gray-700 mb-6 mt-8 ml-4 dark:text-gray-200">Filtriraj</h2>
             <form action="/oglasi" method="get">
                 <div class="flex flex-col m-4" x-data="{ open: false }">
@@ -145,7 +144,9 @@
             <div class="flex items-center justify-between">
                 <h1 class="text-3xl font-bold text-gray-700 mb-8 dark:text-gray-200">Oglasi <span class="text-2xl" th:text="${'(' + totalListingsCount + ')'}"></span></h1>
                 <div x-data="{ open: false }" class="mb-6 relative inline-block text-left">
-                    
+                    <button id="filterToggle" class="lg:hidden absolute top-0 right-0 p-2 text-gray-600 dark:text-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 32 32"><path fill="currentColor" d="M18 28h-4a2 2 0 0 1-2-2v-7.59L4.59 11A2 2 0 0 1 4 9.59V6a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v3.59a2 2 0 0 1-.59 1.41L20 18.41V26a2 2 0 0 1-2 2ZM6 6v3.59l8 8V26h4v-8.41l8-8V6Z"/></svg>
+                    </button>
                     <button type="button" data-dropdown-toggle="optionsDropdown" data-dropdown-placement="bottom-end" class="text-gray-700 font-medium inline-flex items-center focus:outline-none">
                         <a href="#">
                             <svg class="rounded-full w-10 p-1 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 14H2m6-4H2m4-4H2m10 12H2m17 2V4m0 16l3-3m-3 3l-3-3m3-13l3 3m-3-3l-3 3"/></svg>
@@ -266,6 +267,13 @@
     <footer>
         <th:block th:insert="~{fragments/footer :: footer}"></th:block>
     </footer>
-    
+    <script>
+        const filterToggle = document.getElementById('filterToggle');
+        const filterContainer = document.getElementById('filterContainer');
+      
+        filterToggle.addEventListener('click', () => {
+          filterContainer.classList.toggle('hidden');
+        });
+      </script>
 </body>
 </html>
