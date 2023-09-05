@@ -1,6 +1,7 @@
 package com.example.AutoSpotter.config;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,7 +24,18 @@ public class OAuthLoginSuccessHandler extends SavedRequestAwareAuthenticationSuc
         CustomOAuth2User oauth2User = (CustomOAuth2User) authentication.getPrincipal();
         String oauth2ClientName = oauth2User.getOauth2ClientName();
         String username = oauth2User.getEmail();
-         
+        String email = oauth2User.getEmail();
+
+        Map<String, Object> attributes = oauth2User.getAttributes();
+
+        String firstName = (String) attributes.get("given_name");
+        String lastName = (String) attributes.get("family_name");
+        String phoneNumber = (String) attributes.get("phone_number");
+        String address = (String) attributes.get("address");
+    
+
+        userService.processOAuthPostLogin(username, email, firstName, lastName, phoneNumber, address);
+
         userService.updateAuthenticationType(username, oauth2ClientName);
         super.onAuthenticationSuccess(request, response, authentication);
     }

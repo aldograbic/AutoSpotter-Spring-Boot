@@ -59,6 +59,13 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
+    public void saveOAuth2(User user) {
+        String sql = "INSERT INTO user (username, first_name, last_name, phone_number, address, email, email_verified, auth_type) " + 
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, user.getUsername(),user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getAddress(), user.getEmail(), user.isEmailVerified(), user.getAuthType().toString());
+    }
+
+    @Override
     public void deleteUser(int userId) {
         String sql = "DELETE FROM user WHERE id = ?";
         jdbcTemplate.update(sql, userId);

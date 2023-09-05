@@ -31,7 +31,7 @@ public class SecurityConfig {
         http
         .csrf().disable()
             .authorizeHttpRequests((auth) -> auth
-                .requestMatchers("/prijava", "/registracija", "/registracija-1", "/registracija-2", "/registracija-3", "/potvrdi",
+                .requestMatchers("/oauth/**","/prijava", "/registracija", "/registracija-1", "/registracija-2", "/registracija-3", "/potvrdi",
                 "/", "/kontakt", "/oglasi", "/pretraga", "/zaboravljena-lozinka", "/reset-lozinke", "/pravila-privatnosti", "/uvjeti-koristenja", "/manufacturers", "/manufacturersSearch", "/models", "/modelsSearch",
                 "/css/**", "/img/**", "/js/**", "/oglasi/**", "/backRegistration", "/error-404", "/error-500", "/korisnicki-profil/**").permitAll()
                 .anyRequest().authenticated()

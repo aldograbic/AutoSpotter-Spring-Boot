@@ -8,6 +8,8 @@ public interface UserRepository {
 
     void save(User user);
 
+    void saveOAuth2(User user);
+
     void deleteUser (int userId);
 
     void updateUser (User user);
@@ -27,6 +29,7 @@ public interface UserRepository {
     void updateEmailVerification(User user);
 
     void updatePassword(User user);
+
 
     public void updateAuthenticationType(String username, AuthenticationType authType);
 }

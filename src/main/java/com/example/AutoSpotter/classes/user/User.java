@@ -1,9 +1,9 @@
 package com.example.AutoSpotter.classes.user;
 
-import org.apache.tomcat.websocket.AuthenticationType;
 
 import com.example.AutoSpotter.classes.location.City;
 import com.example.AutoSpotter.classes.location.County;
+import com.example.AutoSpotter.config.AuthenticationType;
 
 public class User {
     private int id;
@@ -162,6 +162,7 @@ public class User {
     public void setAuthType(AuthenticationType authType) {
         this.authType = authType;
     }
+
 
     public User(String username, String password, String firstName, String lastName, String companyName, String companyOIB, String address, String phoneNumber, String email, int cityId) {
         
