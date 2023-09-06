@@ -49,7 +49,6 @@ public class CustomUserDetailsService extends SavedRequestAwareAuthenticationSuc
             newUser.setPhoneNumber(phoneNumber);
             newUser.setAddress(address);
             newUser.setEmailVerified(true);
-            newUser.setAuthType(AuthenticationType.GOOGLE);
 
             userRepository.saveOAuth2(newUser);
         }
