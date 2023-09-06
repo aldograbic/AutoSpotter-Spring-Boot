@@ -145,7 +145,7 @@
                         <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                     </select>
                 </div>
-                <div class="lg:flex justify-between">
+                <div class="grid grid-cols-3">
                     <div class="flex flex-col m-4">
                         <label class="dark:text-gray-300" for="batteryCapacity">Kapacitet baterije</label>
                         <div class="flex items-center">
@@ -217,7 +217,7 @@
                 <hr class="dark:border-gray-700">
                 <div class="flex flex-col m-4">
                     <label class="dark:text-gray-300" for="blackColorCheckbox">Boja vozila</label>
-                    <div class="lg:flex grid grid-cols-3">
+                    <div class="md:flex grid grid-cols-3">
                         <input type="checkbox" id="blackColorCheckbox" value="crna" class="hidden" name="colorCheckbox"/>
                         <label for="blackColorCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
                             <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
@@ -275,7 +275,7 @@
                         <option value="Poslovni">Poslovni</option>
                     </select>
                 </div>
-                <div class="lg:flex items-center m-4">
+                <div class="md:flex items-center m-4">
                     <input id="onlyRegistered" type="checkbox" value="" class="hidden">
                     <label for="onlyRegistered" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
                         <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
@@ -290,8 +290,8 @@
                 </div>
             </div>
             
-            <div class="flex justify-end mb-4">
-                <input type="submit" id="submitBtn" value="Filtriraj" class="button">
+            <div class="flex md:justify-end mb-4 ">
+                <input type="submit" id="submitBtn" value="Filtriraj" class="button w-full md:w-24">
             </div>
 
         </div>

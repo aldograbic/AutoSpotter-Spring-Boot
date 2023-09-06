@@ -32,7 +32,7 @@
 
     <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
 
-    <div class="flex-1 mt-4 ml-4 mr-4 font-semibold px-4 sm:px-0">
+    <div class="flex-1 mt-4 ml-4 mr-4 font-semibold">
       <div class="text-sm text-gray-500 dark:text-gray-200">
         <a th:href="@{/oglasi(vehicleType=${listing.vehicle.vehicleType})}" class="hover:text-cyan-700 text-base"
           th:text="${listing.vehicle.vehicleType}"></a> &gt;
@@ -64,7 +64,7 @@
             
               <div th:each="imageUrl, iterationStatus : ${imageUrls}" class="embla__slide">
                   <div class="embla__slide__inner">
-                      <img class="embla__slide__img" th:src="${imageUrl}" alt="Slika vozila" />
+                      <img class="embla__slide__img" th:src="${imageUrl}" alt="Slika vozila"/>
                   </div>
               </div>
           </div>
@@ -83,7 +83,7 @@
       </button>
     </div>
       
-      <div class="text-2xl px-4 sm:px-0">
+      <div class="text-2xl">
         <h2 class="mb-4 ml mt-8 font-semibold dark:text-gray-200"
           th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}">
         </h2>
@@ -144,7 +144,7 @@
           </div>
         </div>
       </div>
-      <div class="px-4 sm:px-0 md:flex justify-center gap-4 mt-12 dark:text-gray-300">
+      <div class="md:flex grid grid-cols-2 justify-center gap-4 mt-12 dark:text-gray-300">
         <div class="flex items-center mr-2">
           <div class="w-8 h-8 flex-shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
@@ -265,47 +265,47 @@
         </div>
       </div>
 
-      <div class="px-4 sm:px-0 mt-8">
+      <div class="mt-8">
         <h2 class="text-xl font-semibold leading-7 text-gray-900 dark:text-gray-200">Tehnički podaci</h2>
       </div>
       <div class="mt-6 border-t border-gray-100 dark:border-gray-700">
         <dl class="divide-y divide-gray-100 dark:divide-gray-700">
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class=" py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt class="dt dark:text-gray-400">Motor</dt>
             <dd th:text="${listing.vehicle.engineType}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt class="dt dark:text-gray-400">Zapremnina motora</dt>
             <dd th:text="${listing.vehicle.engineDisplacement + ' L'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt class="dt dark:text-gray-400">Obujam motora</dt>
             <dd th:text="${listing.vehicle.engineDisplacementCcm3 + ' ccm&sup3;'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt class="dt dark:text-gray-400">Snaga motora</dt>
             <dd th:text="${listing.vehicle.enginePower + ' kW'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 dark:text-gray-300">
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 dark:text-gray-300">
             <dt class="dt dark:text-gray-400">Mjenjač</dt>
             <dd th:text="${listing.vehicle.transmission}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt class="dt dark:text-gray-400">Pogon kotača</dt>
             <dd th:text="${listing.vehicle.driveTrain}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt class="dt dark:text-gray-400">Potrošnja goriva</dt>
             <dd th:text="${listing.vehicle.fuelConsumption + ' L/100km'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt class="dt dark:text-gray-400">Ekološka kategorija</dt>
             <dd th:text="${listing.vehicle.ecoCategory}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
           </div>
         </dl>
       </div>
 
-      <div class="px-4 sm:px-0 mt-8">
+      <div class="mt-8">
         <h2 class="text-base font-semibold text-xl leading-7 text-gray-900 dark:text-gray-200">Sigurnost i oprema</h2>
         <div class="mt-6 py-6 border-t border-gray-100 grid grid-cols-2 gap-4 dark:border-gray-700">
           <div>
@@ -316,7 +316,7 @@
                     d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z"
                     fill="#0891b2"></path>
                 </svg>
-                <span class="inline-block align-middle dark:text-gray-300" th:text="${feature}"></span>
+                <span class="align-middle dark:text-gray-300" th:text="${feature}"></span>
               </li>
             </ul>
           </div>
@@ -328,21 +328,21 @@
                     d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z"
                     fill="#0891b2"></path>
                 </svg>
-                <span class="inline-block align-middle dark:text-gray-300" th:text="${extra}"></span>
+                <span class="align-middle dark:text-gray-300" th:text="${extra}"></span>
               </li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="px-4 sm:px-0 mt-8">
+      <div class="mt-8">
         <h2 class="text-base font-semibold text-xl leading-7 text-gray-900 dark:text-gray-200">Opis oglasa</h2>
         <div class="mt-6 py-6 border-t border-gray-100 dark:border-gray-700">
           <p class="text-gray-700 dark:text-gray-300" th:text="${listing.listingDescription}"></p>
         </div>
       </div>
 
-      <div class="px-4 sm:px-0 mt-8 mb-8">
+      <div class="mt-8 mb-8">
         <h2 class="text-base font-semibold text-xl leading-7 text-gray-900 dark:text-gray-200">Podaci o prodavatelju</h2>
         <div class="mt-6 py-6 border-t border-gray-100 dark:border-gray-700">
           <a class="inline-flex items-center text-cyan-600 hover:text-cyan-700" th:href="@{'/korisnicki-profil/' + ${listing.user.id} + '/' + ${listing.user.username}}">
@@ -451,7 +451,7 @@
         </div>
       </div>
 
-      <div class="px-4 sm:px-0 mt-8 mb-8">
+      <div class="mt-8 mb-8">
         <h2 class="text-base font-semibold text-xl leading-7 text-gray-900 dark:text-gray-200">Slični oglasi</h2>
         <div class="mt-6 border-t border-gray-100 dark:border-gray-700">
           <div class="py-4 flex border-b grid px-4 gap-4 grid-cols-2 border-gray-200 dark:border-gray-700">
