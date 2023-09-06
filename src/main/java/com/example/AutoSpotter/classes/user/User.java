@@ -24,6 +24,8 @@ public class User {
     private City city;
     private County county;
     private boolean acceptedTermsOfService;
+    private AuthenticationType authType;
+
 
     public int getId() {
         return id;
@@ -153,7 +155,6 @@ public class User {
         this.confirmationToken = confirmationToken;
     }
 
-    private AuthenticationType authType;
  
     public AuthenticationType getAuthType() {
         return authType;
