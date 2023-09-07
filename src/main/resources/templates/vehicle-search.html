@@ -67,10 +67,11 @@
 
                     <div class="flex flex-col">
                         <label class="dark:text-gray-300" for="maximumAllowableWeight">Najveća dopuštena masa</label>
-                        <div class="flex items-center">
+                        <div class="flex items-center relative">
                             <input type="text" id="maximumAllowableWeight" name="maximumAllowableWeight"
                                 placeholder="1000" pattern="[0-9]*\.?[0-9]+" required class="input w-full no-arrows"
                                 oninput="validateInput(this)">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">kg</span>
                         </div>
                     </div>
                 </div>
@@ -78,22 +79,30 @@
                 <div class="flex flex-col m-4">
                     <label class="dark:text-gray-300" for="mileageFrom">Kilometraža vozila</label>
                     <div class="flex items-center">
-                        <input type="number" id="mileageFrom" min="0" placeholder="0"
-                            class="input w-11/12 no-arrows flex-grow pl-1">
+                        <div class="relative flex items-center w-full">
+                            <input type="number" id="mileageFrom" min="0" placeholder="0" class="input w-full no-arrows flex-grow pl-1">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">km</span>
+                        </div>
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="mileageTo" min="0" placeholder="..."
-                            class="input w-11/12 no-arrows flex-grow pl-1">
+                        <div class="relative flex items-center w-full">
+                            <input type="number" id="mileageTo" min="0" placeholder="..." class="input w-full no-arrows flex-grow pl-1">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">km</span>
+                        </div>
                     </div>
                     <p id="mileageError" class="text-red-500"></p>
                 </div>
                 <div class="flex flex-col m-4">
                     <label class="dark:text-gray-300" for="priceFrom">Cijena vozila</label>
                     <div class="flex items-center">
-                        <input type="number" id="priceFrom" min="0" placeholder="0"
-                            class="input w-11/12 no-arrows flex-grow pl-1">
+                        <div class="relative flex items-center w-full">
+                            <input type="number" id="priceFrom" min="0" placeholder="0" class="input w-full no-arrows flex-grow pl-1">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">&euro;</span>
+                        </div>
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="priceTo" min="0" placeholder="..."
-                            class="input w-11/12 no-arrows flex-grow pl-1">
+                        <div class="relative flex items-center w-full">
+                            <input type="number" id="priceTo" min="0" placeholder="..." class="input w-full no-arrows flex-grow pl-1">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">&euro;</span>
+                        </div>
                     </div>
                     <p id="priceError" class="text-red-500"></p>
                 </div>
@@ -148,68 +157,77 @@
                 <div id="electricEngineSection" class="grid grid-cols-3">
                     <div class="flex flex-col ml-4 mr-4">
                         <label class="dark:text-gray-300" for="batteryCapacity">Kapacitet baterije</label>
-                        <div class="flex items-center">
+                        <div class="flex items-center relative">
                             <input type="text" id="batteryCapacity" name="batteryCapacity" required
                                 pattern="[0-9]*\.?[0-9]+" class="input w-full" placeholder="50"
                                 oninput="validateInput(this)">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">kWh</span>
                         </div>
                     </div>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col ml-4 mr-4">
                         <label class="dark:text-gray-300" for="vehicleRange">Doseg vozila</label>
-                        <div class="flex items-center">
+                        <div class="flex items-center relative">
                             <input type="text" id="vehicleRange" name="vehicleRange" required
                                 pattern="[0-9]*\.?[0-9]+" class="input w-full" placeholder="100"
                                 oninput="validateInput(this)" th:value="${session['vehicleRange']}">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">km</span>
                         </div>
                     </div>
                     <div class="flex flex-col ml-4 mr-4">
                         <label class="dark:text-gray-300" for="chargingTime">Vrijeme punjenja</label>
-                        <div class="flex items-center">
+                        <div class="flex items-center relative">
                             <input type="text" id="chargingTime" name="chargingTime" required
                                 pattern="[0-9]*\.?[0-9]+" class="input w-full" placeholder="1"
                                 oninput="validateInput(this)" th:value="${session['chargingTime']}">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">h</span>
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="transmissionType">Mjenjač</label>
-                    <select id="transmissionType" class="input select2-basic">
-                        <option value="" selected>Sve vrste</option>
-                        <option th:each="transmissionType : ${transmissionTypes}" th:value="${transmissionType}" th:text="${transmissionType}"></option>
-                    </select>
-                </div>
-                <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="driveTrainType">Pogon kotača</label>
-                    <select id="driveTrainType" class="input select2-basic">
-                        <option value="" selected>Sve vrste</option>
-                        <option th:each="driveTrainType : ${driveTrainTypes}" th:value="${driveTrainType}" th:text="${driveTrainType}"></option>
-                    </select>
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="flex flex-col m-4">
+                        <label class="dark:text-gray-300" for="transmissionType">Mjenjač</label>
+                        <select id="transmissionType" class="input select2-basic">
+                            <option value="" selected>Sve vrste</option>
+                            <option th:each="transmissionType : ${transmissionTypes}" th:value="${transmissionType}" th:text="${transmissionType}"></option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col m-4">
+                        <label class="dark:text-gray-300" for="driveTrainType">Pogon kotača</label>
+                        <select id="driveTrainType" class="input select2-basic">
+                            <option value="" selected>Sve vrste</option>
+                            <option th:each="driveTrainType : ${driveTrainTypes}" th:value="${driveTrainType}" th:text="${driveTrainType}"></option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-2">
-                    <div class="relative flex flex-col ml-4 mr-4">
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="flex flex-col ml-4 mr-4">
                         <label class="dark:text-gray-300" for="engineDisplacementFrom">Zapremnina motora</label>
                         <div class="flex items-center">
-                            <input type="text" id="engineDisplacementFrom" name="engineDisplacementFrom" placeholder="1.0"
-                                pattern="[0-9]*\.?[0-9]+" required class="input w-full" oninput="validateInput(this)">
-                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
+                            <div class="relative flex items-center w-full">
+                                <input type="text" id="engineDisplacementFrom" name="engineDisplacementFrom" placeholder="1.0" pattern="[0-9]*\.?[0-9]+" required class="input w-full" oninput="validateInput(this)">
+                                <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
+                            </div> 
                             <p class="text-center mr-4 ml-4">do</p>
-                            <input type="text" id="engineDisplacementTo" name="engineDisplacementTo" placeholder="..."
-                                pattern="[0-9]*\.?[0-9]+" required class="input w-full" oninput="validateInput(this)">
-                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
+                            <div class="relative flex items-center w-full">
+                                <input type="text" id="engineDisplacementTo" name="engineDisplacementTo" placeholder="..." pattern="[0-9]*\.?[0-9]+" required class="input w-full" oninput="validateInput(this)">
+                                <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
+                            </div>
                         </div>
                     </div>
     
-                    <div class="relative flex flex-col ml-4 mr-4">
+                    <div class="flex flex-col ml-4 mr-4">
                         <label class="dark:text-gray-300" for="engineDisplacementCcm3From">Radni obujam</label>
                         <div class="flex items-center">
-                            <input type="text" id="engineDisplacementCcm3From" name="engineDisplacementCcm3From" placeholder="1000"
-                                pattern="[0-9]*\.?[0-9]+" required class="input w-full" oninput="validateInput(this)">
-                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
+                            <div class="relative flex items-center w-full">
+                                <input type="text" id="engineDisplacementCcm3From" name="engineDisplacementCcm3From" placeholder="1000" pattern="[0-9]*\.?[0-9]+" required class="input w-full" oninput="validateInput(this)">
+                                <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
+                            </div>
                             <p class="text-center mr-4 ml-4">do</p>
-                            <input type="text" id="engineDisplacementCcm3To" name="engineDisplacementCcm3To" placeholder="..."
-                                pattern="[0-9]*\.?[0-9]+" required class="input w-full" oninput="validateInput(this)">
-                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
+                            <div class="relative flex items-center w-full">
+                                <input type="text" id="engineDisplacementCcm3To" name="engineDisplacementCcm3To" placeholder="..." pattern="[0-9]*\.?[0-9]+" required class="input w-full" oninput="validateInput(this)">
+                                <span class="absolute right-0 pr-2 text-gray-500 text-xl">L</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -217,19 +235,29 @@
                 <div class="flex flex-col m-4">
                     <label class="dark:text-gray-300" for="enginePowerFrom">Snaga motora</label>
                     <div class="flex items-center">
-                        <input type="number" id="enginePowerFrom" min="0" placeholder="0"
-                            class="input w-11/12 no-arrows flex-grow pl-1">
+                        <div class="relative flex items-center w-full">
+                            <input type="number" id="enginePowerFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">kW</span>
+                        </div>
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="enginePowerTo" min="0" placeholder="..."
-                            class="input w-11/12 no-arrows flex-grow pl-1">
+                        <div class="relative flex items-center w-full">
+                            <input type="number" id="enginePowerTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">kW</span>
+                        </div>
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
                     <label class="dark:text-gray-300" for="fuelConsumptionFrom">Potrošnja goriva</label>
                     <div class="flex items-center">
-                        <input type="number" id="fuelConsumptionFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                        <div class="relative flex items-center w-full">
+                            <input type="number" id="fuelConsumptionFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">L/100km</span>
+                        </div>
                         <p class="text-center mr-4 ml-4">do</p>
-                        <input type="number" id="fuelConsumptionTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1">
+                        <div class="relative flex items-center w-full">
+                            <input type="number" id="fuelConsumptionTo" min="0" placeholder="..." class="input w-11/12 no-arrows flex-grow pl-1">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">L/100km</span>
+                        </div>
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
