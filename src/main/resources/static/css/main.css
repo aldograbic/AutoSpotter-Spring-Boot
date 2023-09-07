@@ -1091,6 +1091,10 @@ input[type="checkbox"]:checked + label {
   z-index: 50;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
 .m-4 {
   margin: 1rem;
 }
@@ -2600,6 +2604,10 @@ input[type="checkbox"]:checked + label {
 
   .md\:w-24 {
     width: 6rem;
+  }
+
+  .md\:w-48 {
+    width: 12rem;
   }
 
   .md\:w-\[64rem\] {
