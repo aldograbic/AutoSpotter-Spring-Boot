@@ -209,6 +209,28 @@ public class UserProfileController {
         return "user-profile";
     }
 
+    @GetMapping("/oglas/{listingId}/uredi")
+        public String showEditListing(@PathVariable("listingId") int listingId, Model model){
+        Listing listing = listingRepository.getListingById(listingId);
+        int vehicleId = listing.getVehicleId();
+        List<String> imageUrls = listingRepository.getImageUrlsForVehicle(vehicleId);
+
+        model.addAttribute("imageUrls", imageUrls);
+        model.addAttribute("listing", listing);
+            
+        return "edit-listing";
+        }
+
+
+    @PostMapping("/oglas/{listingId}/uredi")
+    public String editListing(@PathVariable("listingId") int listingId, RedirectAttributes redirectAttributes) {
+        
+        listingRepository.editListing(listingId);
+        
+        redirectAttributes.addFlashAttribute("successMessage", "Oglas je uspješno uređen.");
+        return "/korisnicki-profil/{userId}/{userUsername}";
+    }
+
     @PostMapping("/listing/{listingId}/delete")
     public String deleteListing(@PathVariable("listingId") int listingId, RedirectAttributes redirectAttributes) {
         listingRepository.deleteListing(listingId);

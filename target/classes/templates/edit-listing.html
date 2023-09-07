@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <th:block th:insert="~{fragments/head-dynamic :: head-dynamic}"></th:block>
+  <title th:text="'AutoSpotter | ' + ${listing.vehicle.manufacturer} + ' ' + ${listing.vehicle.model} "></title>
+  <script th:src="@{/js/carousel.js}" defer="defer"></script>
+  <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+  <th:block th:insert="~{fragments/header-dynamic :: header-dynamic}"></th:block>
+
+  <main class="flex flex-1 dark:bg-gray-800 min-h-screen">
+
+    <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+
+    <div class="flex-1 ml-4 mr-4 font-semibold">
+
+      <div x-data="{ embla: null, next: true, prev: true }" x-init="() => {
+        embla = EmblaCarousel($refs.viewport, { loop: false })
+        embla.on('select', () => {
+          next = embla.canScrollNext()
+          prev = embla.canScrollPrev()
+        })
+        embla.on('init', () => {
+          next = embla.canScrollNext()
+          prev = embla.canScrollPrev()
+        })
+      }" class="embla">
+      <div x-ref="viewport" class="embla__viewport">
+          <div class="embla__container">
+
+              <div class="embla__slide flex justify-center" th:if="${#lists.isEmpty(imageUrls)}">
+                  <div class="embla__slide__inner w-48">
+                      <img class="embla__slide__img" src="/img/no-image-svg.svg" alt="Oglas nema slike" />
+                  </div>
+              </div>
+            
+              <div th:each="imageUrl, iterationStatus : ${imageUrls}" class="embla__slide">
+                  <div class="embla__slide__inner">
+                      <img class="embla__slide__img" th:src="${imageUrl}" alt="Slika vozila"/>
+                  </div>
+              </div>
+          </div>
+      </div>
+    
+
+      <button :disabled="!prev" @click="embla.scrollPrev()" class="embla__button embla__button--prev" type="button">
+        <svg class="embla__button__svg" viewBox="137.718 -1.001 366.563 643.999">
+          <path d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"></path>
+        </svg>
+      </button>
+      <button :disabled="!next" @click="embla.scrollNext()" class="embla__button embla__button--next" type="button">
+        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+          <path d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"></path>
+        </svg>
+      </button>
+    </div>
+      
+      <div class="text-2xl">
+        <h2 class="mb-4 ml mt-8 font-semibold dark:text-gray-200"
+          th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}">
+        </h2>
+
+        <!--Stavit input da se cijena moze mijenjat */-->
+        <p class="text-gray-700 mb-4 font-semibold dark:text-gray-200"
+          th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}">
+        </p>
+
+      </div>
+      <div class="md:flex grid grid-cols-2 justify-center gap-4 mt-12 dark:text-gray-300">
+        <div class="flex items-center mr-2">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
+              <g fill="currentColor">
+                <path d="M3 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5v-5Z" />
+                <path
+                  d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1c.564 0 1.034.11 1.412.336c.383.228.634.551.794.907c.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V2Zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8V2Z" />
+              </g>
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500 dark:text-gray-400">Gorivo</p>
+            <p class="font-medium dark:text-gray-200" th:text="${listing.vehicle.engineType}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 512 512">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                d="m80 224l37.78-88.15C123.93 121.5 139.6 112 157.11 112h197.78c17.51 0 33.18 9.5 39.33 23.85L432 224m-352 0h352v144H80zm32 144v32H80v-32m352 0v32h-32v-32" />
+              <circle cx="144" cy="288" r="16" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="32" />
+              <circle cx="368" cy="288" r="16" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="32" />
+            </svg>
+
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500 dark:text-gray-400">Oblik karoserije</p>
+            <p class="font-medium dark:text-gray-200" th:text="${listing.vehicle.bodyType}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg fill="#000000" viewBox="0 0 24 24" id="car-door-left-1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path id="primary" d="M12.29,3.29,20,11v4.13a1,1,0,0,1-.86,1l-2.06.3A6.11,6.11,0,0,0,12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h6.59A1,1,0,0,1,12.29,3.29ZM20,11H4m4,4h2" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></path>
+              </g>
+            </svg>
+
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500 dark:text-gray-400">Broj vrata</p>
+            <p class="font-medium dark:text-gray-200" th:text="${listing.vehicle.numberOfDoors}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20">
+              <path fill="currentColor"
+                d="M9.75 6.5a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5Zm3 1a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5Zm2.5 1.5a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Zm-.75 3.75a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5ZM13.25 14a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0Zm.447-11.008c-2.754-1.415-5.554-1.28-7.927.174c-1.21.742-2.517 2.303-3.254 3.893c-.37.8-.617 1.646-.614 2.434c.004.801.268 1.566.938 2.112c.61.498 1.142.748 1.656.773c.518.026.922-.184 1.238-.37c.07-.041.135-.081.197-.119c.242-.147.441-.268.69-.346c.28-.09.637-.122 1.155.036c.19.058.306.144.386.244c.086.106.155.254.206.466c.052.213.08.464.1.76c.009.11.016.237.023.369c.012.192.023.397.039.586c.054.67.17 1.436.574 2.132c.414.713 1.1 1.303 2.203 1.68c1.602.548 3.066.103 4.206-.8c1.126-.891 1.956-2.24 2.371-3.589c1.315-4.273-.211-8.393-4.187-10.435ZM6.292 4.019c2.065-1.265 4.492-1.4 6.948-.138c3.507 1.802 4.873 5.4 3.688 9.252c-.366 1.19-1.094 2.354-2.036 3.1c-.929.735-2.043 1.053-3.261.637c-.904-.31-1.384-.757-1.663-1.236c-.288-.497-.39-1.078-.442-1.712c-.015-.189-.025-.36-.035-.534a28.417 28.417 0 0 0-.025-.41a5.674 5.674 0 0 0-.126-.925a2.171 2.171 0 0 0-.4-.86a1.748 1.748 0 0 0-.872-.57c-.702-.215-1.265-.187-1.75-.034c-.375.12-.698.317-.946.47l-.146.087c-.285.169-.472.244-.68.234c-.213-.01-.543-.118-1.074-.55c-.385-.314-.567-.763-.57-1.34c-.002-.591.186-1.288.521-2.01c.674-1.453 1.862-2.844 2.87-3.461Z" />
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500 dark:text-gray-400">Boja</p>
+            <p class="font-medium dark:text-gray-200" th:text="${listing.vehicle.color}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 2048 2048">
+              <path fill="currentColor"
+                d="M2048 128v1792H0V128h384V0h128v128h1024V0h128v128h384zM128 256v256h1792V256h-256v128h-128V256H512v128H384V256H128zm1792 1536V640H128v1152h1792zm-512-896v640h-128v-486q-27 14-62 26t-66 12V960q12 0 31-6t39-15t36-21t22-21v-1h128zm-384 192q0 39-11 70t-31 58t-44 51t-51 46t-51 46t-47 49h235v128H640v-36q0-19-1-38t4-38t10-36q11-27 33-53t50-53t55-51t51-49t39-47t15-47q0-27-19-45t-45-19q-23 0-40 14t-23 37l-125-26q6-33 23-61t44-48t57-32t64-12q40 0 75 15t61 41t41 61t15 75z" />
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500 dark:text-gray-400">Godina proizvodnje</p>
+            <p class="font-medium dark:text-gray-200" th:text="${listing.vehicle.year}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m0 2v12h7V6H4m16 12V6h-1.24c.24.54.19 1.07.19 1.13c-.07.67-.54 1.37-.71 1.62l-2.33 2.55l3.32-.02l.01 1.22l-5.2-.03l-.04-1s3.05-3.23 3.2-3.52c.14-.28.71-1.95-.7-1.95c-1.23.05-1.09 1.3-1.09 1.3l-1.54.01s.01-.66.38-1.31H13v12h2.58l-.01-.86l.97-.01s.91-.16.92-1.05c.04-1-.81-1-.96-1c-.13 0-1.07.05-1.07.87h-1.52s.04-2.06 2.59-2.06c2.6 0 2.46 2.02 2.46 2.02s.04 1.25-1.11 1.72l.52.37H20M8.92 16h-1.5v-5.8l-1.8.56V9.53l3.14-1.12h.16V16Z" />
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500 dark:text-gray-400">Kilometraža</p>
+            <p class="font-medium dark:text-gray-200" th:text="${listing.vehicle.mileage + ' km'}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+              <path fill="currentColor"
+                d="M9.5 6c-1.32 0-2.496.86-2.875 2.125L5.25 12.719l-1.938-.656l-.624 1.874l1.968.657l-.625 2.125A.972.972 0 0 0 4 17v8c0 .55.45 1 1 1h3l.656-2h5.25l9.938 1.531L24 26h3.031c.242 0 .477-.09.657-.25l.03-.031c.012-.012.024-.02.032-.032a.998.998 0 0 0 .25-.625v-.093a.668.668 0 0 0 0-.125L27.156 19H29v-2h-2.375L24.5 12.656l.875-2.937a1.004 1.004 0 0 0-.344-1.094l-1.937-1.438a1.017 1.017 0 0 0-.5-.187L9.562 6H9.5zm0 2l12.625.969l1.125.844l-.781 2.624a.999.999 0 0 0 .062.75l1.5 3.063l-6.125-2.125l-.125-.063h-.125L7.22 13.095l1.31-4.376c.13-.43.524-.719.969-.719zm-2.875 7.063l10.781 1h.063l7.625 2.687l.718 5.031L14.22 22a1.043 1.043 0 0 0-.156 0h-1.157l.438-1l4.312.625L20.25 22L19 20l-7-1l-1.25 3H6v-4.813zM8.5 16a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3zm12.375 2.75a1.808 1.808 0 1 0 3.406 1.219z" />
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500 dark:text-gray-400">Stanje</p>
+            <p class="font-medium dark:text-gray-200" th:text="${listing.vehicle.state}"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-8 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-8 h-8 mr-2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            </svg>
+          </div>
+          <div class="ml-2">
+            <p class="text-xs text-gray-500 dark:text-gray-400">Lokacija</p>
+            <p class="font-medium dark:text-gray-200"
+              th:text="${listing.vehicle.city.cityName + ', ' + listing.vehicle.county.countyName}"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <h2 class="text-xl font-semibold leading-7 text-gray-900 dark:text-gray-200">Tehnički podaci</h2>
+      </div>
+      <div class="mt-6 border-t border-gray-100 dark:border-gray-700">
+        <dl class="divide-y divide-gray-100 dark:divide-gray-700">
+          <div class=" py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt dark:text-gray-400">Motor</dt>
+            <dd th:text="${listing.vehicle.engineType}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+          </div>
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt dark:text-gray-400">Zapremnina motora</dt>
+            <dd th:text="${listing.vehicle.engineDisplacement + ' L'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+          </div>
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt dark:text-gray-400">Obujam motora</dt>
+            <dd th:text="${listing.vehicle.engineDisplacementCcm3 + ' ccm&sup3;'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+          </div>
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt dark:text-gray-400">Snaga motora</dt>
+            <dd th:text="${listing.vehicle.enginePower + ' kW'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+          </div>
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 dark:text-gray-300">
+            <dt class="dt dark:text-gray-400">Mjenjač</dt>
+            <dd th:text="${listing.vehicle.transmission}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+          </div>
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt dark:text-gray-400">Pogon kotača</dt>
+            <dd th:text="${listing.vehicle.driveTrain}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+          </div>
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt dark:text-gray-400">Potrošnja goriva</dt>
+            <dd th:text="${listing.vehicle.fuelConsumption + ' L/100km'}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+          </div>
+          <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="dt dark:text-gray-400">Ekološka kategorija</dt>
+            <dd th:text="${listing.vehicle.ecoCategory}" class="dd sm:col-span-2 sm:mt-0 dark:text-gray-300"></dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="mt-8">
+        <h2 class="text-base font-semibold text-xl leading-7 text-gray-900 dark:text-gray-200">Sigurnost i oprema</h2>
+        <div class="mt-6 py-6 border-t border-gray-100 grid grid-cols-2 gap-4 dark:border-gray-700">
+          <div>
+            <ul>
+              <li th:each="feature : ${listing.vehicle.safetyFeatures}" th:if="${feature.value}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 inline-block align-middle" viewBox="0 0 24 24">
+                  <path
+                    d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z"
+                    fill="#0891b2"></path>
+                </svg>
+                <span class="align-middle dark:text-gray-300" th:text="${feature}"></span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li th:each="extra : ${listing.vehicle.extras}" th:if="${extra.value}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 inline-block align-middle" viewBox="0 0 24 24">
+                  <path
+                    d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z"
+                    fill="#0891b2"></path>
+                </svg>
+                <span class="align-middle dark:text-gray-300" th:text="${extra}"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+        <!--Stavit input da se opis moze mijenjat */-->
+      <div class="mt-8">
+        <h2 class="text-base font-semibold text-xl leading-7 text-gray-900 dark:text-gray-200">Opis oglasa</h2>
+        <div class="mt-6 py-6 border-t border-gray-100 dark:border-gray-700">
+          <p class="text-gray-700 dark:text-gray-300" th:text="${listing.listingDescription}"></p>
+        </div>
+      </div>
+
+      <div class="mt-8 mb-8">
+        <h2 class="text-base font-semibold text-xl leading-7 text-gray-900 dark:text-gray-200">Podaci o prodavatelju</h2>
+        <div class="mt-6 py-6 border-t border-gray-100 dark:border-gray-700">
+          <a class="inline-flex items-center text-cyan-600 hover:text-cyan-700" th:href="@{'/korisnicki-profil/' + ${listing.user.id} + '/' + ${listing.user.username}}">
+            <span class="mr-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="currentColor" class="w-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg></span>
+            <span class="font-semibold text-lg" th:text="${listing.user.username}"></span>
+          </a>
+          <p class="dark:text-gray-400" th:if="${listing.user.companyName != null}">Naziv tvrtke: <span class="font-semibold dark:text-gray-300"
+              th:text="${listing.user.companyName}"></span></p>
+          <p class="dark:text-gray-400" th:unless="${listing.user.companyName != null}">Ime i prezime: <span class="font-semibold dark:text-gray-300"
+              th:text="${listing.user.firstName + ' ' + listing.user.lastName}"></span></p>
+          <p class="dark:text-gray-400">Kontakt: <span class="font-semibold dark:text-gray-300"
+              th:text="${listing.user.email + ', ' + listing.user.phoneNumber}"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <th:block th:insert="~{fragments/sideDiv :: sideDiv}"></th:block>
+  </main>
+
+  <footer>
+    <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+  </footer>
+
+</body>
+
+</html>

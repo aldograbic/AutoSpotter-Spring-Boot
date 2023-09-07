@@ -231,7 +231,7 @@ CREATE TABLE `user` (
   `company_oib` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
+  `email` varchar(255) UNIQUE DEFAULT NULL,
   `profile_image` varchar(255) DEFAULT NULL,
   `city_id` int DEFAULT NULL,
   `role_id` int DEFAULT NULL,
