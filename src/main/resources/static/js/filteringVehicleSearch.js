@@ -3,15 +3,25 @@ $(document).ready(function () {
     var selectedVehicleType = $('#vehicleType').val();
     if (selectedVehicleType === "Automobil") {
       $('#bodyTypeSection').show();
+      $('#truckDetailsSection').hide();
+    } else if (selectedVehicleType === "Kamion") {
+      $('#truckDetailsSection').show();
+      $('#bodyTypeSection').hide();
     } else {
       $('#bodyTypeSection').hide();
+      $('#truckDetailsSection').hide();
     }
-
     loadManufacturers();
   });
 
-  $('#manufacturer').change(function () {
-    loadModels();
+  $('#engineType').change(function () {
+    var selectedEngineType = $('#engineType').val();
+    if (selectedEngineType === "Električni" || selectedEngineType === "Hibrid" || selectedEngineType === "Plug-in hibrid") {
+      $('#electricEngineSection').show();
+    } else {
+      $('#electricEngineSection').hide();
+    }
+    loadManufacturers();
   });
 
   const checkboxes = document.querySelectorAll('input[name="colorCheckbox"]');
@@ -88,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const yearToSelect = $("#yearTo");
   const yearError = $("#yearError");
 
-  // Add event listeners for the 'select2:select' event
   yearFromSelect.on("select2:select", validateYearRange);
   yearToSelect.on("select2:select", validateYearRange);
 

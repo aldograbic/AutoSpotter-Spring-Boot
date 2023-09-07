@@ -26,6 +26,8 @@ $(document).ready(function() {
     }
   }
 
+  loadModels();
+
   var registeredYesRadio = document.getElementById("registeredYes");
   var registeredNoRadio = document.getElementById("registeredNo");
   var registeredDateInput = document.getElementById("registeredDateInput");
