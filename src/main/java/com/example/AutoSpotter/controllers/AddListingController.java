@@ -114,6 +114,12 @@ public class AddListingController {
             model.addAttribute("showNumberOfWheelsInput", false);
             model.addAttribute("showMaximumAllowableWeightInput", false);
         }
+        // if (step == 3 && 4 == ((Integer) session.getAttribute("vehicleTypeId"))) {
+        //     model.addAttribute("showMotorcycleEngineInput", true);
+        // } else {
+        //     model.addAttribute("showMotorcycleEngineInput", false);
+        // }
+
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();

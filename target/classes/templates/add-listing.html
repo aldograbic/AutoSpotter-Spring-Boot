@@ -257,16 +257,15 @@
                                 </option>
                             </select>
                         </div>
-
-
-                        <div class="relative flex flex-col mb-4">
-                            <label class="dark:text-gray-300" for="engineDisplacementCcm3">Radni obujam</label>
-                            <div class="flex items-center">
-                                <input type="number" id="engineDisplacementCcm3" name="engineDisplacementCcm3" min="0" placeholder="1000"
-                                    required class="input w-full lg:w-44 no-arrows" th:value="${session['engineDisplacementCcm3']}">
-                                <span class="absolute right-0 pr-2 text-gray-500 text-xl">ccm&sup3;</span>
-                            </div>
-                        </div>
+                        <!-- <div th:if="${showMotorcycleEngineInput}" class="flex flex-col mb-4">
+                            <label class="dark:text-gray-300" for="motorcycleEngineType">Motor</label>
+                            <select id="motorcycleEngineType" name="motorcycleEngineType" required class="input select2-basic">
+                                <option value="" disabled selected>Odabir</option>
+                                <option th:each="motorcycleEngineType : ${motorcycleEngineTypes}" th:value="${motorcycleEngineType}"
+                                    th:text="${motorcycleEngineType}" th:selected="${motorcycleEngineType eq session['motorcycleEngineType']}">
+                                </option>
+                            </select>
+                        </div> -->
                     </div>
                     
                     <div class="grid lg:grid-cols-2 grid-cols-1 lg:gap-8">
@@ -280,12 +279,21 @@
                             </div>
                         </div>
                         <div class="relative flex flex-col mb-4">
-                            <label class="dark:text-gray-300" for="enginePower">Snaga motora</label>
+                            <label class="dark:text-gray-300" for="engineDisplacementCcm3">Radni obujam</label>
                             <div class="flex items-center">
-                                <input type="number" id="enginePower" name="enginePower" min="0" placeholder="50"
-                                    required class="input w-full lg:w-44 no-arrows" th:value="${session['enginePower']}">
-                                <span class="absolute right-0 pr-2 text-gray-500 text-xl">kW</span>
+                                <input type="number" id="engineDisplacementCcm3" name="engineDisplacementCcm3" min="0" placeholder="1000"
+                                    required class="input w-full lg:w-44 no-arrows" th:value="${session['engineDisplacementCcm3']}">
+                                <span class="absolute right-0 pr-2 text-gray-500 text-xl">ccm&sup3;</span>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="relative flex flex-col mb-4">
+                        <label class="dark:text-gray-300" for="enginePower">Snaga motora</label>
+                        <div class="flex items-center">
+                            <input type="number" id="enginePower" name="enginePower" min="0" placeholder="50"
+                                required class="input w-full lg:w-96 no-arrows" th:value="${session['enginePower']}">
+                            <span class="absolute right-0 pr-2 text-gray-500 text-xl">kW</span>
                         </div>
                     </div>
                     <div class="grid lg:grid-cols-2 grid-cols-1 lg:gap-8">

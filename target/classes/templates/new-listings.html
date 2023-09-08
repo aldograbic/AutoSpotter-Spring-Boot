@@ -55,10 +55,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="flex flex-col m-4" id="bodyTypeSection">
+                <div class="flex flex-col m-4 hidden" id="bodyTypeSection">
                     <label class="dark:text-gray-300" for="bodyType">Oblik karoserije</label>
-                    <div class="relative inline-block w-auto">
-                        <select id="bodyType" name="bodyType" class="w-full select2-basic">
+                    <div>
+                        <select id="bodyType" name="bodyType" class="select2-basic">
                             <option value="" selected>Svi oblici</option>
                             <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:selected="${bodyType == selectedBodyType}" th:text="${bodyType}"></option>
                         </select>
@@ -66,23 +66,21 @@
                 </div>
                 <div class="flex flex-col m-4" id="engineTypeSection">
                     <label class="dark:text-gray-300" for="engineType">Motor</label>
-                    <div class="relative inline-block w-auto">
-                        <select id="engineType" name="engineType" class="w-full select2-basic">
-                            <option value="" selected>Sve vrste</option>
-                            <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:selected="${engineType == selectedEngineType}" th:text="${engineType}"></option>
-                        </select>
-                    </div>
+                    <select id="engineType" name="engineType" class="w-full select2-basic">
+                        <option value="" selected>Sve vrste</option>
+                        <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:selected="${engineType == selectedEngineType}" th:text="${engineType}"></option>
+                    </select>
                 </div>
-                <div class="flex flex-col m-4" id="motorcycleEngineType">
+                <div class="flex flex-col m-4 hidden" id="motorcycleEngineType">
                     <label class="dark:text-gray-300" for="engineType">Motor</label>
-                    <div class="relative inline-block w-auto">
+                    <div>
                         <select id="motorcycleEngineType" name="motorcycleEngineType" class="w-full select2-basic">
                             <option value="" selected>Sve vrste</option>
-                            <option th:each="motorcycleEngineType : ${motorcycleEngineTypes}" th:value="${motorcycleEngineType}" th:selected="${motorcycleEngineType == selectedmotorcycleEngineType}" th:text="${motorcycleEngineType}"></option>
+                            <option th:each="motorcycleEngineType : ${motorcycleEngineTypes}" th:value="${motorcycleEngineType}" th:selected="${motorcycleEngineType == selectedMotorcycleEngineType}" th:text="${motorcycleEngineType}"></option>
                         </select>
                     </div>
                 </div>
-                <div class="flex flex-col m-4">
+                <div class="flex flex-col m-4 w-auto">
                     <label class="dark:text-gray-300" for="transmissionButtons">Mjenjač</label>
                     <div class="flex shadow-md" id="transmissionButtons">
                         <button type="button" id="transmissionAll" class="button bg-neutral-400 dark:bg-gray-700 dark:hover:bg-cyan-700 flex-grow rounded-br-none rounded-tr-none selected">Sve vrste</button>
@@ -93,12 +91,10 @@
                 </div>
                 <div class="flex flex-col m-4">
                     <label class="dark:text-gray-300" for="county">Lokacija vozila</label>
-                    <div class="relative inline-block w-auto">
-                        <select id="county" name="county" class="w-full select2-withSearch">
-                            <option value="" disabled selected>Odabir</option>
-                            <option th:each="county : ${counties}" th:value="${county}" th:selected="${county == selectedCounty}" th:text="${county}"></option>
-                        </select>
-                    </div>
+                    <select id="county" name="county" class="w-full select2-withSearch">
+                        <option value="" disabled selected>Odabir</option>
+                        <option th:each="county : ${counties}" th:value="${county}" th:selected="${county == selectedCounty}" th:text="${county}"></option>
+                    </select>
                 </div>
                 <div class="flex flex-col m-4">
                     <label class="dark:text-gray-300" for="mileageFrom">Kilometraža vozila</label>
@@ -139,7 +135,7 @@
                     <p id="priceError" class="text-red-500"></p>
                 </div>
                 
-                <div class="flex flex-col m-4">
+                <div class="flex flex-col m-4 w-auto">
                     <label class="dark:text-gray-300" for="userTypeButtons">Tip prodavača</label>
                     <div class="flex shadow-md" id="userTypeButtons">
                         <button type="button" id="userTypeAll" class="button bg-neutral-400 dark:bg-gray-700 dark:hover:bg-cyan-700 flex-grow rounded-br-none rounded-tr-none selected">Svi prodavači</button>

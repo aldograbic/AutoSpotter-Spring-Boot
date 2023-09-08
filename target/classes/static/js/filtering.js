@@ -18,6 +18,9 @@ $(document).ready(function () {
     $('#vehicleType').val(selectedVehicleType);
     if (selectedVehicleType === "Automobil") {
       $('#bodyTypeSection').show();
+    } else if (selectedVehicleType === "Motocikl") {
+      $('#motorcycleEngineType').show();
+      $('#engineTypeSection').hide();
     }
     loadManufacturers(selectedVehicleType);
   }
@@ -29,20 +32,29 @@ $(document).ready(function () {
 
   $('#vehicleType').change(function () {
     var selectedVehicleType = $('#vehicleType').val();
-    if (selectedVehicleType === "Automobil") {
+    
+    if (selectedVehicleType === "Motocikl") {
+      $('#bodyTypeSection').hide(); // Hide body type for "Motocikl"
+      $('#engineTypeSection').hide(); // Hide engine type for "Motocikl"
+      $('#motorcycleEngineType').show(); // Show motorcycle engine type for "Motocikl"
+    } else if (selectedVehicleType === "Automobil") {
       $('#bodyTypeSection').show();
+      $('#engineTypeSection').show();
+      $('#motorcycleEngineType').hide();
     } else {
       $('#bodyTypeSection').hide();
+      $('#engineTypeSection').show();
+      $('#motorcycleEngineType').hide();
     }
-
+  
     loadManufacturers();
-
+  
     const manufacturerParam = queryParams.get('manufacturer');
     if (manufacturerParam) {
       $('#manufacturer').val(manufacturerParam);
     }
   });
-
+  
   $('#manufacturer').change(function () {
     loadModels();
 
