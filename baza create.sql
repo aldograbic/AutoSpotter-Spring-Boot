@@ -37,10 +37,10 @@ CREATE TABLE `states` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `vehicle_type` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `body_type` (
   `id` int NOT NULL,
@@ -51,6 +51,12 @@ CREATE TABLE `body_type` (
 CREATE TABLE `engine_type` (
   `id` int NOT NULL,
   `engine_type_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `motorcycle_engine_type` (
+  `id` int NOT NULL,
+  `motorcycle_engine_type_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -73,13 +79,13 @@ CREATE TABLE `eco_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `manufacturers` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL,
   `manufacturer_name` varchar(50) NOT NULL,
   `vehicle_type_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_vehicle_type_manufacturers` (`vehicle_type_id`),
   CONSTRAINT `fk_vehicle_type_manufacturers` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `models` (
   `id` int NOT NULL,
@@ -178,7 +184,8 @@ CREATE TABLE `vehicle` (
   `number_of_wheels` int NOT NULL,
   `number_of_doors` int NOT NULL,
   `maximum_allowable_weight` double NULL,
-  `engine_type` varchar(255) NOT NULL,
+  `engine_type` varchar(255) DEFAULT NULL,
+  `motorcycle_engine_type` varchar(255) DEFAULT NULL,
   `engine_displacement` varchar(255) NOT NULL,
   `engine_displacement_ccm3` varchar(255) NOT NULL,
   `engine_power` int NOT NULL,
@@ -193,7 +200,6 @@ CREATE TABLE `vehicle` (
   `vehicle_type_id` int NOT NULL,
   `vehicle_safety_features_id` int NOT NULL,
   `vehicle_extras_id` int NOT NULL,
-  
   PRIMARY KEY (`id`),
   KEY `fk_vehicle_type` (`vehicle_type_id`),
   KEY `fk_city_name` (`city_id`),
@@ -203,8 +209,7 @@ CREATE TABLE `vehicle` (
   CONSTRAINT `fk_city_name` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
   CONSTRAINT `fk_vehicle_safety_features` FOREIGN KEY (`vehicle_safety_features_id`) REFERENCES `vehicle_safety_features` (`id`),
   CONSTRAINT `fk_vehicle_extras` FOREIGN KEY (`vehicle_extras_id`) REFERENCES `vehicle_extras` (`id`)
-  
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `images` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -243,7 +248,7 @@ CREATE TABLE `user` (
   KEY `role_id` (`role_id`),
   CONSTRAINT `user_ibfk2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `listing` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -258,7 +263,7 @@ CREATE TABLE `listing` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `listing_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`) ON DELETE CASCADE,
   CONSTRAINT `listing_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `user_likes` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -269,4 +274,4 @@ CREATE TABLE `user_likes` (
   KEY `listing_id` (`listing_id`),
   CONSTRAINT `user_likes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_likes_ibfk_2` FOREIGN KEY (`listing_id`) REFERENCES `listing` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

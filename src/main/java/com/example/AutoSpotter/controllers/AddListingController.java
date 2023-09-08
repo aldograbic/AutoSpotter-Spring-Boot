@@ -194,7 +194,8 @@ public class AddListingController {
     }
 
     @PostMapping("/oglas-3")
-    public String handleStep3FormSubmission(@RequestParam("engineType") String engineType,
+    public String handleStep3FormSubmission(@RequestParam(value = "engineType", required = false) String engineType,
+                                            @RequestParam(value = "motorcycleEngineType", required = false) String motorcycleEngineType,
                                             @RequestParam("engineDisplacement") double engineDisplacement,
                                             @RequestParam("engineDisplacementCcm3") int engineDisplacementCcm3,
                                             @RequestParam("enginePower") int enginePower,
@@ -205,6 +206,7 @@ public class AddListingController {
                                             HttpSession session, Model model) {
 
         session.setAttribute("engineType", engineType);
+        session.setAttribute("motorcycleEngineType", motorcycleEngineType);
         session.setAttribute("engineDisplacement", engineDisplacement);
         session.setAttribute("engineDisplacementCcm3", engineDisplacementCcm3);
         session.setAttribute("enginePower", enginePower);
@@ -234,6 +236,7 @@ public class AddListingController {
         int extrasId = vehicleRepository.saveVehicleExtras(extras);
 
         String engineType = (String) session.getAttribute("engineType");
+        String motorcycleEngineType = (String) session.getAttribute("motorcycleEngineType");
 
         Double actualBatteryCapacity = batteryCapacity != null ? batteryCapacity : -1.0;
         Double actualVehicleRange = vehicleRange != null ? vehicleRange : -1.0;
@@ -264,7 +267,7 @@ public class AddListingController {
         int vehicleTypeId = (int) session.getAttribute("vehicleTypeId");
 
         Vehicle vehicle = new Vehicle(manufacturer, vehicleModel, bodyType, color, registered, mileage, state, year, numberOfWheels, numberOfDoors,
-                                    actualMaximumAllowableWeight, engineType, engineDisplacement, engineDisplacementCcm3, enginePower, fuelConsumption, ecoCategory, transmission,
+                                    actualMaximumAllowableWeight, engineType, motorcycleEngineType, engineDisplacement, engineDisplacementCcm3, enginePower, fuelConsumption, ecoCategory, transmission,
                                     driveTrain, actualBatteryCapacity, actualChargingTime, actualVehicleRange, cityId, vehicleTypeId);
 
         vehicle.setVehicleSafetyFeaturesId(safetyFeaturesId);

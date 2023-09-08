@@ -54,6 +54,11 @@ public class JdbcListingRepository implements ListingRepository {
     }
 
     @Override
+    public void editListing(int listingId) {
+
+    }
+
+    @Override
     public void deleteListing(int id) {
         String sql = "DELETE FROM listing WHERE id = ?";
         jdbcTemplate.update(sql, id);
@@ -81,7 +86,7 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public List<Listing> getFilteredListings(String vehicleType, String manufacturer, String model,
-                                            String bodyType, String engineType, String transmission,
+                                            String bodyType, String engineType, String motorcycleEngineType, String transmission,
                                             String location, Integer mileageFrom, Integer mileageTo,
                                             Integer yearFrom, Integer yearTo, Integer priceFrom,
                                             Integer priceTo, String userType) {
@@ -120,6 +125,11 @@ public class JdbcListingRepository implements ListingRepository {
         if (engineType != null && !engineType.isEmpty()) {
             sql += "AND v.engine_type = ? ";
             params.add(engineType);
+        }
+
+        if (motorcycleEngineType != null && !motorcycleEngineType.isEmpty()) {
+            sql += "AND v.motorcycle_engine_type = ? ";
+            params.add(motorcycleEngineType);
         }
 
         if (transmission != null && !transmission.isEmpty()) {

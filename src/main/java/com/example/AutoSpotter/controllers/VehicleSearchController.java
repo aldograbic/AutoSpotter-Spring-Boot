@@ -48,10 +48,10 @@ public class VehicleSearchController {
         }
         Map<String, List<String>> citiesByCounty = locationRepository.getCitiesByCounty();
         List<String> engineTypes = vehicleRepository.getAllEngineTypes();
+        List<String> motorcycleEngineTypes = vehicleRepository.getAllMotorcycleEngineTypes();
         List<String> transmissionTypes = vehicleRepository.getAllTransmissionTypes();
         List<String> driveTrainTypes = vehicleRepository.getAllDriveTrainTypes();
         List<String> ecoCategories = vehicleRepository.getAllEcoCategories();
-
 
         model.addAttribute("vehicleTypes", vehicleTypes);
         model.addAttribute("bodyTypes", bodyTypes);
@@ -59,6 +59,7 @@ public class VehicleSearchController {
         model.addAttribute("years", years);
         model.addAttribute("citiesByCounty", citiesByCounty);
         model.addAttribute("engineTypes", engineTypes);
+        model.addAttribute("motorcycleEngineTypes", motorcycleEngineTypes);
         model.addAttribute("transmissionTypes", transmissionTypes);
         model.addAttribute("driveTrainTypes", driveTrainTypes);
         model.addAttribute("ecoCategories", ecoCategories);

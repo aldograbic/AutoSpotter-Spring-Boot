@@ -44,6 +44,7 @@ public class NewListingsController {
                                 @RequestParam(required = false) String vehicleModel,
                                 @RequestParam(required = false) String bodyType,
                                 @RequestParam(required = false) String engineType,
+                                @RequestParam(required = false) String motorcycleEngineType,
                                 @RequestParam(required = false) String transmission,
                                 @RequestParam(required = false) String county,
                                 @RequestParam(required = false) Integer mileageFrom,
@@ -61,10 +62,10 @@ public class NewListingsController {
         List<Listing> newListings;
         List<Listing> allNewListings = listingRepository.getNewListings();
 
-        if (vehicleType != null || manufacturer != null || vehicleModel != null || bodyType != null || engineType != null || transmission != null || county != null || 
+        if (vehicleType != null || manufacturer != null || vehicleModel != null || bodyType != null || engineType != null || motorcycleEngineType != null || transmission != null || county != null || 
             mileageFrom != null || mileageTo != null  || yearFrom != null || yearTo != null || priceFrom != null || priceTo != null || userType != null) {
 
-            newListings = listingRepository.getFilteredListings(vehicleType, manufacturer, vehicleModel, bodyType, engineType, transmission, county, mileageFrom,
+            newListings = listingRepository.getFilteredListings(vehicleType, manufacturer, vehicleModel, bodyType, engineType, motorcycleEngineType, transmission, county, mileageFrom,
                                                                 mileageTo, yearFrom, yearTo, priceFrom, priceTo, userType);
 
         } else {
@@ -104,6 +105,7 @@ public class NewListingsController {
         List<String> vehicleTypes = vehicleRepository.getAllVehicleTypes();
         List<String> bodyTypes = vehicleRepository.getAllBodyTypes();
         List<String> engineTypes = vehicleRepository.getAllEngineTypes();
+        List<String> motorcycleEngineTypes = vehicleRepository.getAllMotorcycleEngineTypes();
         List<County> counties = locationRepository.getAllCounties();
         List<Integer> years = new ArrayList<>();
         for (int i = 2023; i >= 1900; i--) {
@@ -127,6 +129,7 @@ public class NewListingsController {
         model.addAttribute("vehicleTypes", vehicleTypes);
         model.addAttribute("bodyTypes", bodyTypes);
         model.addAttribute("engineTypes", engineTypes);
+        model.addAttribute("motorcycleEngineTypes", motorcycleEngineTypes);
         model.addAttribute("counties", counties);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
@@ -136,6 +139,7 @@ public class NewListingsController {
         model.addAttribute("selectedVehicleModel", vehicleModel);
         model.addAttribute("selectedBodyType", bodyType);
         model.addAttribute("selectedEngineType", engineType);
+        model.addAttribute("selectedMotorcycleEngineType", motorcycleEngineType);
         model.addAttribute("selectedTransmission", transmission);
         model.addAttribute("selectedCounty", county);
         model.addAttribute("selectedMileageFrom", mileageFrom);

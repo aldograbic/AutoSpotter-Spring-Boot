@@ -26,6 +26,10 @@ INSERT INTO engine_type VALUES (5, "Plin");
 INSERT INTO engine_type VALUES (6, "Plug-in hibrid");
 INSERT INTO engine_type VALUES (7, "Vodik");
 
+INSERT INTO motorcycle_engine_type VALUES (1, "Dvotaktni");
+INSERT INTO motorcycle_engine_type VALUES (2, "Četverotaktni");
+INSERT INTO motorcycle_engine_type VALUES (3, "Električni");
+
 INSERT INTO transmission VALUES (1, "Ručni");
 INSERT INTO transmission VALUES (2, "Automatski");
 INSERT INTO transmission VALUES (3, "Poluautomatski");

@@ -20,6 +20,7 @@ public class Vehicle {
     private int numberOfWheels;
     private double maximumAllowableWeight;
     private String engineType;
+    private String motorcycleEngineType;
     private double engineDisplacement;
     private int engineDisplacementCcm3;
     private int enginePower;
@@ -42,9 +43,10 @@ public class Vehicle {
     private List<VehicleExtra> extras;
 
     public Vehicle(String manufacturer, String model, String bodyType, String color, Date registered, int mileage,
-                   String state, int year, int numberOfDoors, int numberOfWheels, double maximumAllowableWeight, String engineType, double engineDisplacement, int engineDisplacementCcm3,
-                   int enginePower, double fuelConsumption, String ecoCategory, String transmission, String driveTrain, double batteryCapacity, double chargingTime,
-                   double vehicleRange, int cityId, int vehicleTypeId) {
+                String state, int year, int numberOfDoors, int numberOfWheels, double maximumAllowableWeight, String engineType,
+                String motorcycleEngineType, double engineDisplacement, int engineDisplacementCcm3,
+                int enginePower, double fuelConsumption, String ecoCategory, String transmission, String driveTrain,
+                double batteryCapacity, double chargingTime, double vehicleRange, int cityId, int vehicleTypeId) {
         this.manufacturer = manufacturer;
         this.model = model;
         this.bodyType = bodyType;
@@ -175,6 +177,14 @@ public class Vehicle {
 
     public void setEngineType(String engineType) {
         this.engineType = engineType;
+    }
+
+    public String getMotorcycleEngineType() {
+        return motorcycleEngineType;
+    }
+
+    public void setMotorcycleEngineType(String motorcycleEngineType) {
+        this.motorcycleEngineType = motorcycleEngineType;
     }
 
     public double getEngineDisplacement() {

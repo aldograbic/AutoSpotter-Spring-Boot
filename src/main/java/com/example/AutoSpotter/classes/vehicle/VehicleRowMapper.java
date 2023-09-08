@@ -36,6 +36,7 @@ public class VehicleRowMapper implements RowMapper<Vehicle> {
         vehicle.setNumberOfWheels(rs.getInt("number_of_wheels"));
         vehicle.setMaximumAllowableWeight(rs.getDouble("maximum_allowable_weight"));
         vehicle.setEngineType(rs.getString("engine_type"));
+        vehicle.setMotorcycleEngineType(rs.getString("motorcycle_engine_type"));
         vehicle.setEngineDisplacement(rs.getDouble("engine_displacement"));
         vehicle.setEngineDisplacementCcm3(rs.getInt("engine_displacement_ccm3"));
         vehicle.setEnginePower(rs.getInt("engine_power"));

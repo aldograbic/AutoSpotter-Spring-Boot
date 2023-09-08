@@ -64,12 +64,21 @@
                         </select>
                     </div>
                 </div>
-                <div class="flex flex-col m-4">
+                <div class="flex flex-col m-4" id="engineTypeSection">
                     <label class="dark:text-gray-300" for="engineType">Motor</label>
                     <div class="relative inline-block w-auto">
                         <select id="engineType" name="engineType" class="w-full select2-basic">
                             <option value="" selected>Sve vrste</option>
                             <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:selected="${engineType == selectedEngineType}" th:text="${engineType}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex flex-col m-4" id="motorcycleEngineType">
+                    <label class="dark:text-gray-300" for="engineType">Motor</label>
+                    <div class="relative inline-block w-auto">
+                        <select id="motorcycleEngineType" name="motorcycleEngineType" class="w-full select2-basic">
+                            <option value="" selected>Sve vrste</option>
+                            <option th:each="motorcycleEngineType : ${motorcycleEngineTypes}" th:value="${motorcycleEngineType}" th:selected="${motorcycleEngineType == selectedmotorcycleEngineType}" th:text="${motorcycleEngineType}"></option>
                         </select>
                     </div>
                 </div>

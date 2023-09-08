@@ -257,6 +257,15 @@
                                 </option>
                             </select>
                         </div>
+                        <div class="flex flex-col mb-4">
+                            <label class="dark:text-gray-300" for="motorcycleEngineType">Motor</label>
+                            <select id="engineType" name="motorcycleEngineType" required class="input select2-basic">
+                                <option value="" disabled selected>Odabir</option>
+                                <option th:each="motorcycleEngineType : ${motorcycleEngineTypes}" th:value="${motorcycleEngineType}"
+                                    th:text="${motorcycleEngineType}" th:selected="${motorcycleEngineType eq session['motorcycleEngineType']}">
+                                </option>
+                            </select>
+                        </div>
                         <div class="relative flex flex-col mb-4">
                             <label class="dark:text-gray-300" for="engineDisplacementCcm3">Radni obujam</label>
                             <div class="flex items-center">
