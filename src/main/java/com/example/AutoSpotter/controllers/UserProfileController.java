@@ -209,6 +209,7 @@ public class UserProfileController {
         return "user-profile";
     }
 
+
     @GetMapping("/oglas/{listingId}/uredi")
         public String showEditListing(@PathVariable("listingId") int listingId, Model model){
         Listing listing = listingRepository.getListingById(listingId);
@@ -224,11 +225,12 @@ public class UserProfileController {
 
     @PostMapping("/oglas/{listingId}/uredi")
     public String editListing(@PathVariable("listingId") int listingId, RedirectAttributes redirectAttributes) {
+    
         
         listingRepository.editListing(listingId);
         
         redirectAttributes.addFlashAttribute("successMessage", "Oglas je uspješno uređen.");
-        return "/korisnicki-profil/{userId}/{userUsername}";
+        return "redirect:/korisnicki-profil";
     }
 
     @PostMapping("/listing/{listingId}/delete")

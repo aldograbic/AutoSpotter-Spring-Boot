@@ -1343,6 +1343,10 @@ input[type="checkbox"]:checked + label {
   width: 3rem;
 }
 
+.w-16 {
+  width: 4rem;
+}
+
 .w-2\/3 {
   width: 66.666667%;
 }
