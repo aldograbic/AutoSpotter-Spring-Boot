@@ -247,7 +247,7 @@
                 <h2 class="text-xl font-bold text-gray-700 mt-4 md:mt-0 mx-auto mb-8 dark:text-gray-200">Vozilo - tehničko</h2>
                 <form th:action="@{/oglas-3}" method="post" class="mx-6 md:mx-0">
 
-                    <div class="grid lg:grid-cols-2 grid-cols-1 lg:gap-8">
+                    <div class="grid lg:grid-cols-2 grid-cols-1">
                         <div class="flex flex-col mb-4">
                             <label class="dark:text-gray-300" for="engineType">Motor</label>
                             <select id="engineType" name="engineType" required class="input select2-basic">
@@ -257,15 +257,8 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="flex flex-col mb-4">
-                            <label class="dark:text-gray-300" for="motorcycleEngineType">Motor</label>
-                            <select id="engineType" name="motorcycleEngineType" required class="input select2-basic">
-                                <option value="" disabled selected>Odabir</option>
-                                <option th:each="motorcycleEngineType : ${motorcycleEngineTypes}" th:value="${motorcycleEngineType}"
-                                    th:text="${motorcycleEngineType}" th:selected="${motorcycleEngineType eq session['motorcycleEngineType']}">
-                                </option>
-                            </select>
-                        </div>
+
+
                         <div class="relative flex flex-col mb-4">
                             <label class="dark:text-gray-300" for="engineDisplacementCcm3">Radni obujam</label>
                             <div class="flex items-center">
@@ -276,7 +269,6 @@
                         </div>
                     </div>
                     
-
                     <div class="grid lg:grid-cols-2 grid-cols-1 lg:gap-8">
                         <div class="relative flex flex-col mb-4">
                             <label class="dark:text-gray-300" for="engineDisplacement">Zapremnina motora</label>
