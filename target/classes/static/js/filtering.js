@@ -34,9 +34,9 @@ $(document).ready(function () {
     var selectedVehicleType = $('#vehicleType').val();
     
     if (selectedVehicleType === "Motocikl") {
-      $('#bodyTypeSection').hide(); // Hide body type for "Motocikl"
-      $('#engineTypeSection').hide(); // Hide engine type for "Motocikl"
-      $('#motorcycleEngineType').show(); // Show motorcycle engine type for "Motocikl"
+      $('#bodyTypeSection').hide();
+      $('#engineTypeSection').hide();
+      $('#motorcycleEngineType').show();
     } else if (selectedVehicleType === "Automobil") {
       $('#bodyTypeSection').show();
       $('#engineTypeSection').show();

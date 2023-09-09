@@ -225,7 +225,12 @@
                 <h2 class="text-xl font-semibold text-gray-700 mb-4 mt-8 dark:text-gray-300 text-center">Slični oglasi</h2>
                 <ul>
                     <li th:each="listing, url : ${similarListings}" class="relative flex items-center space-x-4 mb-4 border rounded-md shadow-md dark:border-gray-700">
-                        <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}"><img class="w-56 h-56 object-cover rounded-tl-md rounded-bl-md" th:src="${firstImageUrlsSimilar[__${url.index}__]}" alt="Slika vozila"></a>
+                        <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}">
+                            <img class="w-56 h-56 object-cover rounded-tl-md rounded-bl-md" th:if="${firstImageUrlsSimilar[__${url.index}__] != null}" th:src="${firstImageUrlsSimilar[__${url.index}__]}" alt="Slika vozila">
+                            <div th:if="${firstImageUrlsSimilar[__${url.index}__] == null}" class="w-56 h-56 bg-gray-100 flex justify-center items-center">
+                                <img class="w-24 h-24 object-cover rounded-tl-md rounded-bl-md" src="/img/no-image-svg.svg" alt="Nema slike">
+                            </div>
+                        </a>
                         <div>
                             <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}" class="text-cyan-600 text-xl hover:text-cyan-700">
                                 <h2 class="mb-4 inline-block" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></h2>
@@ -264,9 +269,13 @@
 
             <div class="flex justify-center mb-4">
                 <nav class="inline-flex">
-                    <a th:href="@{'/oglasi?page=' + ${currentPage - 1}}" class="px-3 border rounded-l-md border-gray-300 flex hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-800" th:if="${currentPage > 1}"><svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg></a>
+                    <a th:href="@{'/oglasi?page=' + ${currentPage - 1}}" class="px-3 border rounded-l-md border-gray-300 flex hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-800" th:if="${currentPage > 1}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
+                    </a>
                     <span class="px-4 py-2 border-t border-b border-gray-300 bg-white font-semibold text-gray-700 dark:text-gray-200 dark:bg-gray-900 dark:border-gray-800" th:text="${currentPage + ' od ' + totalPages}"></span>
-                    <a th:href="@{'/oglasi?page=' + ${currentPage + 1}}" class="px-3 border rounded-r-md border-gray-300 flex hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-800" th:if="${currentPage < totalPages}"><svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24"><path d="M13.1714 12.0007L8.22168 7.05093L9.63589 5.63672L15.9999 12.0007L9.63589 18.3646L8.22168 16.9504L13.1714 12.0007Z"></path></svg></a>
+                    <a th:href="@{'/oglasi?page=' + ${currentPage + 1}}" class="px-3 border rounded-r-md border-gray-300 flex hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-800" th:if="${currentPage < totalPages}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24"><path d="M13.1714 12.0007L8.22168 7.05093L9.63589 5.63672L15.9999 12.0007L9.63589 18.3646L8.22168 16.9504L13.1714 12.0007Z"></path></svg>
+                    </a>
                 </nav>
             </div>
 

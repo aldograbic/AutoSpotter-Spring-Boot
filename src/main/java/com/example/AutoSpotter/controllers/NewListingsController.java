@@ -74,7 +74,14 @@ public class NewListingsController {
         }
 
         int totalItems = newListings.size();
-        int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+        int totalPages;
+
+        if (totalItems == 0) {
+            totalPages = 0;
+        } else {
+            totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+        }
+
 
         if (page < 1) {
             page = 1;
@@ -162,8 +169,15 @@ public class NewListingsController {
             }
             
             int totalItemsSimilar = similarListings.size();
-            int totalPagesSimilar = (int) Math.ceil((double) totalItemsSimilar / itemsPerPage);
-            totalPagesSimilar = Math.max(totalPagesSimilar, 1);
+            int totalPagesSimilar;
+
+            if (totalItemsSimilar == 0) {
+                totalPagesSimilar = 0;
+            } else {
+                totalPagesSimilar = (int) Math.ceil((double) totalItemsSimilar / itemsPerPage);
+                totalPagesSimilar = Math.max(totalPagesSimilar, 1);
+            }
+
             int currentPageSimilar = (totalItemsSimilar > 0) ? 1 : 0;
         
             model.addAttribute("totalListingsCount", totalItemsSimilar);
