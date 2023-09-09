@@ -137,12 +137,12 @@
                       </button>
                     </h2>
                     <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
-                        <div class="py-4 flex border-b grid px-4 gap-4 grid-cols-2 border-gray-200 dark:border-gray-700 shadow-2xl">
+                        <div class="py-4 flex grid gap-4 grid-cols-1 md:grid-cols-2 border-gray-200 dark:border-gray-700 shadow-2xl">
                             <div th:if="${#lists.isEmpty(userListing)}">
                                 <p class="text-gray-500">Korisnik nema oglasa.</p>
                             </div>
 
-                            <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-300 dark:border-gray-700" th:each="listing, url : ${userListing}">
+                            <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border bg-white dark:bg-gray-800 rounded-md dark:text-gray-300 shadow-md dark:border-gray-700" th:each="listing, url : ${userListing}">
                                 <a th:if="${user.id == authenticatedUserId}" th:href="@{'/oglas/'+${listing.id}+'/uredi'}" class="absolute bg-cyan-600 w-8 h-8 flex items-center justify-center top-1.5 right-11 hover:bg-cyan-700 rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6 ">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
@@ -186,17 +186,17 @@
                                 </div>
 
                                 <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}">
-                                    <img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
-                                    <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-square bg-gray-100 flex justify-center items-center">
+                                    <img class="object-cover rounded-tl-md rounded-bl-md aspect-video lg:aspect-square h-full w-full" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
+                                    <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-video lg:aspect-square h-full w-full bg-gray-100 flex justify-center items-center">
                                         <img class="w-24 h-24 object-cover rounded-tl-md rounded-bl-md" src="/img/no-image-svg.svg" alt="Nema slike">
                                     </div>
                                 </a>                            
-                                <div class="grid gap-4">
+                                <div class="grid gap-6 m-2">
                                     <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}" class="text-cyan-600 hover:text-cyan-700">
                                         <h2 class="inline-block font-semibold text-lg" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model}"></h2>
                                     </a>
                                     <p th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}" class="text-gray-700 font-semibold text-lg dark:text-gray-300"></p>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16">
+                                    <div class="grid grid-cols-2 gap-2 md:gap-x-16 col-span-2">
                                     
                                         <div class="flex items-center">
                                             <div class="w-8 h-8">
@@ -258,25 +258,25 @@
                       </button>
                     </h2>
                     <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
-                        <div class="py-4 flex border-b grid px-4 gap-4 grid-cols-2 border-gray-200 dark:border-gray-700 shadow-2xl">
+                        <div class="py-4 flex grid gap-4 grid-cols-1 md:grid-cols-2 border-gray-200 dark:border-gray-700 shadow-2xl">
                             <div th:if="${#lists.isEmpty(likedListings)}">
                                 <p class="text-gray-500">Korisnik nema oglasa.</p>
                             </div>
 
-                            <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-300 dark:border-gray-700" th:each="listing, url : ${likedListings}">
+                            <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border bg-white dark:bg-gray-800 rounded-md dark:text-gray-300 shadow-md dark:border-gray-700" th:each="listing, url : ${likedListings}">
 
                                 <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}">
-                                    <img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
-                                    <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-square bg-gray-100 flex justify-center items-center">
+                                    <img class="object-cover rounded-tl-md rounded-bl-md aspect-video lg:aspect-square h-full w-full" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
+                                    <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-video lg:aspect-square h-full w-full bg-gray-100 flex justify-center items-center">
                                         <img class="w-24 h-24 object-cover rounded-tl-md rounded-bl-md" src="/img/no-image-svg.svg" alt="Nema slike">
                                     </div>
                                 </a>                            
-                                <div class="grid gap-4">
+                                <div class="grid gap-6 m-2">
                                     <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}" class="text-cyan-600 hover:text-cyan-700">
                                         <h2 class="inline-block font-semibold text-lg" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model}"></h2>
                                     </a>
                                     <p th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}" class="text-gray-700 font-semibold text-lg dark:text-gray-300"></p>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16">
+                                    <div class="grid grid-cols-2 gap-2 md:gap-x-16 col-span-2">
                                     
                                         <div class="flex items-center">
                                             <div class="w-8 h-8">

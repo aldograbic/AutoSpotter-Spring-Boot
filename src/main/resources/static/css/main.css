@@ -522,44 +522,48 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.monkeylogin
+/* .animcon img
 {
-  width: 350px;
-  height: 500px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 40px;
+	margin-top:110%;
+	height: 170px;
+	width: 170px;
+	transition: 1s;
+}
+
+  .monkeylogin
+{
+	width: 350px;
+	height: 500px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background-color: white;
+	border-radius: 40px;
 }
 
 .animcon
 {
-  background-color: white;
-  /*overflow hidden because to keep the hand image hidden below*/
-  margin-top:20px;
-  height: 170px;
-  width: 170px;
-  border-radius: 50%;
-  background-image:url("img/monkey.gif");
-  background-size: 90% 85%;
-  background-repeat: no-repeat;
-  background-position: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
-  /*flex center to keep the hand image in the center*/
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
+	background-color: white;
+  overflow: hidden;
+	/*overflow hidden because to keep the hand image hidden below*/
 
-.animcon img
-{
-  margin-top:110%;
-  height: 170px;
-  width: 170px;
-  transition: 1s;
-}
+/* margin-top:20px;
+	height: 170px;
+	width: 170px;
+	border-radius: 50%;
+	background-image:url("img/monkey.gif");
+	background-size: 90% 85%;
+	background-repeat: no-repeat;
+	background-position: center;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, .2); */
+
+/*flex center to keep the hand image in the center*/
+
+/* display: flex;
+	align-items: center;
+	flex-direction: column;
+} */
 
 .button {
   --tw-bg-opacity: 1;
@@ -1130,12 +1134,8 @@ input[type="checkbox"]:checked + label {
   z-index: 50;
 }
 
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
-
-.row-span-3 {
-  grid-row: span 3 / span 3;
+.col-span-2 {
+  grid-column: span 2 / span 2;
 }
 
 .m-2 {
@@ -1218,6 +1218,10 @@ input[type="checkbox"]:checked + label {
   margin-right: 0.25rem;
 }
 
+.mr-12 {
+  margin-right: 3rem;
+}
+
 .mr-2 {
   margin-right: 0.5rem;
 }
@@ -1296,6 +1300,10 @@ input[type="checkbox"]:checked + label {
 
 .aspect-square {
   aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
 }
 
 .h-10 {
@@ -1564,10 +1572,6 @@ input[type="checkbox"]:checked + label {
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
-.grid-rows-2 {
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-}
-
 .flex-col {
   flex-direction: column;
 }
@@ -1618,11 +1622,6 @@ input[type="checkbox"]:checked + label {
 
 .gap-8 {
   gap: 2rem;
-}
-
-.gap-x-16 {
-  -moz-column-gap: 4rem;
-       column-gap: 4rem;
 }
 
 .gap-x-6 {
@@ -2707,6 +2706,11 @@ input[type="checkbox"]:checked + label {
     justify-content: flex-end;
   }
 
+  .md\:gap-x-16 {
+    -moz-column-gap: 4rem;
+         column-gap: 4rem;
+  }
+
   :is(.dark .md\:dark\:hover\:text-white:hover) {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -2729,6 +2733,10 @@ input[type="checkbox"]:checked + label {
 
   .lg\:hidden {
     display: none;
+  }
+
+  .lg\:aspect-square {
+    aspect-ratio: 1 / 1;
   }
 
   .lg\:w-1\/6 {

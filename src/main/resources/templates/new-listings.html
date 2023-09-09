@@ -58,7 +58,7 @@
                 <div class="flex flex-col m-4 hidden" id="bodyTypeSection">
                     <label class="dark:text-gray-300" for="bodyType">Oblik karoserije</label>
                     <div>
-                        <select id="bodyType" name="bodyType" class="select2-basic">
+                        <select id="bodyType" name="bodyType" class="w-full select2-basic">
                             <option value="" selected>Svi oblici</option>
                             <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:selected="${bodyType == selectedBodyType}" th:text="${bodyType}"></option>
                         </select>
@@ -155,7 +155,7 @@
             <div class="flex items-center justify-between">
                 <h1 class="text-3xl font-bold text-gray-700 mb-8 dark:text-gray-200">Oglasi <span class="text-2xl" th:text="${'(' + totalListingsCount + ')'}"></span></h1>
                 <div x-data="{ open: false }" class="mb-6 relative inline-block text-left">
-                    <button id="filterToggle" class="lg:hidden absolute top-0 right-0 p-2 text-gray-600 dark:text-gray-300">
+                    <button id="filterToggle" class="lg:hidden absolute right-0 w-10 rounded-full mr-12 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 32 32"><path fill="currentColor" d="M18 28h-4a2 2 0 0 1-2-2v-7.59L4.59 11A2 2 0 0 1 4 9.59V6a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v3.59a2 2 0 0 1-.59 1.41L20 18.41V26a2 2 0 0 1-2 2ZM6 6v3.59l8 8V26h4v-8.41l8-8V6Z"/></svg>
                     </button>
                     <button type="button" data-dropdown-toggle="optionsDropdown" data-dropdown-placement="bottom-end" class="text-gray-700 font-medium inline-flex items-center focus:outline-none">
@@ -178,7 +178,7 @@
             </div>
             
             <ul>
-                <li th:each="listing, url : ${newListings}" class="relative flex items-center space-x-4 mb-4 border rounded-md shadow-md dark:border-gray-700">
+                <li th:each="listing, url : ${newListings}" class="flex items-center relative border bg-white dark:bg-gray-800 rounded-md dark:text-gray-300 shadow-md dark:border-gray-700">
                     <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}">
                         <img class="w-56 h-56 object-cover rounded-tl-md rounded-bl-md" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
                         <div th:if="${firstImageUrls[__${url.index}__] == null}" class="w-56 h-56 bg-gray-100 flex justify-center items-center">
@@ -187,7 +187,7 @@
                     </a>
                     <div>
                         <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}" class="text-cyan-600 text-xl hover:text-cyan-700">
-                            <h2 class="mb-4 inline-block" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></h2>
+                            <h2 class="inline-block font-semibold text-lg mb-4" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></h2>
                         </a>
                         <p th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}" class="text-gray-700 text-lg font-semibold mb-4 dark:text-gray-300"></p>
 

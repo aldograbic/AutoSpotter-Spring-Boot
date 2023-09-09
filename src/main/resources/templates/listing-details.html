@@ -454,23 +454,21 @@
       <div class="mt-8 mb-8">
         <h2 class="text-base font-semibold text-xl leading-7 text-gray-900 dark:text-gray-200">Slični oglasi</h2>
         <div class="mt-6 border-t border-gray-100 dark:border-gray-700">
-          <div class="py-4 flex border-b grid px-4 gap-4 grid-cols-2 border-gray-200 dark:border-gray-700">
-
-          
-          <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border rounded-md dark:text-gray-300 dark:border-gray-700" th:each="listing, url : ${similarListings}">
+          <div class="py-4 flex border-b grid gap-4 grid-cols-1 md:grid-cols-2 border-gray-200 dark:border-gray-700">
+          <div class="grid relative grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border bg-white dark:bg-gray-800 rounded-md dark:text-gray-300 shadow-md dark:border-gray-700" th:each="listing, url : ${similarListings}">
             <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}">
-              <img class="object-cover rounded-tl-md rounded-bl-md aspect-square w-full" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
-              <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-square bg-gray-100 flex justify-center items-center">
+              <img class="object-cover rounded-tl-md rounded-bl-md aspect-video lg:aspect-square h-full w-full" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
+              <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-video lg:aspect-square h-full w-full bg-gray-100 flex justify-center items-center">
                   <img class="w-24 h-24 object-cover rounded-tl-md rounded-bl-md" src="/img/no-image-svg.svg" alt="Nema slike">
               </div>
             </a>
         
-            <div class="grid gap-4">
+            <div class="grid gap-6 m-2">
                 <a th:href="@{'/oglasi/' + ${listing.id}}" class="text-cyan-600 hover:text-cyan-700">
                     <h2 class="inline-block font-semibold text-lg" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model}"></h2>
                 </a>
                 <p th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}" class="text-gray-700 font-semibold text-lg dark:text-gray-300"></p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16">
+                <div class="grid grid-cols-2 gap-2 md:gap-x-16 col-span-2">
                 
                     <div class="flex items-center">
                         <div class="w-8 h-8">

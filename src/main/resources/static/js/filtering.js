@@ -18,6 +18,7 @@ $(document).ready(function () {
     $('#vehicleType').val(selectedVehicleType);
     if (selectedVehicleType === "Automobil") {
       $('#bodyTypeSection').show();
+      $('#bodyTypeSection').removeClass('hidden');
     } else if (selectedVehicleType === "Motocikl") {
       $('#motorcycleEngineType').show();
       $('#engineTypeSection').hide();
