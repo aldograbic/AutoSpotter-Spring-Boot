@@ -59,7 +59,7 @@
       </button>
     </div>
 
-    <form method="POST" th:action="@{'/oglas/'+ ${listing.id}+'/uredi'}">
+    <form method="POST" th:action="@{'/oglas/'+ ${listing.id} +'/uredi'}">
       <div class="text-2xl">
         <h2 class="mb-4 ml mt-8 font-semibold dark:text-gray-200"
           th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}">

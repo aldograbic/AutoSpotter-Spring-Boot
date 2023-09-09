@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <!-- <script th:src="@{/js/login.js}" defer="defer"></script> -->
     <title>AutoSpotter | Prijava</title>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -46,15 +47,21 @@
             
             <h1 class="text-3xl font-bold text-gray-700 mb-8 dark:text-gray-200">Prijava</h1>
 
+            
+
             <div class="border rounded-md h-full flex flex-col md:items-center justify-center mb-4 shadow-md dark:border-gray-700">
+                <!-- <div class="monkeylogin">
+                    <div class="animcon" id="animcon">
+                        <img id="hands" src="img/hands.png"/>
+                    </div> -->
                 <form th:action="@{/prijava}" method="post" class="mx-6 md:mx-0">
                     <div class="flex flex-col mb-4">
                         <label class="dark:text-gray-300" for="username">Korisničko ime</label>
-                        <input type="text" id="username" name="username" required class="input dark:bg-gray-500" autocomplete="username"/>
+                        <input type="text" onclick="openeye();" id="username" name="username" required class="input dark:bg-gray-500" autocomplete="username"/>
                     </div>
                     <div class="flex flex-col mb-4">
                         <label class="dark:text-gray-300" for="password">Lozinka</label>
-                        <input type="password" id="password" name="password" required class="input dark:bg-gray-500"/>
+                        <input type="password" onclick="closeye();" id="password" name="password" required class="input dark:bg-gray-500"/>
                     </div>
                     <div class="flex flex-col mb-4">
                         <input type="submit" value="Potvrdi" class="button"/>
@@ -89,6 +96,7 @@
                     </div>
                 </form>
             </div>
+        </div>
             
         </div>
 

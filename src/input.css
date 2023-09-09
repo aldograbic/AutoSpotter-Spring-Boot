@@ -3,6 +3,53 @@
 @tailwind utilities;
 
 @layer components {
+  
+
+
+
+/* .animcon img
+{
+	margin-top:110%;
+	height: 170px;
+	width: 170px;
+	transition: 1s;
+}
+
+  .monkeylogin
+{
+	width: 350px;
+	height: 500px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background-color: white;
+	border-radius: 40px;
+}
+
+.animcon
+{
+	background-color: white;
+  overflow: hidden;
+	/*overflow hidden because to keep the hand image hidden below*/
+	/* margin-top:20px;
+	height: 170px;
+	width: 170px;
+	border-radius: 50%;
+	background-image:url("img/monkey.gif");
+	background-size: 90% 85%;
+	background-repeat: no-repeat;
+	background-position: center;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, .2); */
+
+	/*flex center to keep the hand image in the center*/
+	/* display: flex;
+	align-items: center;
+	flex-direction: column;
+} */ 
+
+
+  
 
     .button {
         --tw-bg-opacity: 1;
@@ -387,4 +434,6 @@
       .embla__button--next {
         right: 27px;
       }
+
+      
 }

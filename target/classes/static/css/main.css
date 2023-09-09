@@ -522,6 +522,45 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.monkeylogin
+{
+  width: 350px;
+  height: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 40px;
+}
+
+.animcon
+{
+  background-color: white;
+  /*overflow hidden because to keep the hand image hidden below*/
+  margin-top:20px;
+  height: 170px;
+  width: 170px;
+  border-radius: 50%;
+  background-image:url("img/monkey.gif");
+  background-size: 90% 85%;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+  /*flex center to keep the hand image in the center*/
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.animcon img
+{
+  margin-top:110%;
+  height: 170px;
+  width: 170px;
+  transition: 1s;
+}
+
 .button {
   --tw-bg-opacity: 1;
   background-color: rgb(8 145 178 / var(--tw-bg-opacity));
@@ -2154,6 +2193,11 @@ input[type="checkbox"]:checked + label {
 .ring-cyan-600 {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(8 145 178 / var(--tw-ring-opacity));
+}
+
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .transition {
