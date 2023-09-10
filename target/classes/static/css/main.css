@@ -1254,10 +1254,6 @@ input[type="checkbox"]:checked + label {
   margin-top: 0.5rem;
 }
 
-.mt-20 {
-  margin-top: 5rem;
-}
-
 .mt-3 {
   margin-top: 0.75rem;
 }
@@ -1360,10 +1356,6 @@ input[type="checkbox"]:checked + label {
 
 .h-8 {
   height: 2rem;
-}
-
-.h-96 {
-  height: 24rem;
 }
 
 .h-\[calc\(100\%-1rem\)\] {
@@ -2661,6 +2653,10 @@ input[type="checkbox"]:checked + label {
 }
 
 @media (min-width: 768px) {
+  .md\:absolute {
+    position: absolute;
+  }
+
   .md\:inset-0 {
     inset: 0px;
   }
@@ -2678,16 +2674,16 @@ input[type="checkbox"]:checked + label {
     margin-top: 0px;
   }
 
+  .md\:mt-20 {
+    margin-top: 5rem;
+  }
+
   .md\:flex {
     display: flex;
   }
 
   .md\:hidden {
     display: none;
-  }
-
-  .md\:h-full {
-    height: 100%;
   }
 
   .md\:w-1\/2 {

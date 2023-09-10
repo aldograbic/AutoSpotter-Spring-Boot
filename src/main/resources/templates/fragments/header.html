@@ -82,7 +82,7 @@
     </div>
   </nav>
 
-  <div x-data="{ isOpen: false }" class="md:hidden flex justify-between relative dark:bg-gray-800">
+  <div x-data="{ isOpen: false }" class="md:hidden flex justify-between relative dark:bg-gray-800" x-cloak>
     <a href="/"><img class="mr-3 w-36" src="img/logo-svg.svg" alt="logo" id="logo"></a>
     <button @click="isOpen = !isOpen" type="button"
       class="inline-flex items-center justify-center p-2 w-10 h-10 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
