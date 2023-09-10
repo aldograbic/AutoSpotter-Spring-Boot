@@ -187,7 +187,7 @@
 
                                 <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}">
                                     <img class="object-cover rounded-tl-md rounded-bl-md aspect-video lg:aspect-square h-full w-full" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
-                                    <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-video lg:aspect-square h-full w-full bg-gray-100 flex justify-center items-center">
+                                    <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-video lg:aspect-square h-full w-full bg-gray-100 dark:bg-gray-700 flex justify-center items-center">
                                         <img class="w-24 h-24 object-cover rounded-tl-md rounded-bl-md" src="/img/no-image-svg.svg" alt="Nema slike">
                                     </div>
                                 </a>                            
@@ -196,7 +196,7 @@
                                         <h2 class="inline-block font-semibold text-lg" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model}"></h2>
                                     </a>
                                     <p th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}" class="text-gray-700 font-semibold text-lg dark:text-gray-300"></p>
-                                    <div class="grid grid-cols-2 gap-2 md:gap-x-16 col-span-2">
+                                    <div class="grid grid-cols-2 gap-2 md:gap-x-16">
                                     
                                         <div class="flex items-center">
                                             <div class="w-8 h-8">
@@ -267,7 +267,7 @@
 
                                 <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}">
                                     <img class="object-cover rounded-tl-md rounded-bl-md aspect-video lg:aspect-square h-full w-full" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
-                                    <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-video lg:aspect-square h-full w-full bg-gray-100 flex justify-center items-center">
+                                    <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-video lg:aspect-square h-full w-full bg-gray-100 dark:bg-gray-700 flex justify-center items-center">
                                         <img class="w-24 h-24 object-cover rounded-tl-md rounded-bl-md" src="/img/no-image-svg.svg" alt="Nema slike">
                                     </div>
                                 </a>                            
@@ -276,7 +276,7 @@
                                         <h2 class="inline-block font-semibold text-lg" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model}"></h2>
                                     </a>
                                     <p th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}" class="text-gray-700 font-semibold text-lg dark:text-gray-300"></p>
-                                    <div class="grid grid-cols-2 gap-2 md:gap-x-16 col-span-2">
+                                    <div class="grid grid-cols-2 gap-2 md:gap-x-16">
                                     
                                         <div class="flex items-center">
                                             <div class="w-8 h-8">

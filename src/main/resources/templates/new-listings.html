@@ -177,30 +177,30 @@
                 </div>   
             </div>
             
-            <ul>
-                <li th:each="listing, url : ${newListings}" class="flex items-center relative border bg-white dark:bg-gray-800 rounded-md dark:text-gray-300 shadow-md dark:border-gray-700">
+            <ul class="grid gap-4 border-gray-200 dark:border-gray-700">
+                <li th:each="listing, url : ${newListings}" class="md:flex grid relative border dark:bg-gray-800 rounded-md dark:text-gray-300 shadow-md dark:border-gray-700">
                     <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}">
-                        <img class="w-56 h-56 object-cover rounded-tl-md rounded-bl-md" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
-                        <div th:if="${firstImageUrls[__${url.index}__] == null}" class="w-56 h-56 bg-gray-100 flex justify-center items-center">
+                        <img class="object-cover object-center rounded-tl-md rounded-bl-md aspect-video lg:aspect-square h-full w-full lg:w-64" th:if="${firstImageUrls[__${url.index}__] != null}" th:src="${firstImageUrls[__${url.index}__]}" alt="Slika vozila">
+                        <div th:if="${firstImageUrls[__${url.index}__] == null}" class="aspect-video lg:aspect-square h-full w-full lg:w-64 bg-gray-100 dark:bg-gray-700 flex justify-center items-center">
                             <img class="w-24 h-24 object-cover rounded-tl-md rounded-bl-md" src="/img/no-image-svg.svg" alt="Nema slike">
                         </div>
                     </a>
-                    <div>
+                    <div class="m-2">
                         <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}" class="text-cyan-600 text-xl hover:text-cyan-700">
                             <h2 class="inline-block font-semibold text-lg mb-4" th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></h2>
                         </a>
                         <p th:text="&euro; + ${listing.listingPrice == listing.listingPrice.intValue() ? listing.listingPrice.intValue() : listing.listingPrice}" class="text-gray-700 text-lg font-semibold mb-4 dark:text-gray-300"></p>
 
                         <p th:text="${listing.vehicle.state + ', ' + listing.vehicle.mileage + ' km'}" class="text-gray-700 dark:text-gray-300"></p>
-                        <p class="text-gray-700 dark:text-gray-300">
+                        <p class="text-gray-700 dark:text-gray-300 mt-4">
                             <span th:if="${#strings.length(listing.listingDescription) > 75}" th:text="${#strings.substring(listing.listingDescription, 0, 75) + '...'}"></span>
                             <span th:if="${#strings.length(listing.listingDescription) > 75}">
                                 <a th:href="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}" class="text-cyan-600 hover:text-cyan-700">Više</a>
                             </span>
                             <span th:unless="${#strings.length(listing.listingDescription) > 75}" th:text="${listing.listingDescription}"></span>
                         </p>
-                        <p class="mt-10 text-gray-700 dark:text-gray-300" th:text="${#dates.format(listing.createdAt, 'dd.MM.yyyy')}"></p>
-                        <p class="flex items-center text-gray-700 absolute top-0 right-0 mt-3 mr-4 dark:text-gray-300">
+                        <p class="mt-20 text-gray-700 dark:text-gray-300" th:text="${#dates.format(listing.createdAt, 'dd.MM.yyyy')}"></p>
+                        <p class="flex items-center text-gray-700 absolute top-0 right-0 mt-3 mr-2 dark:text-gray-300">
                             <span class="mr-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-cyan-600">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -209,7 +209,7 @@
                             </span>
                             <span th:text="${listing.vehicle.city.cityName}"></span>
                         </p>
-                        <a th:href="@{'/korisnicki-profil/' + ${listing.user.id} + '/' + ${listing.user.username}}" class="flex items-center text-cyan-600 absolute bottom-0 right-0 mb-3 mr-4 hover:text-cyan-700">
+                        <a th:href="@{'/korisnicki-profil/' + ${listing.user.id} + '/' + ${listing.user.username}}" class="flex items-center text-cyan-600 absolute bottom-0 right-0 mb-3 mr-2 hover:text-cyan-700">
                             <span class="mr-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                               </svg>
@@ -267,7 +267,7 @@
                 </ul>
             </div>
 
-            <div class="flex justify-center mb-4">
+            <div class="flex justify-center mb-4 mt-4">
                 <nav class="inline-flex">
                     <a th:href="@{'/oglasi?page=' + ${currentPage - 1}}" class="px-3 border rounded-l-md border-gray-300 flex hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-800" th:if="${currentPage > 1}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
