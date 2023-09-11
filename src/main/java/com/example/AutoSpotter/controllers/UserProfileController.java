@@ -12,7 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +24,6 @@ import com.example.AutoSpotter.classes.listing.ListingRepository;
 import com.example.AutoSpotter.classes.location.LocationRepository;
 import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.user.UserRepository;
-import com.example.AutoSpotter.classes.vehicle.Vehicle;
 import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
@@ -197,7 +195,10 @@ public class UserProfileController {
     }
 
     @GetMapping("/korisnicki-profil/{userId}/{userUsername}")
-    public String showUserProfile(@PathVariable("userId") int userId, @PathVariable("userUsername") String userUsername, Model model) {
+    public String showUserProfile(@PathVariable("userId") int userId,
+                                @PathVariable("userUsername") String userUsername,
+                                Model model) {
+
         User user = userRepository.getUserById(userId);
         int listingCount = listingRepository.getListingsCountByUserId(userId);
         List<Listing> userListing = listingRepository.getListingsByUserId(userId);
@@ -207,53 +208,57 @@ public class UserProfileController {
             String firstImageUrl = listingRepository.getFirstImageUrlForVehicle(listing.getVehicleId());
             firstImageUrls.add(firstImageUrl);
         }
-        model.addAttribute("firstImageUrls", firstImageUrls);
 
+        model.addAttribute("firstImageUrls", firstImageUrls);
         model.addAttribute("user", user);
         model.addAttribute("listingCount", listingCount);
         model.addAttribute("userListing", userListing);
+
         return "user-profile";
     }
 
-
     @GetMapping("/oglas/{listingId}/uredi")
-        public String showEditListing(@PathVariable("listingId") int listingId, Model model){
+    public String showEditListing(@PathVariable("listingId") int listingId, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username);
+
         Listing listing = listingRepository.getListingById(listingId);
         int vehicleId = listing.getVehicleId();
         List<String> imageUrls = listingRepository.getImageUrlsForVehicle(vehicleId);
         List<String> states = vehicleRepository.getAllStates();
         Map<String, List<String>> citiesByCounty = locationRepository.getCitiesByCounty();
 
+        model.addAttribute("user", user);
         model.addAttribute("imageUrls", imageUrls);
         model.addAttribute("listing", listing);
         model.addAttribute("states", states);
         model.addAttribute("citiesByCounty", citiesByCounty);
             
         return "edit-listing";
-        }
-
+    }
 
     @PostMapping("/oglas/{listingId}/uredi")
     public String editListing(@PathVariable("listingId") int listingId, 
-                              @RequestParam("listingDescription") String listingDescription,
-                              @RequestParam("mileage") int mileage,
-                              @RequestParam("state") String state,
-                              @RequestParam("city") String city,
-                              RedirectAttributes redirectAttributes,
-                              @RequestParam("priceInput") BigDecimal priceInput) {
+                            @RequestParam("listingDescription") String listingDescription,
+                            @RequestParam("priceInput") BigDecimal priceInput,
+                            @RequestParam("mileage") int mileage,
+                            @RequestParam("state") String state,
+                            @RequestParam("city") String city,
+                            RedirectAttributes redirectAttributes) {
+
         Listing listing = listingRepository.getListingById(listingId);
-        Vehicle vehicle = vehicleRepository.getVehicleById(listing.getVehicleId());
-        
+        int cityId = locationRepository.getCityIdByName(city);
         
         listing.setListingDescription(listingDescription);
         listing.setListingPrice(priceInput);
         listing.getVehicle().setMileage(mileage);
         listing.getVehicle().setState(state);
-        
+        listing.getVehicle().setCityId(cityId);
         
         listingRepository.editListing(listing);
         
-
         redirectAttributes.addFlashAttribute("successMessage", "Oglas je uspješno uređen.");
         return "redirect:/korisnicki-profil";
     }
