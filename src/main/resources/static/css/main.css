@@ -2587,6 +2587,12 @@ input[type="checkbox"]:checked + label {
   --tw-ring-color: rgb(153 27 27 / var(--tw-ring-opacity));
 }
 
+@media not all and (min-width: 640px) {
+  .max-sm\:h-96 {
+    height: 24rem;
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:col-span-2 {
     grid-column: span 2 / span 2;
