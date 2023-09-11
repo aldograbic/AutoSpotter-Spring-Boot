@@ -180,7 +180,7 @@
             <label class="text-xs text-gray-500 dark:text-gray-400" for="state">Stanje vozila</label>
             <select name="state" id="state" class="input select2-basic">
                 <option value="" disabled selected>Odabir</option>
-                <option th:each="state : ${states}" th:value="${state}" th:text="${state}"></option>
+                <option th:each="state : ${states}" th:selected="${listing.vehicle.state == state}" th:value="${state}" th:text="${state}"></option>
             </select>
           </div>
         </div>
@@ -202,7 +202,7 @@
                     <optgroup th:label="${entry.key}">
                         <th:block th:each="city : ${entry.value}">
                             <option th:value="${city}" th:text="${city}"
-                                th:selected="${city eq session['city']}"></option>
+                                    th:selected="${listing.vehicle.city.cityName == city}"></option>
                         </th:block>
                     </optgroup>
                 </th:block>
@@ -284,7 +284,7 @@
       <div class="mt-8">
         <h2 class="text-base font-semibold text-xl leading-7 text-gray-900 dark:text-gray-200">Opis oglasa</h2>
         <div class="mt-6 py-6 border-t border-gray-100 dark:border-gray-700">
-          <textarea class="input h-48 w-full resize-none text-gray-700 dark:text-gray-300" th:text="${listing.listingDescription}"></textarea>
+          <textarea name="listingDescription" class="input h-48 w-full resize-none text-gray-700 dark:text-gray-300" th:text="${listing.listingDescription}"></textarea>
         </div>
       </div>
 

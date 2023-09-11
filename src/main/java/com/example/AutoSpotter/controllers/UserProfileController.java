@@ -1,6 +1,7 @@
 package com.example.AutoSpotter.controllers;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +25,8 @@ import com.example.AutoSpotter.classes.listing.ListingRepository;
 import com.example.AutoSpotter.classes.location.LocationRepository;
 import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.user.UserRepository;
+import com.example.AutoSpotter.classes.vehicle.Vehicle;
+import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
@@ -39,13 +43,15 @@ public class UserProfileController {
     private LocationRepository locationRepository;
     private EmailService emailService;
     private Storage storage;
+    private VehicleRepository vehicleRepository;
 
-    public UserProfileController(UserRepository userRepository, ListingRepository listingRepository, LocationRepository locationRepository, EmailService emailService, Storage storage) {
+    public UserProfileController(UserRepository userRepository, ListingRepository listingRepository, LocationRepository locationRepository, EmailService emailService, Storage storage, VehicleRepository vehicleRepository) {
         this.userRepository = userRepository;
         this.listingRepository = listingRepository;
         this.locationRepository = locationRepository;
         this.emailService = emailService;
         this.storage = storage;
+        this.vehicleRepository = vehicleRepository;
     }
 
     @GetMapping("/korisnicki-profil")
@@ -215,20 +221,39 @@ public class UserProfileController {
         Listing listing = listingRepository.getListingById(listingId);
         int vehicleId = listing.getVehicleId();
         List<String> imageUrls = listingRepository.getImageUrlsForVehicle(vehicleId);
+        List<String> states = vehicleRepository.getAllStates();
+        Map<String, List<String>> citiesByCounty = locationRepository.getCitiesByCounty();
 
         model.addAttribute("imageUrls", imageUrls);
         model.addAttribute("listing", listing);
+        model.addAttribute("states", states);
+        model.addAttribute("citiesByCounty", citiesByCounty);
             
         return "edit-listing";
         }
 
 
     @PostMapping("/oglas/{listingId}/uredi")
-    public String editListing(@PathVariable("listingId") int listingId, RedirectAttributes redirectAttributes) {
-    
+    public String editListing(@PathVariable("listingId") int listingId, 
+                              @RequestParam("listingDescription") String listingDescription,
+                              @RequestParam("mileage") int mileage,
+                              @RequestParam("state") String state,
+                              @RequestParam("city") String city,
+                              RedirectAttributes redirectAttributes,
+                              @RequestParam("priceInput") BigDecimal priceInput) {
+        Listing listing = listingRepository.getListingById(listingId);
+        Vehicle vehicle = vehicleRepository.getVehicleById(listing.getVehicleId());
         
-        listingRepository.editListing(listingId);
         
+        listing.setListingDescription(listingDescription);
+        listing.setListingPrice(priceInput);
+        listing.getVehicle().setMileage(mileage);
+        listing.getVehicle().setState(state);
+        
+        
+        listingRepository.editListing(listing);
+        
+
         redirectAttributes.addFlashAttribute("successMessage", "Oglas je uspješno uređen.");
         return "redirect:/korisnicki-profil";
     }

@@ -55,13 +55,13 @@ public class JdbcListingRepository implements ListingRepository {
     }
 
     @Override
-    public void editListing(int listingId) {
-        Listing listing = getListingById(listingId);
+    public void editListing(Listing listing) {
+        int listingId = listing.getId();
         Vehicle vehicle = vehicleRepository.getVehicleById(listing.getVehicleId());
         String sql = "UPDATE listing l " +
         "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
         "SET l.listing_description = ?, l.listing_price = ?, v.mileage = ?, v.state = ?, v.city_id = ? " +
-        "WHERE l.id = ?";
+        "WHERE l.id = ? ";
         jdbcTemplate.update(
         sql,
         listing.getListingDescription(),
