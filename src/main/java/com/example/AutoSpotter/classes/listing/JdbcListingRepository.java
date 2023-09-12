@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import com.example.AutoSpotter.classes.user.UserRepository;
-import com.example.AutoSpotter.classes.vehicle.Vehicle;
 import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
 
 @Repository
@@ -270,17 +269,24 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public List<Listing> getSimilarListings(int currentListingId, String vehicleType, String manufacturer, String model) {
-        String sql = "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at " +
-                "FROM listing " +
-                "WHERE id != ? " +
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at " +
+                "FROM listing l " +
+                "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
+                "INNER JOIN vehicle_type vt ON v.vehicle_type_id = vt.id " +
+                "WHERE l.id != ? " +
                 "AND ( " +
-                    "(vehicle_id IN (SELECT id FROM vehicle WHERE manufacturer = ? AND model = ?)) " +
+                    "(l.vehicle_id IN (SELECT l.id FROM vehicle WHERE manufacturer = ? AND model = ?)) " +
                     "OR " +
-                    "(vehicle_id IN (SELECT id FROM vehicle WHERE manufacturer = ?) AND id NOT IN (?, ?)) " +
+                    "(l.vehicle_id IN (SELECT l.id FROM vehicle WHERE manufacturer = ?) AND l.id NOT IN (?, ?)) " +
                     "OR " +
-                    "(vehicle_id IN (SELECT id FROM vehicle WHERE vehicle_type_id = ?) AND id NOT IN (?, ?, ?)) " +
+                    "(l.vehicle_id IN (SELECT l.id FROM vehicle WHERE vt.name = ?) AND l.id NOT IN (?, ?, ?)) " +
                 ") " +
-                "ORDER BY created_at DESC " +
+                "ORDER BY " +
+                "  CASE " +
+                "    WHEN v.manufacturer = ? AND v.model = ? THEN 1 " +
+                "    WHEN v.manufacturer = ? THEN 2 " +
+                "    ELSE 3 " +
+                "  END, l.created_at DESC " +
                 "LIMIT 6";
 
         return jdbcTemplate.query(
@@ -291,9 +297,12 @@ public class JdbcListingRepository implements ListingRepository {
                 manufacturer,
                 currentListingId, currentListingId,
                 vehicleType,
-                currentListingId, currentListingId, currentListingId
+                currentListingId, currentListingId, currentListingId,
+                manufacturer, model,
+                manufacturer
         );
     }
+
 
     @Override
     public List<Listing> getSimilarListingsOfFilteredListings(String vehicleType, String manufacturer, String model) {
@@ -309,9 +318,14 @@ public class JdbcListingRepository implements ListingRepository {
                     "OR " +
                     "(l.vehicle_id IN (SELECT v2.id FROM vehicle v2 WHERE v2.manufacturer = ?) AND l.id NOT IN (?, ?)) " +
                     "OR " +
-                    "(l.vehicle_id IN (SELECT v3.id FROM vehicle v3 WHERE v3.vehicle_type_id = ?) AND l.id NOT IN (?, ?, ?)) " +
+                    "(l.vehicle_id IN (SELECT v3.id FROM vehicle v3 INNER JOIN vehicle_type vt ON v3.vehicle_type_id = vt.id WHERE vt.name = ?) AND l.id NOT IN (?, ?, ?)) " +
                 ") " +
-                "ORDER BY l.created_at DESC";
+                "ORDER BY " +
+                "  CASE " +
+                "    WHEN v.manufacturer = ? AND v.model = ? THEN 1 " +
+                "    WHEN v.manufacturer = ? THEN 2 " +
+                "    ELSE 3 " +
+                "  END, l.created_at DESC ";
 
         return jdbcTemplate.query(
                 sql,
@@ -320,9 +334,12 @@ public class JdbcListingRepository implements ListingRepository {
                 manufacturer,
                 manufacturer, manufacturer,
                 vehicleType,
-                manufacturer, manufacturer, manufacturer
+                manufacturer, manufacturer, manufacturer,
+                manufacturer, model,
+                manufacturer
         );
     }
+
 
     @Override
     public void saveImageUrlsForVehicle(ListingImage listingImage) {

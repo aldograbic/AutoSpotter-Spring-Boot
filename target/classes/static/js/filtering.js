@@ -5,6 +5,42 @@ $(document).ready(function () {
   const queryParams = new URLSearchParams(window.location.search);
   const selectedVehicleType = queryParams.get('vehicleType');
   const selectedManufacturer = queryParams.get('manufacturer');
+  const selectedModel = queryParams.get('model');
+  const selectedTransmission = queryParams.get('transmission');
+
+  if (selectedTransmission) {
+    // Remove the 'selected' class from all buttons first
+    $('#transmissionButtons button').removeClass('selected');
+
+    // Add the 'selected' class to the button based on the selectedTransmission value
+    switch (selectedTransmission) {
+      case "Ručni":
+        $('#transmissionManual').addClass('selected');
+        break;
+      case "Automatski":
+        $('#transmissionAutomatic').addClass('selected');
+        break;
+      default:
+        $('#transmissionAll').addClass('selected');
+    }
+  }
+
+  if (selectedUserType) {
+    // Remove the 'selected' class from all user type buttons first
+    $('#userTypeButtons button').removeClass('selected');
+
+    // Add the 'selected' class to the button based on the selectedUserType value
+    switch (selectedUserType) {
+      case "Privatni":
+        $('#userTypePrivate').addClass('selected');
+        break;
+      case "Poslovni":
+        $('#userTypeBusiness').addClass('selected');
+        break;
+      default:
+        $('#userTypeAll').addClass('selected');
+    }
+  }
 
   $('input[type="reset"]').click(function () {
     $('.select2-basic').val('').trigger('change');
@@ -29,6 +65,10 @@ $(document).ready(function () {
   if (selectedManufacturer) {
     $('#manufacturer').val(selectedManufacturer);
     loadModels(selectedManufacturer);
+  }
+
+  if (selectedModel) {
+    $('#model').val(selectedModel);
   }
 
   $('#vehicleType').change(function () {
