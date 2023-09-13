@@ -5,14 +5,13 @@ $(document).ready(function () {
   const queryParams = new URLSearchParams(window.location.search);
   const selectedVehicleType = queryParams.get('vehicleType');
   const selectedManufacturer = queryParams.get('manufacturer');
-  const selectedModel = queryParams.get('model');
+  const selectedModel = queryParams.get('vehicleModel');
   const selectedTransmission = queryParams.get('transmission');
+  const selectedUserType = queryParams.get('userType');
 
   if (selectedTransmission) {
-    // Remove the 'selected' class from all buttons first
     $('#transmissionButtons button').removeClass('selected');
 
-    // Add the 'selected' class to the button based on the selectedTransmission value
     switch (selectedTransmission) {
       case "Ručni":
         $('#transmissionManual').addClass('selected');
@@ -26,10 +25,7 @@ $(document).ready(function () {
   }
 
   if (selectedUserType) {
-    // Remove the 'selected' class from all user type buttons first
     $('#userTypeButtons button').removeClass('selected');
-
-    // Add the 'selected' class to the button based on the selectedUserType value
     switch (selectedUserType) {
       case "Privatni":
         $('#userTypePrivate').addClass('selected');

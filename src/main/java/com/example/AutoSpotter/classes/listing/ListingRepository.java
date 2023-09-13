@@ -11,7 +11,7 @@ public interface ListingRepository {
     List<Listing> getNewListings();
     List<Listing> getFilteredListings(String vehicleType, String manufacturer, String model,
                                             String bodyType, String engineType, String motorcycleEngineType, String transmission,
-                                            String location, Integer mileageFrom, Integer mileageTo,
+                                            String county, Integer mileageFrom, Integer mileageTo,
                                             Integer yearFrom, Integer yearTo, Integer priceFrom,
                                             Integer priceTo, String userType);
     int getListingsCountByUserId(int userId);

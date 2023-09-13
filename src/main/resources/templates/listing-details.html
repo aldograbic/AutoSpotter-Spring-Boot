@@ -114,7 +114,7 @@
             </div>
           </div>
           <div th:if="${user != null}">
-            <form th:if="${!userHasLikedListing}" th:action="@{/like/{listingId}(listingId=${listing.id})}"
+            <form th:if="${!userHasLikedListing}" th:action="@{'/like/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}"
               method="post">
               <button type="submit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24">
@@ -124,7 +124,7 @@
               </button>
             </form>
 
-            <form th:if="${userHasLikedListing}" th:action="@{/dislike/{listingId}(listingId=${listing.id})}"
+            <form th:if="${userHasLikedListing}" th:action="@{'/dislike/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model}}"
               method="post">
               <button type="submit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-8" viewBox="0 0 24 24">
@@ -364,8 +364,7 @@
             Pošalji upit
           </button>
 
-          <div id="contact-modal" tabindex="-1" aria-hidden="true"
-            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+          <div id="contact-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-md max-h-full">
               <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
                 <button type="button"
@@ -383,7 +382,7 @@
                     prodavatelja za</h3>
                   <span class="mb-4 text-xl font-bold flex justify-center text-gray-900 dark:text-white"
                     th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></span>
-                  <form class="space-y-6" th:action="@{/oglasi/{listingId}/kontaktiraj(listingId = ${listing.id})}"
+                  <form class="space-y-6" th:action="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model} + '/kontaktiraj'}"
                     method="post">
                     <div th:if="${user.firstName != null}">
                       <label for="firstName" class="block text-sm font-medium dark:text-white">Ime</label>
@@ -418,7 +417,7 @@
                   <h3 class="mb-4 text-xl font-medium flex justify-center text-gray-900 dark:text-white">Kontaktiraj prodavatelja za</h3>
                   <span class="mb-4 text-xl font-bold flex justify-center text-gray-900 dark:text-white"
                     th:text="${listing.vehicle.manufacturer + ' ' + listing.vehicle.model + ' (' + listing.vehicle.year + ')'}"></span>
-                  <form class="space-y-6" th:action="@{/oglasi/{listingId}/kontaktiraj(listingId = ${listing.id})}" method="post">
+                  <form class="space-y-6" th:action="@{'/oglasi/' + ${listing.id} + '/' + ${listing.vehicle.manufacturer} + '/' + ${listing.vehicle.model} + '/kontaktiraj'}" method="post">
                     <div>
                       <label for="firstName" class="block text-sm font-medium dark:text-white">Ime</label>
                       <input type="text" name="firstName" id="firstName" class="input text-sm block w-full" required>

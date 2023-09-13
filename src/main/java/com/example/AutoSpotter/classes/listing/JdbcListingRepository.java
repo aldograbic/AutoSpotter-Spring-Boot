@@ -101,7 +101,7 @@ public class JdbcListingRepository implements ListingRepository {
     @Override
     public List<Listing> getFilteredListings(String vehicleType, String manufacturer, String model,
                                             String bodyType, String engineType, String motorcycleEngineType, String transmission,
-                                            String location, Integer mileageFrom, Integer mileageTo,
+                                            String county, Integer mileageFrom, Integer mileageTo,
                                             Integer yearFrom, Integer yearTo, Integer priceFrom,
                                             Integer priceTo, String userType) {
         String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
@@ -151,9 +151,9 @@ public class JdbcListingRepository implements ListingRepository {
             params.add(transmission);
         }
 
-        if (location != null && !location.isEmpty()) {
+        if (county != null && !county.isEmpty()) {
             sql += "AND co.county_name = ? ";
-            params.add(location);
+            params.add(county);
         }
 
         if (mileageFrom != null) {

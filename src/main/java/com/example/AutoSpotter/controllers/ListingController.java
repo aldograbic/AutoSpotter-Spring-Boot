@@ -73,8 +73,11 @@ public class ListingController {
     }
 
 
-    @PostMapping("/like/{listingId}")
-    public String likeListing(@PathVariable("listingId") int listingId, RedirectAttributes redirectAttributes) {
+    @PostMapping("/like/{listingId}/{vehicleManufacturer}/{vehicleModel}")
+    public String likeListing(@PathVariable("listingId") int listingId,
+                            @PathVariable("vehicleManufacturer") String vehicleManufacturer,
+                            @PathVariable("vehicleModel") String vehicleModel,
+                            RedirectAttributes redirectAttributes) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -84,11 +87,14 @@ public class ListingController {
 
         redirectAttributes.addFlashAttribute("successMessage", "Oglas uspješno spremljen!");
 
-        return "redirect:/oglasi/{listingId}";
+        return "redirect:/oglasi/{listingId}/{vehicleManufacturer}/{vehicleModel}";
     }
 
-    @PostMapping("/dislike/{listingId}")
-    public String dislikeListing(@PathVariable("listingId") int listingId, RedirectAttributes redirectAttributes) {
+    @PostMapping("/dislike/{listingId}/{vehicleManufacturer}/{vehicleModel}")
+    public String dislikeListing(@PathVariable("listingId") int listingId,
+                            @PathVariable("vehicleManufacturer") String vehicleManufacturer,
+                            @PathVariable("vehicleModel") String vehicleModel,
+                            RedirectAttributes redirectAttributes) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -98,11 +104,13 @@ public class ListingController {
 
         redirectAttributes.addFlashAttribute("successMessage", "Oglas obrisan iz vaših spremljenih oglasa!");
 
-        return "redirect:/oglasi/{listingId}";
+        return "redirect:/oglasi/{listingId}/{vehicleManufacturer}/{vehicleModel}";
     }
 
-    @PostMapping("/oglasi/{listingId}/kontaktiraj")
+    @PostMapping("/oglasi/{listingId}/{vehicleManufacturer}/{vehicleModel}/kontaktiraj")
     public String contactListingUser(@PathVariable("listingId") int listingId,
+                                    @PathVariable("vehicleManufacturer") String vehicleManufacturer,
+                                    @PathVariable("vehicleModel") String vehicleModel,
                                     @RequestParam(value = "firstName", required = false) String firstName,
                                     @RequestParam(value = "lastName", required = false) String lastName,
                                     @RequestParam(value = "companyName", required = false) String companyName,
@@ -111,23 +119,23 @@ public class ListingController {
                                     RedirectAttributes redirectAttributes) {
 
         User listingUser = listingRepository.getListingById(listingId).getUser();
-        String listingLink = "http://localhost:8080/oglasi/" + listingId;
+        String listingLink = "http://localhost:8080/oglasi/" + listingId + "/" + vehicleManufacturer + "/" + vehicleModel;
 
         if(firstName == null) {
-            emailService.sendContactListingEmail(email, listingUser.getEmail(), "Nova poruka od " + companyName + "! - AutoSpotter", "Poštovani/a " + listingUser.getFirstName() + 
+            emailService.sendContactListingEmail(email, listingUser.getEmail(), "Nova poruka od " + companyName + "! - AutoSpotter", "Poštovani/a" + 
                                                 ",\n\nDobili ste novu poruku putem AutoSpotter platforme!" +
                                                 "\n\nDetalji poruke:\nNaziv tvrtke: " + companyName + "\nE-mail adresa: " + email + "\nOglas: " + listingLink +
                                                 "\nPoruka: " + message + "\n\nMolimo Vas da odgovorite na ovaj e-mail kako biste nastavili s potencijalnim kupcem/prodavateljem oglasa." +
                                                 "\n\nHvala što koristite AutoSpotter.\n\nSrdačan pozdrav,\nVaš AutoSpotter tim");
         } else {
             emailService.sendContactListingEmail(email, listingUser.getEmail(), "Nova poruka od " + firstName + ' ' + lastName + "! - AutoSpotter", 
-                                                "Poštovani/a " + listingUser.getCompanyName() + ",\n\nDobili ste novu poruku putem AutoSpotter platforme!" +
+                                                "Poštovani/a" + ",\n\nDobili ste novu poruku putem AutoSpotter platforme!" +
                                                 "\n\nDetalji poruke:\nIme i prezime: " + firstName + ' ' + lastName + "\nE-mail adresa: " + email + "\nOglas: " + listingLink +
                                                 "\nPoruka: " + message + "\n\nMolimo Vas da odgovorite na ovaj e-mail kako biste nastavili s potencijalnim kupcem/prodavateljem oglasa." +
                                                 "\n\nHvala što koristite AutoSpotter.\n\nSrdačan pozdrav,\nVaš AutoSpotter tim");
         }
 
         redirectAttributes.addFlashAttribute("successMessage", "Poruka uspješno poslana korisniku " + listingUser.getUsername() + "!");
-        return "redirect:/oglasi/{listingId}";
+        return "redirect:/oglasi/{listingId}/{vehicleManufacturer}/{vehicleModel}";
     }
 }

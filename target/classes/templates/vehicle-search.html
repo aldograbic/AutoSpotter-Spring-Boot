@@ -46,9 +46,9 @@
                     </div>
                 </div>
 
-                <div id="bodyTypeSection" class="flex flex-col m-4">
+                <div id="bodyTypeSection" class="flex flex-col m-4 hidden">
                     <label class="dark:text-gray-300 font-medium" for="bodyType">Oblik karoserije</label>
-                    <select id="bodyType" class="input select2-basic">
+                    <select id="bodyType" class="input select2-basic" style="width: 100%;">
                         <option value="" selected>Svi oblici</option>
                         <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
                     </select>
@@ -59,13 +59,13 @@
                     <input type="number" id="numberOfDoors" min="0" placeholder="4" class="input no-arrows flex-grow pl-1">
                 </div>
 
-                <div id="truckDetailsSection" class="grid md:grid-cols-2 grid-cols-1 lg:gap-12 gap-4 m-4">
+                <div id="truckDetailsSection" class="grid md:grid-cols-2 grid-cols-1 lg:gap-12 gap-4 m-4 hidden">
                     <div class="flex flex-col">
                         <label class="dark:text-gray-300 font-medium" for="numberOfWheels">Broj kotača</label>
                         <input type="number" id="numberOfWheels" name="numberOfWheels" min="4" placeholder="6" class="input no-arrows">
                     </div>
 
-                    <div class="flex flex-col">
+                    <div class="flex flex-col mt-4">
                         <label class="dark:text-gray-300 font-medium" for="maximumAllowableWeight">Najveća dopuštena masa</label>
                         <div class="flex items-center relative">
                             <input type="text" id="maximumAllowableWeight" name="maximumAllowableWeight"
@@ -154,14 +154,14 @@
                         <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                     </select>
                 </div>
-                <div id="motorcycleEngineSection" class="flex flex-col m-4">
+                <div id="motorcycleEngineSection" class="flex flex-col m-4 hidden">
                     <label class="dark:text-gray-300 font-medium" for="motorcycleEngineType">Motor</label>
-                    <select id="motorcycleEngineType" class="input select2-basic">
+                    <select id="motorcycleEngineType" class="input select2-basic" style="width: 100%;">
                         <option value="" selected>Sve vrste</option>
                         <option th:each="motorcycleEngineType : ${motorcycleEngineTypes}" th:value="${motorcycleEngineType}" th:text="${motorcycleEngineType}"></option>
                     </select>
                 </div>
-                <div id="electricEngineSection" class="grid grid-cols-1 lg:grid-cols-3 lg:gap-12 gap-4 m-4">
+                <div id="electricEngineSection" class="grid grid-cols-1 lg:grid-cols-3 lg:gap-12 gap-4 m-4 hidden">
                     <div class="flex flex-col">
                         <label class="dark:text-gray-300 font-medium" for="batteryCapacity">Kapacitet baterije</label>
                         <div class="flex items-center relative">
@@ -169,14 +169,14 @@
                             <span class="absolute right-0 pr-2 text-gray-500 text-xl">kWh</span>
                         </div>
                     </div>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col mt-4">
                         <label class="dark:text-gray-300 font-medium" for="vehicleRange">Doseg vozila</label>
                         <div class="flex items-center relative">
                             <input type="text" id="vehicleRange" name="vehicleRange" required pattern="[0-9]*\.?[0-9]+" class="input w-full" placeholder="100" oninput="validateInput(this)">
                             <span class="absolute right-0 pr-2 text-gray-500 text-xl">km</span>
                         </div>
                     </div>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col mt-4">
                         <label class="dark:text-gray-300 font-medium" for="chargingTime">Vrijeme punjenja</label>
                         <div class="flex items-center relative">
                             <input type="text" id="chargingTime" name="chargingTime" required pattern="[0-9]*\.?[0-9]+" class="input w-full" placeholder="1" oninput="validateInput(this)">
