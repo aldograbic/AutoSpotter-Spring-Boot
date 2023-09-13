@@ -21,6 +21,7 @@
     </div>
 
     <main class="flex flex-1 dark:bg-gray-800 min-h-screen">
+        
         <div id="filterContainer" class="hidden relative lg:block flex-0 w-full lg:w-1/6 bg-gray-100 dark:bg-gray-900 dark:border-gray-700 text-sm dark:text-gray-200">
             <button type="button" class="lg:hidden absolute right-0 m-2 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -289,8 +290,8 @@
     </footer>
     <script>
         const filterToggle = document.getElementById('filterToggle');
-        const content = document.getElementById('content');
-        // const filterContainer = document.getElementById('filterContainer');
+        // const content = document.getElementById('content');
+        const filterContainer = document.getElementById('filterContainer');
       
         filterToggle.addEventListener('click', () => {
           filterContainer.classList.toggle('hidden');

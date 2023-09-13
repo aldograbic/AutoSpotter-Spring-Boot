@@ -23,7 +23,7 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 ml-4 dark:text-gray-200">Osnovni podaci</h2>
                 <hr class="dark:border-gray-700">
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="vehicleType">Tip vozila</label>
+                    <label class="dark:text-gray-300 font-medium" for="vehicleType">Tip vozila</label>
                     <select id="vehicleType" class="input select2-basic">
                         <option value="" selected>Sva vozila</option>
                         <option th:each="vehicleType : ${vehicleTypes}" th:value="${vehicleType}"
@@ -32,14 +32,14 @@
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 gap-4 m-4">
                     <div class="flex flex-col">
-                        <label class="dark:text-gray-300" for="manufacturer">Proizvođač</label>
+                        <label class="dark:text-gray-300 font-medium" for="manufacturer">Proizvođač</label>
                         <select id="manufacturer" name="manufacturer" class="input select2-withSearch">
                             <option value="" disabled selected>Odabir</option>
                         </select>
                     </div>
 
                     <div class="flex flex-col">
-                        <label class="dark:text-gray-300" for="model">Model</label>
+                        <label class="dark:text-gray-300 font-medium" for="model">Model</label>
                         <select id="model" name="model" class="input select2-withSearch">
                             <option value="" disabled selected>Odabir</option>
                         </select>
@@ -47,7 +47,7 @@
                 </div>
 
                 <div id="bodyTypeSection" class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="bodyType">Oblik karoserije</label>
+                    <label class="dark:text-gray-300 font-medium" for="bodyType">Oblik karoserije</label>
                     <select id="bodyType" class="input select2-basic">
                         <option value="" selected>Svi oblici</option>
                         <option th:each="bodyType : ${bodyTypes}" th:value="${bodyType}" th:text="${bodyType}"></option>
@@ -55,18 +55,18 @@
                 </div>
 
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="numberOfDoors">Broj vrata</label>
+                    <label class="dark:text-gray-300 font-medium" for="numberOfDoors">Broj vrata</label>
                     <input type="number" id="numberOfDoors" min="0" placeholder="4" class="input no-arrows flex-grow pl-1">
                 </div>
 
                 <div id="truckDetailsSection" class="grid md:grid-cols-2 grid-cols-1 lg:gap-12 gap-4 m-4">
                     <div class="flex flex-col">
-                        <label class="dark:text-gray-300" for="numberOfWheels">Broj kotača</label>
+                        <label class="dark:text-gray-300 font-medium" for="numberOfWheels">Broj kotača</label>
                         <input type="number" id="numberOfWheels" name="numberOfWheels" min="4" placeholder="6" class="input no-arrows">
                     </div>
 
                     <div class="flex flex-col">
-                        <label class="dark:text-gray-300" for="maximumAllowableWeight">Najveća dopuštena masa</label>
+                        <label class="dark:text-gray-300 font-medium" for="maximumAllowableWeight">Najveća dopuštena masa</label>
                         <div class="flex items-center relative">
                             <input type="text" id="maximumAllowableWeight" name="maximumAllowableWeight"
                                 placeholder="1000" pattern="[0-9]*\.?[0-9]+" required class="input w-full no-arrows"
@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="mileageFrom">Kilometraža vozila</label>
+                    <label class="dark:text-gray-300 font-medium" for="mileageFrom">Kilometraža vozila</label>
                     <div class="flex items-center">
                         <div class="relative flex items-center w-full">
                             <input type="number" id="mileageFrom" min="0" placeholder="0" class="input w-full no-arrows flex-grow pl-1">
@@ -92,7 +92,7 @@
                     <p id="mileageError" class="text-red-500"></p>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="priceFrom">Cijena vozila</label>
+                    <label class="dark:text-gray-300 font-medium" for="priceFrom">Cijena vozila</label>
                     <div class="flex items-center">
                         <div class="relative flex items-center w-full">
                             <input type="number" id="priceFrom" min="0" placeholder="0" class="input w-full no-arrows flex-grow pl-1">
@@ -107,14 +107,14 @@
                     <p id="priceError" class="text-red-500"></p>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="state">Stanje vozila</label>
+                    <label class="dark:text-gray-300 font-medium" for="state">Stanje vozila</label>
                     <select id="state" class="input select2-basic">
                         <option value="" disabled selected>Odabir</option>
                         <option th:each="state : ${states}" th:value="${state}" th:text="${state}"></option>
                     </select>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="yearFrom">Godina proizvodnje</label>
+                    <label class="dark:text-gray-300 font-medium" for="yearFrom">Godina proizvodnje</label>
                     <div class="flex items-center">
                         <select id="yearFrom" class="input flex-grow select2-basic">
                             <option value="" disabled selected>Odabir</option>
@@ -129,7 +129,7 @@
                     <p id="yearError" class="text-red-500"></p>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="city">Lokacija vozila</label>
+                    <label class="dark:text-gray-300 font-medium" for="city">Lokacija vozila</label>
                     <select id="city" name="city" required class="input select2-withSearch">
                         <option value="" disabled selected>Odabir</option>
                         <th:block th:each="entry : ${citiesByCounty}">
@@ -147,15 +147,15 @@
             <div class="border rounded-md mb-4 shadow-md dark:border-gray-700">
                 <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 ml-4 dark:text-gray-200">Tehnički podaci</h2>
                 <hr class="dark:border-gray-700">
-                <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="engineType">Motor</label>
+                <div id="engineTypeSection" class="flex flex-col m-4">
+                    <label class="dark:text-gray-300 font-medium" for="engineType">Motor</label>
                     <select id="engineType" class="input select2-basic">
                         <option value="" selected>Sve vrste</option>
                         <option th:each="engineType : ${engineTypes}" th:value="${engineType}" th:text="${engineType}"></option>
                     </select>
                 </div>
-                <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="motorcycleEngineType">Motor</label>
+                <div id="motorcycleEngineSection" class="flex flex-col m-4">
+                    <label class="dark:text-gray-300 font-medium" for="motorcycleEngineType">Motor</label>
                     <select id="motorcycleEngineType" class="input select2-basic">
                         <option value="" selected>Sve vrste</option>
                         <option th:each="motorcycleEngineType : ${motorcycleEngineTypes}" th:value="${motorcycleEngineType}" th:text="${motorcycleEngineType}"></option>
@@ -163,21 +163,21 @@
                 </div>
                 <div id="electricEngineSection" class="grid grid-cols-1 lg:grid-cols-3 lg:gap-12 gap-4 m-4">
                     <div class="flex flex-col">
-                        <label class="dark:text-gray-300" for="batteryCapacity">Kapacitet baterije</label>
+                        <label class="dark:text-gray-300 font-medium" for="batteryCapacity">Kapacitet baterije</label>
                         <div class="flex items-center relative">
                             <input type="text" id="batteryCapacity" name="batteryCapacity" required pattern="[0-9]*\.?[0-9]+" class="input w-full" placeholder="50" oninput="validateInput(this)">
                             <span class="absolute right-0 pr-2 text-gray-500 text-xl">kWh</span>
                         </div>
                     </div>
                     <div class="flex flex-col">
-                        <label class="dark:text-gray-300" for="vehicleRange">Doseg vozila</label>
+                        <label class="dark:text-gray-300 font-medium" for="vehicleRange">Doseg vozila</label>
                         <div class="flex items-center relative">
                             <input type="text" id="vehicleRange" name="vehicleRange" required pattern="[0-9]*\.?[0-9]+" class="input w-full" placeholder="100" oninput="validateInput(this)">
                             <span class="absolute right-0 pr-2 text-gray-500 text-xl">km</span>
                         </div>
                     </div>
                     <div class="flex flex-col">
-                        <label class="dark:text-gray-300" for="chargingTime">Vrijeme punjenja</label>
+                        <label class="dark:text-gray-300 font-medium" for="chargingTime">Vrijeme punjenja</label>
                         <div class="flex items-center relative">
                             <input type="text" id="chargingTime" name="chargingTime" required pattern="[0-9]*\.?[0-9]+" class="input w-full" placeholder="1" oninput="validateInput(this)">
                             <span class="absolute right-0 pr-2 text-gray-500 text-xl">h</span>
@@ -186,14 +186,14 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:gap-12 gap-4 m-4">
                     <div class="flex flex-col">
-                        <label class="dark:text-gray-300" for="transmissionType">Mjenjač</label>
+                        <label class="dark:text-gray-300 font-medium" for="transmissionType">Mjenjač</label>
                         <select id="transmissionType" class="input select2-basic">
                             <option value="" selected>Sve vrste</option>
                             <option th:each="transmissionType : ${transmissionTypes}" th:value="${transmissionType}" th:text="${transmissionType}"></option>
                         </select>
                     </div>
                     <div class="flex flex-col">
-                        <label class="dark:text-gray-300" for="driveTrainType">Pogon kotača</label>
+                        <label class="dark:text-gray-300 font-medium" for="driveTrainType">Pogon kotača</label>
                         <select id="driveTrainType" class="input select2-basic">
                             <option value="" selected>Sve vrste</option>
                             <option th:each="driveTrainType : ${driveTrainTypes}" th:value="${driveTrainType}" th:text="${driveTrainType}"></option>
@@ -203,7 +203,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:gap-12 gap-4 m-4">
                     <div class="flex flex-col">
-                        <label class="dark:text-gray-300" for="engineDisplacementFrom">Zapremnina motora</label>
+                        <label class="dark:text-gray-300 font-medium" for="engineDisplacementFrom">Zapremnina motora</label>
                         <div class="flex items-center">
                             <div class="relative flex items-center w-full">
                                 <input type="text" id="engineDisplacementFrom" name="engineDisplacementFrom" placeholder="1.0" pattern="[0-9]*\.?[0-9]+" required class="input w-full" oninput="validateInput(this)">
@@ -218,7 +218,7 @@
                     </div>
     
                     <div class="flex flex-col">
-                        <label class="dark:text-gray-300" for="engineDisplacementCcm3From">Radni obujam</label>
+                        <label class="dark:text-gray-300 font-medium" for="engineDisplacementCcm3From">Radni obujam</label>
                         <div class="flex items-center">
                             <div class="relative flex items-center w-full">
                                 <input type="text" id="engineDisplacementCcm3From" name="engineDisplacementCcm3From" placeholder="1000" pattern="[0-9]*\.?[0-9]+" required class="input w-full" oninput="validateInput(this)">
@@ -234,7 +234,7 @@
                 </div>
 
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="enginePowerFrom">Snaga motora</label>
+                    <label class="dark:text-gray-300 font-medium" for="enginePowerFrom">Snaga motora</label>
                     <div class="flex items-center">
                         <div class="relative flex items-center w-full">
                             <input type="number" id="enginePowerFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
@@ -248,7 +248,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="fuelConsumptionFrom">Potrošnja goriva</label>
+                    <label class="dark:text-gray-300 font-medium" for="fuelConsumptionFrom">Potrošnja goriva</label>
                     <div class="flex items-center">
                         <div class="relative flex items-center w-full">
                             <input type="number" id="fuelConsumptionFrom" min="0" placeholder="0" class="input w-11/12 no-arrows flex-grow pl-1">
@@ -262,7 +262,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="ecoCategory">Ekološka kategorija</label>
+                    <label class="dark:text-gray-300 font-medium" for="ecoCategory">Ekološka kategorija</label>
                     <select id="ecoCategory" class="input select2-basic">
                         <option value="" selected>Sve kategorije</option>
                         <option th:each="ecoCategory : ${ecoCategories}" th:value="${ecoCategory}" th:text="${ecoCategory}"></option>
@@ -274,7 +274,7 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 ml-4 dark:text-gray-200">Izgled i značajke</h2>
                 <hr class="dark:border-gray-700">
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="blackColorCheckbox">Boja vozila</label>
+                    <label class="dark:text-gray-300 font-medium" for="blackColorCheckbox">Boja vozila</label>
                     <div class="md:flex grid grid-cols-3">
                         <input type="checkbox" id="blackColorCheckbox" value="crna" class="hidden" name="colorCheckbox"/>
                         <label for="blackColorCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
@@ -316,8 +316,662 @@
                         <label for="silverColorCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
                             <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"></span>
                             Srebrna
+                        </label> 
+                    </div>
+                </div>
+                <div class="flex flex-col m-4">
+                    <label class="dark:text-gray-300 font-medium" for="absCheckbox">Sigurnosne značajke</label>
+                    <div class="md:flex grid grid-cols-3">
+                        <input type="checkbox" id="absCheckbox" name="safetyFeatures" value="abs" class="hidden" x-model="selectedOptions"/>
+                    <label for="absCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded" x-bind:class="{ 'bg-gray-400': selectedOptions.includes('abs') }"></span>
+                        ABS
+                    </label>
+
+                    <input type="checkbox" id="espCheckbox" name="safetyFeatures" value="esp" class="hidden" x-model="selectedOptions" />
+                    <label for="espCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded" x-bind:class="{ 'bg-gray-400': selectedOptions.includes('esp') }"></span>
+                        ESP
+                    </label>
+
+                    <input type="checkbox" id="centralLockingCheckbox" name="safetyFeatures" value="central_locking" class="hidden" x-model="selectedOptions" />
+                    <label for="centralLockingCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded" x-bind:class="{ 'bg-gray-400': selectedOptions.includes('central_locking') }"></span>
+                        Centr. zaključavanje
+                    </label>
+
+                    <input type="checkbox" id="frontSideAirbagCheckbox" name="safetyFeatures" value="front_side_airbag" class="hidden" x-model="selectedOptions" />
+                    <label for="frontSideAirbagCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded" x-bind:class="{ 'bg-gray-400': selectedOptions.includes('front_side_airbag') }"></span>
+                        Prednji zračni jastuci
+                    </label>
+
+                    <input type="checkbox" id="tractionControlCheckbox" name="safetyFeatures" value="traction_control" class="hidden" x-model="selectedOptions" />
+                    <label for="tractionControlCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded" x-bind:class="{ 'bg-gray-400': selectedOptions.includes('traction_control') }"></span>
+                        TCS
+                    </label>
+
+                    <input type="checkbox" id="rearSideAirbagCheckbox" name="safetyFeatures" value="rear_side_airbag" class="hidden" x-model="selectedOptions" />
+                    <label for="rearSideAirbagCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                        <span class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded" x-bind:class="{ 'bg-gray-400': selectedOptions.includes('rear_side_airbag') }"></span>
+                        Zadnji zračni jastuci
+                    </label>
+                    </div>
+                </div>
+
+                <div class="flex flex-col m-4">
+                    <label class="dark:text-gray-300 font-medium" for="accCheckbox">Dodatne značajke</label>
+                    <div class="grid grid-cols-3">
+                        <input type="checkbox" id="accCheckbox" name="extras"
+                            value="adaptive_cruise_control" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="accCheckbox" class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('adaptive_cruise_control') }"></span>
+                            Adaptivni tempomat
                         </label>
-                        
+
+                        <input type="checkbox" id="airSuspCheckbox" name="extras"
+                            value="air_suspension" class="hidden" x-model="selectedOptions">
+                        <label for="airSuspCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('air_suspension') }"></span>
+                            Podesivo ogibljenje
+                        </label>
+
+                        <input type="checkbox" id="alarmSystemCheckbox" name="extras"
+                            value="alarm_system" class="hidden" x-model="selectedOptions">
+                        <label for="alarmSystemCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('alarm_system') }"></span>
+                            Alarm sustav
+                        </label>
+
+                        <input type="checkbox" id="aluminiumWheelsCheckbox" name="extras"
+                            value="aluminium_wheels" class="hidden" x-model="selectedOptions">
+                        <label for="aluminiumWheelsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('aluminium_wheels') }"></span>
+                            Aluminijske felge
+                        </label>
+
+                        <input type="checkbox" id="ambientLightingCheckbox" name="extras"
+                            value="ambient_lighting" class="hidden" x-model="selectedOptions">
+                        <label for="ambientLightingCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('ambient_lighting') }"></span>
+                            Ambijentalna svijetla
+                        </label>
+
+                        <input type="checkbox" id="androidAutoCheckbox" name="extras"
+                            value="android_auto" class="hidden" x-model="selectedOptions">
+                        <label for="androidAutoCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('android_auto') }"></span>
+                            Android auto
+                        </label>
+
+                        <input type="checkbox" id="appleCarplayCheckbox" name="extras"
+                            value="apple_carplay" class="hidden" x-model="selectedOptions">
+                        <label for="appleCarplayCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('apple_carplay') }"></span>
+                            Apple carplay
+                        </label>
+
+                        <input type="checkbox" id="armRestCheckbox" name="extras"
+                            value="arm_rest" class="hidden" x-model="selectedOptions">
+                        <label for="armRestCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('arm_rest') }"></span>
+                            Naslonjač za ruku
+                        </label>
+
+                        <input type="checkbox" id="automaticAirConditioningCheckbox"
+                            name="extras" value="automatic_air_conditioning" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="automaticAirConditioningCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('automatic_air_conditioning') }"></span>
+                            Automatska klima
+                        </label>
+
+                        <input type="checkbox" id="automatic2ZoneClimatisationsCheckbox"
+                            name="extras" value="automatic_2_zone_climatisations" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="automatic2ZoneClimatisationsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('automatic_2_zone_climatisations') }"></span>
+                            Dvozonska klima
+                        </label>
+
+                        <input type="checkbox" id="automatic3ZoneClimatisationsCheckbox"
+                            name="extras" value="automatic_3_zone_climatisations" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="automatic3ZoneClimatisationsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('automatic_3_zone_climatisations') }"></span>
+                            Trozonska klima
+                        </label>
+
+                        <input type="checkbox" id="automatic4ZoneClimatisationsCheckbox"
+                            name="extras" value="automatic_4_zone_climatisations" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="automatic4ZoneClimatisationsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('automatic_4_zone_climatisations') }"></span>
+                            Četverozonska klima
+                        </label>
+
+                        <input type="checkbox" id="biXenonHeadlightsCheckbox" name="extras"
+                            value="bi_xenon_headlights" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="biXenonHeadlightsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('bi_xenon_headlights') }"></span>
+                            Bi-Xenon svijetla
+                        </label>
+
+                        <input type="checkbox" id="bluetoothCheckbox" name="extras"
+                            value="bluetooth" class="hidden" x-model="selectedOptions">
+                        <label for="bluetoothCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('bluetooth') }"></span>
+                            Bluetooth
+                        </label>
+
+                        <input type="checkbox" id="blindSpotAssistCheckbox" name="extras"
+                            value="blind_spot_assist" class="hidden" x-model="selectedOptions">
+                        <label for="blindSpotAssistCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('blind_spot_assist') }"></span>
+                            Pomoć za mrtvi kut
+                        </label>
+
+                        <input type="checkbox" id="cdPlayerCheckbox" name="extras"
+                            value="cd_player" class="hidden" x-model="selectedOptions">
+                        <label for="cdPlayerCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('cd_player') }"></span>
+                            CD player
+                        </label>
+
+                        <input type="checkbox" id="cruiseControlCheckbox" name="extras"
+                            value="cruise_control" class="hidden" x-model="selectedOptions">
+                        <label for="cruiseControlCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('cruise_control') }"></span>
+                            Tempomat
+                        </label>
+
+                        <input type="checkbox" id="dabRadioCheckbox" name="extras"
+                            value="dab_radio" class="hidden" x-model="selectedOptions">
+                        <label for="dabRadioCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('dab_radio') }"></span>
+                            Dab radio
+                        </label>
+
+                        <input type="checkbox" id="distanceWarningSystemCheckbox" name="extras"
+                            value="distance_warning_system" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="distanceWarningSystemCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('distance_warning_system') }"></span>
+                            Upozorenje za udaljenost
+                        </label>
+
+                        <input type="checkbox" id="electricSeatAdjustmentCheckbox" name="extras"
+                            value="electric_seat_adjustment" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="electricSeatAdjustmentCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('electric_seat_adjustment') }"></span>
+                            Električno podešavanje sjedala
+                        </label>
+
+                        <input type="checkbox" id="electricSideMirrorCheckbox" name="extras"
+                            value="electric_side_mirror" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="electricSideMirrorCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('electric_side_mirror') }"></span>
+                            Električni retrovizori
+                        </label>
+
+                        <input type="checkbox" id="electricWindowsCheckbox" name="extras"
+                            value="electric_windows" class="hidden" x-model="selectedOptions">
+                        <label for="electricWindowsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('electric_windows') }"></span>
+                            Električni podizači prozora
+                        </label>
+
+                        <input type="checkbox" id="emergencyCallSystemCheckbox" name="extras"
+                            value="emergency_call_system" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="emergencyCallSystemCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('emergency_call_system') }"></span>
+                            Sustav hitnog poziva
+                        </label>
+
+                        <input type="checkbox" id="emergencyTyreRepairKitCheckbox" name="extras"
+                            value="emergency_tyre_repair_kit" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="emergencyTyreRepairKitCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('emergency_tyre_repair_kit') }"></span>
+                            Pribor za hitan popravak guma
+                        </label>
+
+                        <input type="checkbox" id="fogLampCheckbox" name="extras"
+                            value="fog_lamp" class="hidden" x-model="selectedOptions">
+                        <label for="fogLampCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('fog_lamp') }"></span>
+                            Maglenke
+                        </label>
+
+                        <input type="checkbox" id="handsFreeKitCheckbox" name="extras"
+                            value="hands_free_kit" class="hidden" x-model="selectedOptions">
+                        <label for="handsFreeKitCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('hands_free_kit') }"></span>
+                            Handsfree
+                        </label>
+
+                        <input type="checkbox" id="headUpDisplayCheckbox" name="extras"
+                            value="head_up_display" class="hidden" x-model="selectedOptions">
+                        <label for="headUpDisplayCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('head_up_display') }"></span>
+                            Head-Up zaslon
+                        </label>
+
+                        <input type="checkbox" id="headlightWasherSystemCheckbox" name="extras"
+                            value="headlight_washer_system" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="headlightWasherSystemCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('headlight_washer_system') }"></span>
+                            Sustav pranja prednjih svjetala
+                        </label>
+
+                        <input type="checkbox" id="heatedRearSeatsCheckbox" name="extras"
+                            value="heated_rear_seats" class="hidden" x-model="selectedOptions">
+                        <label for="heatedRearSeatsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('heated_rear_seats') }"></span>
+                            Grijanje zadnjih sjedala
+                        </label>
+
+                        <input type="checkbox" id="heatedSeatsCheckbox" name="extras"
+                            value="heated_seats" class="hidden" x-model="selectedOptions">
+                        <label for="heatedSeatsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('heated_seats') }"></span>
+                            Grijanje prednjih sjedala
+                        </label>
+
+                        <input type="checkbox" id="heatedSteeringWheelCheckbox" name="extras"
+                            value="heated_steering_wheel" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="heatedSteeringWheelCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('heated_steering_wheel') }"></span>
+                            Grijanje volana
+                        </label>
+
+                        <input type="checkbox" id="hillStartAssistCheckbox" name="extras"
+                            value="hill_start_assist" class="hidden" x-model="selectedOptions">
+                        <label for="hillStartAssistCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('hill_start_assist') }"></span>
+                            Pomoć pri kretanju uzbrdo
+                        </label>
+
+                        <input type="checkbox" id="inductionChargingForSmartphonesCheckbox"
+                            name="extras" value="induction_charging_for_smartphones"
+                            class="hidden" x-model="selectedOptions">
+                        <label for="inductionChargingForSmartphonesCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('induction_charging_for_smartphones') }"></span>
+                            Punjenje za pametne telefone
+                        </label>
+
+                        <input type="checkbox" id="isofixCheckbox" name="extras" value="isofix"
+                            class="hidden" x-model="selectedOptions">
+                        <label for="isofixCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('isofix') }"></span>
+                            Isofix
+                        </label>
+
+                        <input type="checkbox" id="keylessCentralLockingCheckbox" name="extras"
+                            value="keyless_central_locking" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="keylessCentralLockingCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('keyless_central_locking') }"></span>
+                            Zaključavanje bez ključa
+                        </label>
+
+                        <input type="checkbox" id="laneChangeAssistCheckbox" name="extras"
+                            value="lane_change_assist" class="hidden" x-model="selectedOptions">
+                        <label for="laneChangeAssistCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('lane_change_assist') }"></span>
+                            Pomoć pri promjeni trake
+                        </label>
+
+                        <input type="checkbox" id="laserHeadlightsCheckbox" name="extras"
+                            value="laser_headlights" class="hidden" x-model="selectedOptions">
+                        <label for="laserHeadlightsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('laser_headlights') }"></span>
+                            Laserski farovi
+                        </label>
+
+                        <input type="checkbox" id="leatherSteeringWheelCheckbox" name="extras"
+                            value="leather_steering_wheel" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="leatherSteeringWheelCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('leather_steering_wheel') }"></span>
+                            Kožni volan
+                        </label>
+
+                        <input type="checkbox" id="ledHeadlightsCheckbox" name="extras"
+                            value="led_headlights" class="hidden" x-model="selectedOptions">
+                        <label for="ledHeadlightsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('led_headlights') }"></span>
+                            LED prednja svjetla
+                        </label>
+
+                        <input type="checkbox" id="lumbarSupportCheckbox" name="extras"
+                            value="lumbar_support" class="hidden" x-model="selectedOptions">
+                        <label for="lumbarSupportCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('lumbar_support') }"></span>
+                            Lumbalni oslonac
+                        </label>
+
+                        <input type="checkbox" id="manualClimatisationCheckbox" name="extras"
+                            value="manual_climatisation" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="manualClimatisationCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('manual_climatisation') }"></span>
+                            Ručna klima
+                        </label>
+
+                        <input type="checkbox" id="massageSeatsCheckbox" name="extras"
+                            value="massage_seats" class="hidden" x-model="selectedOptions">
+                        <label for="massageSeatsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('massage_seats') }"></span>
+                            Masaža sjedala
+                        </label>
+
+                        <input type="checkbox" id="multifunctionSteeringWheelCheckbox"
+                            name="extras" value="multifunction_steering_wheel" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="multifunctionSteeringWheelCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('multifunction_steering_wheel') }"></span>
+                            Multifunkcionalni volan
+                        </label>
+
+                        <input type="checkbox" id="navigationSystemCheckbox" name="extras"
+                            value="navigation_system" class="hidden" x-model="selectedOptions">
+                        <label for="navigationSystemCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('navigation_system') }"></span>
+                            Navigacija
+                        </label>
+
+                        <input type="checkbox" id="onBoardComputerCheckbox" name="extras"
+                            value="on_board_computer" class="hidden" x-model="selectedOptions">
+                        <label for="onBoardComputerCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('on_board_computer') }"></span>
+                            Ugrađeno računalo
+                        </label>
+
+                        <input type="checkbox" id="paddleShiftersCheckbox" name="extras"
+                            value="paddle_shifters" class="hidden" x-model="selectedOptions">
+                        <label for="paddleShiftersCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('paddle_shifters') }"></span>
+                            Poluge mjenjača
+                        </label>
+
+                        <input type="checkbox" id="panoramicRoofCheckbox" name="extras"
+                            value="panoramic_roof" class="hidden" x-model="selectedOptions">
+                        <label for="panoramicRoofCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('panoramic_roof') }"></span>
+                            Panoramski krov
+                        </label>
+
+                        <input type="checkbox" id="parkingSensorsCheckbox" name="extras"
+                            value="parking_sensors" class="hidden" x-model="selectedOptions">
+                        <label for="parkingSensorsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('parking_sensors') }"></span>
+                            Parking senzori
+                        </label>
+
+                        <input type="checkbox" id="powerAssistedSteeringCheckbox" name="extras"
+                            value="power_assisted_steering" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="powerAssistedSteeringCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('power_assisted_steering') }"></span>
+                            Servo upravljač
+                        </label>
+
+                        <input type="checkbox" id="rainSensorCheckbox" name="extras"
+                            value="rain_sensor" class="hidden" x-model="selectedOptions">
+                        <label for="rainSensorCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('rain_sensor') }"></span>
+                            Senzor za kišu
+                        </label>
+
+                        <input type="checkbox" id="roofRackCheckbox" name="extras"
+                            value="roof_rack" class="hidden" x-model="selectedOptions">
+                        <label for="roofRackCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('roof_rack') }"></span>
+                            Krovni nosač
+                        </label>
+
+                        <input type="checkbox" id="spareTyreCheckbox" name="extras"
+                            value="spare_tyre" class="hidden" x-model="selectedOptions">
+                        <label for="spareTyreCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('spare_tyre') }"></span>
+                            Rezervrna guma
+                        </label>
+
+                        <input type="checkbox" id="sportSeatsCheckbox" name="extras"
+                            value="sport_seats" class="hidden" x-model="selectedOptions">
+                        <label for="sportSeatsCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('sport_seats') }"></span>
+                            Sportska sjedala
+                        </label>
+
+                        <input type="checkbox" id="startStopSystemCheckbox" name="extras"
+                            value="start_stop_system" class="hidden" x-model="selectedOptions">
+                        <label for="startStopSystemCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('start_stop_system') }"></span>
+                            Start-stop sustav
+                        </label>
+
+                        <input type="checkbox" id="sunroofCheckbox" name="extras"
+                            value="sunroof" class="hidden" x-model="selectedOptions">
+                        <label for="sunroofCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('sunroof') }"></span>
+                            Šiber
+                        </label>
+
+                        <input type="checkbox" id="trafficSignRecognitionCheckbox" name="extras"
+                            value="traffic_sign_recognition" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="trafficSignRecognitionCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('traffic_sign_recognition') }"></span>
+                            Prepoznavanje znakova
+                        </label>
+
+                        <input type="checkbox" id="tyrePressureMonitoringCheckbox" name="extras"
+                            value="tyre_pressure_monitoring" class="hidden"
+                            x-model="selectedOptions">
+                        <label for="tyrePressureMonitoringCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('tyre_pressure_monitoring') }"></span>
+                            Nadzor tlaka u gumama
+                        </label>
+
+                        <input type="checkbox" id="usbPortCheckbox" name="extras"
+                            value="usb_port" class="hidden" x-model="selectedOptions">
+                        <label for="usbPortCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('usb_port') }"></span>
+                            USB priključak
+                        </label>
+
+                        <input type="checkbox" id="voiceControlCheckbox" name="extras"
+                            value="voice_control" class="hidden" x-model="selectedOptions">
+                        <label for="voiceControlCheckbox"
+                            class="flex items-center cursor-pointer p-2 dark:text-gray-300">
+                            <span
+                                class="w-4 h-4 inline-block mr-1 border border-gray-400 rounded"
+                                x-bind:class="{ 'bg-gray-400': selectedOptions.includes('voice_control') }"></span>
+                            Kontrola glasom
+                        </label>
                     </div>
                 </div>
             </div>
@@ -326,7 +980,7 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-6 mt-6 ml-4 dark:text-gray-200">Detalji ponude</h2>
                 <hr class="dark:border-gray-700">
                 <div class="flex flex-col m-4">
-                    <label class="dark:text-gray-300" for="userTypes">Vrsta prodavača</label>
+                    <label class="dark:text-gray-300 font-medium" for="userTypes">Vrsta prodavača</label>
                     <select id="userTypes" class="input select2-basic">
                         <option value="" selected>Svi prodavači</option>
                         <option value="Privatni">Privatni</option>

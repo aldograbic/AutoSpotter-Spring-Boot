@@ -7,6 +7,11 @@ $(document).ready(function () {
     } else if (selectedVehicleType === "Kamion") {
       $('#truckDetailsSection').show();
       $('#bodyTypeSection').hide();
+    } else if (selectedVehicleType === "Motocikl") {
+      $('#motorcycleEngineSection').show();
+      $('#truckDetailsSection').hide();
+      $('#engineTypeSection').hide();
+      $('#bodyTypeSection').hide();
     } else {
       $('#bodyTypeSection').hide();
       $('#truckDetailsSection').hide();
