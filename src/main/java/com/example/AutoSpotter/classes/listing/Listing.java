@@ -13,21 +13,25 @@ public class Listing {
     private int vehicleId;
     private int userId;
     private boolean status;
+    private boolean isFeatured;
     private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     private Vehicle vehicle;
     private User user;
 
     public Listing() {}
 
-    public Listing(int id, String listingDescription, BigDecimal listingPrice, int vehicleId, int userId, boolean status, Timestamp createdAt) {
+    public Listing(int id, String listingDescription, BigDecimal listingPrice, int vehicleId, int userId, boolean status, boolean isFeatured, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.listingDescription = listingDescription;
         this.listingPrice = listingPrice;
         this.vehicleId = vehicleId;
         this.userId = userId;
         this.status = status;
+        this.isFeatured = isFeatured;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Vehicle getVehicle() {
@@ -94,11 +98,27 @@ public class Listing {
         this.status = status;
     }
 
+    public boolean getIsFeatured() {
+        return isFeatured;
+    }
+
+    public void setIsFeatured(boolean isFeatured) {
+        this.isFeatured = isFeatured;
+    }
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

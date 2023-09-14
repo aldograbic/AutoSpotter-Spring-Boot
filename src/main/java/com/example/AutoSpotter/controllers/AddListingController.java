@@ -376,6 +376,7 @@ public class AddListingController {
         listing.setListingPrice(price);
         listing.setVehicleId(vehicleId);
         listing.setUserId(user.getId());
+        listing.setIsFeatured(false);
 
         listingRepository.createListing(listing);
         redirectAttributes.addFlashAttribute("successMessage", "Oglas je uspješno dodan!");

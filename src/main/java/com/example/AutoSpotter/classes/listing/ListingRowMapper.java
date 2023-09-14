@@ -32,7 +32,9 @@ public class ListingRowMapper implements RowMapper<Listing> {
         listing.setVehicleId(rs.getInt("vehicle_id"));
         listing.setUserId(rs.getInt("user_id"));
         listing.setStatus(rs.getBoolean("status"));
+        listing.setIsFeatured(rs.getBoolean("is_featured"));
         listing.setCreatedAt(rs.getTimestamp("created_at"));
+        listing.setUpdatedAt(rs.getTimestamp("updated_at"));
 
         int vehicleId = rs.getInt("vehicle_id");
         Vehicle vehicle = vehicleRepository.getVehicleById(vehicleId);

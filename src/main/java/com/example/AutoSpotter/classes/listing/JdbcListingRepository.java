@@ -26,7 +26,7 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public void createListing(Listing listing) {
-        String sql = "INSERT INTO listing (listing_description, listing_price, vehicle_id, user_id, status, created_at) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO listing (listing_description, listing_price, vehicle_id, user_id, status, is_featured, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql,
                 listing.getListingDescription(),
@@ -34,22 +34,9 @@ public class JdbcListingRepository implements ListingRepository {
                 listing.getVehicleId(),
                 listing.getUserId(),
                 1,
+                listing.getIsFeatured(),
+                LocalDateTime.now(),
                 LocalDateTime.now()
-        );
-    }
-
-    @Override
-    public void updateListing(Listing listing) {
-        String sql = "UPDATE listing SET listing_description = ?, listing_price = ?, vehicle_id = ?, user_id = ?, status = ?, created_at = ? WHERE id = ?";
-        jdbcTemplate.update(
-                sql,
-                listing.getListingDescription(),
-                listing.getListingPrice(),
-                listing.getVehicleId(),
-                listing.getUserId(),
-                listing.getStatus(),
-                listing.getCreatedAt(),
-                listing.getId()
         );
     }
 
@@ -59,13 +46,14 @@ public class JdbcListingRepository implements ListingRepository {
         
         String sql = "UPDATE listing l " +
             "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
-            "SET l.listing_description = ?, l.listing_price = ?, v.mileage = ?, v.state = ?, v.city_id = ? " +
+            "SET l.listing_description = ?, l.listing_price = ?, l.updated_at = ?, v.mileage = ?, v.state = ?, v.city_id = ? " +
             "WHERE l.id = ? ";
 
         jdbcTemplate.update(
         sql,
         listing.getListingDescription(),
         listing.getListingPrice(),
+        LocalDateTime.now(),
         listing.getVehicle().getMileage(),
         listing.getVehicle().getState(),
         listing.getVehicle().getCityId(),
@@ -80,13 +68,13 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public Listing getListingById(int id) {
-        String sql = "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, created_at FROM listing WHERE id = ?";
+        String sql = "SELECT id, listing_description, listing_price, vehicle_id, user_id, status, is_featured, created_at, updated_at FROM listing WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new ListingRowMapper(vehicleRepository, userRepository), id);
     }
 
     @Override
     public List<Listing> getNewListings() {
-        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.is_featured, l.created_at, l.updated_at, " +
                     "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
                     "FROM listing l " +
                     "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
@@ -104,7 +92,7 @@ public class JdbcListingRepository implements ListingRepository {
                                             String county, Integer mileageFrom, Integer mileageTo,
                                             Integer yearFrom, Integer yearTo, Integer priceFrom,
                                             Integer priceTo, String userType) {
-        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.is_featured, l.created_at, l.updated_at, " +
                 "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
                 "FROM listing l " +
                 "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
@@ -221,7 +209,7 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public List<Listing> getListingsByUserId(int userId) {
-        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.is_featured, l.created_at, l.updated_at, " +
                 "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
                 "FROM listing l " +
                 "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
@@ -254,7 +242,7 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public List<Listing> getListingsLikedByUser(int userId) {
-        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.is_featured, l.created_at, l.updated_at, " +
                     "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
                     "FROM listing l " +
                     "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
@@ -269,7 +257,7 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public List<Listing> getSimilarListings(int currentListingId, String vehicleType, String manufacturer, String model) {
-        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at " +
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.is_featured, l.created_at, l.updated_at " +
                 "FROM listing l " +
                 "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
                 "INNER JOIN vehicle_type vt ON v.vehicle_type_id = vt.id " +
@@ -306,7 +294,7 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public List<Listing> getSimilarListingsOfFilteredListings(String vehicleType, String manufacturer, String model) {
-        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.is_featured, l.created_at, l.updated_at, " +
                 "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
                 "FROM listing l " +
                 "INNER JOIN vehicle v ON l.vehicle_id = v.id " +
@@ -340,7 +328,6 @@ public class JdbcListingRepository implements ListingRepository {
         );
     }
 
-
     @Override
     public void saveImageUrlsForVehicle(ListingImage listingImage) {
         String sql = "INSERT INTO images (vehicle_id, image_url) VALUES (?, ?)";
@@ -365,7 +352,7 @@ public class JdbcListingRepository implements ListingRepository {
 
     @Override
     public List<Listing> getNewestListings() {
-        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.created_at, " +
+        String sql = "SELECT l.id, l.listing_description, l.listing_price, l.vehicle_id, l.user_id, l.status, l.is_featured, l.created_at, l.updated_at, " +
                     "v.year, v.manufacturer, v.model, v.mileage, c.city_name, v.state, u.username " +
                     "FROM listing l " +
                     "INNER JOIN vehicle v ON l.vehicle_id = v.id " +

@@ -4,7 +4,6 @@ import java.util.List;
 
 public interface ListingRepository {
     void createListing(Listing listing);
-    void updateListing(Listing listing);
     void editListing(Listing listing);
     void deleteListing(int id);
     Listing getListingById(int id);
