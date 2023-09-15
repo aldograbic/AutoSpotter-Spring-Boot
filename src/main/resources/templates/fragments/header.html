@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <!-- <div sec:authorize="isAuthenticated()">
+      <div sec:authorize="isAuthenticated()">
         <div th:if="${user.profileImage == null}" x-data="{ isOpen: false }" x-cloak class="relative flex items-center">
           <img src="img/icons8-user-50.png" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
             alt="Default slika profila"
@@ -45,16 +45,16 @@
             class="w-10 h-10 rounded-full object-contain ring-2 ring-cyan-600 text-cyan-600 cursor-pointer hover:fill-gray-200"
             @click="isOpen = !isOpen">
         </div>
-      </div> -->
+      </div>
 
       <!-- Dropdown menu -->
       <div id="userDropdown"
         class="z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
-        <!-- <div sec:authorize="isAuthenticated()" class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+        <div sec:authorize="isAuthenticated()" class="px-4 py-3 text-sm text-gray-900 dark:text-white">
           <div th:if="${user.firstName != null}" th:text="${user.firstName + ' ' + user.lastName}"></div>
           <div th:unless="${user.firstName != null}" th:text="${user.companyName}"></div>
           <div class="font-medium truncate" th:text="${user.username}"></div>
-        </div> -->
+        </div>
         <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
           <li>
             <a sec:authorize="isAnonymous()" href="/prijava"
@@ -109,7 +109,7 @@
         </button>
         <ul class="mt-6 text-xl">
           <a href="/korisnicki-profil">
-            <!-- <li sec:authorize="isAuthenticated()" class="flex items-center px-4">
+            <li sec:authorize="isAuthenticated()" class="flex items-center px-4">
               <div th:if="${user.profileImage == null}" class="relative flex items-center">
                 <img src="img/icons8-user-50.png" alt="Default slika profila"
                   class="w-10 h-10 rounded-full ring-2 ring-cyan-600 text-cyan-600 cursor-pointer hover:fill-gray-200">
@@ -124,7 +124,7 @@
                 <div th:unless="${user.firstName != null}" th:text="${user.companyName}"></div>
                 <div class="font-medium truncate" th:text="${user.username}"></div>
               </div>
-            </li> -->
+            </li>
           </a>
           <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
           <li>
