@@ -19,7 +19,7 @@
         href="/kontakt">Kontakt</a>
 
       <div x-data="{ isOpen: false }" x-cloak>
-        <div th:unless="${user != null}" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start">
+        <div sec:authorize="isAnonymous()" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start">
           <button type="button" @click="isOpen = !isOpen"
             class="text-gray-700 ml-2 font-medium hover:text-cyan-700 inline-flex items-center header-link dark:text-gray-200 dark:hover:text-cyan-600">
             Korisnički račun
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div th:if="${user != null}">
+      <!-- <div sec:authorize="isAuthenticated()">
         <div th:if="${user.profileImage == null}" x-data="{ isOpen: false }" x-cloak class="relative flex items-center">
           <img src="img/icons8-user-50.png" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
             alt="Default slika profila"
@@ -45,34 +45,34 @@
             class="w-10 h-10 rounded-full object-contain ring-2 ring-cyan-600 text-cyan-600 cursor-pointer hover:fill-gray-200"
             @click="isOpen = !isOpen">
         </div>
-      </div>
+      </div> -->
 
       <!-- Dropdown menu -->
       <div id="userDropdown"
         class="z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
-        <div th:if="${user != null}" class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+        <!-- <div sec:authorize="isAuthenticated()" class="px-4 py-3 text-sm text-gray-900 dark:text-white">
           <div th:if="${user.firstName != null}" th:text="${user.firstName + ' ' + user.lastName}"></div>
           <div th:unless="${user.firstName != null}" th:text="${user.companyName}"></div>
           <div class="font-medium truncate" th:text="${user.username}"></div>
-        </div>
+        </div> -->
         <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
           <li>
-            <a th:unless="${user != null}" href="/prijava"
+            <a sec:authorize="isAnonymous()" href="/prijava"
               class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
               role="menuitem">Prijava</a>
           </li>
           <li>
-            <a th:unless="${user != null}" href="/registracija"
+            <a sec:authorize="isAnonymous()" href="/registracija"
               class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
               role="menuitem">Registracija</a>
           </li>
           <li>
-            <a th:if="${user != null}" href="/korisnicki-profil"
+            <a sec:authorize="isAuthenticated()" href="/korisnicki-profil"
               class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
               role="menuitem">Korisnički profil</a>
           </li>
         </ul>
-        <div th:if="${user != null}" class="py-2">
+        <div sec:authorize="isAuthenticated()" class="py-2">
           <a href="/odjava"
             class="block px-4 py-2 text-gray-700 font-medium hover:text-cyan-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:text-cyan-600 dark:hover:bg-gray-700"
             role="menuitem">Odjava</a>
@@ -109,7 +109,7 @@
         </button>
         <ul class="mt-6 text-xl">
           <a href="/korisnicki-profil">
-            <li th:if="${user != null}" class="flex items-center px-4">
+            <!-- <li sec:authorize="isAuthenticated()" class="flex items-center px-4">
               <div th:if="${user.profileImage == null}" class="relative flex items-center">
                 <img src="img/icons8-user-50.png" alt="Default slika profila"
                   class="w-10 h-10 rounded-full ring-2 ring-cyan-600 text-cyan-600 cursor-pointer hover:fill-gray-200">
@@ -124,7 +124,7 @@
                 <div th:unless="${user.firstName != null}" th:text="${user.companyName}"></div>
                 <div class="font-medium truncate" th:text="${user.username}"></div>
               </div>
-            </li>
+            </li> -->
           </a>
           <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
           <li>
@@ -146,17 +146,17 @@
               class="block p-4 text-gray-700 font-medium rounded hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white">Kontakt</a>
           </li>
           <li>
-            <a th:unless="${user != null}" href="/prijava"
+            <a sec:authorize="isAnonymous()" href="/prijava"
               class="block p-4 text-gray-700 font-medium rounded hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white"
               role="menuitem">Prijava</a>
           </li>
           <li>
-            <a th:unless="${user != null}" href="/registracija"
+            <a sec:authorize="isAnonymous()" href="/registracija"
               class="block p-4 text-gray-700 font-medium rounded hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white"
               role="menuitem">Registracija</a>
           </li>
           <li>
-            <a th:if="${user != null}" href="/odjava"
+            <a sec:authorize="isAuthenticated()" href="/odjava"
               class="block p-4 text-gray-700 font-medium rounded hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white"
               role="menuitem">Odjava</a>
           </li>

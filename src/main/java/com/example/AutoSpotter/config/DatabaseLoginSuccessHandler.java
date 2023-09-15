@@ -9,6 +9,8 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.stereotype.Service;
 
 import com.example.AutoSpotter.classes.user.CustomUserDetailsService;
+import com.example.AutoSpotter.classes.user.User;
+import com.example.AutoSpotter.classes.user.UserRepository;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,13 +19,24 @@ import jakarta.servlet.http.HttpServletResponse;
 @Service
 public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
-    @Autowired CustomUserDetailsService userService;
+    @Autowired
+    CustomUserDetailsService userService;
+
+    @Autowired
+    UserRepository userRepository;
     
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        //nismo sigurni za ovu prvu liniju ispod
+        
         UserDetails authenticatedUserDetails = (UserDetails) authentication.getPrincipal();
-        userService.updateAuthenticationType(authenticatedUserDetails.getUsername(), "database");
-        super.onAuthenticationSuccess(request, response, authentication);
+        String username = authenticatedUserDetails.getUsername();
+        User user = userRepository.findByUsername(username);
+
+        if(user.getAuthType() == null && user.isEmailVerified()) {
+            userService.updateAuthenticationType(username, "database");
+            response.sendRedirect("/?uspjesnaPrijava");
+        } else {
+            response.sendRedirect("/?uspjesnaPrijava");
+        }
     }
 }

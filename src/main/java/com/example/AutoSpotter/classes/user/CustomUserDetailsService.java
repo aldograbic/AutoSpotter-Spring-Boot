@@ -25,7 +25,7 @@ public class CustomUserDetailsService extends SavedRequestAwareAuthenticationSuc
     }
 
     public void updateAuthenticationType(String username, String oauth2ClientName) {
-       AuthenticationType authType = AuthenticationType.valueOf(oauth2ClientName.toUpperCase());
+        AuthenticationType authType = AuthenticationType.valueOf(oauth2ClientName.toUpperCase());
         userRepository.updateAuthenticationType(username, authType);
     }
 
@@ -35,14 +35,14 @@ public class CustomUserDetailsService extends SavedRequestAwareAuthenticationSuc
         if (existUser == null) {
             User newUser = new User();
 
-            int atIndex = username.indexOf('@');
-            if (atIndex >= 0) {
-                String extractedUsername = username.substring(0, atIndex);
-                newUser.setUsername(extractedUsername);
-            } else {
-                newUser.setUsername(username);
-            }
-            
+            // int atIndex = username.indexOf('@');
+            // if (atIndex >= 0) {
+            //     String extractedUsername = username.substring(0, atIndex);
+            //     newUser.setUsername(extractedUsername);
+            // } else {
+            //     newUser.setUsername(username);
+            // }
+            newUser.setUsername(username);
             newUser.setEmail(email);
             newUser.setFirstName(firstName);
             newUser.setLastName(lastName);

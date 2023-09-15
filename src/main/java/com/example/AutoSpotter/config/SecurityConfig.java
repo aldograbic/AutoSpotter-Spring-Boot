@@ -40,11 +40,9 @@ public class SecurityConfig {
             .formLogin((formLogin) -> formLogin
                 .loginPage("/prijava")
                 .loginProcessingUrl("/prijava")
-                .defaultSuccessUrl("/?uspjesnaPrijava", true)
                 .failureHandler(databaseLoginFailureHandler)
-                // .successHandler(databaseLoginSuccessHandler)
+                .successHandler(databaseLoginSuccessHandler)
                 .permitAll()
-                
             )
             .oauth2Login((formLogin)-> formLogin
                 .loginPage("/prijava")
@@ -80,6 +78,6 @@ public class SecurityConfig {
     @Autowired
     private DatabaseLoginFailureHandler databaseLoginFailureHandler;
      
-    // @Autowired
-    // private DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
+    @Autowired
+    private DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
 }
