@@ -24,6 +24,7 @@ import com.example.AutoSpotter.classes.listing.ListingRepository;
 import com.example.AutoSpotter.classes.location.LocationRepository;
 import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.user.UserRepository;
+import com.example.AutoSpotter.classes.vehicle.SafetyFeature;
 import com.example.AutoSpotter.classes.vehicle.VehicleRepository;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
@@ -76,7 +77,7 @@ public class UserProfileController {
         model.addAttribute("likedListingsCount", likedListingsCount);
         model.addAttribute("userListing", userListing);
         model.addAttribute("likedListings", likedListings);
-        return "user-profile";
+        return "auth-user-profile";
     }
 
     @GetMapping("/korisnicki-profil/osobni-podaci")
@@ -199,9 +200,13 @@ public class UserProfileController {
                                 @PathVariable("userUsername") String userUsername,
                                 Model model) {
 
-        User user = userRepository.getUserById(userId);
+        User userProfile = userRepository.getUserById(userId);
         int listingCount = listingRepository.getListingsCountByUserId(userId);
         List<Listing> userListing = listingRepository.getListingsByUserId(userId);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username);
 
         List<String> firstImageUrls = new ArrayList<>();
         for (Listing listing : userListing) {
@@ -210,6 +215,7 @@ public class UserProfileController {
         }
 
         model.addAttribute("firstImageUrls", firstImageUrls);
+        model.addAttribute("userProfile", userProfile);
         model.addAttribute("user", user);
         model.addAttribute("listingCount", listingCount);
         model.addAttribute("userListing", userListing);
@@ -229,12 +235,14 @@ public class UserProfileController {
         List<String> imageUrls = listingRepository.getImageUrlsForVehicle(vehicleId);
         List<String> states = vehicleRepository.getAllStates();
         Map<String, List<String>> citiesByCounty = locationRepository.getCitiesByCounty();
+        List<SafetyFeature> safetyFeatures = listing.getVehicle().getSafetyFeatures();
 
         model.addAttribute("user", user);
         model.addAttribute("imageUrls", imageUrls);
         model.addAttribute("listing", listing);
         model.addAttribute("states", states);
         model.addAttribute("citiesByCounty", citiesByCounty);
+        model.addAttribute("safetyFeatures", safetyFeatures);
             
         return "edit-listing";
     }
