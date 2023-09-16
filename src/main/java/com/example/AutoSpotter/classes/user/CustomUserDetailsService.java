@@ -29,12 +29,12 @@ public class CustomUserDetailsService extends SavedRequestAwareAuthenticationSuc
         userRepository.updateAuthenticationType(username, authType);
     }
 
-    public void processOAuthPostLogin(String username, String email, String firstName, String lastName, String phoneNumber, String address) {
+    public void processOAuthPostLogin(String username, String email, String firstName, String lastName, String profileImage) {
         User existUser = userRepository.findByUsername(username);
          
         if (existUser == null) {
             User newUser = new User();
-
+            // podesit za display_username ->
             // int atIndex = username.indexOf('@');
             // if (atIndex >= 0) {
             //     String extractedUsername = username.substring(0, atIndex);
@@ -46,8 +46,7 @@ public class CustomUserDetailsService extends SavedRequestAwareAuthenticationSuc
             newUser.setEmail(email);
             newUser.setFirstName(firstName);
             newUser.setLastName(lastName);
-            newUser.setPhoneNumber(phoneNumber);
-            newUser.setAddress(address);
+            newUser.setProfileImage(profileImage);
             newUser.setEmailVerified(true);
 
             userRepository.saveOAuth2(newUser);

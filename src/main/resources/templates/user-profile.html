@@ -36,9 +36,14 @@
                     <h1 class="text-4xl font-medium text-gray-700 dark:text-gray-200" th:text="${userProfile.username}"></h1>
                     <p th:if="${userProfile.firstName != null}" th:text="${userProfile.firstName + ' ' + userProfile.lastName}" class="mt-2 text-gray-500 dark:text-gray-300"></p>
                     <p th:unless="${userProfile.firstName != null}" th:text="${userProfile.companyName}" class="mt-2 text-gray-500 dark:text-gray-300"></p>
-                    <p class="font-light text-gray-500 mt-2 dark:text-gray-300" th:text="${userProfile.city.cityName + ', ' + userProfile.county}"></p>
+                    <p th:if="${userProfile.city != null}" class="font-light text-gray-500 mt-2 dark:text-gray-300" th:text="${userProfile.city.cityName + ', ' + userProfile.county}"></p>
+                    <p th:unless="${userProfile.city != null}" class="font-light text-gray-500 mt-2 dark:text-gray-300">Grad: nema</p>
                     
-                    <p class="mt-8 text-gray-500 dark:text-gray-300">Broj telefona: <span th:text="${userProfile.phoneNumber}"></span></p>
+                    <p class="mt-8 text-gray-500 dark:text-gray-300">
+                        Broj telefona: 
+                        <span th:if="${userProfile.phoneNumber != null}" th:text="${userProfile.phoneNumber}"></span>
+                        <span th:unless="${userProfile.phoneNumber != null}">nema</span>
+                    </p>
                     <p class="mt-2 text-gray-500 dark:text-gray-300">E-mail adresa: <span th:text="${userProfile.email}"></span></p>
                 </div>
 

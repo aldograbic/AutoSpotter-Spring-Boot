@@ -63,11 +63,16 @@
                         <div class="flex flex-col mb-4">
                             <label class="dark:text-gray-300" for="city">Grad</label>
                             <select id="city" name="city" required class="input lg:w-96 select2-withSearch">
-                              <option value="" selected><span th:if="user.city == null">Odabir</span><span th:unless="user.city == null" th:text="${user.city.cityName}" th:value="${user.city.cityName}"></span></option>
+                              <option value="" selected>
+                                <span th:if="${user.city == null}">Odabir</span>
+                                <span th:unless="${user.city == null}" th:text="${user.city.cityName}" th:value="${user.city.cityName}"></span>
+                            </option>
                               <th:block th:each="entry : ${citiesByCounty}">
                                 <optgroup th:label="${entry.key}">
                                   <th:block th:each="city : ${entry.value}">
                                       <option th:value="${city}" th:text="${city}" th:selected="${user.city != null and user.city.cityName == city}"></option>
+                                      
+                                      
                                   </th:block>
                                 </optgroup>
                               </th:block>

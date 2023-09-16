@@ -121,9 +121,13 @@
                     <h1 class="text-4xl font-medium text-gray-700 dark:text-gray-200" th:text="${user.username}"></h1>
                     <p th:if="${user.firstName != null}" th:text="${user.firstName + ' ' + user.lastName}" class="mt-2 text-gray-500 dark:text-gray-300"></p>
                     <p th:unless="${user.firstName != null}" th:text="${user.companyName}" class="mt-2 text-gray-500 dark:text-gray-300"></p>
-                    <p class="font-light text-gray-500 mt-2 dark:text-gray-300" th:text="${user.city.cityName + ', ' + user.county}"></p>
-                    
-                    <p class="mt-8 text-gray-500 dark:text-gray-300">Broj telefona: <span th:text="${user.phoneNumber}"></span></p>
+                    <p th:if="${user.city != null}" class="font-light text-gray-500 mt-2 dark:text-gray-300" th:text="${user.city.cityName + ', ' + user.county}"></p>
+                    <p th:unless="${user.city != null}" class="font-light text-gray-500 mt-2 dark:text-gray-300">Grad: nema</p>
+                    <p class="mt-8 text-gray-500 dark:text-gray-300">
+                        Broj telefona: 
+                        <span th:if="${user.phoneNumber != null}" th:text="${user.phoneNumber}"></span>
+                        <span th:unless="${user.phoneNumber != null}">nema</span>
+                    </p>
                     <p class="mt-2 text-gray-500 dark:text-gray-300">E-mail adresa: <span th:text="${user.email}"></span></p>
                 </div>
 

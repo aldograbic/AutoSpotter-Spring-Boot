@@ -29,17 +29,7 @@ public class IndexController {
     @GetMapping("/")
     public String showIndex(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // String username;
-        // if (authentication.getPrincipal() instanceof CustomOAuth2User) {
-        //     CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
-        //     username = oAuth2User.getAttribute("name");
-        // } else {
-        //     username = authentication.getName();
-        // }
-
         String username = authentication.getName();
-
         User user = userRepository.findByUsername(username);
 
         List<Listing> newestListings = listingRepository.getNewestListings();

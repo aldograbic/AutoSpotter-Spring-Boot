@@ -37,11 +37,21 @@ public class UserRowMapper implements RowMapper<User> {
         
         int cityId = rs.getInt("city_id");
         City city = locationRepository.getCityById(cityId);
-        user.setCity(city);
-
-        int countyId = city.getCountyId();
-        County county = locationRepository.getCountyById(countyId);
-        user.setCounty(county);
+        if (city != null) {
+            user.setCity(city);
+            int countyId = city.getCountyId();
+            County county = locationRepository.getCountyById(countyId);
+    
+            if (county != null) {
+                user.setCounty(county);
+            } else {
+                // Handle the case where the county is not found
+                // You can log a message or take appropriate action
+            }
+        } else {
+            // Handle the case where the city is not found
+            // You can log a message or take appropriate action
+        }
 
         return user;
     }

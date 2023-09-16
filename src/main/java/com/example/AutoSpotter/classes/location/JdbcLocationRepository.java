@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -20,13 +21,17 @@ public class JdbcLocationRepository implements LocationRepository{
     @Override
     public City getCityById(int id) {
         String sql = "SELECT id, city_name, county_id FROM cities WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
-            City city = new City();
-            city.setId(rs.getInt("id"));
-            city.setCityName(rs.getString("city_name"));
-            city.setCountyId(rs.getInt("county_id"));
-            return city;
-        }, id);
+        try {
+            return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
+                        City city = new City();
+                        city.setId(rs.getInt("id"));
+                        city.setCityName(rs.getString("city_name"));
+                        city.setCountyId(rs.getInt("county_id"));
+                        return city;
+                    }, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public int getCityIdByName(String cityName) {

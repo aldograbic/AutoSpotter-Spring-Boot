@@ -30,12 +30,12 @@ public class OAuthLoginSuccessHandler extends SavedRequestAwareAuthenticationSuc
 
         String firstName = (String) attributes.get("given_name");
         String lastName = (String) attributes.get("family_name");
-        String phoneNumber = (String) attributes.get("phone_number");
-        String address = (String) attributes.get("address");
+        String profileImage = (String) attributes.get("picture");
     
-        userService.processOAuthPostLogin(username, email, firstName, lastName, phoneNumber, address);
+        userService.processOAuthPostLogin(username, email, firstName, lastName, profileImage);
 
         userService.updateAuthenticationType(username, oauth2ClientName);
-        super.onAuthenticationSuccess(request, response, authentication);
+        
+        response.sendRedirect("/?uspjesnaPrijava");
     }
 }
