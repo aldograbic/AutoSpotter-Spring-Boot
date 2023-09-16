@@ -82,9 +82,11 @@ public class UserProfileController {
 
     @GetMapping("/korisnicki-profil/osobni-podaci")
     public String showUserProfileDetails(Model model) {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
+
         Map<String, List<String>> citiesByCounty = locationRepository.getCitiesByCounty();
         model.addAttribute("citiesByCounty", citiesByCounty);
 
@@ -130,15 +132,15 @@ public class UserProfileController {
     public String updateUserDetails(@PathVariable("userId") int userId, User updatedUser, RedirectAttributes redirectAttributes, HttpSession session) {
         User user = userRepository.getUserById(userId);
     
-        if (!user.getUsername().equals(updatedUser.getUsername())) {
+        if (!user.getDisplayUsername().equals(updatedUser.getDisplayUsername())) {
 
-            User existingUserWithNewUsername = userRepository.findByUsername(updatedUser.getUsername());
+            User existingUserWithNewUsername = userRepository.findByDisplayUsername(updatedUser.getDisplayUsername());
             if (existingUserWithNewUsername != null) {
                 redirectAttributes.addFlashAttribute("errorMessage", "Već postoji korisnik s istim korisničkim imenom!");
                 return "redirect:/korisnicki-profil/osobni-podaci";
             }
 
-            user.setUsername(updatedUser.getUsername());
+            user.setDisplayUsername(updatedUser.getDisplayUsername());
             user.setFirstName(updatedUser.getFirstName());
             user.setLastName(updatedUser.getLastName());
             user.setAddress(updatedUser.getAddress());
@@ -163,7 +165,7 @@ public class UserProfileController {
             user.setConfirmationToken(token);
             user.setEmailVerified(false);
             
-            user.setUsername(updatedUser.getUsername());
+            user.setDisplayUsername(updatedUser.getDisplayUsername());
             user.setFirstName(updatedUser.getFirstName());
             user.setLastName(updatedUser.getLastName());
             user.setAddress(updatedUser.getAddress());
@@ -180,7 +182,7 @@ public class UserProfileController {
             return "redirect:/";
         }
     
-        user.setUsername(updatedUser.getUsername());
+        user.setDisplayUsername(updatedUser.getDisplayUsername());
         user.setFirstName(updatedUser.getFirstName());
         user.setLastName(updatedUser.getLastName());
         user.setAddress(updatedUser.getAddress());

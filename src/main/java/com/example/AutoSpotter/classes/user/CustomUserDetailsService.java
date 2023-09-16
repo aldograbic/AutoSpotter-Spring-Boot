@@ -13,6 +13,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.stereotype.Service;
 
 import com.example.AutoSpotter.config.AuthenticationType;
+import com.example.AutoSpotter.config.EmailNotVerifiedException;
 
 @Service
 public class CustomUserDetailsService extends SavedRequestAwareAuthenticationSuccessHandler implements UserDetailsService  {
@@ -34,14 +35,15 @@ public class CustomUserDetailsService extends SavedRequestAwareAuthenticationSuc
          
         if (existUser == null) {
             User newUser = new User();
-            // podesit za display_username ->
-            // int atIndex = username.indexOf('@');
-            // if (atIndex >= 0) {
-            //     String extractedUsername = username.substring(0, atIndex);
-            //     newUser.setUsername(extractedUsername);
-            // } else {
-            //     newUser.setUsername(username);
-            // }
+
+            int atIndex = email.indexOf('@');
+            if (atIndex >= 0) {
+                String extractedUsername = email.substring(0, atIndex);
+                newUser.setDisplayUsername(extractedUsername);
+            } else {
+                newUser.setDisplayUsername(username);
+            }
+
             newUser.setUsername(username);
             newUser.setEmail(email);
             newUser.setFirstName(firstName);
@@ -60,6 +62,10 @@ public class CustomUserDetailsService extends SavedRequestAwareAuthenticationSuc
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found.");
+        }
+
+        if (!user.isEmailVerified()) {
+            throw new EmailNotVerifiedException("Email not verified");
         }
 
         Set<GrantedAuthority> authorities = new HashSet<>();

@@ -24,6 +24,7 @@ public class OAuthLoginSuccessHandler extends SavedRequestAwareAuthenticationSuc
         CustomOAuth2User oauth2User = (CustomOAuth2User) authentication.getPrincipal();
         String oauth2ClientName = oauth2User.getOauth2ClientName();
         String username = oauth2User.getAttribute("name");
+
         String email = oauth2User.getEmail();
 
         Map<String, Object> attributes = oauth2User.getAttributes();

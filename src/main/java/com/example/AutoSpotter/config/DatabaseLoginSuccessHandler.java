@@ -32,7 +32,7 @@ public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthentication
         String username = authenticatedUserDetails.getUsername();
         User user = userRepository.findByUsername(username);
 
-        if(user.getAuthType() == null && user.isEmailVerified()) {
+        if(user.getAuthType() == null) {
             userService.updateAuthenticationType(username, "database");
             response.sendRedirect("/?uspjesnaPrijava");
         } else {

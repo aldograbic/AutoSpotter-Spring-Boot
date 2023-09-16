@@ -53,7 +53,7 @@
         <div sec:authorize="isAuthenticated()" class="px-4 py-3 text-sm text-gray-900 dark:text-white">
           <div th:if="${user.firstName != null}" th:text="${user.firstName + ' ' + user.lastName}"></div>
           <div th:unless="${user.firstName != null}" th:text="${user.companyName}"></div>
-          <div class="font-medium truncate" th:text="${user.username}"></div>
+          <div class="font-medium truncate" th:text="${user.displayUsername}"></div>
         </div>
         <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
           <li>
@@ -122,7 +122,7 @@
               <div class="px-4 py-3 text-gray-900 dark:text-white">
                 <div th:if="${user.firstName != null}" th:text="${user.firstName + ' ' + user.lastName}"></div>
                 <div th:unless="${user.firstName != null}" th:text="${user.companyName}"></div>
-                <div class="font-medium truncate" th:text="${user.username}"></div>
+                <div class="font-medium truncate" th:text="${user.displayUsername}"></div>
               </div>
             </li>
           </a>

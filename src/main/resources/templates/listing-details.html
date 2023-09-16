@@ -340,20 +340,22 @@
       <div class="mt-8 mb-8">
         <h2 class="text-base font-semibold text-xl leading-7 text-gray-900 dark:text-gray-200">Podaci o prodavatelju</h2>
         <div class="mt-6 py-6 border-t border-gray-100 dark:border-gray-700">
-          <a class="inline-flex items-center text-cyan-600 hover:text-cyan-700" th:href="@{'/korisnicki-profil/' + ${listing.user.id} + '/' + ${listing.user.username}}">
+          <a class="inline-flex items-center text-cyan-600 hover:text-cyan-700" th:href="@{'/korisnicki-profil/' + ${listing.user.id} + '/' + ${listing.user.displayUsername}}">
             <span class="mr-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="w-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg></span>
-            <span class="font-semibold text-lg" th:text="${listing.user.username}"></span>
+            <span class="font-semibold text-lg" th:text="${listing.user.displayUsername}"></span>
           </a>
           <p class="dark:text-gray-400" th:if="${listing.user.companyName != null}">Naziv tvrtke: <span class="font-semibold dark:text-gray-300"
               th:text="${listing.user.companyName}"></span></p>
           <p class="dark:text-gray-400" th:unless="${listing.user.companyName != null}">Ime i prezime: <span class="font-semibold dark:text-gray-300"
               th:text="${listing.user.firstName + ' ' + listing.user.lastName}"></span></p>
-          <p class="dark:text-gray-400">Kontakt: <span class="font-semibold dark:text-gray-300"
-              th:text="${listing.user.email + ', ' + listing.user.phoneNumber}"></span></p>
+          <p class="dark:text-gray-400">Kontakt: 
+            <span class="font-semibold dark:text-gray-300" th:text="${listing.user.email}"></span>
+            <span th:if="${listing.user.phoneNumber != null}" th:text="${listing.user.phoneNumber}"></span>
+          </p>
           <button data-modal-target="contact-modal" data-modal-toggle="contact-modal" type="button"
             class="button text-white font-medium rounded-lg mt-4 py-2.5 text-center inline-flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

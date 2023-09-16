@@ -8,6 +8,7 @@ import com.example.AutoSpotter.config.AuthenticationType;
 public class User {
     private int id;
     private String username;
+    private String displayUsername;
     private String password;
     private String firstName;
     private String lastName;
@@ -41,6 +42,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getDisplayUsername() {
+        return displayUsername;
+    }
+
+    public void setDisplayUsername(String displayUsername) {
+        this.displayUsername = displayUsername;
     }
 
     public String getPassword() {

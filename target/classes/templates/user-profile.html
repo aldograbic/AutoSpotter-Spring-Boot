@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="hr" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <th:block th:insert="~{fragments/head-dynamic :: head-dynamic}"></th:block>
-    <title th:text="'AutoSpotter | ' + ${userProfile.username}"></title>
+    <title th:text="'AutoSpotter | ' + ${userProfile.displayUsername}"></title>
 </head>
 <body class="flex flex-col min-h-screen">
     
@@ -33,7 +33,7 @@
                 </div>
                 
                 <div class="mt-8 text-center">
-                    <h1 class="text-4xl font-medium text-gray-700 dark:text-gray-200" th:text="${userProfile.username}"></h1>
+                    <h1 class="text-4xl font-medium text-gray-700 dark:text-gray-200" th:text="${userProfile.displayUsername}"></h1>
                     <p th:if="${userProfile.firstName != null}" th:text="${userProfile.firstName + ' ' + userProfile.lastName}" class="mt-2 text-gray-500 dark:text-gray-300"></p>
                     <p th:unless="${userProfile.firstName != null}" th:text="${userProfile.companyName}" class="mt-2 text-gray-500 dark:text-gray-300"></p>
                     <p th:if="${userProfile.city != null}" class="font-light text-gray-500 mt-2 dark:text-gray-300" th:text="${userProfile.city.cityName + ', ' + userProfile.county}"></p>

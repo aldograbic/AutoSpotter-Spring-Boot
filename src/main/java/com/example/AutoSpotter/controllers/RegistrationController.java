@@ -173,6 +173,7 @@ public class RegistrationController {
         String token = UUID.randomUUID().toString();
         user.setConfirmationToken(token);
         user.setEmailVerified(false);
+        user.setDisplayUsername(username);
 
         model.addAttribute("user", user);
 

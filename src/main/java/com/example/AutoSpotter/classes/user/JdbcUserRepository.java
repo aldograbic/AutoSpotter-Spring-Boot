@@ -22,7 +22,7 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public User getUserById(int id) {
-        String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, email_verified, confirmation_token, city_id FROM user WHERE id = ?";
+        String sql = "SELECT id, username, display_username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, email_verified, confirmation_token, city_id FROM user WHERE id = ?";
         User user = jdbcTemplate.queryForObject(sql, new UserRowMapper(locationRepository), id);
 
         return user;
@@ -44,25 +44,33 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public User findByUsername(String username) {
-        String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, email_verified, confirmation_token, city_id FROM user WHERE username = ?";
+        String sql = "SELECT id, username, display_username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, email_verified, confirmation_token, city_id FROM user WHERE username = ?";
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(locationRepository), username);
 
         return users.isEmpty() ? null : users.get(0);
     }
 
     @Override
+    public User findByDisplayUsername(String displayUsername) {
+        String sql = "SELECT id, username, display_username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, email_verified, confirmation_token, city_id FROM user WHERE display_username = ?";
+        List<User> users = jdbcTemplate.query(sql, new UserRowMapper(locationRepository), displayUsername);
+
+        return users.isEmpty() ? null : users.get(0);
+    }
+
+    @Override
     public void save(User user) {
-        String sql = "INSERT INTO user (username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, email_verified, confirmation_token, city_id) " + 
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCompanyName(), user.getCompanyOIB(),
+        String sql = "INSERT INTO user (username, display_username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, email_verified, confirmation_token, city_id) " + 
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, user.getUsername(), user.getDisplayUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCompanyName(), user.getCompanyOIB(),
                             user.getAddress(), user.getPhoneNumber(), user.getEmail(), user.getProfileImage(), user.isEmailVerified(), user.getConfirmationToken(), user.getCityId());
     }
 
     @Override
     public void saveOAuth2(User user) {
-        String sql = "INSERT INTO user (username, first_name, last_name, profile_image, email, email_verified) " + 
-                    "VALUES (?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, user.getUsername(),user.getFirstName(), user.getLastName(), user.getProfileImage(), user.getEmail(), user.isEmailVerified());
+        String sql = "INSERT INTO user (username, display_username, first_name, last_name, profile_image, email, email_verified) " + 
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, user.getUsername(), user.getDisplayUsername(), user.getFirstName(), user.getLastName(), user.getProfileImage(), user.getEmail(), user.isEmailVerified());
     }
 
     @Override
@@ -73,10 +81,10 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public void updateUser(User user) {
-        String sql = "UPDATE user SET username = ?, password = ?, first_name = ?, last_name = ?, " +
+        String sql = "UPDATE user SET display_username = ?, password = ?, first_name = ?, last_name = ?, " +
                 "company_name = ?, company_oib = ?, address = ?, phone_number = ?, email = ?, profile_image = ?, " +
                 "email_verified = ?, confirmation_token = ?, city_id = ? WHERE id = ?";
-        jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getFirstName(),
+        jdbcTemplate.update(sql, user.getDisplayUsername(), user.getPassword(), user.getFirstName(),
                 user.getLastName(), user.getCompanyName(), user.getCompanyOIB(), user.getAddress(),
                 user.getPhoneNumber(), user.getEmail(), user.getProfileImage(), user.isEmailVerified(), user.getConfirmationToken(),
                 user.getCityId(), user.getId());
@@ -84,7 +92,7 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public User findByEmail(String email) {
-        String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, email_verified, confirmation_token, city_id FROM user WHERE email = ?";
+        String sql = "SELECT id, username, display_username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, email_verified, confirmation_token, city_id FROM user WHERE email = ?";
         try {
             return jdbcTemplate.queryForObject(sql, new UserRowMapper(locationRepository), email);
         } catch (EmptyResultDataAccessException ex) {
@@ -94,13 +102,13 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public User findByUsernameAndPassword(String username, String password) {
-        String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, city_id FROM user WHERE username = ? AND password = ?";
+        String sql = "SELECT id, username, display_username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, city_id FROM user WHERE username = ? AND password = ?";
         return jdbcTemplate.queryForObject(sql, new UserRowMapper(locationRepository), username, password);
     }
 
     @Override
     public User findByConfirmationToken(String token) {
-        String sql = "SELECT id, username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, city_id, email_verified, confirmation_token " +
+        String sql = "SELECT id, username, display_username, password, first_name, last_name, company_name, company_oib, address, phone_number, email, profile_image, city_id, email_verified, confirmation_token " +
                     "FROM user WHERE confirmation_token = ?";
         try {
             return jdbcTemplate.queryForObject(sql, new UserRowMapper(locationRepository), token);

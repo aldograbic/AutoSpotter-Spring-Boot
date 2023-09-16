@@ -20,6 +20,8 @@ public interface UserRepository {
 
     User findByUsername(String username);
 
+    User findByDisplayUsername(String displayUsername);
+
     User findByEmail(String email);
 
     User findByUsernameAndPassword(String username, String password);
@@ -29,7 +31,6 @@ public interface UserRepository {
     void updateEmailVerification(User user);
 
     void updatePassword(User user);
-
 
     public void updateAuthenticationType(String username, AuthenticationType authType);
 }
