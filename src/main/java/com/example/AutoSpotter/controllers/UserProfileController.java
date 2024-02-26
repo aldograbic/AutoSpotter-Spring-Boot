@@ -123,6 +123,7 @@ public class UserProfileController {
     public void uploadImageToGoogleCloudStorage(String bucketName, String objectName, byte[] imageBytes) {
         BlobId blobId = BlobId.of(bucketName, objectName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("image/jpeg").build();
+        @SuppressWarnings("unused")
         Blob blob = storage.create(blobInfo, imageBytes);
         Acl acl = Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER);
         storage.createAcl(blobId, acl);

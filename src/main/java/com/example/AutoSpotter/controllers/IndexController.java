@@ -13,7 +13,6 @@ import com.example.AutoSpotter.classes.listing.Listing;
 import com.example.AutoSpotter.classes.listing.ListingRepository;
 import com.example.AutoSpotter.classes.user.User;
 import com.example.AutoSpotter.classes.user.UserRepository;
-import com.example.AutoSpotter.config.CustomOAuth2User;
 
 @Controller
 public class IndexController {

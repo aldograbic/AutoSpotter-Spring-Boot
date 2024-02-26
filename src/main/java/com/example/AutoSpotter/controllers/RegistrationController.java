@@ -30,6 +30,7 @@ public class RegistrationController {
 
     private final UserRepository userRepository;
     private final LocationRepository locationRepository;
+    @SuppressWarnings("unused")
     private final CityConverter cityConverter;
     private final BCryptPasswordEncoder passwordEncoder;
     private final EmailService emailService;

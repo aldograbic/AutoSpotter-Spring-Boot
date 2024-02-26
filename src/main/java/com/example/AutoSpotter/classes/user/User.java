@@ -24,6 +24,7 @@ public class User {
 
     private City city;
     private County county;
+    @SuppressWarnings("unused")
     private boolean acceptedTermsOfService;
     private AuthenticationType authType;
 
