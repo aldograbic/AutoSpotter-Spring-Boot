@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 src/main/resources/application.properties
+src/main/resources/peerless-tiger-394915-c4668df1d81d.json
 
 ### STS ###
 .apt_generated
