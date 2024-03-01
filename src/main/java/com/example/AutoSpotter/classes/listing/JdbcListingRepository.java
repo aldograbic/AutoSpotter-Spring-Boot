@@ -86,6 +86,7 @@ public class JdbcListingRepository implements ListingRepository {
         return jdbcTemplate.query(sql, new ListingRowMapper(vehicleRepository, userRepository));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public List<Listing> getFilteredListings(String vehicleType, String manufacturer, String model,
                                             String bodyType, String engineType, String motorcycleEngineType, String transmission,
